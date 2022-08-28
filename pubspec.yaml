@@ -11,17 +11,113 @@ dependencies:
   flutter:
     sdk: flutter
 
+  #####
+  # BASE FUNCTION
+  #####
+  # 格式化的日志输出
+  logger: ^1.1.0
+  # 注解式本地数据库
+  floor: ^1.3.0
+  # dialog、toast
+  flutter_smart_dialog: ^4.5.3+6
+  # Beans管理(状态)、路由管理
+  get: ^4.6.5
+  # 通知//todo，暂不支持
+  awesome_notifications: ^0.6.21
+  # 简单手势监听
+  simple_gesture_detector: ^0.2.0
+  # pojo <-> json处理：https://pub.dev/packages/json_serializable
+  # json注解使用：https://github.com/google/json_serializable.dart/blob/master/example/lib/example.dart
+  json_annotation: ^4.6.0
+  # 事件总线
+  event_bus: ^2.0.0
+
+  #####
+  # FUNCTION TOOL
+  #####
+  # 应用路径处理，例如临时目录、应用内部文件路径
+  path_provider: ^2.0.11
+  # dart扩展，集合、int、num、String等
+  dartx: ^1.1.0
+  # 好用的工具组合。基础APIs：https://github.com/Sky24n/common_utils
+  flustars: ^2.0.1
+  # uuid
+  uuid: ^3.0.6
+  # 加解密处理
+  encrypt: ^5.0.1
+  # svg图片处理，与Bruno依赖的xml版本冲突，降低至该版本
+  flutter_svg: ^1.0.3
+
+  #####
+  # DEVICE/APP
+  #####
+  # Plus package: https://plus.fluttercommunity.dev/docs/overview/
+  #####
+  # 权限处理
+  permission_handler: ^10.0.0
+  # 设备网络连接状态
+  connectivity_plus: ^2.3.5
+  # 设备信息
+  device_info_plus: ^4.0.0
+  # 应用包信息
+  package_info_plus: ^1.4.2
+  # 设备网络信息
+  network_info_plus: ^2.1.3
+
+  #####
+  # NETWORK
+  #####
+  # 网络请求库，相关插件见https://github.com/flutterchina/dio/blob/master/README-ZH.md
+  dio: ^4.0.6
+  # dio请求日志处理
+  pretty_dio_logger: ^1.1.1
+  # 注解式http网络请求
+  retrofit: '>=3.0.0 <4.0.0'
+
+  #####
+  # UI
+  #####
+  # iOS风格icon
+  cupertino_icons: ^1.0.5
+  # google字体
+  google_fonts: ^3.0.1
+  # 主题
+  flex_color_scheme: ^5.1.0
+  # 分割线
+  text_divider: ^1.0.0
+  # Bruno 是基于一整套设计体系的 Flutter UI 组件库
+  bruno: ^3.0.0
+  # 去除ListView的边界水波纹效果
+  noripple_overscroll: ^0.0.2
+  # 下拉、上拉加载
+  pull_to_refresh_flutter3: ^2.0.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  # json序列化/反序列化代码生成处理器
+  json_serializable: ^6.3.1
+  # flutter packages pub run build_runner build --delete-conflicting-outputs
+  build_runner: ^2.1.11
+  # floor数据库相关类生成器
+  floor_generator: ^1.3.0
+  # retrofit代码生成器
+  retrofit_generator: '>=4.0.0 <5.0.0'
+
+# dart scripts plugin
+scripts:
+  build_runner_build: flutter packages pub run build_runner build --delete-conflicting-outputs
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
 flutter:
-
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
   # To add assets to your package, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
