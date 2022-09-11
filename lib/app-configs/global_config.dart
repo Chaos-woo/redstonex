@@ -3,7 +3,7 @@ import 'package:redstonex/app-configs/user-configs/global_database_configs.dart'
 import 'package:redstonex/app-configs/user-configs/global_http_option_configs.dart';
 import 'package:redstonex/app-configs/user-configs/global_log_configs.dart';
 import 'package:redstonex/commons/standards/of_syntax.dart';
-import 'package:redstonex/ioc-core/reflectable-core/utils/reflections_util.dart';
+import 'package:redstonex/ioc-core/reflectable-core/utils/reflections_utils.dart';
 
 /// A global configuration.
 ///

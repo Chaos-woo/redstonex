@@ -1,4 +1,3 @@
-
 class NamedRef {
   String? name;
 

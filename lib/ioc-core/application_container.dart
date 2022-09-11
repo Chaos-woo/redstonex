@@ -1,13 +1,15 @@
 import 'package:dartx/dartx.dart';
 import 'package:redstonex/commons/exceptions/no_such_mirror_definition_exception.dart';
 import 'package:redstonex/commons/log/loggers.dart';
-import 'package:redstonex/ioc-core/metadata-core/carriers/registrable_ref.dart';
+import 'package:redstonex/ioc-core/metadata-core/autowired.dart';
+import 'package:redstonex/ioc-core/metadata-core/carriers/depend_on.dart';
+import 'package:redstonex/ioc-core/metadata-core/carriers/named_ref.dart';
 import 'package:redstonex/ioc-core/metadata-core/reflection_configuration.dart';
-import 'package:redstonex/ioc-core/metadata-core/utils/metadata_util.dart';
+import 'package:redstonex/ioc-core/metadata-core/utils/metadata_utils.dart';
 import 'package:redstonex/ioc-core/mirror-core/mirror_definition_holder.dart';
 import 'package:redstonex/ioc-core/mirror-core/mirror_definiton.dart';
 import 'package:redstonex/ioc-core/mirror-core/without_mirror_definition_holder.dart';
-import 'package:redstonex/ioc-core/reflectable-core/utils/metadata_mirror_util.dart';
+import 'package:redstonex/ioc-core/reflectable-core/utils/metadata_mirror_utils.dart';
 import 'package:reflectable/reflectable.dart';
 
 import 'metadata-core/reflection.dart';
@@ -50,6 +52,8 @@ class ApplicationContainer {
     _mirrorDefinitions.addAll(_parseAnnotatedBasicMirrors());
     _mirrorDefinitionHolders.addAll(_parseMirrorDefinitionHolders());
     _withoutMirrorDefinitionHolders.addAll(_parseWithoutMirrorDefinitionHolders());
+
+    _circularDependencyInjection();
 
     /// end parse
     Loggers.of().i('initialize application container end');
@@ -152,11 +156,56 @@ class ApplicationContainer {
     return holders;
   }
 
-  String _getKey(Type type, String? name) {
+  static String _getKey(Type type, String? name) {
     String runtimeName = type.toString();
     return name.isNotNullOrBlank ? '{$runtimeName}_{$name}' : runtimeName;
   }
 
+  /// Inject properties that [_mirrorDefinitionHolders] and
+  /// [_withoutMirrorDefinitionHolders] dependency
+  static void _circularDependencyInjection() {
+    for (MirrorDefinitionHolder holder in _mirrorDefinitionHolders.values) {
+      Map<String, VariableMirror> variableMirrors = holder.mirrorDefinition.variableFieldMirrors;
+      for(var entry in variableMirrors.entries) {
+        String fieldName = entry.key;
+        VariableMirror variableMirror = entry.value;
+        Object? reflectable = MetadataMirrorUtil.declarationReflectableMetadata(variableMirror);
+        if (reflectable == null) {
+          continue;
+        }
+
+        List<Object> carriers = variableMirror.metadata;
+        DependOn? dependencyCarrier = MetadataUtil.findCarrier<DependOn>(carriers);
+        String? tag;
+        if (dependencyCarrier != null) {
+          tag = dependencyCarrier.name;
+        }
+
+        Type type = variableMirror.reflectedType;
+        dynamic dependency = findDependencyByCarrierName(type, tag);
+
+        if (dependency == null) {
+          throw NoSuchMirrorDefinitionException('not found mirror definition holder for dependency $fieldName and name ${dependencyCarrier?.name}');
+        }
+
+        var instanceMirror = const Reflection().reflect(holder.instance);
+        instanceMirror.invokeSetter(dependencyCarrier?.setterName ?? fieldName, dependency);
+      }
+    }
+  }
+
+  static dynamic findDependencyByCarrierName(Type type, String? tag) {
+    String name = _getKey(type, tag);
+    if (_mirrorDefinitionHolders[name] != null) {
+      return _mirrorDefinitionHolders[name]!.instance;
+    } else if (_withoutMirrorDefinitionHolders[name] != null) {
+      return _withoutMirrorDefinitionHolders[name]!.instance;
+    } else {
+      return null;
+    }
+  }
+
+  /// Find dependency in self container
   S findInSelfContainer<S>({String? tag}) {
     String name = _getKey(S, tag);
     if (_mirrorDefinitionHolders[name] != null) {

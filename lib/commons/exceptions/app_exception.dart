@@ -5,7 +5,7 @@ import 'package:redstonex/commons/exceptions/network_exception.dart';
 import 'package:redstonex/commons/exceptions/not_found_exception.dart';
 import 'package:redstonex/commons/exceptions/server_exception.dart';
 import 'package:redstonex/commons/exceptions/unauthorised_exception.dart';
-import 'package:redstonex/ioc-core/reflectable-core/utils/reflections_util.dart';
+import 'package:redstonex/ioc-core/reflectable-core/utils/reflections_utils.dart';
 
 /// App abstract/base exception.
 ///

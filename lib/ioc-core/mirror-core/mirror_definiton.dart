@@ -1,6 +1,6 @@
 import 'package:dartx/dartx.dart';
 import 'package:redstonex/commons/log/loggers.dart';
-import 'package:redstonex/ioc-core/mirror-core/utils/definition_util.dart';
+import 'package:redstonex/ioc-core/mirror-core/utils/definition_utils.dart';
 import 'package:reflectable/reflectable.dart';
 
 ///  Holder mirror definition by parsing [ClassMirror] and [MethodMirror]
@@ -20,8 +20,8 @@ class MirrorDefinition {
   /// additional definition
   final List<MethodMirror> _instanceMemberMethodMirrors = [];
   final List<MethodMirror> _staticMethodMirrors = [];
-  final List<VariableMirror> _variableFieldMirrors = [];
-  final List<VariableMirror> _nonVariableFieldMirrors = [];
+  final Map<String, VariableMirror> _variableFieldMirrors = {};
+  final Map<String, VariableMirror> _nonVariableFieldMirrors = {};
 
   MirrorDefinition(this._classMirror) {
     _reflectMirrorDefinition(_classMirror);
@@ -71,18 +71,19 @@ class MirrorDefinition {
     for (var declarationEntry in _declarationMirrors.entries) {
       var declaration = declarationEntry.value;
       if (declaration is VariableMirror) {
+        MapEntry<String, VariableMirror> entry = MapEntry(declarationEntry.key, declaration);
         if (DefinitionUtil.isNonVariableField(declaration)) {
-          _nonVariableFieldMirrors.add(declaration);
+          _nonVariableFieldMirrors.addEntries([entry]);
         } else if (DefinitionUtil.isVariableField(declaration)) {
-          _variableFieldMirrors.add(declaration);
+          _variableFieldMirrors.addEntries([entry]);
         }
       }
     }
   }
 
-  List<VariableMirror> get nonVariableFieldMirrors => _nonVariableFieldMirrors.toUnmodifiable();
+  Map<String, VariableMirror> get nonVariableFieldMirrors => _nonVariableFieldMirrors;
 
-  List<VariableMirror> get variableFieldMirrors => _variableFieldMirrors.toUnmodifiable();
+  Map<String, VariableMirror> get variableFieldMirrors => _variableFieldMirrors;
 
   List<MethodMirror> get staticMethodMirrors => _staticMethodMirrors.toUnmodifiable();
 

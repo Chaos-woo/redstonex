@@ -1,8 +1,10 @@
 import 'package:redstonex/app-configs/global_config.dart';
 import 'package:redstonex/commons/log/loggers.dart';
+import 'package:redstonex/ioc-core/metadata-core/autowired.dart';
 import 'package:redstonex/ioc-core/metadata-core/reflection.dart';
 import 'package:redstonex/ioc-core/metadata-core/reflection_configuration.dart';
-import 'package:redstonex/ioc-core/reflectable-core/utils/reflections_util.dart';
+import 'package:redstonex/ioc-core/reflectable-core/utils/metadata_mirror_utils.dart';
+import 'package:redstonex/ioc-core/reflectable-core/utils/reflections_utils.dart';
 import 'package:redstonex/ioc-core/self_reflectable.dart';
 import 'package:reflectable/reflectable.dart';
 import 'package:test/test.dart';
@@ -19,7 +21,14 @@ class RefA {
   @Record('theMethodA')
   void methodA() {}
 
-  TestV? test;
+  @Autowired()
+  TestV test = TestV();
+
+  AnyClass? anyClass;
+}
+
+class AnyClass {
+
 }
 
 class TestV {
@@ -30,7 +39,12 @@ class TestV {
 @RefsConfiguration()
 class RefsConfig {
   @Reflection()
-  TestV testV() => TestV();
+  TestV testV() {
+   TestV t = TestV();
+   t.m = 'm';
+   t.v = 'v';
+   return t;
+  }
 }
 
 class RecordRef extends Reflectable {
@@ -116,6 +130,11 @@ void main() {
       var variable = entry.value;
       if (variable is VariableMirror) {
         Loggers.of().w('variable ${entry.key}');
+
+        Object? reflectable = MetadataMirrorUtil.declarationReflectableMetadata(variable);
+        if (reflectable == null) {
+          continue;
+        }
 
         var executeCm = recordRef.reflect(newInstance);
 

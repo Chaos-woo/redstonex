@@ -18,6 +18,8 @@ class MirrorDefinitionHolder implements MirrorDefinitionHolderFactory {
 
   dynamic get instance => _instance;
 
+  MirrorDefinition get mirrorDefinition => _mirrorDefinition;
+
   @override
   dynamic newInstance(
     MirrorDefinition mirrorDefinition, {

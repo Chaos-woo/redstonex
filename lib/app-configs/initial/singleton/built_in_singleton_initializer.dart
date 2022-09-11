@@ -1,6 +1,6 @@
 import 'package:redstonex/app-configs/global_config.dart';
 import 'package:redstonex/app-configs/initial/singleton/singleton_initializer.dart';
-import 'package:redstonex/ioc-core/reflectable-core/utils/reflections_util.dart';
+import 'package:redstonex/ioc-core/reflectable-core/utils/reflections_utils.dart';
 
 ///
 /// Built in singleton initializer.
