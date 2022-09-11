@@ -166,26 +166,26 @@ class ApplicationContainer {
   static void _circularDependencyInjection() {
     for (MirrorDefinitionHolder holder in _mirrorDefinitionHolders.values) {
       Map<String, VariableMirror> variableMirrors = holder.mirrorDefinition.variableFieldMirrors;
-      for(var entry in variableMirrors.entries) {
+      for (var entry in variableMirrors.entries) {
         String fieldName = entry.key;
         VariableMirror variableMirror = entry.value;
-        Object? reflectable = MetadataMirrorUtil.declarationReflectableMetadata(variableMirror);
-        if (reflectable == null) {
+
+        List<Object> carriers = variableMirror.metadata;
+        if (!MetadataUtil.existInList(carriers, Autowired)) {
           continue;
         }
 
-        List<Object> carriers = variableMirror.metadata;
         DependOn? dependencyCarrier = MetadataUtil.findCarrier<DependOn>(carriers);
         String? tag;
         if (dependencyCarrier != null) {
           tag = dependencyCarrier.name;
         }
 
-        Type type = variableMirror.reflectedType;
-        dynamic dependency = findDependencyByCarrierName(type, tag);
+        dynamic dependency = findDependencyByCarrierName(variableMirror.reflectedType, tag);
 
         if (dependency == null) {
-          throw NoSuchMirrorDefinitionException('not found mirror definition holder for dependency $fieldName and name ${dependencyCarrier?.name}');
+          throw NoSuchMirrorDefinitionException(
+              'not found mirror definition holder for dependency $fieldName and name ${dependencyCarrier?.name}');
         }
 
         var instanceMirror = const Reflection().reflect(holder.instance);
