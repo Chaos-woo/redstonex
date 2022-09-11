@@ -4,12 +4,12 @@ import 'dart:collection';
 
 import 'package:logger/logger.dart';
 import 'package:redstonex/app-configs/global_config.dart';
-import 'package:redstonex/commons/log/redstone_log.dart';
+import 'package:redstonex/commons/log/rs_log.dart';
 import 'package:redstonex/commons/standards/of_syntax.dart';
 
 /// A log manager.
 ///
-/// Manage all named [RedStoneLogger]. various logger will
+/// Manage all named [RsLogger]. various logger will
 /// stored it and classified by various dimensions
 ///
 /// Add a [LogFilter] decide logger and listen log event.
@@ -22,7 +22,7 @@ class Loggers with OfSyntax {
   static const String _fixedRedstoneXLoggerName = '_fixedRedstoneXLogger';
 
   /// built-in logger
-  static RedStoneLogger? _builtInLogger;
+  static RsLogger? _builtInLogger;
 
   /// log manager initial state
   static bool _builtInLoggerInitialState = false;
@@ -31,20 +31,20 @@ class Loggers with OfSyntax {
   static int _replaceCount = 0;
 
   /// named loggers
-  static final Map<String, RedStoneLogger> _namedLoggers = {};
+  static final Map<String, RsLogger> _namedLoggers = {};
 
   /// loggers of classifying by level
-  static final Map<Level, LinkedHashSet<RedStoneLogger>> _levelLoggers = {};
+  static final Map<Level, LinkedHashSet<RsLogger>> _levelLoggers = {};
 
   /// Get a new logger and put it in map
-  static RedStoneLogger newLogger(
+  static RsLogger newLogger(
     String name, {
     LogFilter? filter,
     LogPrinter? printer,
     LogOutput? output,
     Level? lowestLevel,
   }) {
-    RedStoneLogger logger = RedStoneLogger.newLogger(
+    RsLogger logger = RsLogger.newLogger(
       name,
       filter: filter,
       printer: printer,
@@ -56,20 +56,20 @@ class Loggers with OfSyntax {
   }
 
   /// Storage a logger in memory
-  static void _storageLoggerInMemory(RedStoneLogger logger) {
+  static void _storageLoggerInMemory(RsLogger logger) {
     /// named map
     _namedLoggers[logger.name] = logger;
 
     /// level map
     Level level = logger.lowestLevel ?? GlobalConfig.of().globalLogConfigs.defLogLevel;
-    LinkedHashSet<RedStoneLogger>? loggers = _levelLoggers[level];
-    loggers ??= LinkedHashSet<RedStoneLogger>();
+    LinkedHashSet<RsLogger>? loggers = _levelLoggers[level];
+    loggers ??= LinkedHashSet<RsLogger>();
     loggers.add(logger);
     _levelLoggers[level] = loggers;
   }
 
   /// Get built-in logger
-  static RedStoneLogger of() => builtInLogger();
+  static RsLogger of() => builtInLogger();
 
   /// Get named logger.
   ///
@@ -80,11 +80,11 @@ class Loggers with OfSyntax {
   ///
   /// If named [name] logger not exist [_namedLoggers],
   /// will create a new logger with [level] and storage in it.
-  static RedStoneLogger ofNamed({String? name, Level? level}) {
+  static RsLogger ofNamed({String? name, Level? level}) {
     if (name == null) {
       return builtInLogger();
     } else {
-      RedStoneLogger? logger = _namedLoggers[name];
+      RsLogger? logger = _namedLoggers[name];
       if (logger == null) {
         logger = _defLogger(name: name, level: level);
         _storageLoggerInMemory(logger);
@@ -96,7 +96,7 @@ class Loggers with OfSyntax {
   /// Get built-in logger.
   ///
   /// Replace built-in logger for [replace] param
-  static RedStoneLogger builtInLogger({bool replace = false}) {
+  static RsLogger builtInLogger({bool replace = false}) {
     if (_builtInLogger == null) {
       _builtInLoggerInitialState = true;
       _builtInLogger = _defLogger(name: _fixedRedstoneXLoggerName, isBuiltInLog: true);
@@ -112,11 +112,11 @@ class Loggers with OfSyntax {
   }
 
   /// Default logger, external can not access
-  static RedStoneLogger _defLogger(
+  static RsLogger _defLogger(
           {required String name, Level? level, bool isBuiltInLog = false}) =>
-      RedStoneLogger.newLogger(
+      RsLogger.newLogger(
         name,
-        printer: RedStoneLogger.defPrettyPrinter(),
+        printer: RsLogger.defPrettyPrinter(),
         lowestLevel: level ??
             (isBuiltInLog
                 ? GlobalConfig.of().globalLogConfigs.defBuiltInLogLevel

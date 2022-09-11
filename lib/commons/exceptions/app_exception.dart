@@ -5,7 +5,7 @@ import 'package:redstonex/commons/exceptions/network_exception.dart';
 import 'package:redstonex/commons/exceptions/not_found_exception.dart';
 import 'package:redstonex/commons/exceptions/server_exception.dart';
 import 'package:redstonex/commons/exceptions/unauthorised_exception.dart';
-import 'package:redstonex/commons/utils/reference_utils.dart';
+import 'package:redstonex/ioc-core/reflectable-core/utils/reflections_util.dart';
 
 /// App abstract/base exception.
 ///
@@ -106,11 +106,11 @@ class AppException implements Exception {
   /// GetX bean container and fixed tag tagged [AppException.fixedI10nBaseErrTag].
   /// Finally, app exception will using multi language error message.
   static I10nExceptionText _i10nBaseErr() {
-    if (ReferenceUtils.exist<I10nExceptionText>(tag: fixedI10nBaseErrTag)) {
-      return ReferenceUtils.find<I10nExceptionText>(tag: fixedI10nBaseErrTag);
+    if (ReflectionsUtil.existInGetX<I10nExceptionText>(tag: fixedI10nBaseErrTag)) {
+      return ReflectionsUtil.find<I10nExceptionText>(tag: fixedI10nBaseErrTag);
     } else {
       I10nExceptionText def = I10nExceptionText();
-      return ReferenceUtils.put(def, tag: fixedI10nBaseErrTag);
+      return ReflectionsUtil.put(def, tag: fixedI10nBaseErrTag);
     }
   }
 }

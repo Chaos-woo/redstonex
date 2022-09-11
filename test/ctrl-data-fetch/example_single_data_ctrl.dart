@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 import 'package:get/get.dart';
 import 'package:redstonex/app-configs/global_config.dart';
 import 'package:redstonex/commons/log/loggers.dart';
-import 'package:redstonex/commons/log/redstone_log.dart';
+import 'package:redstonex/commons/log/rs_log.dart';
 import 'package:redstonex/network-core/definitions/proxy/dios.dart';
 import 'package:redstonex/state-core/ctrls/impls/loaded-ctrl/single_data_view_ctrl.dart';
 
@@ -15,7 +15,7 @@ import '../retrofit-dio/retrofit_dio_test.dart';
 /// to translate any you want.
 ///
 class ExampleSingleDataCtrl extends SingleDataViewCtrl<String> implements GetxService {
-  final RedStoneLogger _logger = Loggers.of();
+  final RsLogger _logger = Loggers.of();
 
   String builtInString = '';
 

@@ -1,6 +1,6 @@
 import 'package:redstonex/app-configs/global_config.dart';
 import 'package:redstonex/app-configs/initial/singleton/singleton_initializer.dart';
-import 'package:redstonex/commons/utils/reference_utils.dart';
+import 'package:redstonex/ioc-core/reflectable-core/utils/reflections_util.dart';
 
 ///
 /// Built in singleton initializer.
@@ -12,6 +12,6 @@ class BuiltInSingletonInitializer extends SingletonInitializer {
   @override
   void initSingletons() {
     /// default global configuration
-    ReferenceUtils.put(GlobalConfig(), tag: GlobalConfig.fixedGlobalConfigTag);
+    ReflectionsUtil.put(GlobalConfig(), tag: GlobalConfig.fixedGlobalConfigTag);
   }
 }

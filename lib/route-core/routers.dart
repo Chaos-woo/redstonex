@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 /// A GetX route, navigation utils.
 ///
 /// In order to semantic.
-class NavigationUtils {
+class Routers {
   static Future<R?>? push<R>(String route,
       {dynamic arguments, Map<String, String>? parameters}) {
     return Get.toNamed<R>(route, arguments: arguments, parameters: parameters);

@@ -3,7 +3,7 @@ import 'package:redstonex/app-configs/user-configs/global_database_configs.dart'
 import 'package:redstonex/app-configs/user-configs/global_http_option_configs.dart';
 import 'package:redstonex/app-configs/user-configs/global_log_configs.dart';
 import 'package:redstonex/commons/standards/of_syntax.dart';
-import 'package:redstonex/commons/utils/reference_utils.dart';
+import 'package:redstonex/ioc-core/reflectable-core/utils/reflections_util.dart';
 
 /// A global configuration.
 ///
@@ -17,7 +17,7 @@ class GlobalConfig with OfSyntax {
 
   /// Get GetX bean container [GlobalConfig] instance
   static GlobalConfig of() =>
-      ReferenceUtils.find<GlobalConfig>(tag: GlobalConfig.fixedGlobalConfigTag);
+      ReflectionsUtil.find<GlobalConfig>(tag: GlobalConfig.fixedGlobalConfigTag);
 
   /// Get real type [GlobalConfig] instance from container
   ///
@@ -29,11 +29,11 @@ class GlobalConfig with OfSyntax {
   /// Default global configuration will put in container when built-in initialing,
   /// using the same tag replace default configuration when want to.
   static void safePutGlobalConfig(GlobalConfig customGlobalConfig) {
-    if (ReferenceUtils.exist<GlobalConfig>(tag: fixedGlobalConfigTag)) {
-      ReferenceUtils.remove<GlobalConfig>(tag: fixedGlobalConfigTag);
+    if (ReflectionsUtil.existInGetX<GlobalConfig>(tag: fixedGlobalConfigTag)) {
+      ReflectionsUtil.remove<GlobalConfig>(tag: fixedGlobalConfigTag);
     }
 
-    ReferenceUtils.put<GlobalConfig>(customGlobalConfig, tag: fixedGlobalConfigTag);
+    ReflectionsUtil.put<GlobalConfig>(customGlobalConfig, tag: fixedGlobalConfigTag);
   }
 
   /// Current development mode whether debug mode
