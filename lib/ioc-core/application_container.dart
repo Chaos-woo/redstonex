@@ -2,7 +2,6 @@ import 'package:dartx/dartx.dart';
 import 'package:redstonex/commons/exceptions/no_such_mirror_definition_exception.dart';
 import 'package:redstonex/commons/log/loggers.dart';
 import 'package:redstonex/ioc-core/metadata-core/autowired.dart';
-import 'package:redstonex/ioc-core/metadata-core/carriers/depend_on.dart';
 import 'package:redstonex/ioc-core/metadata-core/carriers/named_ref.dart';
 import 'package:redstonex/ioc-core/metadata-core/reflection_configuration.dart';
 import 'package:redstonex/ioc-core/metadata-core/utils/metadata_utils.dart';
@@ -37,8 +36,10 @@ class ApplicationContainer {
   /// Note that level 2 cache.
   static final Map<String, WithoutMirrorDefinitionHolder> _withoutMirrorDefinitionHolders = {};
 
-  /// Builtin definitions that must be registered.
+  /// Builtin definitions that must be registered high priority.
   static final List<Type> _builtinDefinitions = [];
+
+  /// Builtin reflectable metadata.
   static final List<Reflectable> _builtinReflectableMetadatas = [];
 
   /// start point.
@@ -169,27 +170,23 @@ class ApplicationContainer {
       for (var entry in variableMirrors.entries) {
         String fieldName = entry.key;
         VariableMirror variableMirror = entry.value;
-
         List<Object> carriers = variableMirror.metadata;
-        if (!MetadataUtil.existInList(carriers, Autowired)) {
+
+        Autowired? autowiredCarier = MetadataUtil.findCarrier<Autowired>(carriers);
+        if (autowiredCarier == null) {
           continue;
         }
 
-        DependOn? dependencyCarrier = MetadataUtil.findCarrier<DependOn>(carriers);
-        String? tag;
-        if (dependencyCarrier != null) {
-          tag = dependencyCarrier.name;
-        }
-
-        dynamic dependency = findDependencyByCarrierName(variableMirror.reflectedType, tag);
+        String? tag = autowiredCarier.name;
+        dynamic dependency = findDependencyByCarrierName(variableMirror.dynamicReflectedType, tag);
 
         if (dependency == null) {
           throw NoSuchMirrorDefinitionException(
-              'not found mirror definition holder for dependency $fieldName and name ${dependencyCarrier?.name}');
+              'not found mirror definition holder for dependency $fieldName and name ${autowiredCarier.name}');
         }
 
         var instanceMirror = const Reflection().reflect(holder.instance);
-        instanceMirror.invokeSetter(dependencyCarrier?.setterName ?? fieldName, dependency);
+        instanceMirror.invokeSetter(autowiredCarier.setterName ?? fieldName, dependency);
       }
     }
   }

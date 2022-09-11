@@ -1,5 +1,5 @@
 class NamedRef {
-  String? name;
+  final String? name;
 
   NamedRef({this.name});
 }

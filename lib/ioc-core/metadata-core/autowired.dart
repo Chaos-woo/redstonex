@@ -1,6 +1,6 @@
+class Autowired {
+  final String? setterName;
+  final String? name;
 
-import 'package:reflectable/reflectable.dart';
-
-class Autowired extends Reflectable {
-  const Autowired() : super(typingCapability, invokingCapability, reflectedTypeCapability);
+  const Autowired({this.setterName, this.name});
 }
