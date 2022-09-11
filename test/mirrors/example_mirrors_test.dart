@@ -1,14 +1,13 @@
 import 'package:redstonex/app-configs/global_config.dart';
 import 'package:redstonex/commons/log/loggers.dart';
 import 'package:redstonex/ioc-core/metadata-core/reflection.dart';
+import 'package:redstonex/ioc-core/metadata-core/reflection_configuration.dart';
 import 'package:redstonex/ioc-core/reflectable-core/utils/reflections_util.dart';
 import 'package:redstonex/ioc-core/self_reflectable.dart';
-// import 'package:redstonex/mirrors-core/annotations/reflection.dart';
-// import 'package:redstonex/mirrors-core/handlers/register_ref_parser.dart';
-// import 'package:redstonex/mirrors-core/reflections_util.dart';
 import 'package:reflectable/reflectable.dart';
-import 'example_mirrors_test.reflectable.dart';
 import 'package:test/test.dart';
+
+import 'example_mirrors_test.reflectable.dart';
 
 // @registerRef
 @Record('theA')
@@ -26,6 +25,12 @@ class RefA {
 class TestV {
   String? v;
   String? m;
+}
+
+@RefsConfiguration()
+class RefsConfig {
+  @Reflection()
+  TestV testV() => TestV();
 }
 
 class RecordRef extends Reflectable {
@@ -80,8 +85,8 @@ void main() {
 
     List<MethodMirror> methods = cm.instanceMembers.values.toList();
     MethodMirror? mm;
-    for ( var m in methods) {
-      if(m.metadata.isNotEmpty){
+    for (var m in methods) {
+      if (m.metadata.isNotEmpty) {
         mm = m;
         break;
       }
@@ -105,7 +110,7 @@ void main() {
     Loggers.of().i(' Variable === ');
 
     Map<String, DeclarationMirror> declarations = cm.declarations;
-    for(var entry in declarations.entries) {
+    for (var entry in declarations.entries) {
       // Loggers.of().i(entry.key);
 
       var variable = entry.value;
@@ -127,5 +132,6 @@ void main() {
     SelfReflectable.startSelfRegistered();
 
     print('${ReflectionsUtil.find<RefA>()}');
+    print('${ReflectionsUtil.find<TestV>()}');
   });
 }

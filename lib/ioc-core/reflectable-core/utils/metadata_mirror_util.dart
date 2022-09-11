@@ -8,11 +8,15 @@ class MetadataMirrorUtil {
     return reflector.annotatedClasses.toList().toUnmodifiable();
   }
 
-  static List<Object> classAnnotationCarriers(ClassMirror classMirror) {
+  static List<Object> classMetadataCarriers(ClassMirror classMirror) {
     return classMirror.metadata.whereNot((ele) => ele is Reflectable).toList().toUnmodifiable();
   }
 
-  static List<Object> declarationAnnotationCarriers(DeclarationMirror declarationMirror) {
+  static List<Object> declarationMetadataCarriers(DeclarationMirror declarationMirror) {
     return declarationMirror.metadata.whereNot((ele) => ele is Reflectable).toList().toUnmodifiable();
+  }
+
+  static Object? declarationReflectableMetadata<S>(DeclarationMirror declarationMirror) {
+    return declarationMirror.metadata.filter((ele) => ele is Reflectable).filter((ele) => ele is S).firstOrNull;
   }
 }

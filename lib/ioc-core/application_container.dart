@@ -1,11 +1,12 @@
 import 'package:dartx/dartx.dart';
-import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:redstonex/commons/exceptions/no_such_mirror_definition_exception.dart';
 import 'package:redstonex/commons/log/loggers.dart';
 import 'package:redstonex/ioc-core/metadata-core/carriers/registrable_ref.dart';
+import 'package:redstonex/ioc-core/metadata-core/reflection_configuration.dart';
 import 'package:redstonex/ioc-core/metadata-core/utils/metadata_util.dart';
 import 'package:redstonex/ioc-core/mirror-core/mirror_definition_holder.dart';
 import 'package:redstonex/ioc-core/mirror-core/mirror_definiton.dart';
+import 'package:redstonex/ioc-core/mirror-core/without_mirror_definition_holder.dart';
 import 'package:redstonex/ioc-core/reflectable-core/utils/metadata_mirror_util.dart';
 import 'package:reflectable/reflectable.dart';
 
@@ -21,12 +22,18 @@ class ApplicationContainer {
 
   static ApplicationContainer? _container;
 
-  /// Holds references to every Instance type definition
+  /// Holds references to every Instance type definition.
   static final Map<Type, MirrorDefinition> _mirrorDefinitions = {};
 
   /// Holds references to every class when application
-  /// initialize in `main` method
+  /// initialize in `main` method.
   static final Map<String, MirrorDefinitionHolder> _mirrorDefinitionHolders = {};
+
+  /// Holds references to reflection configuration's method
+  /// class instance without [MirrorDefinition].
+  ///
+  /// Note that level 2 cache.
+  static final Map<String, WithoutMirrorDefinitionHolder> _withoutMirrorDefinitionHolders = {};
 
   /// Builtin definitions that must be registered.
   static final List<Type> _builtinDefinitions = [];
@@ -42,6 +49,7 @@ class ApplicationContainer {
 
     _mirrorDefinitions.addAll(_parseAnnotatedBasicMirrors());
     _mirrorDefinitionHolders.addAll(_parseMirrorDefinitionHolders());
+    _withoutMirrorDefinitionHolders.addAll(_parseWithoutMirrorDefinitionHolders());
 
     /// end parse
     Loggers.of().i('initialize application container end');
@@ -51,11 +59,11 @@ class ApplicationContainer {
   Map<Type, MirrorDefinition> _parseAnnotatedBasicMirrors() {
     Map<Type, MirrorDefinition> allDefinitions = {};
 
-    for(Reflectable reflectableMetadata in _builtinReflectableMetadatas) {
+    for (Reflectable reflectableMetadata in _builtinReflectableMetadatas) {
       List<ClassMirror> classMirrors = MetadataMirrorUtil.annotatedClass(reflectableMetadata);
       Map<Type, MirrorDefinition> definitions = {};
       for (ClassMirror clazz in classMirrors) {
-        definitions[clazz.runtimeType] = MirrorDefinition(clazz);
+        definitions[clazz.dynamicReflectedType] = MirrorDefinition(clazz);
       }
       allDefinitions.addAll(definitions);
     }
@@ -67,11 +75,23 @@ class ApplicationContainer {
   Map<String, MirrorDefinitionHolder> _parseMirrorDefinitionHolders() {
     Map<String, MirrorDefinitionHolder> holders = {};
 
-    for(Reflectable reflectableMetadata in _builtinReflectableMetadatas) {
+    for (Reflectable reflectableMetadata in _builtinReflectableMetadatas) {
       List<ClassMirror> classMirrors = MetadataMirrorUtil.annotatedClass(reflectableMetadata);
       if (reflectableMetadata is Reflection) {
         holders.addAll(_parseReflectionMetadata(classMirrors));
-      } else if (reflectableMetadata is RefreshConfiguration) {
+      }
+    }
+
+    return holders;
+  }
+
+  /// Create [WithoutMirrorDefinitionHolder] instance
+  Map<String, WithoutMirrorDefinitionHolder> _parseWithoutMirrorDefinitionHolders() {
+    Map<String, WithoutMirrorDefinitionHolder> holders = {};
+
+    for (Reflectable reflectableMetadata in _builtinReflectableMetadatas) {
+      List<ClassMirror> classMirrors = MetadataMirrorUtil.annotatedClass(reflectableMetadata);
+      if (reflectableMetadata is RefsConfiguration) {
         holders.addAll(_parseReflectionConfigurationMetadata(classMirrors));
       }
     }
@@ -83,12 +103,12 @@ class ApplicationContainer {
     Map<String, MirrorDefinitionHolder> holders = {};
 
     for (ClassMirror classMirror in classMirrors) {
-      MirrorDefinition? definition = _mirrorDefinitions[classMirror.runtimeType];
+      MirrorDefinition? definition = _mirrorDefinitions[classMirror.dynamicReflectedType];
       if (definition == null) {
         continue;
       }
 
-      List<Object> carriers = MetadataMirrorUtil.classAnnotationCarriers(classMirror);
+      List<Object> carriers = MetadataMirrorUtil.classMetadataCarriers(classMirror);
       NamedRef? namedRef = MetadataUtil.findCarrier<NamedRef>(carriers);
       String? name = namedRef?.name;
       String key = _getKey(definition.actualType, name);
@@ -98,21 +118,36 @@ class ApplicationContainer {
     return holders;
   }
 
-  Map<String, MirrorDefinitionHolder> _parseReflectionConfigurationMetadata(List<ClassMirror> classMirrors) {
-    Map<String, MirrorDefinitionHolder> holders = {};
+  Map<String, WithoutMirrorDefinitionHolder> _parseReflectionConfigurationMetadata(List<ClassMirror> classMirrors) {
+    Map<String, WithoutMirrorDefinitionHolder> holders = {};
 
-    // for (ClassMirror classMirror in classMirrors) {
-    //   MirrorDefinition? definition = _mirrorDefinitions[classMirror.runtimeType];
-    //   if (definition == null) {
-    //     continue;
-    //   }
-    //
-    //   List<Object> carriers = MetadataMirrorUtil.classAnnotationCarriers(classMirror);
-    //   NamedRef? namedRef = MetadataUtil.findCarrier<NamedRef>(carriers);
-    //   String? name = namedRef?.name;
-    //   String key = _getKey(definition.actualType, name);
-    //   holders[key] = MirrorDefinitionHolder(definition, name);
-    // }
+    for (ClassMirror classMirror in classMirrors) {
+      MirrorDefinition? definition = _mirrorDefinitions[classMirror.dynamicReflectedType];
+      if (definition == null) {
+        continue;
+      }
+
+      List<MethodMirror> methodMirrors = definition.instanceMemberMethodMirrors;
+      dynamic dynamicInstance = definition.classMirror.newInstance('', []);
+      InstanceMirror instanceMirror = const RefsConfiguration().reflect(dynamicInstance);
+
+      for (MethodMirror methodMirror in methodMirrors) {
+        Object? keyCarrier = MetadataMirrorUtil.declarationReflectableMetadata<Reflection>(methodMirror);
+        if (keyCarrier == null) {
+          continue;
+        }
+
+        NamedRef? namedRef = MetadataUtil.findCarrier<NamedRef>(methodMirror.metadata);
+        String? name = namedRef?.name;
+        Object? returnInstance = instanceMirror.invoke(methodMirror.simpleName, []);
+        if (returnInstance == null) {
+          continue;
+        }
+
+        String key = _getKey(returnInstance.runtimeType, name);
+        holders[key] = WithoutMirrorDefinitionHolder(instanceMirror, methodMirror, name);
+      }
+    }
 
     return holders;
   }
@@ -126,6 +161,8 @@ class ApplicationContainer {
     String name = _getKey(S, tag);
     if (_mirrorDefinitionHolders[name] != null) {
       return _mirrorDefinitionHolders[name]!.instance as S;
+    } else if (_withoutMirrorDefinitionHolders[name] != null) {
+      return _withoutMirrorDefinitionHolders[name]!.instance as S;
     } else {
       throw NoSuchMirrorDefinitionException('not found mirror definition holder for type $S and name $tag');
     }
