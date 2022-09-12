@@ -1,7 +1,7 @@
 import 'package:dartx/dartx.dart';
 import 'package:redstonex/commons/exceptions/no_such_mirror_definition_exception.dart';
 import 'package:redstonex/commons/log/loggers.dart';
-import 'package:redstonex/ioc-core/metadata-core/autowired.dart';
+import 'package:redstonex/ioc-core/metadata-core/carriers/autowired.dart';
 import 'package:redstonex/ioc-core/metadata-core/carriers/named_ref.dart';
 import 'package:redstonex/ioc-core/metadata-core/reflection_configuration.dart';
 import 'package:redstonex/ioc-core/metadata-core/utils/metadata_utils.dart';
@@ -200,6 +200,10 @@ class ApplicationContainer {
     } else {
       return null;
     }
+  }
+
+  static bool existDependency<S>({String? tag}) {
+    return findDependencyByCarrierName(S, tag);
   }
 
   /// Find dependency in self container

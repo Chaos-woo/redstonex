@@ -1,0 +1,15 @@
+import 'package:redstonex/ioc-core/reflectable-core/utils/reflections_utils.dart';
+
+/// Provide simple semantic API to find dependency in container.
+///
+class Depends {
+  /// Provide search method to find dependency.
+  static S on<S>({String? tag}) {
+    return ReflectionsUtil.find<S>(tag: tag);
+  }
+
+  /// Provide find method to judge dependency exist.
+  static bool exist<S>({String? tag}) {
+    return ReflectionsUtil.existInGetX<S>(tag: tag) || ReflectionsUtil.existInSelfContainer<S>(tag: tag);
+  }
+}

@@ -5,7 +5,6 @@ import 'package:redstonex/ioc-core/application_container.dart';
 ///
 /// In order to semantic.
 class ReflectionsUtil {
-
   /// Find `S` type dependency from GetX container or [ApplicationContainer] .
   static S find<S>({String? tag}) {
     if (existInGetX<S>(tag: tag)) {
@@ -46,6 +45,9 @@ class ReflectionsUtil {
 
   /// Whether exist in GetX container
   static bool existInGetX<S>({String? tag}) => Get.isRegistered<S>(tag: tag);
+
+  /// Whether exist in Self-Container container
+  static bool existInSelfContainer<S>({String? tag}) => ApplicationContainer.existDependency<S>(tag: tag);
 
   /// Remove from GetX container
   static void remove<S>({String? tag}) => Get.delete<S>(tag: tag);
