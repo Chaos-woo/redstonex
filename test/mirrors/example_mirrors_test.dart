@@ -1,6 +1,7 @@
 import 'package:redstonex/app-configs/global_config.dart';
 import 'package:redstonex/commons/log/loggers.dart';
 import 'package:redstonex/ioc-core/metadata-core/carriers/autowired.dart';
+import 'package:redstonex/ioc-core/metadata-core/carriers/named_ref.dart';
 import 'package:redstonex/ioc-core/metadata-core/reflection.dart';
 import 'package:redstonex/ioc-core/metadata-core/reflection_configuration.dart';
 import 'package:redstonex/ioc-core/reflectable-core/utils/metadata_mirror_utils.dart';
@@ -34,6 +35,12 @@ class AnyClass {
 class TestV {
   String? v;
   String? m;
+}
+
+@Reflection()
+@NamedRef(name: 'theNamed')
+class NamedRefTest {
+
 }
 
 @RefsConfiguration()

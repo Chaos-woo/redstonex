@@ -1,4 +1,3 @@
-
 import 'package:reflectable/reflectable.dart';
 
 class Reflection extends Reflectable {

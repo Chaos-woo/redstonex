@@ -20,7 +20,7 @@ class MetadataUtil {
 
   /// find carriers in [metadata] list.
   static S? findCarrier<S>(List<Object> metadata) {
-    int index = indexInList(metadata, S.runtimeType);
+    int index = indexInList(metadata, S);
     return index != -1 ? metadata[index] as S : null;
   }
 }

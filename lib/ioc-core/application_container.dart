@@ -83,7 +83,7 @@ class ApplicationContainer {
     for (Reflectable reflectableMetadata in _builtinReflectableMetadatas) {
       List<ClassMirror> classMirrors = MetadataMirrorUtil.annotatedClass(reflectableMetadata);
       if (reflectableMetadata is Reflection) {
-        holders.addAll(_parseReflectionMetadata(classMirrors));
+        holders.addAll(_parseReflectionSingleton(classMirrors));
       }
     }
 
@@ -97,14 +97,14 @@ class ApplicationContainer {
     for (Reflectable reflectableMetadata in _builtinReflectableMetadatas) {
       List<ClassMirror> classMirrors = MetadataMirrorUtil.annotatedClass(reflectableMetadata);
       if (reflectableMetadata is RefsConfiguration) {
-        holders.addAll(_parseReflectionConfigurationMetadata(classMirrors));
+        holders.addAll(_parseReflectionSingletonConfiguration(classMirrors));
       }
     }
 
     return holders;
   }
 
-  Map<String, MirrorDefinitionHolder> _parseReflectionMetadata(List<ClassMirror> classMirrors) {
+  Map<String, MirrorDefinitionHolder> _parseReflectionSingleton(List<ClassMirror> classMirrors) {
     Map<String, MirrorDefinitionHolder> holders = {};
 
     for (ClassMirror classMirror in classMirrors) {
@@ -123,7 +123,7 @@ class ApplicationContainer {
     return holders;
   }
 
-  Map<String, WithoutMirrorDefinitionHolder> _parseReflectionConfigurationMetadata(List<ClassMirror> classMirrors) {
+  Map<String, WithoutMirrorDefinitionHolder> _parseReflectionSingletonConfiguration(List<ClassMirror> classMirrors) {
     Map<String, WithoutMirrorDefinitionHolder> holders = {};
 
     for (ClassMirror classMirror in classMirrors) {
@@ -159,7 +159,7 @@ class ApplicationContainer {
 
   static String _getKey(Type type, String? name) {
     String runtimeName = type.toString();
-    return name.isNotNullOrBlank ? '{$runtimeName}_{$name}' : runtimeName;
+    return name.isNotNullOrBlank ? '${runtimeName}_$name' : runtimeName;
   }
 
   /// Inject properties that [_mirrorDefinitionHolders] and
