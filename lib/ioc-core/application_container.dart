@@ -1,8 +1,11 @@
 import 'package:dartx/dartx.dart';
 import 'package:redstonex/commons/exceptions/no_such_mirror_definition_exception.dart';
 import 'package:redstonex/commons/log/loggers.dart';
+import 'package:redstonex/commons/log/rs_log.dart';
+import 'package:redstonex/ioc-core/metadata-core/carriers/after_properties_set.dart';
 import 'package:redstonex/ioc-core/metadata-core/carriers/autowired.dart';
-import 'package:redstonex/ioc-core/metadata-core/carriers/named_ref.dart';
+import 'package:redstonex/ioc-core/metadata-core/carriers/named_reference.dart';
+import 'package:redstonex/ioc-core/metadata-core/carriers/post_construct.dart';
 import 'package:redstonex/ioc-core/metadata-core/reflection_configuration.dart';
 import 'package:redstonex/ioc-core/metadata-core/utils/metadata_utils.dart';
 import 'package:redstonex/ioc-core/mirror-core/mirror_definition_holder.dart';
@@ -42,26 +45,41 @@ class ApplicationContainer {
   /// Builtin reflectable metadata.
   static final List<Reflectable> _builtinReflectableMetadatas = [];
 
-  /// start point.
+  static final RsLogger _logger = Loggers.of();
+
+  /// Start point.
   void initializeAppContainer(List<Type> builtinDefinitions, List<Reflectable> builtinReflectableMetadatas) {
     _builtinDefinitions.addAll(builtinDefinitions);
     _builtinReflectableMetadatas.addAll(builtinReflectableMetadatas);
 
     /// start parse
-    Loggers.of().i('initialize application container start');
+    _logger.i('Initialize application container start');
 
-    _mirrorDefinitions.addAll(_parseAnnotatedBasicMirrors());
-    _mirrorDefinitionHolders.addAll(_parseMirrorDefinitionHolders());
+    /// parse and save mirror definition
+    _mirrorDefinitions.addAll(_doParseReflectionMirrorDefinitions());
+    _magicApplicationContainerInitializeLog(_mirrorDefinitions);
+
+    /// process instance configuration class firstly
     _withoutMirrorDefinitionHolders.addAll(_parseWithoutMirrorDefinitionHolders());
+    _magicApplicationContainerInitializeLog(_withoutMirrorDefinitionHolders);
 
-    _circularDependencyInjection();
+    /// process mirror definition instance class and dependency injection
+    _mirrorDefinitionHolders.addAll(_doCreateMirrorDefinitionHolders());
+    _magicApplicationContainerInitializeLog(_mirrorDefinitionHolders);
+
+    /// process circular dependency injection
+    _doCircularDependencyInjection();
+    _magicApplicationContainerInitializeLog(_mirrorDefinitionHolders, afterCircularDependencyInjection: true);
+
+    /// after dependency injection
+    _doProcessInstanceAfterPropertiesSet(_mirrorDefinitionHolders.values.toList());
 
     /// end parse
-    Loggers.of().i('initialize application container end');
+    _logger.i('Initialize application container end');
   }
 
   /// Parse all pointed annotated class mirror definition.
-  Map<Type, MirrorDefinition> _parseAnnotatedBasicMirrors() {
+  Map<Type, MirrorDefinition> _doParseReflectionMirrorDefinitions() {
     Map<Type, MirrorDefinition> allDefinitions = {};
 
     for (Reflectable reflectableMetadata in _builtinReflectableMetadatas) {
@@ -77,13 +95,13 @@ class ApplicationContainer {
   }
 
   /// Create [MirrorDefinitionHolder] instance by [MirrorDefinition] list
-  Map<String, MirrorDefinitionHolder> _parseMirrorDefinitionHolders() {
+  Map<String, MirrorDefinitionHolder> _doCreateMirrorDefinitionHolders() {
     Map<String, MirrorDefinitionHolder> holders = {};
 
     for (Reflectable reflectableMetadata in _builtinReflectableMetadatas) {
       List<ClassMirror> classMirrors = MetadataMirrorUtil.annotatedClass(reflectableMetadata);
       if (reflectableMetadata is Reflection) {
-        holders.addAll(_parseReflectionSingleton(classMirrors));
+        holders.addAll(_doParseReflection(classMirrors));
       }
     }
 
@@ -97,14 +115,15 @@ class ApplicationContainer {
     for (Reflectable reflectableMetadata in _builtinReflectableMetadatas) {
       List<ClassMirror> classMirrors = MetadataMirrorUtil.annotatedClass(reflectableMetadata);
       if (reflectableMetadata is RefsConfiguration) {
-        holders.addAll(_parseReflectionSingletonConfiguration(classMirrors));
+        holders.addAll(_doParseReflectionConfiguration(classMirrors));
       }
     }
 
     return holders;
   }
 
-  Map<String, MirrorDefinitionHolder> _parseReflectionSingleton(List<ClassMirror> classMirrors) {
+  /// Inject dependency to application by parsing `MirrorDefinition`.
+  Map<String, MirrorDefinitionHolder> _doParseReflection(List<ClassMirror> classMirrors) {
     Map<String, MirrorDefinitionHolder> holders = {};
 
     for (ClassMirror classMirror in classMirrors) {
@@ -114,16 +133,36 @@ class ApplicationContainer {
       }
 
       List<Object> carriers = MetadataMirrorUtil.classMetadataCarriers(classMirror);
-      NamedRef? namedRef = MetadataUtil.findCarrier<NamedRef>(carriers);
+      NamedReference? namedRef = MetadataUtil.findCarrier<NamedReference>(carriers);
       String? name = namedRef?.name;
       String key = _getKey(definition.actualType, name);
-      holders[key] = MirrorDefinitionHolder(definition, name);
+      MirrorDefinitionHolder mirrorDefinitionHolder = MirrorDefinitionHolder(definition, name);
+
+      if (mirrorDefinitionHolder.instance != null && definition.instanceMemberMethodMirrors.isNotEmpty) {
+        /// process instance @PostConstruct marked method
+        List<MethodMirror> methodMirrors = definition.instanceMemberMethodMirrors;
+        InstanceMirror instanceMirror = const Reflection().reflect(mirrorDefinitionHolder.instance);
+        for (MethodMirror methodMirror in methodMirrors) {
+          Object? keyCarrier = MetadataMirrorUtil.declarationAnyMetadata<PostConstruct>(methodMirror);
+          if (keyCarrier == null) {
+            continue;
+          }
+          instanceMirror.invoke(methodMirror.simpleName, []);
+
+          /// only invoke first marked method
+          break;
+        }
+      }
+
+      holders[key] = mirrorDefinitionHolder;
     }
 
     return holders;
   }
 
-  Map<String, WithoutMirrorDefinitionHolder> _parseReflectionSingletonConfiguration(List<ClassMirror> classMirrors) {
+  /// Parse dependency configuration. It cannot process `ClassMirror` definition.
+  /// Only can auto inject dependency to application container.
+  Map<String, WithoutMirrorDefinitionHolder> _doParseReflectionConfiguration(List<ClassMirror> classMirrors) {
     Map<String, WithoutMirrorDefinitionHolder> holders = {};
 
     for (ClassMirror classMirror in classMirrors) {
@@ -142,7 +181,7 @@ class ApplicationContainer {
           continue;
         }
 
-        NamedRef? namedRef = MetadataUtil.findCarrier<NamedRef>(methodMirror.metadata);
+        NamedReference? namedRef = MetadataUtil.findCarrier<NamedReference>(methodMirror.metadata);
         String? name = namedRef?.name;
         Object? returnInstance = instanceMirror.invoke(methodMirror.simpleName, []);
         if (returnInstance == null) {
@@ -164,7 +203,7 @@ class ApplicationContainer {
 
   /// Inject properties that [_mirrorDefinitionHolders] and
   /// [_withoutMirrorDefinitionHolders] dependency
-  static void _circularDependencyInjection() {
+  static void _doCircularDependencyInjection() {
     for (MirrorDefinitionHolder holder in _mirrorDefinitionHolders.values) {
       Map<String, VariableMirror> variableMirrors = holder.mirrorDefinition.variableFieldMirrors;
       for (var entry in variableMirrors.entries) {
@@ -172,25 +211,27 @@ class ApplicationContainer {
         VariableMirror variableMirror = entry.value;
         List<Object> carriers = variableMirror.metadata;
 
-        Autowired? autowiredCarier = MetadataUtil.findCarrier<Autowired>(carriers);
-        if (autowiredCarier == null) {
+        Autowired? autowiredCarrier = MetadataUtil.findCarrier<Autowired>(carriers);
+        if (autowiredCarrier == null) {
           continue;
         }
 
-        String? tag = autowiredCarier.name;
+        String? tag = autowiredCarrier.name;
         dynamic dependency = findDependencyByCarrierName(variableMirror.dynamicReflectedType, tag);
 
         if (dependency == null) {
           throw NoSuchMirrorDefinitionException(
-              'not found mirror definition holder for dependency $fieldName and name ${autowiredCarier.name}');
+              'not found mirror definition holder for dependency $fieldName and name ${autowiredCarrier.name}');
         }
 
         var instanceMirror = const Reflection().reflect(holder.instance);
-        instanceMirror.invokeSetter(autowiredCarier.setterName ?? fieldName, dependency);
+        instanceMirror.invokeSetter(autowiredCarrier.setterName ?? fieldName, dependency);
       }
     }
   }
 
+  /// Find dependency from application container.
+  /// Note that it will return null.
   static dynamic findDependencyByCarrierName(Type type, String? tag) {
     String name = _getKey(type, tag);
     if (_mirrorDefinitionHolders[name] != null) {
@@ -202,11 +243,12 @@ class ApplicationContainer {
     }
   }
 
+  /// Whether exist dependency in application container
   static bool existDependency<S>({String? tag}) {
     return findDependencyByCarrierName(S, tag);
   }
 
-  /// Find dependency in self container
+  /// Find dependency in application container
   S findInSelfContainer<S>({String? tag}) {
     String name = _getKey(S, tag);
     if (_mirrorDefinitionHolders[name] != null) {
@@ -215,6 +257,51 @@ class ApplicationContainer {
       return _withoutMirrorDefinitionHolders[name]!.instance as S;
     } else {
       throw NoSuchMirrorDefinitionException('not found mirror definition holder for type $S and name $tag');
+    }
+  }
+
+  /// Process instance's @AfterPropertiesSet marked member method
+  void _doProcessInstanceAfterPropertiesSet(List<MirrorDefinitionHolder> mirrorDefinitionHolders) {
+    for (MirrorDefinitionHolder mirrorDefinitionHolder in mirrorDefinitionHolders) {
+      /// process instance @AfterPropertiesSet marked method
+      if (mirrorDefinitionHolder.instance != null &&
+          mirrorDefinitionHolder.mirrorDefinition.instanceMemberMethodMirrors.isNotEmpty) {
+        List<MethodMirror> methodMirrors = mirrorDefinitionHolder.mirrorDefinition.instanceMemberMethodMirrors;
+        InstanceMirror instanceMirror = const Reflection().reflect(mirrorDefinitionHolder.instance);
+        for (MethodMirror methodMirror in methodMirrors) {
+          Object? keyCarrier = MetadataMirrorUtil.declarationAnyMetadata<AfterPropertiesSet>(methodMirror);
+          if (keyCarrier == null) {
+            continue;
+          }
+          instanceMirror.invoke(methodMirror.simpleName, []);
+
+          /// only invoke first marked method
+          break;
+        }
+      }
+    }
+  }
+
+  /// Collect applicationContainer initialize logs
+  void _magicApplicationContainerInitializeLog(dynamic data, {bool afterCircularDependencyInjection = false}) {
+    if (data is Map<Type, MirrorDefinition>) {
+      _logger.i('MirrorDefinitions collect start');
+      for(var entry in data.entries) {
+        _logger.i('Type=${entry.key}, MirrorDefinition=${entry.value.toString()}');
+      }
+      _logger.i('MirrorDefinitions collect end');
+    } else if (data is Map<String, MirrorDefinitionHolder>) {
+      _logger.i('MirrorDefinitionHolders collect start, current is afterCircularDependencyInjection?: $afterCircularDependencyInjection');
+      for(var entry in data.entries) {
+        _logger.i('HolderName=${entry.key}, MirrorDefinitionHolder=${entry.value.toString()}');
+      }
+      _logger.i('MirrorDefinitionHolders collect end');
+    } else if (data is Map<String, WithoutMirrorDefinitionHolder>) {
+      _logger.i('WithoutMirrorDefinitionHolders collect start');
+      for(var entry in data.entries) {
+        _logger.i('HolderName=${entry.key}, WithoutMirrorDefinitionHolder=${entry.value.toString()}');
+      }
+      _logger.i('WithoutMirrorDefinitionHolders collect end');
     }
   }
 }

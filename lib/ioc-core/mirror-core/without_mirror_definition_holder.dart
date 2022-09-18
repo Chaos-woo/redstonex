@@ -31,4 +31,9 @@ class WithoutMirrorDefinitionHolder implements WithoutMirrorDefinitionHolderFact
 
     return instance;
   }
+
+  @override
+  String toString() {
+    return 'WithoutMirrorDefinitionHolder{_instanceMirror: $_instanceMirror, _methodMirror: $_methodMirror, _name: $_name, _instance: $_instance}';
+  }
 }

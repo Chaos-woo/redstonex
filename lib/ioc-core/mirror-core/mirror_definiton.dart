@@ -43,7 +43,7 @@ class MirrorDefinition {
       _superclass = _classMirror.superclass;
     } on NoSuchCapabilityError catch(e){
       _superclass = null;
-      Loggers.of().w(e.stackTrace);
+      // Loggers.of().i(e.stackTrace);
     } on Exception catch(e, stack) {
       _superclass = null;
       Loggers.of().e('self parse class superclass exception', e, stack);
@@ -101,4 +101,9 @@ class MirrorDefinition {
   Type get actualType => _actualType;
 
   ClassMirror get classMirror => _classMirror;
+
+  @override
+  String toString() {
+    return 'MirrorDefinition{_classMirror: $_classMirror, _actualType: $_actualType, _classMetadatas: $_classMetadatas, _declarationMirrors: $_declarationMirrors, _superclass: $_superclass, _superInterfaces: $_superInterfaces, _instanceMemberMethodMirrors: $_instanceMemberMethodMirrors, _staticMethodMirrors: $_staticMethodMirrors, _variableFieldMirrors: $_variableFieldMirrors, _nonVariableFieldMirrors: $_nonVariableFieldMirrors}';
+  }
 }

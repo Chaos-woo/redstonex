@@ -13,16 +13,16 @@ import 'package:redstonex/route-core/routes.dart';
 /// and then auto initial all routes.
 class Dispatcher implements Initializer {
   /// all routes of app. [GetMaterialApp.getPages] can use this after initial
-  final List<GetPage> pageRoutes = [];
+  static final List<GetPage> pageRoutes = [];
 
   /// maybe group by business-related, or irrelevant, just in the same group
-  final List<RouteGroup> routeGroups = [];
+  static final List<RouteGroup> routeGroups = [];
 
   /// remainder routes
-  final RouteGroup otherRouteGroup = RouteGroup('other');
+  static final RouteGroup otherRouteGroup = RouteGroup('other');
 
   /// routes statistics
-  final RoutesStatistics statistics = RoutesStatistics();
+  static final RoutesStatistics statistics = RoutesStatistics();
 
   /// Get a [RouteGroup] to organize routes
   RouteGroup group({String? groupName}) {
@@ -34,7 +34,7 @@ class Dispatcher implements Initializer {
 
   /// Adding route in [otherRouteGroup] directly
   void route(Route route) {
-    otherRouteGroup.add(route);
+    otherRouteGroup.newRoute(route);
     statistics.routeCount++;
   }
 

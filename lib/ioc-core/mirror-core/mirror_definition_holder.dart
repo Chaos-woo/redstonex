@@ -32,4 +32,9 @@ class MirrorDefinitionHolder implements MirrorDefinitionHolderFactory {
 
     return instance;
   }
+
+  @override
+  String toString() {
+    return 'MirrorDefinitionHolder{_mirrorDefinition: $_mirrorDefinition, _name: $_name, _instance: $_instance}';
+  }
 }

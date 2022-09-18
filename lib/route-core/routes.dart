@@ -31,5 +31,5 @@ class RouteGroup {
 
   RouteGroup(this.name);
 
-  void add(Route route) => routes.add(route);
+  void newRoute(Route route) => routes.add(route);
 }

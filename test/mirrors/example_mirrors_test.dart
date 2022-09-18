@@ -1,7 +1,9 @@
 import 'package:redstonex/app-configs/global_config.dart';
 import 'package:redstonex/commons/log/loggers.dart';
+import 'package:redstonex/ioc-core/metadata-core/carriers/after_properties_set.dart';
 import 'package:redstonex/ioc-core/metadata-core/carriers/autowired.dart';
-import 'package:redstonex/ioc-core/metadata-core/carriers/named_ref.dart';
+import 'package:redstonex/ioc-core/metadata-core/carriers/named_reference.dart';
+import 'package:redstonex/ioc-core/metadata-core/carriers/post_construct.dart';
 import 'package:redstonex/ioc-core/metadata-core/reflection.dart';
 import 'package:redstonex/ioc-core/metadata-core/reflection_configuration.dart';
 import 'package:redstonex/ioc-core/reflectable-core/utils/metadata_mirror_utils.dart';
@@ -12,7 +14,6 @@ import 'package:test/test.dart';
 
 import 'example_mirrors_test.reflectable.dart';
 
-// @registerRef
 @Record('theA')
 @recordRef
 @Reflection()
@@ -26,6 +27,16 @@ class RefA {
   TestV test = TestV();
 
   AnyClass? anyClass;
+
+  @PostConstruct()
+  void postConstruct() {
+    Loggers.of().i('postConstruct method invoke');
+  }
+
+  @AfterPropertiesSet()
+  void afterPropertiesSet() {
+    Loggers.of().i('afterPropertiesSet method invoke');
+  }
 }
 
 class AnyClass {
@@ -38,7 +49,7 @@ class TestV {
 }
 
 @Reflection()
-@NamedRef(name: 'theNamed')
+@NamedReference(name: 'theNamed')
 class NamedRefTest {
 
 }
@@ -70,12 +81,6 @@ void main() {
   initializeReflectable(); // 自定义方法名开启reflectable反射的支持
 
   GlobalConfig.safePutGlobalConfig(GlobalConfig());
-
-  // test('mirrors initial test', () {
-  //   RegisterRefHandler handler = RegisterRefHandler();
-  //   handler.handle();
-  //   Loggers.of().i(Refs.ref<RefA>());
-  // });
 
   /// 结论：使用有metadataCapability的注解，可以获取到类上
   ///     、方法上、参数上的注解(其他注解)信息，且可以获取到
@@ -154,6 +159,13 @@ void main() {
     print('$newInstance');
   });
 
+  /// 测试IoC和DI
+  /// 1.测试RefA类的生成管理
+  /// 2.测试RefA类@Autowired()依赖的自动注入
+  /// 3.测试RefA类@PostConstruct()方法的自动执行
+  /// 4.测试RefA类@AfterPropertiesSet()方法的自动执行
+  ///
+  /// 5.测试@RefsConfiguration()配置类配置类注入容器（TestV类）
   test('auto reflectable', () {
     SelfReflectable.startSelfRegistered();
 

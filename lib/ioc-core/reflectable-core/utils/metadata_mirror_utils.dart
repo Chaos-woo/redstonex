@@ -19,4 +19,8 @@ class MetadataMirrorUtil {
   static Object? declarationReflectableMetadata<S>(DeclarationMirror declarationMirror) {
     return declarationMirror.metadata.filter((ele) => ele is Reflectable).filter((ele) => ele is S).firstOrNull;
   }
+
+  static Object? declarationAnyMetadata<S>(DeclarationMirror declarationMirror) {
+    return declarationMirror.metadata.filter((ele) => ele is S).firstOrNull;
+  }
 }

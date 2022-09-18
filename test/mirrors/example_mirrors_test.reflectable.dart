@@ -4,9 +4,13 @@
 
 import 'dart:core';
 import 'example_mirrors_test.dart' as prefix0;
+import 'package:redstonex/ioc-core/metadata-core/carriers/after_properties_set.dart'
+    as prefix5;
 import 'package:redstonex/ioc-core/metadata-core/carriers/autowired.dart'
     as prefix3;
-import 'package:redstonex/ioc-core/metadata-core/carriers/named_ref.dart'
+import 'package:redstonex/ioc-core/metadata-core/carriers/named_reference.dart'
+    as prefix6;
+import 'package:redstonex/ioc-core/metadata-core/carriers/post_construct.dart'
     as prefix4;
 import 'package:redstonex/ioc-core/metadata-core/reflection.dart' as prefix1;
 import 'package:redstonex/ioc-core/metadata-core/reflection_configuration.dart'
@@ -34,8 +38,8 @@ final _data = <r.Reflectable, r.ReflectorData>{
             134217735,
             0,
             const prefix0.RecordRef(),
-            const <int>[0, 1, 2, 7],
-            const <int>[8, 9, 10, 11, 12, 2, 3, 4, 5, 6],
+            const <int>[0, 1, 2, 3, 4, 9],
+            const <int>[10, 11, 12, 13, 14, 2, 3, 4, 5, 6, 7, 8],
             const <int>[],
             -1,
             {},
@@ -67,10 +71,32 @@ final _data = <r.Reflectable, r.ReflectorData>{
             const <int>[],
             const prefix0.RecordRef(),
             const <Object>[const prefix0.Record('theMethodA')]),
-        r.ImplicitGetterMirrorImpl(const prefix0.RecordRef(), 0, 3),
-        r.ImplicitSetterMirrorImpl(const prefix0.RecordRef(), 0, 4),
-        r.ImplicitGetterMirrorImpl(const prefix0.RecordRef(), 1, 5),
-        r.ImplicitSetterMirrorImpl(const prefix0.RecordRef(), 1, 6),
+        r.MethodMirrorImpl(
+            r'postConstruct',
+            1310722,
+            0,
+            -1,
+            -1,
+            -1,
+            null,
+            const <int>[],
+            const prefix0.RecordRef(),
+            const <Object>[const prefix4.PostConstruct()]),
+        r.MethodMirrorImpl(
+            r'afterPropertiesSet',
+            1310722,
+            0,
+            -1,
+            -1,
+            -1,
+            null,
+            const <int>[],
+            const prefix0.RecordRef(),
+            const <Object>[const prefix5.AfterPropertiesSet()]),
+        r.ImplicitGetterMirrorImpl(const prefix0.RecordRef(), 0, 5),
+        r.ImplicitSetterMirrorImpl(const prefix0.RecordRef(), 0, 6),
+        r.ImplicitGetterMirrorImpl(const prefix0.RecordRef(), 1, 7),
+        r.ImplicitSetterMirrorImpl(const prefix0.RecordRef(), 1, 8),
         r.MethodMirrorImpl(r'', 0, 0, -1, -1, -1, null, const <int>[],
             const prefix0.RecordRef(), const []),
         r.MethodMirrorImpl(r'==', 2097154, -1, -1, -1, -1, null, const <int>[2],
@@ -85,13 +111,13 @@ final _data = <r.Reflectable, r.ReflectorData>{
             const <int>[], const prefix0.RecordRef(), const [])
       ],
       <m.ParameterMirror>[
-        r.ParameterMirrorImpl(r'_test', 134348902, 4, const prefix0.RecordRef(),
+        r.ParameterMirrorImpl(r'_test', 134348902, 6, const prefix0.RecordRef(),
             -1, -1, -1, null, const [], null, null),
-        r.ParameterMirrorImpl(r'_anyClass', 67240038, 6,
+        r.ParameterMirrorImpl(r'_anyClass', 67240038, 8,
             const prefix0.RecordRef(), -1, -1, -1, null, const [], null, null),
-        r.ParameterMirrorImpl(r'other', 134348806, 8, const prefix0.RecordRef(),
-            -1, -1, -1, null, const [], null, null),
-        r.ParameterMirrorImpl(r'invocation', 134348806, 10,
+        r.ParameterMirrorImpl(r'other', 134348806, 10,
+            const prefix0.RecordRef(), -1, -1, -1, null, const [], null, null),
+        r.ParameterMirrorImpl(r'invocation', 134348806, 12,
             const prefix0.RecordRef(), -1, -1, -1, null, const [], null, null)
       ],
       <Type>[prefix0.RefA],
@@ -103,6 +129,9 @@ final _data = <r.Reflectable, r.ReflectorData>{
         r'hashCode': (dynamic instance) => instance.hashCode,
         r'runtimeType': (dynamic instance) => instance.runtimeType,
         r'methodA': (dynamic instance) => instance.methodA,
+        r'postConstruct': (dynamic instance) => instance.postConstruct,
+        r'afterPropertiesSet': (dynamic instance) =>
+            instance.afterPropertiesSet,
         r'test': (dynamic instance) => instance.test,
         r'anyClass': (dynamic instance) => instance.anyClass
       },
@@ -123,8 +152,8 @@ final _data = <r.Reflectable, r.ReflectorData>{
             134217735,
             0,
             const prefix1.Reflection(),
-            const <int>[0, 1, 2, 7],
-            const <int>[8, 9, 10, 11, 12, 2, 3, 4, 5, 6],
+            const <int>[0, 1, 2, 3, 4, 9],
+            const <int>[10, 11, 12, 13, 14, 2, 3, 4, 5, 6, 7, 8],
             const <int>[],
             -1,
             {},
@@ -145,8 +174,8 @@ final _data = <r.Reflectable, r.ReflectorData>{
             134217735,
             1,
             const prefix1.Reflection(),
-            const <int>[13],
-            const <int>[8, 9, 10, 11, 12],
+            const <int>[15],
+            const <int>[10, 11, 12, 13, 14],
             const <int>[],
             -1,
             {},
@@ -157,7 +186,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
             const <int>[],
             const <Object>[
               const prefix1.Reflection(),
-              const prefix4.NamedRef(name: 'theNamed')
+              const prefix6.NamedReference(name: 'theNamed')
             ],
             null)
       ],
@@ -177,10 +206,32 @@ final _data = <r.Reflectable, r.ReflectorData>{
             const <int>[],
             const prefix1.Reflection(),
             const <Object>[const prefix0.Record('theMethodA')]),
-        r.ImplicitGetterMirrorImpl(const prefix1.Reflection(), 0, 3),
-        r.ImplicitSetterMirrorImpl(const prefix1.Reflection(), 0, 4),
-        r.ImplicitGetterMirrorImpl(const prefix1.Reflection(), 1, 5),
-        r.ImplicitSetterMirrorImpl(const prefix1.Reflection(), 1, 6),
+        r.MethodMirrorImpl(
+            r'postConstruct',
+            1310722,
+            0,
+            -1,
+            -1,
+            -1,
+            const <int>[],
+            const <int>[],
+            const prefix1.Reflection(),
+            const <Object>[const prefix4.PostConstruct()]),
+        r.MethodMirrorImpl(
+            r'afterPropertiesSet',
+            1310722,
+            0,
+            -1,
+            -1,
+            -1,
+            const <int>[],
+            const <int>[],
+            const prefix1.Reflection(),
+            const <Object>[const prefix5.AfterPropertiesSet()]),
+        r.ImplicitGetterMirrorImpl(const prefix1.Reflection(), 0, 5),
+        r.ImplicitSetterMirrorImpl(const prefix1.Reflection(), 0, 6),
+        r.ImplicitGetterMirrorImpl(const prefix1.Reflection(), 1, 7),
+        r.ImplicitSetterMirrorImpl(const prefix1.Reflection(), 1, 8),
         r.MethodMirrorImpl(r'', 0, 0, -1, 0, 0, const <int>[], const <int>[],
             const prefix1.Reflection(), const []),
         r.MethodMirrorImpl(r'==', 2097154, -1, -1, 4, 4, const <int>[],
@@ -209,7 +260,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
         r.ParameterMirrorImpl(
             r'_test',
             134348902,
-            4,
+            6,
             const prefix1.Reflection(),
             -1,
             2,
@@ -221,7 +272,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
         r.ParameterMirrorImpl(
             r'_anyClass',
             67240038,
-            6,
+            8,
             const prefix1.Reflection(),
             -1,
             3,
@@ -233,7 +284,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
         r.ParameterMirrorImpl(
             r'other',
             134348806,
-            8,
+            10,
             const prefix1.Reflection(),
             -1,
             8,
@@ -245,7 +296,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
         r.ParameterMirrorImpl(
             r'invocation',
             134348806,
-            10,
+            12,
             const prefix1.Reflection(),
             -1,
             9,
@@ -275,6 +326,9 @@ final _data = <r.Reflectable, r.ReflectorData>{
         r'hashCode': (dynamic instance) => instance.hashCode,
         r'runtimeType': (dynamic instance) => instance.runtimeType,
         r'methodA': (dynamic instance) => instance.methodA,
+        r'postConstruct': (dynamic instance) => instance.postConstruct,
+        r'afterPropertiesSet': (dynamic instance) =>
+            instance.afterPropertiesSet,
         r'test': (dynamic instance) => instance.test,
         r'anyClass': (dynamic instance) => instance.anyClass
       },

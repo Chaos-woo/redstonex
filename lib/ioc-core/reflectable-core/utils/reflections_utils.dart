@@ -19,7 +19,7 @@ class ReflectionsUtil {
     return Get.find<S>(tag: tag);
   }
 
-  /// For long lifecycle object in self container.
+  /// For long lifecycle object in application container.
   static S _findInSelfContainer<S>({String? tag}) {
     return ApplicationContainer().findInSelfContainer<S>(tag: tag);
   }
