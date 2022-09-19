@@ -1,6 +1,6 @@
 import 'package:redstonex/ioc-core/application_container.dart';
-import 'package:redstonex/ioc-core/metadata-core/reflection.dart';
-import 'package:redstonex/ioc-core/metadata-core/reflection_configuration.dart';
+import 'package:redstonex/ioc-core/metadata-core/component.dart';
+import 'package:redstonex/ioc-core/metadata-core/components_configuration.dart';
 import 'package:reflectable/reflectable.dart';
 
 ///
@@ -26,7 +26,7 @@ class SelfReflectable {
 /// Builtin definition that must initialize.
 class _BuiltinReflectable {
   final List<Type> _builtinDefinitions = [];
-  final List<Reflectable> _builtinReflectableMetadatas = [const Reflection(), const  RefsConfiguration()];
+  final List<Reflectable> _builtinReflectableMetadatas = [const Component(), const  ComponentsConfiguration()];
 
   List<Type> get builtinDefinitions => _builtinDefinitions;
 

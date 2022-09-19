@@ -4,8 +4,8 @@ import 'package:redstonex/ioc-core/metadata-core/carriers/after_properties_set.d
 import 'package:redstonex/ioc-core/metadata-core/carriers/autowired.dart';
 import 'package:redstonex/ioc-core/metadata-core/carriers/named_reference.dart';
 import 'package:redstonex/ioc-core/metadata-core/carriers/post_construct.dart';
-import 'package:redstonex/ioc-core/metadata-core/reflection.dart';
-import 'package:redstonex/ioc-core/metadata-core/reflection_configuration.dart';
+import 'package:redstonex/ioc-core/metadata-core/component.dart';
+import 'package:redstonex/ioc-core/metadata-core/components_configuration.dart';
 import 'package:redstonex/ioc-core/reflectable-core/utils/metadata_mirror_utils.dart';
 import 'package:redstonex/ioc-core/reflectable-core/utils/reflections_utils.dart';
 import 'package:redstonex/ioc-core/self_reflectable.dart';
@@ -16,7 +16,7 @@ import 'example_mirrors_test.reflectable.dart';
 
 @Record('theA')
 @recordRef
-@Reflection()
+@Component()
 class RefA {
   RefA() {}
 
@@ -48,15 +48,15 @@ class TestV {
   String? m;
 }
 
-@Reflection()
+@Component()
 @NamedReference(name: 'theNamed')
 class NamedRefTest {
 
 }
 
-@RefsConfiguration()
+@ComponentsConfiguration()
 class RefsConfig {
-  @Reflection()
+  @Component()
   TestV testV() {
    TestV t = TestV();
    t.m = 'm';

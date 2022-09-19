@@ -6,7 +6,7 @@ import 'package:redstonex/ioc-core/metadata-core/carriers/after_properties_set.d
 import 'package:redstonex/ioc-core/metadata-core/carriers/autowired.dart';
 import 'package:redstonex/ioc-core/metadata-core/carriers/named_reference.dart';
 import 'package:redstonex/ioc-core/metadata-core/carriers/post_construct.dart';
-import 'package:redstonex/ioc-core/metadata-core/reflection_configuration.dart';
+import 'package:redstonex/ioc-core/metadata-core/components_configuration.dart';
 import 'package:redstonex/ioc-core/metadata-core/utils/metadata_utils.dart';
 import 'package:redstonex/ioc-core/mirror-core/mirror_definition_holder.dart';
 import 'package:redstonex/ioc-core/mirror-core/mirror_definiton.dart';
@@ -14,7 +14,7 @@ import 'package:redstonex/ioc-core/mirror-core/without_mirror_definition_holder.
 import 'package:redstonex/ioc-core/reflectable-core/utils/metadata_mirror_utils.dart';
 import 'package:reflectable/reflectable.dart';
 
-import 'metadata-core/reflection.dart';
+import 'metadata-core/component.dart';
 
 /// Instance container following the application lifecycle.
 ///
@@ -100,7 +100,7 @@ class ApplicationContainer {
 
     for (Reflectable reflectableMetadata in _builtinReflectableMetadatas) {
       List<ClassMirror> classMirrors = MetadataMirrorUtil.annotatedClass(reflectableMetadata);
-      if (reflectableMetadata is Reflection) {
+      if (reflectableMetadata is Component) {
         holders.addAll(_doParseReflection(classMirrors));
       }
     }
@@ -114,7 +114,7 @@ class ApplicationContainer {
 
     for (Reflectable reflectableMetadata in _builtinReflectableMetadatas) {
       List<ClassMirror> classMirrors = MetadataMirrorUtil.annotatedClass(reflectableMetadata);
-      if (reflectableMetadata is RefsConfiguration) {
+      if (reflectableMetadata is ComponentsConfiguration) {
         holders.addAll(_doParseReflectionConfiguration(classMirrors));
       }
     }
@@ -141,7 +141,7 @@ class ApplicationContainer {
       if (mirrorDefinitionHolder.instance != null && definition.instanceMemberMethodMirrors.isNotEmpty) {
         /// process instance @PostConstruct marked method
         List<MethodMirror> methodMirrors = definition.instanceMemberMethodMirrors;
-        InstanceMirror instanceMirror = const Reflection().reflect(mirrorDefinitionHolder.instance);
+        InstanceMirror instanceMirror = const Component().reflect(mirrorDefinitionHolder.instance);
         for (MethodMirror methodMirror in methodMirrors) {
           Object? keyCarrier = MetadataMirrorUtil.declarationAnyMetadata<PostConstruct>(methodMirror);
           if (keyCarrier == null) {
@@ -173,10 +173,10 @@ class ApplicationContainer {
 
       List<MethodMirror> methodMirrors = definition.instanceMemberMethodMirrors;
       dynamic dynamicInstance = definition.classMirror.newInstance('', []);
-      InstanceMirror instanceMirror = const RefsConfiguration().reflect(dynamicInstance);
+      InstanceMirror instanceMirror = const ComponentsConfiguration().reflect(dynamicInstance);
 
       for (MethodMirror methodMirror in methodMirrors) {
-        Object? keyCarrier = MetadataMirrorUtil.declarationReflectableMetadata<Reflection>(methodMirror);
+        Object? keyCarrier = MetadataMirrorUtil.declarationReflectableMetadata<Component>(methodMirror);
         if (keyCarrier == null) {
           continue;
         }
@@ -224,7 +224,7 @@ class ApplicationContainer {
               'not found mirror definition holder for dependency $fieldName and name ${autowiredCarrier.name}');
         }
 
-        var instanceMirror = const Reflection().reflect(holder.instance);
+        var instanceMirror = const Component().reflect(holder.instance);
         instanceMirror.invokeSetter(autowiredCarrier.setterName ?? fieldName, dependency);
       }
     }
@@ -267,7 +267,7 @@ class ApplicationContainer {
       if (mirrorDefinitionHolder.instance != null &&
           mirrorDefinitionHolder.mirrorDefinition.instanceMemberMethodMirrors.isNotEmpty) {
         List<MethodMirror> methodMirrors = mirrorDefinitionHolder.mirrorDefinition.instanceMemberMethodMirrors;
-        InstanceMirror instanceMirror = const Reflection().reflect(mirrorDefinitionHolder.instance);
+        InstanceMirror instanceMirror = const Component().reflect(mirrorDefinitionHolder.instance);
         for (MethodMirror methodMirror in methodMirrors) {
           Object? keyCarrier = MetadataMirrorUtil.declarationAnyMetadata<AfterPropertiesSet>(methodMirror);
           if (keyCarrier == null) {
