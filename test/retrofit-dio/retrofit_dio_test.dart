@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 import 'package:redstonex/app-configs/global_config.dart';
 import 'package:redstonex/app-configs/user-configs/global_http_option_configs.dart';
 import 'package:redstonex/commons/log/loggers.dart';
-import 'package:redstonex/commons/log/rs_log.dart';
+import 'package:redstonex/commons/log/redstone_logger.dart';
 import 'package:redstonex/network-core/definitions/proxy/dios.dart';
 
 import 'http_client_example.dart';
@@ -30,11 +30,11 @@ class MyGlobalConfigs extends GlobalConfig {
 void main() {
   test('http client test', () async {
     GlobalConfig global = MyGlobalConfigs();
-    GlobalConfig.safePutGlobalConfig(global);
+    GlobalConfig.safeOverride(global);
 
     Dio dio = Dios.of();
     HttpClientExample httpClient = HttpClientExample(dio, baseUrl: 'https://');
-    RsLogger logger = Loggers.of();
+    RedstoneLogger logger = Loggers.of();
     String string = await httpClient.getBaidu();
     logger.i(string);
   });

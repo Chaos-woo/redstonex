@@ -80,7 +80,7 @@ class Record {
 void main() {
   initializeReflectable(); // 自定义方法名开启reflectable反射的支持
 
-  GlobalConfig.safePutGlobalConfig(GlobalConfig());
+  GlobalConfig.safeOverride(GlobalConfig());
 
   /// 结论：使用有metadataCapability的注解，可以获取到类上
   ///     、方法上、参数上的注解(其他注解)信息，且可以获取到
@@ -143,7 +143,7 @@ void main() {
       if (variable is VariableMirror) {
         Loggers.of().w('variable ${entry.key}');
 
-        Object? reflectable = MetadataMirrorUtil.declarationReflectableMetadata(variable);
+        Object? reflectable = MetadataBeanUtils.declarationReflectableMetadata(variable);
         if (reflectable == null) {
           continue;
         }
@@ -169,7 +169,7 @@ void main() {
   test('auto reflectable', () {
     SelfReflectable.startSelfRegistered();
 
-    print('${ReflectionsUtil.find<RefA>()}');
-    print('${ReflectionsUtil.find<TestV>()}');
+    print('${ReflectionsUtils.find<RefA>()}');
+    print('${ReflectionsUtils.find<TestV>()}');
   });
 }

@@ -31,5 +31,5 @@ mixin CtrlMultipartDataProcessMixin<T> on LoadedViewCtrl {
   void onCompletedLoadData(List<T>? obtainedData) => {};
 
   /// Process error or exception on process data
-  void onProcessDataError(Object e, StackTrace s) => throw CommonsAppException(e, s);
+  void onProcessDataError(Object e, StackTrace s) => throw CommonException(e, s);
 }

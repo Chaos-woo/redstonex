@@ -17,23 +17,23 @@ class GlobalConfig with OfSyntax {
 
   /// Get GetX bean container [GlobalConfig] instance
   static GlobalConfig of() =>
-      ReflectionsUtil.find<GlobalConfig>(tag: GlobalConfig.fixedGlobalConfigTag);
+      ReflectionsUtils.find<GlobalConfig>(tag: GlobalConfig.fixedGlobalConfigTag);
 
   /// Get real type [GlobalConfig] instance from container
   ///
   /// note: `T` generic type must be subtype of [GlobalConfig]
-  static T ofReal<T>() => of() as T;
+  static T realOf<T>() => of() as T;
 
-  /// Safety put global configuration in GetX bean container.
+  /// Safety put global configuration to container.
   ///
   /// Default global configuration will put in container when built-in initialing,
   /// using the same tag replace default configuration when want to.
-  static void safePutGlobalConfig(GlobalConfig customGlobalConfig) {
-    if (ReflectionsUtil.existInGetX<GlobalConfig>(tag: fixedGlobalConfigTag)) {
-      ReflectionsUtil.remove<GlobalConfig>(tag: fixedGlobalConfigTag);
+  static void safeOverride(GlobalConfig customGlobalConfig) {
+    if (ReflectionsUtils.existInSelfContainer<GlobalConfig>(tag: fixedGlobalConfigTag)) {
+      ReflectionsUtils.remove<GlobalConfig>(tag: fixedGlobalConfigTag);
     }
 
-    ReflectionsUtil.put<GlobalConfig>(customGlobalConfig, tag: fixedGlobalConfigTag);
+    ReflectionsUtils.put<GlobalConfig>(customGlobalConfig, tag: fixedGlobalConfigTag);
   }
 
   /// Current development mode whether debug mode

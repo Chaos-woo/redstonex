@@ -3,7 +3,7 @@ import 'package:reflectable/reflectable.dart';
 
 /// Mirror-Metadata relation parse util.
 ///
-class MetadataMirrorUtil {
+class MetadataBeanUtils {
   static List<ClassMirror> annotatedClass(Reflectable reflector) {
     return reflector.annotatedClasses.toList().toUnmodifiable();
   }

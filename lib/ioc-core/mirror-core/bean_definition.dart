@@ -9,10 +9,10 @@ import 'package:reflectable/reflectable.dart';
 ///  e.g.
 ///  Class type and method definition and variable definition
 ///  and metadata annotation definition
-class MirrorDefinition {
+class BeanDefinition {
   final ClassMirror _classMirror;
   late final Type _actualType;
-  final List<Object> _classMetadatas = [];
+  final List<Object> _classMetadataList = [];
   final Map<String, DeclarationMirror> _declarationMirrors = {};
   late final ClassMirror? _superclass;
   final List<ClassMirror> _superInterfaces = [];
@@ -23,7 +23,7 @@ class MirrorDefinition {
   final Map<String, VariableMirror> _variableFieldMirrors = {};
   final Map<String, VariableMirror> _nonVariableFieldMirrors = {};
 
-  MirrorDefinition(this._classMirror) {
+  BeanDefinition(this._classMirror) {
     _reflectMirrorDefinition(_classMirror);
 
     _selfParseClassMirror();
@@ -33,7 +33,7 @@ class MirrorDefinition {
 
   void _reflectMirrorDefinition(ClassMirror classMirror) {
     _actualType = classMirror.dynamicReflectedType;
-    _classMetadatas.addAll(classMirror.metadata);
+    _classMetadataList.addAll(classMirror.metadata);
 
     _declarationMirrors.addAll(classMirror.declarations);
   }
@@ -56,8 +56,8 @@ class MirrorDefinition {
     for (var declarationEntry in _declarationMirrors.entries) {
       var declaration = declarationEntry.value;
       if (declaration is MethodMirror &&
-          DefinitionUtil.isRegularMethod(declaration) &&
-          !DefinitionUtil.isOperatorMethod(declaration)) {
+          MirrorDefinitionUtils.isRegularMethod(declaration) &&
+          !MirrorDefinitionUtils.isOperatorMethod(declaration)) {
         if (declaration.isStatic) {
           _staticMethodMirrors.add(declaration);
         } else {
@@ -72,9 +72,9 @@ class MirrorDefinition {
       var declaration = declarationEntry.value;
       if (declaration is VariableMirror) {
         MapEntry<String, VariableMirror> entry = MapEntry(declarationEntry.key, declaration);
-        if (DefinitionUtil.isNonVariableField(declaration)) {
+        if (MirrorDefinitionUtils.isNonVariableField(declaration)) {
           _nonVariableFieldMirrors.addEntries([entry]);
-        } else if (DefinitionUtil.isVariableField(declaration)) {
+        } else if (MirrorDefinitionUtils.isVariableField(declaration)) {
           _variableFieldMirrors.addEntries([entry]);
         }
       }
@@ -96,7 +96,7 @@ class MirrorDefinition {
 
   Map<String, DeclarationMirror> get declarationMirrors => _declarationMirrors;
 
-  List<Object> get classMetadatas => _classMetadatas.toUnmodifiable();
+  List<Object> get classMetadataList => _classMetadataList.toUnmodifiable();
 
   Type get actualType => _actualType;
 
@@ -104,6 +104,6 @@ class MirrorDefinition {
 
   @override
   String toString() {
-    return 'MirrorDefinition{_classMirror: $_classMirror, _actualType: $_actualType, _classMetadatas: $_classMetadatas, _declarationMirrors: $_declarationMirrors, _superclass: $_superclass, _superInterfaces: $_superInterfaces, _instanceMemberMethodMirrors: $_instanceMemberMethodMirrors, _staticMethodMirrors: $_staticMethodMirrors, _variableFieldMirrors: $_variableFieldMirrors, _nonVariableFieldMirrors: $_nonVariableFieldMirrors}';
+    return 'MirrorDefinition{_classMirror: $_classMirror, _actualType: $_actualType, _classMetadataList: $_classMetadataList, _declarationMirrors: $_declarationMirrors, _superclass: $_superclass, _superInterfaces: $_superInterfaces, _instanceMemberMethodMirrors: $_instanceMemberMethodMirrors, _staticMethodMirrors: $_staticMethodMirrors, _variableFieldMirrors: $_variableFieldMirrors, _nonVariableFieldMirrors: $_nonVariableFieldMirrors}';
   }
 }

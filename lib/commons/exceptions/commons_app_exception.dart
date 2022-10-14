@@ -1,13 +1,13 @@
 /// Common app abstract/base exception.
 ///
-class CommonsAppException implements Exception {
+class CommonException implements Exception {
   final Object exception;
   final StackTrace stackTrace;
 
-  CommonsAppException(this.exception, this.stackTrace);
+  CommonException(this.exception, this.stackTrace);
 
   @override
   String toString() {
-    return "Redstonex common app exception: $exception, $stackTrace";
+    return "Redstonex common exception: $exception, $stackTrace";
   }
 }

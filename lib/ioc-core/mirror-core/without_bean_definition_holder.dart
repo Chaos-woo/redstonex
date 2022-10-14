@@ -1,9 +1,9 @@
-import 'package:redstonex/ioc-core/mirror-core/definitions/without_mirror_definition_holder_factory.dart';
+import 'package:redstonex/ioc-core/mirror-core/definitions/without_bean_definition_holder_factory.dart';
 import 'package:reflectable/reflectable.dart';
 
 /// Holder mirror definition and named [_name] instance.
 ///
-class WithoutMirrorDefinitionHolder implements WithoutMirrorDefinitionHolderFactory {
+class WithoutBeanDefinitionHolder implements WithoutMirrorDefinitionHolderFactory {
   final InstanceMirror _instanceMirror;
   final MethodMirror _methodMirror;
   final String? _name;
@@ -11,7 +11,7 @@ class WithoutMirrorDefinitionHolder implements WithoutMirrorDefinitionHolderFact
   /// Holds references to every registered Instance
   late final dynamic _instance;
 
-  WithoutMirrorDefinitionHolder(this._instanceMirror, this._methodMirror, this._name) {
+  WithoutBeanDefinitionHolder(this._instanceMirror, this._methodMirror, this._name) {
     _instance = newInstance(_instanceMirror, _methodMirror);
   }
 
@@ -22,12 +22,12 @@ class WithoutMirrorDefinitionHolder implements WithoutMirrorDefinitionHolderFact
   @override
   dynamic newInstance(
     InstanceMirror instanceMirror,
-    MethodMirror methodMirrorm, {
+    MethodMirror methodMirror, {
     String constructorName = '',
     List positionalArguments = const [],
     Map<Symbol, dynamic> namedArguments = const {},
   }) {
-    dynamic instance = instanceMirror.invoke(methodMirrorm.simpleName, positionalArguments, namedArguments);
+    dynamic instance = instanceMirror.invoke(methodMirror.simpleName, positionalArguments, namedArguments);
 
     return instance;
   }

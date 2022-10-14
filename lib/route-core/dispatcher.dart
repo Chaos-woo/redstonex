@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
-import 'package:redstonex/app-configs/initial/initializer.dart';
-import 'package:redstonex/app-configs/initial/singleton/singleton_initializer_manager.dart';
 import 'package:redstonex/commons/utils/ids_utils.dart';
+import 'package:redstonex/ioc-core/metadata-core/component.dart';
 import 'package:redstonex/route-core/routes.dart';
 
 /// A initial quickly GetX routes of [GetPage] class.
@@ -11,7 +10,8 @@ import 'package:redstonex/route-core/routes.dart';
 /// Because [Dispatcher] implements [Initializer], so, mapping any
 /// route in this initializer, then registering it to [SingletonInitializerManager],
 /// and then auto initial all routes.
-class Dispatcher implements Initializer {
+@Component()
+class Dispatcher {
   /// all routes of app. [GetMaterialApp.getPages] can use this after initial
   static final List<GetPage> pageRoutes = [];
 
@@ -40,7 +40,6 @@ class Dispatcher implements Initializer {
 
   /// Initial [routeGroups]'s routes and [otherRouteGroup]
   /// to generate all [GetPage], then can use [pageRoutes].
-  @override
   void init() {
     if (statistics.initial) {
       return;

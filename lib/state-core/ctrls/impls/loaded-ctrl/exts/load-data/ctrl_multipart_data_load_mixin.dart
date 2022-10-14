@@ -9,5 +9,5 @@ mixin CtrlMultipartDataLoadMixin<T> on LoadedViewCtrl {
   Future<List<T>?> onLoadData();
 
   /// Process error or exception on loading data
-  Future<List<T>> onLoadDataError(Object e, StackTrace s) => throw CommonsAppException(e, s);
+  Future<List<T>> onLoadDataError(Object e, StackTrace s) => throw CommonException(e, s);
 }

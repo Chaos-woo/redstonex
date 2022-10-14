@@ -4,7 +4,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 
 /// A device information function set.
 ///
-class DeviceFunc {
+class MobileDeviceHelper {
   /// base device information
   static final DeviceInfoPlugin _info = DeviceInfoPlugin();
 
@@ -22,8 +22,8 @@ class DeviceFunc {
 
   /// Initial device information for platform
   ///
-  /// Need call [initial] method before using device information
-  static Future<void> init() async {
+  /// Need call [initialize] method before using device information
+  static Future<void> initialize() async {
     if (isAndroid()) {
       _android = await _info.androidInfo;
     }

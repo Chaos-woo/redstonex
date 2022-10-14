@@ -2,7 +2,7 @@ import 'package:logger/logger.dart';
 
 /// An encapsulated logger
 ///
-class RsLogger {
+class RedstoneLogger {
   /// name of logger for search it
   final String name;
 
@@ -53,7 +53,7 @@ class RsLogger {
 
   /// Get a new logger of custom options
   /// of default options
-  RsLogger.newLogger(
+  RedstoneLogger.newLogger(
     this.name, {
     this.filter,
     this.printer,

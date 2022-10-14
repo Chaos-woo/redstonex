@@ -2,14 +2,14 @@ import 'package:package_info_plus/package_info_plus.dart';
 
 /// A package information function set.
 ///
-class PackageFunc {
+class AppPackageHelper {
   /// base package information
   static late PackageInfo _info;
 
   /// Initial package information
   ///
-  /// Need call [initial] method before using package information
-  static Future<void> init() async {
+  /// Need call [initialize] method before using package information
+  static Future<void> initialize() async {
     _info = await PackageInfo.fromPlatform();
   }
 

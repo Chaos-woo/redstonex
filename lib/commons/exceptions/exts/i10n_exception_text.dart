@@ -3,9 +3,9 @@ import 'package:redstonex/commons/exceptions/app_exception.dart';
 ///
 /// An app exception multi language error message.
 ///
-/// Note: extends [I10nExceptionText] and put in GetX bean container,
+/// Note: extends [I10nBaseExceptionText] and put in GetX bean container,
 /// tag only is [AppException.fixedI10nTag]
-class I10nExceptionText {
+class I10nBaseExceptionText {
   String get cancelRequest => 'Cancel request';
 
   String get connectTimeout => 'Connect timeout';

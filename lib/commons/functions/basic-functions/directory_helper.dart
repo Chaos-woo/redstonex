@@ -4,7 +4,7 @@ import 'package:path_provider/path_provider.dart';
 
 /// A directory function set.
 ///
-class DirectoryFunc {
+class DirectoryHelper {
   /// temporary directory
   static Directory? temporaryDirectory;
 
@@ -16,8 +16,8 @@ class DirectoryFunc {
 
   /// Initial directory information
   ///
-  /// Need call [initial] method before using path
-  static Future<void> init() async {
+  /// Need call [initialize] method before using path
+  static Future<void> initialize() async {
     temporaryDirectory = await getTemporaryDirectory();
     appDirectory = await getApplicationDocumentsDirectory();
     if (Platform.isAndroid) {

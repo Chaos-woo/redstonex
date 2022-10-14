@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 import 'package:get/get.dart';
 import 'package:redstonex/app-configs/global_config.dart';
 import 'package:redstonex/commons/log/loggers.dart';
-import 'package:redstonex/commons/log/rs_log.dart';
+import 'package:redstonex/commons/log/redstone_logger.dart';
 import 'package:redstonex/network-core/definitions/proxy/dios.dart';
 import 'package:redstonex/state-core/ctrls/impls/loaded-ctrl/single_data_view_ctrl.dart';
 
@@ -15,7 +15,7 @@ import '../retrofit-dio/retrofit_dio_test.dart';
 /// to translate any you want.
 ///
 class ExampleSingleDataCtrl extends SingleDataViewCtrl<String> implements GetxService {
-  final RsLogger _logger = Loggers.of();
+  final RedstoneLogger _logger = Loggers.of();
 
   String builtInString = '';
 
@@ -52,7 +52,7 @@ class ExampleSingleDataCtrl extends SingleDataViewCtrl<String> implements GetxSe
 void main() {
   test('ctrl single data test', () async {
     GlobalConfig global = MyGlobalConfigs();
-    GlobalConfig.safePutGlobalConfig(global);
+    GlobalConfig.safeOverride(global);
     ExampleSingleDataCtrl ctrl = ExampleSingleDataCtrl();
 
     await ctrl.testViewCtrlInitialReady();

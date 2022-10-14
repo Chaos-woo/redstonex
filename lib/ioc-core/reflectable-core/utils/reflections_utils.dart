@@ -1,27 +1,27 @@
 import 'package:get/get.dart';
-import 'package:redstonex/ioc-core/application_container.dart';
+import 'package:redstonex/ioc-core/self_container.dart';
 
 /// A GetX singleton container utils.
 ///
 /// In order to semantic.
-class ReflectionsUtil {
-  /// Find `S` type dependency from GetX container or [ApplicationContainer] .
+class ReflectionsUtils {
+  /// Find `S` type dependency from GetX container or [SelfContainer] .
   static S find<S>({String? tag}) {
     if (existInGetX<S>(tag: tag)) {
-      return _findInGetXContainer<S>(tag: tag);
+      return findInGetXContainer<S>(tag: tag);
     } else {
-      return _findInSelfContainer<S>(tag: tag);
+      return findInSelfContainer<S>(tag: tag);
     }
   }
 
   /// For short lifecycle object in GetX container.
-  static S _findInGetXContainer<S>({String? tag}) {
+  static S findInGetXContainer<S>({String? tag}) {
     return Get.find<S>(tag: tag);
   }
 
   /// For long lifecycle object in application container.
-  static S _findInSelfContainer<S>({String? tag}) {
-    return ApplicationContainer().findInSelfContainer<S>(tag: tag);
+  static S findInSelfContainer<S>({String? tag}) {
+    return SelfContainer().findInSelfContainer<S>(tag: tag);
   }
 
   /// Put it into GetX container.
@@ -32,7 +32,7 @@ class ReflectionsUtil {
   /// Put it into GetX container when it not exist in GetX container.
   static S putIfAbsent<S>(S dependency, {String? tag}) {
     if (existInGetX<S>(tag: tag)) {
-      return _findInGetXContainer<S>(tag: tag);
+      return findInGetXContainer<S>(tag: tag);
     } else {
       return put(dependency, tag: tag);
     }
@@ -47,7 +47,7 @@ class ReflectionsUtil {
   static bool existInGetX<S>({String? tag}) => Get.isRegistered<S>(tag: tag);
 
   /// Whether exist in Self-Container container
-  static bool existInSelfContainer<S>({String? tag}) => ApplicationContainer.existDependency<S>(tag: tag);
+  static bool existInSelfContainer<S>({String? tag}) => SelfContainer.existDependency<S>(tag: tag);
 
   /// Remove from GetX container
   static void remove<S>({String? tag}) => Get.delete<S>(tag: tag);

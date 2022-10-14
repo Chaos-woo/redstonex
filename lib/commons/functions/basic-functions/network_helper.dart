@@ -5,14 +5,14 @@ import 'package:network_info_plus/network_info_plus.dart';
 
 /// A network function set.
 ///
-class NetworkFunc {
+class NetworkHelper {
   /// base network information
   static final NetworkInfo _info = NetworkInfo();
 
   /// network connectivity utils
   static final Connectivity _conn = Connectivity();
 
-  NetworkFunc._();
+  NetworkHelper._();
 
   /// Get wifi name
   static Future<String> wifiName() async => await _info.getWifiName() ?? '';

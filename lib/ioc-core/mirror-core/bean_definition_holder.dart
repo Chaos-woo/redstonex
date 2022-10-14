@@ -1,16 +1,16 @@
-import 'package:redstonex/ioc-core/mirror-core/definitions/mirror_definition_holder_factory.dart';
-import 'package:redstonex/ioc-core/mirror-core/mirror_definiton.dart';
+import 'package:redstonex/ioc-core/mirror-core/definitions/bean_definition_holder_factory.dart';
+import 'package:redstonex/ioc-core/mirror-core/bean_definition.dart';
 
 /// Holder mirror definition and named [_name] instance.
 ///
-class MirrorDefinitionHolder implements MirrorDefinitionHolderFactory {
-  final MirrorDefinition _mirrorDefinition;
+class BeanDefinitionHolder implements BeanDefinitionHolderFactory {
+  final BeanDefinition _mirrorDefinition;
   final String? _name;
 
   /// Holds references to every registered Instance
   late final dynamic _instance;
 
-  MirrorDefinitionHolder(this._mirrorDefinition, this._name) {
+  BeanDefinitionHolder(this._mirrorDefinition, this._name) {
     _instance = newInstance(_mirrorDefinition);
   }
 
@@ -18,11 +18,11 @@ class MirrorDefinitionHolder implements MirrorDefinitionHolderFactory {
 
   dynamic get instance => _instance;
 
-  MirrorDefinition get mirrorDefinition => _mirrorDefinition;
+  BeanDefinition get mirrorDefinition => _mirrorDefinition;
 
   @override
   dynamic newInstance(
-    MirrorDefinition mirrorDefinition, {
+    BeanDefinition mirrorDefinition, {
     String constructorName = '',
     List positionalArguments = const [],
     Map<Symbol, dynamic> namedArguments = const {},

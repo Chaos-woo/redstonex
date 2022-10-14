@@ -1,12 +1,11 @@
 import 'package:redstonex/ioc-core/metadata-core/component.dart';
 import 'package:redstonex/ioc-core/metadata-core/static_reflection.dart';
-import 'package:redstonex/ioc-core/reflectable-core/mirror_initial_phase.dart';
+import 'package:redstonex/ioc-core/reflectable-core/bean_initial_phase.dart';
 
 /// Invoke any class's static method with [StaticReflection] or [Component]
-///
 class StaticMethodInvoker {
   final String methodName;
-  final MirrorInitialPhase? phase; /// reach a phase, default is [MirrorInitialPhase.ultimate]
+  final BeanInitialPhase? phase; /// reach a phase, default is [BeanInitialPhase.ultimate]
   final List? positionalArguments;
   final Map<Symbol, dynamic>? namedArguments;
 

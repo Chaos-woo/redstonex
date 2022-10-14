@@ -12,10 +12,10 @@ import 'package:redstonex/ioc-core/reflectable-core/utils/reflections_utils.dart
 /// Any exception should be subclass of [AppException].
 ///
 /// For multi language basic error message, should implements
-/// [I10nExceptionText] and put in GetX bean container and tag
-/// only is [fixedI10nBaseErrTag].
+/// [I10nBaseExceptionText] and put in GetX bean container and tag
+/// only is [fixedI10nExceptionTextTag].
 class AppException implements Exception {
-  static const String fixedI10nBaseErrTag = 'fixedI10nBaseErr';
+  static const String fixedI10nExceptionTextTag = 'fixedI10nExceptionText';
   static const int fixedErrCode = -1;
 
   final int errCode;
@@ -24,24 +24,24 @@ class AppException implements Exception {
   AppException(this.errCode, this.message);
 
   factory AppException.http(DioError error) {
-    I10nExceptionText i10nErr = _i10nBaseErr();
+    I10nBaseExceptionText i10nException = _i10nExceptionText();
 
     switch (error.type) {
       case DioErrorType.cancel:
         {
-          return NetworkException(fixedErrCode, i10nErr.cancelRequest);
+          return NetworkException(fixedErrCode, i10nException.cancelRequest);
         }
       case DioErrorType.connectTimeout:
         {
-          return NetworkException(fixedErrCode, i10nErr.connectTimeout);
+          return NetworkException(fixedErrCode, i10nException.connectTimeout);
         }
       case DioErrorType.sendTimeout:
         {
-          return NetworkException(fixedErrCode, i10nErr.writeTimeout);
+          return NetworkException(fixedErrCode, i10nException.writeTimeout);
         }
       case DioErrorType.receiveTimeout:
         {
-          return NetworkException(fixedErrCode, i10nErr.readTimeout);
+          return NetworkException(fixedErrCode, i10nException.readTimeout);
         }
       case DioErrorType.response:
         {
@@ -50,39 +50,39 @@ class AppException implements Exception {
             switch (errCode) {
               case 400:
                 {
-                  return BadRequestException(errCode!, i10nErr.err400);
+                  return BadRequestException(errCode!, i10nException.err400);
                 }
               case 401:
                 {
-                  return UnauthorisedException(errCode!, i10nErr.err401);
+                  return UnauthorisedException(errCode!, i10nException.err401);
                 }
               case 403:
                 {
-                  return UnauthorisedException(errCode!, i10nErr.err403);
+                  return UnauthorisedException(errCode!, i10nException.err403);
                 }
               case 404:
                 {
-                  return NotFoundException(errCode!, i10nErr.err404);
+                  return NotFoundException(errCode!, i10nException.err404);
                 }
               case 405:
                 {
-                  return BadRequestException(errCode!, i10nErr.err405);
+                  return BadRequestException(errCode!, i10nException.err405);
                 }
               case 500:
                 {
-                  return ServerException(errCode!, i10nErr.err500);
+                  return ServerException(errCode!, i10nException.err500);
                 }
               case 502:
                 {
-                  return ServerException(errCode!, i10nErr.err502);
+                  return ServerException(errCode!, i10nException.err502);
                 }
               case 503:
                 {
-                  return ServerException(errCode!, i10nErr.err503);
+                  return ServerException(errCode!, i10nException.err503);
                 }
               case 505:
                 {
-                  return ServerException(errCode!, i10nErr.err505);
+                  return ServerException(errCode!, i10nException.err505);
                 }
               default:
                 {
@@ -90,7 +90,7 @@ class AppException implements Exception {
                 }
             }
           } on Exception catch (_) {
-            return AppException(fixedErrCode, i10nErr.errDef);
+            return AppException(fixedErrCode, i10nException.errDef);
           }
         }
       default:
@@ -102,15 +102,15 @@ class AppException implements Exception {
 
   /// Get base exception.
   ///
-  /// Extending [I10nExceptionText] and override method, putting in
-  /// GetX bean container and fixed tag tagged [AppException.fixedI10nBaseErrTag].
+  /// Extending [I10nBaseExceptionText] and override method, putting in
+  /// GetX bean container and fixed tag tagged [AppException.fixedI10nExceptionTextTag].
   /// Finally, app exception will using multi language error message.
-  static I10nExceptionText _i10nBaseErr() {
-    if (ReflectionsUtil.existInGetX<I10nExceptionText>(tag: fixedI10nBaseErrTag)) {
-      return ReflectionsUtil.find<I10nExceptionText>(tag: fixedI10nBaseErrTag);
+  static I10nBaseExceptionText _i10nExceptionText() {
+    if (ReflectionsUtils.existInGetX<I10nBaseExceptionText>(tag: fixedI10nExceptionTextTag)) {
+      return ReflectionsUtils.find<I10nBaseExceptionText>(tag: fixedI10nExceptionTextTag);
     } else {
-      I10nExceptionText def = I10nExceptionText();
-      return ReflectionsUtil.put(def, tag: fixedI10nBaseErrTag);
+      I10nBaseExceptionText def = I10nBaseExceptionText();
+      return ReflectionsUtils.put(def, tag: fixedI10nExceptionTextTag);
     }
   }
 }

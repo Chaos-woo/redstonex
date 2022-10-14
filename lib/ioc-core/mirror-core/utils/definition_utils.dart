@@ -3,7 +3,7 @@ import 'package:reflectable/reflectable.dart';
 
 /// Mirror definition judgement util.
 ///
-class DefinitionUtil {
+class MirrorDefinitionUtils {
 
   /// Get instance mirror from an real object.
   static InstanceMirror reflect(Reflectable reflector, Object instance) {

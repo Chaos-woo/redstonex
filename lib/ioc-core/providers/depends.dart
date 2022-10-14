@@ -5,11 +5,11 @@ import 'package:redstonex/ioc-core/reflectable-core/utils/reflections_utils.dart
 class Depends {
   /// Provide search method to find dependency.
   static S on<S>({String? tag}) {
-    return ReflectionsUtil.find<S>(tag: tag);
+    return ReflectionsUtils.find<S>(tag: tag);
   }
 
   /// Provide find method to judge dependency exist.
   static bool exist<S>({String? tag}) {
-    return ReflectionsUtil.existInGetX<S>(tag: tag) || ReflectionsUtil.existInSelfContainer<S>(tag: tag);
+    return ReflectionsUtils.existInGetX<S>(tag: tag) || ReflectionsUtils.existInSelfContainer<S>(tag: tag);
   }
 }

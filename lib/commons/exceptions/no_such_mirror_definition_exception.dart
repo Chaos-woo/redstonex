@@ -1,6 +1,6 @@
 
-class NoSuchMirrorDefinitionException implements Exception {
+class NoSuchBeanDefinitionException implements Exception {
   final String message;
 
-  NoSuchMirrorDefinitionException(this.message) : super();
+  NoSuchBeanDefinitionException(this.message) : super();
 }

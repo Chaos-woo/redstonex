@@ -1,11 +1,11 @@
-import 'package:redstonex/ioc-core/mirror-core/mirror_definiton.dart';
+import 'package:redstonex/ioc-core/mirror-core/bean_definition.dart';
 import 'package:reflectable/reflectable.dart';
 
-/// Create instance by [MirrorDefinition]
+/// Create instance by [BeanDefinition]
 abstract class WithoutMirrorDefinitionHolderFactory {
   dynamic newInstance(
     InstanceMirror instanceMirror,
-    MethodMirror methodMirrorm, {
+    MethodMirror methodMirror, {
     String constructorName = '',
     List positionalArguments = const [],
     Map<Symbol, dynamic> namedArguments = const {},
