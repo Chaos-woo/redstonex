@@ -1,3 +1,5 @@
+import 'package:dartx/dartx.dart';
+import 'package:redstonex/app-configs/initializer/configurations/builtin_worker_initializer.dart';
 import 'package:redstonex/app-configs/initializer/properties/def_global_config_initializer.dart';
 import 'package:redstonex/ioc-core/metadata-core/component.dart';
 import 'package:redstonex/ioc-core/metadata-core/components_configuration.dart';
@@ -25,18 +27,33 @@ class SelfReflectable {
 
 /// Builtin definition that must initialize.
 class BuiltinReflectableConfiguration {
+  /// Will earliest initial in the builtin definition list.
+  /// But [_builtinComponentHighPriorType] has highly prior
+  /// type, the [_builtinDefinitions] will initial after
+  /// highly prior types.
   final List<Type> _builtinDefinitions = [];
+
+  /// Builtin metadata marked list
   final List<Reflectable> _builtinReflectableMetadataList = [
     const ComponentsConfiguration(),
     const Component(),
   ];
+
+  /// High prior component configuration type list.
   final List<Type> _builtinComponentsConfigHighPriorType = [
     DefGlobalConfigInitializer,
+  ];
+
+  /// High prior component type list.
+  final List<Type> _builtinComponentHighPriorType = [
+    BuiltinWorkerInitializer,
   ];
 
   List<Type> get builtinDefinitions => _builtinDefinitions;
 
   List<Reflectable> get builtinReflectableMetadataList => _builtinReflectableMetadataList;
 
-  List<Type> get builtinHighPriorType => _builtinComponentsConfigHighPriorType;
+  List<Type> get builtinComponentsConfigHighPriorType => _builtinComponentsConfigHighPriorType.toUnmodifiable();
+
+  List<Type> get builtinComponentHighPriorType => _builtinComponentHighPriorType.toUnmodifiable();
 }

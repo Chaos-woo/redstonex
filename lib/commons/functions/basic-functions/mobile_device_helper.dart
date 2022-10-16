@@ -22,8 +22,8 @@ class MobileDeviceHelper {
 
   /// Initial device information for platform
   ///
-  /// Need call [initialize] method before using device information
-  static Future<void> initialize() async {
+  /// Need call [init] method before using device information
+  static Future<void> init() async {
     if (isAndroid()) {
       _android = await _info.androidInfo;
     }

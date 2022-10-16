@@ -12,19 +12,21 @@ class BuiltinWorkerInitializer {
   /// to do something.
   @PostConstruct()
   Future<void> initialize() async {
-    await _initBasicFunctions();
-    await _initThirdPack();
+    /// init device and app package information
+    await _initDevicePackageCollector();
+    /// init get storage key-value data for [GlobalConfig]
+    await _initGetStorage();
   }
 
   /// initialize basic functions
-  Future<void> _initBasicFunctions() async {
-    await MobileDeviceHelper.initialize();
-    await AppPackageHelper.initialize();
-    await DirectoryHelper.initialize();
+  Future<void> _initDevicePackageCollector() async {
+    await MobileDeviceHelper.init();
+    await AppPackageHelper.init();
+    await DirectoryHelper.init();
   }
 
   /// initialize third package
-  Future<void> _initThirdPack() async {
+  Future<void> _initGetStorage() async {
     GlobalConfig global = GlobalConfig.of();
     if (global.globalAppConfigs.enableGetStorage) {
       await GetStorage.init();

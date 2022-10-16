@@ -4,7 +4,7 @@ import 'package:redstonex/app-configs/user-configs/global_http_option_configs.da
 
 /// An encapsulated dio
 ///
-class RedStoneDio {
+class RedstoneDio {
   /// name of dio for search it
   final String name;
 
@@ -16,7 +16,7 @@ class RedStoneDio {
 
   /// todo: support https
 
-  RedStoneDio.newDio(
+  RedstoneDio.newDio(
     this.name, {
     List<Interceptor>? interceptors,
     BaseOptions? options,

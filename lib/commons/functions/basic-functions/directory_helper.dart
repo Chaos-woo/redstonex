@@ -16,8 +16,8 @@ class DirectoryHelper {
 
   /// Initial directory information
   ///
-  /// Need call [initialize] method before using path
-  static Future<void> initialize() async {
+  /// Need call [init] method before using path
+  static Future<void> init() async {
     temporaryDirectory = await getTemporaryDirectory();
     appDirectory = await getApplicationDocumentsDirectory();
     if (Platform.isAndroid) {

@@ -60,7 +60,7 @@ class SelfContainer {
     _logger.i('Initialize application container start');
 
     /// parse and save mirror definition
-    _mirrorDefinitions.addAll(_doParseReflectionMirrorDefinitions());
+    _mirrorDefinitions.addAll(_doCollectBeanDefinitions());
     _magicApplicationContainerInitializeLog(_mirrorDefinitions);
 
     /// process instance configuration class firstly
@@ -83,7 +83,7 @@ class SelfContainer {
   }
 
   /// Parse all pointed annotated class mirror definition.
-  Map<Type, BeanDefinition> _doParseReflectionMirrorDefinitions() {
+  Map<Type, BeanDefinition> _doCollectBeanDefinitions() {
     Map<Type, BeanDefinition> allDefinitions = {};
 
     for (Reflectable reflectableMetadata in _builtinReflectableMetadataList) {
@@ -103,8 +103,19 @@ class SelfContainer {
     Map<String, BeanDefinitionHolder> holders = {};
 
     for (Reflectable reflectableMetadata in _builtinReflectableMetadataList) {
-      List<ClassMirror> classMirrors = MetadataBeanUtils.annotatedClass(reflectableMetadata);
+      List<ClassMirror> classMirrors = [];
+      classMirrors.addAll(MetadataBeanUtils.annotatedClass(reflectableMetadata));
       if (reflectableMetadata is Component) {
+        List<ClassMirror> sortedClassMirrors = [];
+        for(Type highPriorType in _builtinRefConfig.builtinComponentHighPriorType) {
+          int index = classMirrors.indexWhere((ele) => ele.dynamicReflectedType == highPriorType);
+          if (index > -1) {
+            sortedClassMirrors.add(classMirrors[index]);
+            classMirrors.removeAt(index);
+          }
+        }
+        /// add-in left all class mirror
+        sortedClassMirrors.addAll(classMirrors);
         holders.addAll(_doParseReflection(classMirrors));
       }
     }
@@ -129,13 +140,14 @@ class SelfContainer {
       if (reflectableMetadata is ComponentsConfiguration) {
         List<ClassMirror> sortedClassMirrors = [];
 
-        for(Type highPriorType in _builtinRefConfig.builtinHighPriorType) {
+        for(Type highPriorType in _builtinRefConfig.builtinComponentsConfigHighPriorType) {
           int index = classMirrors.indexWhere((ele) => ele.dynamicReflectedType == highPriorType);
           if (index > -1) {
             sortedClassMirrors.add(classMirrors[index]);
             classMirrors.removeAt(index);
           }
         }
+        /// add-in left all class mirror
         sortedClassMirrors.addAll(classMirrors);
         holders.addAll(_doParseReflectionConfiguration(sortedClassMirrors));
       }

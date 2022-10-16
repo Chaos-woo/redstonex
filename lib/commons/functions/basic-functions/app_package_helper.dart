@@ -8,8 +8,8 @@ class AppPackageHelper {
 
   /// Initial package information
   ///
-  /// Need call [initialize] method before using package information
-  static Future<void> initialize() async {
+  /// Need call [init] method before using package information
+  static Future<void> init() async {
     _info = await PackageInfo.fromPlatform();
   }
 

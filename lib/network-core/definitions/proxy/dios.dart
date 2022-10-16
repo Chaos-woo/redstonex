@@ -13,16 +13,16 @@ class Dios with OfSyntax {
   static const String _fixedRedStoneXDioName = '_fixedRedStoneXDio';
 
   /// named dio instance map
-  static final Map<String, RedStoneDio> _dios = {};
+  static final Map<String, RedstoneDio> _dios = {};
 
   /// Get a new dio proxy instance and put it in memory map
-  static RedStoneDio newDio(
+  static RedstoneDio newDio(
     String name,
     List<RedStoneInterceptor> interceptors,
     BaseOptions? options,
     RedStoneDioOption? rsDioOption,
   ) {
-    RedStoneDio rsDio = RedStoneDio.newDio(
+    RedstoneDio rsDio = RedstoneDio.newDio(
       name,
       interceptors: _processBuiltinInterceptor(
         interceptors,
@@ -35,7 +35,7 @@ class Dios with OfSyntax {
   }
 
   /// Get [_fixedRedStoneXDioName] default dio instance
-  static Dio of() => _builtInRedStoneDio().dio;
+  static Dio of() => _builtInRedstoneDio().dio;
 
   /// Get named [name] dio instance, maybe not
   /// exist of designated [name].
@@ -44,13 +44,13 @@ class Dios with OfSyntax {
   /// Storage redstone dio proxy in memory
   ///
   /// Default will save in map or replace it if exist.
-  static void _storageDioProxyInMemory(RedStoneDio rsDio) {
+  static void _storageDioProxyInMemory(RedstoneDio rsDio) {
     _dios[rsDio.name] = rsDio;
   }
 
   /// Build and storage a default dio proxy instance
-  static RedStoneDio _builtInRedStoneDio() {
-    RedStoneDio? rsDio = _dios[_fixedRedStoneXDioName];
+  static RedstoneDio _builtInRedstoneDio() {
+    RedstoneDio? rsDio = _dios[_fixedRedStoneXDioName];
     if (rsDio != null) {
       return rsDio;
     }
@@ -63,7 +63,7 @@ class Dios with OfSyntax {
     return newDio(
       _fixedRedStoneXDioName,
       [],
-      RedStoneDio.defBaseOptions(),
+      RedstoneDio.defBaseOptions(),
       rsDioOption,
     );
   }
