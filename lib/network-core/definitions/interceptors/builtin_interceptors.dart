@@ -9,31 +9,31 @@ import 'package:redstonex/network-core/definitions/interceptors/response_context
 ///
 class BuiltinInterceptors {
   /// log interceptor
-  static RedStoneInterceptor get builtInLog => RedStoneInterceptor(
+  static RedstoneInterceptor get builtinLog => RedstoneInterceptor(
         LogInterceptor(requestBody: true, responseBody: true, requestHeader: true),
         order: 255,
       );
 
   /// publish loading event interceptor
-  static RedStoneInterceptor get builtInLoadingPublisher => RedStoneInterceptor(
+  static RedstoneInterceptor get builtinLoadingPublisher => RedstoneInterceptor(
         RequestLoadingInterceptor(),
         order: -2,
       );
 
   /// request context interceptor
-  static RedStoneInterceptor get builtInRequestCtx => RedStoneInterceptor(
+  static RedstoneInterceptor get builtinRequestCtx => RedstoneInterceptor(
         RequestContextInterceptor(),
         order: -20,
       );
 
   //// request context interceptor
-  static RedStoneInterceptor get builtInResponseCtx => RedStoneInterceptor(
+  static RedstoneInterceptor get builtinResponseCtx => RedstoneInterceptor(
         ResponseContextInterceptor(),
         order: 20,
       );
 
   //// request context interceptor
-  static RedStoneInterceptor get builtInErrorCtx => RedStoneInterceptor(
+  static RedstoneInterceptor get builtinErrorCtx => RedstoneInterceptor(
     ErrorContextInterceptor(),
     order: 19,
   );

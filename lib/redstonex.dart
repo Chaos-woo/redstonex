@@ -75,7 +75,7 @@ export 'package:redstonex/network-core/definitions/http/http_method.dart';
 export 'package:redstonex/network-core/definitions/http/redstone_interceptor.dart';
 export 'package:redstonex/network-core/definitions/http/request.dart';
 export 'package:redstonex/network-core/definitions/http/request_context.dart';
-export 'package:redstonex/network-core/definitions/interceptors/built_in_interceptors.dart';
+export 'package:redstonex/network-core/definitions/interceptors/builtin_interceptors.dart';
 export 'package:redstonex/network-core/definitions/interceptors/def_exception_interceptor.dart';
 export 'package:redstonex/network-core/definitions/interceptors/error_context_interceptor.dart';
 export 'package:redstonex/network-core/definitions/interceptors/request_context_interceptor.dart';
