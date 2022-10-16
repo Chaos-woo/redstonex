@@ -19,15 +19,15 @@ dependencies:
   # 注解式本地数据库
   floor: ^1.3.0
   # dialog、toast
-  flutter_smart_dialog: ^4.5.3+6
+  #flutter_smart_dialog: ^4.5.3+6
   # Beans管理(状态)、路由管理
   get: ^4.6.5
   # get storage
   get_storage: ^2.0.3
   # 通知//todo，暂不支持
-  awesome_notifications: ^0.6.21
+  #awesome_notifications: ^0.6.21
   # 简单手势监听
-  simple_gesture_detector: ^0.2.0
+  #simple_gesture_detector: ^0.2.0
   # pojo <-> json处理：https://pub.dev/packages/json_serializable
   # json注解使用：https://github.com/google/json_serializable.dart/blob/master/example/lib/example.dart
   json_annotation: ^4.6.0
@@ -79,6 +79,8 @@ dependencies:
   pretty_dio_logger: ^1.1.1
   # 注解式http网络请求
   retrofit: '>=3.0.0 <4.0.0'
+  # webview
+  webview_flutter: ^3.0.4
 
   #####
   # UI
