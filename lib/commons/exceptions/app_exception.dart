@@ -100,6 +100,8 @@ class AppException implements Exception {
     }
   }
 
+  AppException.internal(this.errCode, this.message);
+
   /// Get base exception.
   ///
   /// Extending [I10nBaseExceptionText] and override method, putting in
