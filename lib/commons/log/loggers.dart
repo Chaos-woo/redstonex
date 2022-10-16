@@ -22,7 +22,7 @@ class Loggers with OfSyntax {
   static const String _fixedRedstoneXLoggerName = '_fixedRedstoneXLogger';
 
   /// built-in logger
-  static RedstoneLogger? _builtInLogger;
+  static RedstoneLogger? _builtinLogger;
 
   /// log manager initial state
   static bool _builtInLoggerInitialState = false;
@@ -97,29 +97,29 @@ class Loggers with OfSyntax {
   ///
   /// Replace built-in logger for [replace] param
   static RedstoneLogger builtInLogger({bool replace = false}) {
-    if (_builtInLogger == null) {
+    if (_builtinLogger == null) {
       _builtInLoggerInitialState = true;
-      _builtInLogger = _defLogger(name: _fixedRedstoneXLoggerName, isBuiltInLog: true);
+      _builtinLogger = _defLogger(name: _fixedRedstoneXLoggerName, isBuiltinLog: true);
     } else if (_builtInLoggerInitialState && replace) {
-      _builtInLogger = _defLogger(name: _fixedRedstoneXLoggerName, isBuiltInLog: true);
+      _builtinLogger = _defLogger(name: _fixedRedstoneXLoggerName, isBuiltinLog: true);
       _replaceCount++;
-      _builtInLogger?.w('''Replace built-in logger at ${DateTime.now()}, 
+      _builtinLogger?.w('''Replace built-in logger at ${DateTime.now()}, 
           has replaced time is $_replaceCount, 
           built-in logger named $_fixedRedstoneXLoggerName.''');
     }
 
-    return _builtInLogger!;
+    return _builtinLogger!;
   }
 
   /// Default logger, external can not access
   static RedstoneLogger _defLogger(
-          {required String name, Level? level, bool isBuiltInLog = false}) =>
+          {required String name, Level? level, bool isBuiltinLog = false}) =>
       RedstoneLogger.newLogger(
         name,
         printer: RedstoneLogger.defPrettyPrinter(),
         lowestLevel: level ??
-            (isBuiltInLog
-                ? GlobalConfig.of().globalLogConfigs.defBuiltInLogLevel
+            (isBuiltinLog
+                ? GlobalConfig.of().globalLogConfigs.defBuiltinLogLevel
                 : GlobalConfig.of().globalLogConfigs.defLogLevel),
       );
 }

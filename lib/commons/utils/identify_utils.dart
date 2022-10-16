@@ -4,7 +4,7 @@ import 'package:uuid/uuid.dart';
 /// A multifarious id generator.
 ///
 ///
-class IdsUtil {
+class IdentifyUtils {
   static const _uuid = Uuid();
 
   static String uuidV4() => _uuid.v4();

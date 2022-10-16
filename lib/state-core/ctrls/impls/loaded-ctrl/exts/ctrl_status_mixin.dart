@@ -1,10 +1,10 @@
-import 'package:redstonex/state-core/ctrls/definitions/loaded_view_ctrl.dart';
+import 'package:redstonex/state-core/ctrls/definitions/loadable_view_ctrl.dart';
 import 'package:redstonex/state-core/ctrls/models/ctrl_status.dart';
 
-/// Provide [LoadedViewCtrl] running status of data,
+/// Provide [LoadableViewCtrl] running status of data,
 /// for example, empty, loading, error, etc.
 ///
-mixin CtrlStatusMixin on LoadedViewCtrl {
+mixin CtrlStatusMixin on LoadableViewCtrl {
   CtrlStatus? _status;
 
   /// Initial ctrl status

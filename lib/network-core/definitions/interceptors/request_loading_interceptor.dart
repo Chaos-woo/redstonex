@@ -5,24 +5,24 @@ import 'package:redstonex/network-core/definitions/events/built_in_loading_event
 /// Http request interceptor for loading.
 ///
 /// It will publish a loading event for request and response.
-/// Subscribe [BuiltInLoadingEvent] and judge event type [BuiltInLoadingEventType] to
+/// Subscribe [BuiltinLoadingEvent] and judge event type [BuiltinLoadingEventType] to
 /// show loading widget.
 class RequestLoadingInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    EventsBus.fireZeroDelay(BuiltInLoadingEvent(BuiltInLoadingEventType.request));
+    EventsBus.fireZeroDelay(BuiltinLoadingEvent(BuiltinLoadingEventType.request));
     handler.next(options);
   }
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
-    EventsBus.fireZeroDelay(BuiltInLoadingEvent(BuiltInLoadingEventType.error));
+    EventsBus.fireZeroDelay(BuiltinLoadingEvent(BuiltinLoadingEventType.error));
     handler.next(err);
   }
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    EventsBus.fireZeroDelay(BuiltInLoadingEvent(BuiltInLoadingEventType.ok));
+    EventsBus.fireZeroDelay(BuiltinLoadingEvent(BuiltinLoadingEventType.ok));
     handler.next(response);
   }
 }

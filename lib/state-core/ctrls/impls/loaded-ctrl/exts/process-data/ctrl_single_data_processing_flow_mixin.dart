@@ -1,6 +1,6 @@
 import 'package:redstonex/commons/exceptions/commons_app_exception.dart';
-import 'package:redstonex/state-core/ctrls/definitions/loaded_view_ctrl.dart';
-import 'package:redstonex/state-core/ctrls/impls/loaded-ctrl/exts/load-data/ctrl_multipart_data_load_mixin.dart';
+import 'package:redstonex/state-core/ctrls/definitions/loadable_view_ctrl.dart';
+import 'package:redstonex/state-core/ctrls/impls/loaded-ctrl/exts/load-data/ctrl_single_data_loading_flow_mixin.dart';
 
 /// Ctrl process loaded data flow control.
 ///
@@ -12,24 +12,24 @@ import 'package:redstonex/state-core/ctrls/impls/loaded-ctrl/exts/load-data/ctrl
 /// the internal system.
 ///
 /// Ctrl data process flow:
-/// (1.)[onPreLoadData] -> (2.)[CtrlMultipartDataLoadMixin.onLoadData]
-/// -> (3.)[onPostLoadData] -> (4.)[onCompletedLoadData]
+/// (1.)[onPreLoading] -> (2.)[CtrlSingleDataLoadingFlowMixin.onFetchingData]
+/// -> (3.)[onPostLoading] -> (4.)[onLoadingCompleted]
 ///
 /// If you want catch error and exception, do something
-/// in [CtrlMultipartDataLoadMixin.onLoadDataError] when process (2.).
+/// in [CtrlSingleDataLoadingFlowMixin.onLoadDataError] when process (2.).
 /// Or do something in process (1.), process (3.), process (4.),
 /// because data process flow will call [onLoadDataError].
 ///
-mixin CtrlMultipartDataProcessMixin<T> on LoadedViewCtrl {
+mixin CtrlSingleDataProcessingFlowMixin<T> on LoadableViewCtrl {
   /// Do something pre load data
-  void onPreLoadData() => {};
+  void onPreLoading() => {};
 
   /// Do something post load data
-  void onPostLoadData(List<T>? obtainedData) => {};
+  void onPostLoading(T? fetchedData) => {};
 
   /// Process loaded data
-  void onCompletedLoadData(List<T>? obtainedData) => {};
+  void onLoadingCompleted(T? fetchedData) => {};
 
   /// Process error or exception on process data
-  void onProcessDataError(Object e, StackTrace s) => throw CommonException(e, s);
+  void onLoadingError(Object e, StackTrace s) => throw CommonException(e, s);
 }

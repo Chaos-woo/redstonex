@@ -24,7 +24,7 @@ class Dios with OfSyntax {
   ) {
     RedStoneDio rsDio = RedStoneDio.newDio(
       name,
-      interceptors: _processBuiltInInterceptor(
+      interceptors: _processBuiltinInterceptor(
         interceptors,
         rsDioOption ?? RedStoneDioOption(),
       ),
@@ -69,29 +69,29 @@ class Dios with OfSyntax {
   }
 
   /// process built-in interceptor
-  static List<Interceptor> _processBuiltInInterceptor(
+  static List<Interceptor> _processBuiltinInterceptor(
     List<RedStoneInterceptor> interceptors,
     RedStoneDioOption rsDioOption,
   ) {
     if (rsDioOption.enableHttpLoadingEventPublish ??
         GlobalConfig.of().globalHttpOptionConfigs.enableHttpLoadingEventPublish) {
       /// default publish http request event interceptor
-      interceptors.add(BuiltInInterceptors.builtInLoadingPublisher);
+      interceptors.add(BuiltinInterceptors.builtInLoadingPublisher);
     }
 
     if (rsDioOption.enableRequestContextInterceptor ??
         GlobalConfig.of().globalHttpOptionConfigs.enableRequestContextInterceptor) {
       /// default collect request information interceptor
-      interceptors.add(BuiltInInterceptors.builtInRequestCtx);
-      interceptors.add(BuiltInInterceptors.builtInResponseCtx);
-      interceptors.add(BuiltInInterceptors.builtInErrorCtx);
+      interceptors.add(BuiltinInterceptors.builtInRequestCtx);
+      interceptors.add(BuiltinInterceptors.builtInResponseCtx);
+      interceptors.add(BuiltinInterceptors.builtInErrorCtx);
     }
 
     if ((rsDioOption.enableAutoLogInterceptor ??
             GlobalConfig.of().globalHttpOptionConfigs.enableAutoLogInterceptor) &&
         !_hasLogInterceptor(interceptors)) {
       /// default log interceptor
-      interceptors.add(BuiltInInterceptors.builtInLog);
+      interceptors.add(BuiltinInterceptors.builtInLog);
     }
 
     interceptors.sort(

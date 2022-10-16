@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:redstonex/commons/utils/ids_utils.dart';
+import 'package:redstonex/commons/utils/identify_utils.dart';
 import 'package:redstonex/network-core/definitions/http/http_method.dart';
 import 'package:redstonex/network-core/definitions/http/request.dart';
 import 'package:redstonex/network-core/definitions/http/request_context.dart';
@@ -16,7 +16,7 @@ class RequestContextInterceptor extends Interceptor {
       data: options.data,
       method: _resolveHttpMethod(options.method),
     );
-    RequestContext rc = RequestContext(IdsUtil.uuidV4(), request);
+    RequestContext rc = RequestContext(IdentifyUtils.uuidV4(), request);
     options.extra[RequestContext.fixedExtraRequestCtxName] = rc;
     handler.next(options);
   }

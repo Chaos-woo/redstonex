@@ -12,8 +12,8 @@ extension DelayedMixin on DelayedUtils {
   static Future<void> delaySeconds(int seconds, VoidCallback callback) =>
       DelayedUtils.delayAny(callback, duration: Duration(seconds: seconds));
 
-  /// replable callback
-  static Future<void> replableDelay(VoidCallback callback,
+  /// replay callback
+  static Future<void> replayDelayDo(VoidCallback callback,
           {Duration? initialDelay, int replay = 3, int intervalDelay = 100}) =>
       Future.delayed(initialDelay ?? Duration.zero).whenComplete(() async {
         for (int i = 0; i < replay; i++) {

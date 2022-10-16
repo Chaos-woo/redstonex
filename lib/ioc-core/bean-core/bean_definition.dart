@@ -1,6 +1,6 @@
 import 'package:dartx/dartx.dart';
 import 'package:redstonex/commons/log/loggers.dart';
-import 'package:redstonex/ioc-core/mirror-core/utils/definition_utils.dart';
+import 'package:redstonex/ioc-core/bean-core/utils/definition_utils.dart';
 import 'package:reflectable/reflectable.dart';
 
 ///  Holder mirror definition by parsing [ClassMirror] and [MethodMirror]

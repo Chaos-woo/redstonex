@@ -8,9 +8,9 @@ import 'package:redstonex/ioc-core/metadata-core/carriers/named_reference.dart';
 import 'package:redstonex/ioc-core/metadata-core/carriers/post_construct.dart';
 import 'package:redstonex/ioc-core/metadata-core/components_configuration.dart';
 import 'package:redstonex/ioc-core/metadata-core/utils/metadata_utils.dart';
-import 'package:redstonex/ioc-core/mirror-core/bean_definition_holder.dart';
-import 'package:redstonex/ioc-core/mirror-core/bean_definition.dart';
-import 'package:redstonex/ioc-core/mirror-core/without_bean_definition_holder.dart';
+import 'package:redstonex/ioc-core/bean-core/bean_definition_holder.dart';
+import 'package:redstonex/ioc-core/bean-core/bean_definition.dart';
+import 'package:redstonex/ioc-core/bean-core/without_bean_definition_holder.dart';
 import 'package:redstonex/ioc-core/reflectable-core/utils/metadata_mirror_utils.dart';
 import 'package:reflectable/reflectable.dart';
 

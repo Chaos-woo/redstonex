@@ -6,7 +6,7 @@ import 'package:redstonex/app-configs/global_config.dart';
 ///
 class GlobalLogConfigs {
   /// default built-in logger log level
-  Level get defBuiltInLogLevel => Level.info;
+  Level get defBuiltinLogLevel => Level.info;
 
   /// default log level
   Level get defLogLevel => GlobalConfig.of().debugMode ? Level.debug : Level.info;

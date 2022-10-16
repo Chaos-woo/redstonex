@@ -1,4 +1,4 @@
-import 'package:redstonex/ioc-core/mirror-core/bean_definition.dart';
+import 'package:redstonex/ioc-core/bean-core/bean_definition.dart';
 import 'package:reflectable/reflectable.dart';
 
 /// Create instance by [BeanDefinition]

@@ -1,4 +1,4 @@
-import 'package:redstonex/ioc-core/mirror-core/definitions/without_bean_definition_holder_factory.dart';
+import 'package:redstonex/ioc-core/bean-core/definitions/without_bean_definition_holder_factory.dart';
 import 'package:reflectable/reflectable.dart';
 
 /// Holder mirror definition and named [_name] instance.

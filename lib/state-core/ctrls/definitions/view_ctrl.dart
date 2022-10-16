@@ -1,8 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:redstonex/state-core/ctrls/definitions/view_ctrl_life_cycle.dart';
-import 'package:redstonex/state-core/ctrls/definitions/loaded_view_ctrl.dart';
-import 'package:redstonex/state-core/ctrls/definitions/nonloaded_view_ctrl.dart';
+import 'package:redstonex/state-core/ctrls/definitions/loadable_view_ctrl.dart';
+import 'package:redstonex/state-core/ctrls/definitions/nonloadable_view_ctrl.dart';
 
 /// Define view ctrl basic information.
 ///
@@ -13,17 +12,16 @@ import 'package:redstonex/state-core/ctrls/definitions/nonloaded_view_ctrl.dart'
 /// the relevant data fields when encoding.
 ///
 /// See also:
-///   * [LoadedViewCtrl] is a related to [CtrlStatus]
+///   * [LoadableViewCtrl] is a related to [CtrlStatus]
 ///   base ctrl class, so it can load data from any where
 ///   and change it status. When initializing, it needs to
 ///   obtain the required data from the outside,
 ///   conduct secondary processing, and then carry out
 ///   relevant logic processing and page display.
-///   * [NonloadedViewCtrl] is a no need to load
+///   * [NonloadableViewCtrl] is a no need to load
 ///   data from the outside base ctrl class. It mainly
 ///   carries out relevant logic processing according
 ///   to the initial parameters.
-///
 abstract class ViewCtrl extends GetxController implements ViewCtrlLifeCycle {
 
   /// Called immediately after the widget is allocated in memory.
@@ -31,16 +29,16 @@ abstract class ViewCtrl extends GetxController implements ViewCtrlLifeCycle {
   @override
   void onInit() {
     super.onInit();
-    onViewCtrlInitial();
+    onCtrlInitial();
   }
 
   /// Called 1 frame after onInit(). It is the perfect place to enter
-  /// navigation events, like snackbar, dialogs, or a new route, or
+  /// navigation events, like snack bar, dialogs, or a new route, or
   /// async request.
   @override
   void onReady() async {
     super.onReady();
-    await onViewCtrlInitialReady();
+    await onCtrlInitialReady();
   }
 
   /// Called before [onDelete] method. [onClose] might be used to
@@ -51,7 +49,7 @@ abstract class ViewCtrl extends GetxController implements ViewCtrlLifeCycle {
   /// Might be useful as well to persist some data on disk.
   @override
   void onClose() {
-    onViewCtrlDispose();
+    onCtrlDispose();
     super.onClose();
   }
 }

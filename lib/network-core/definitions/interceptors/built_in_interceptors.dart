@@ -7,7 +7,7 @@ import 'package:redstonex/network-core/definitions/interceptors/response_context
 
 /// Get built-in interceptor of fixed order for dio.
 ///
-class BuiltInInterceptors {
+class BuiltinInterceptors {
   /// log interceptor
   static RedStoneInterceptor get builtInLog => RedStoneInterceptor(
         LogInterceptor(requestBody: true, responseBody: true, requestHeader: true),

@@ -11,7 +11,7 @@ import '../retrofit-dio/http_client_example.dart';
 import '../retrofit-dio/retrofit_dio_test.dart';
 
 /// Test single data view ctrl, if need real needed
-/// data is not `String`, you can implement [onCompletedLoadData]
+/// data is not `String`, you can implement [onLoadingCompleted]
 /// to translate any you want.
 ///
 class ExampleSingleDataCtrl extends SingleDataViewCtrl<String> implements GetxService {
@@ -27,12 +27,12 @@ class ExampleSingleDataCtrl extends SingleDataViewCtrl<String> implements GetxSe
   }
 
   @override
-  void onPreLoadData() {
+  void onPreLoading() {
     _logger.i('load data pre');
   }
 
   @override
-  Future<String?> onLoadData() async {
+  Future<String?> onFetchingData() async {
     Dio dio = Dios.of();
     HttpClientExample httpClient = HttpClientExample(dio, baseUrl: 'https://');
     String string = await httpClient.getBaidu();
@@ -41,7 +41,7 @@ class ExampleSingleDataCtrl extends SingleDataViewCtrl<String> implements GetxSe
   }
 
   @override
-  void onCompletedLoadData(String? obtainedData) {
+  void onLoadingCompleted(String? obtainedData) {
     _logger.i('secondary process: $obtainedData');
     builtInString = obtainedData ?? '';
   }

@@ -1,5 +1,5 @@
-import 'package:redstonex/ioc-core/mirror-core/definitions/bean_definition_holder_factory.dart';
-import 'package:redstonex/ioc-core/mirror-core/bean_definition.dart';
+import 'package:redstonex/ioc-core/bean-core/definitions/bean_definition_holder_factory.dart';
+import 'package:redstonex/ioc-core/bean-core/bean_definition.dart';
 
 /// Holder mirror definition and named [_name] instance.
 ///

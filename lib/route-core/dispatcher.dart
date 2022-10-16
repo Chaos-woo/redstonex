@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:redstonex/commons/utils/ids_utils.dart';
+import 'package:redstonex/commons/utils/identify_utils.dart';
 import 'package:redstonex/ioc-core/metadata-core/component.dart';
-import 'package:redstonex/route-core/routes.dart';
+import 'package:redstonex/route-core/route_holder.dart';
 
 /// A initial quickly GetX routes of [GetPage] class.
 ///
@@ -16,24 +16,24 @@ class Dispatcher {
   static final List<GetPage> pageRoutes = [];
 
   /// maybe group by business-related, or irrelevant, just in the same group
-  static final List<RouteGroup> routeGroups = [];
+  static final List<RouteGroupHolder> routeGroups = [];
 
   /// remainder routes
-  static final RouteGroup otherRouteGroup = RouteGroup('other');
+  static final RouteGroupHolder otherRouteGroup = RouteGroupHolder('other');
 
   /// routes statistics
   static final RoutesStatistics statistics = RoutesStatistics();
 
-  /// Get a [RouteGroup] to organize routes
-  RouteGroup group({String? groupName}) {
-    RouteGroup group = RouteGroup(groupName ?? IdsUtil.uuidV4());
+  /// Get a [RouteGroupHolder] to organize routes
+  RouteGroupHolder group({String? groupName}) {
+    RouteGroupHolder group = RouteGroupHolder(groupName ?? IdentifyUtils.uuidV4());
     routeGroups.add(group);
     statistics.routeGroupCount++;
     return group;
   }
 
   /// Adding route in [otherRouteGroup] directly
-  void route(Route route) {
+  void route(RouteHolder route) {
     otherRouteGroup.newRoute(route);
     statistics.routeCount++;
   }
@@ -45,8 +45,8 @@ class Dispatcher {
       return;
     }
 
-    for (RouteGroup group in routeGroups) {
-      for (Route route in group.routes) {
+    for (RouteGroupHolder group in routeGroups) {
+      for (RouteHolder route in group.routes) {
         pageRoutes.add(_newPageRoute(route));
       }
     }
@@ -54,7 +54,7 @@ class Dispatcher {
     if (otherRouteGroup.routes.isNotEmpty) {
       statistics.routeGroupCount++;
       statistics.routeCount += otherRouteGroup.routes.length;
-      for (Route route in otherRouteGroup.routes) {
+      for (RouteHolder route in otherRouteGroup.routes) {
         pageRoutes.add(_newPageRoute(route));
       }
     }
@@ -62,12 +62,13 @@ class Dispatcher {
     statistics.initial = true;
   }
 
-  /// Get new [GetPage] route according to [Route]
-  GetPage _newPageRoute(Route route) {
+  /// Get new [GetPage] route according to [RouteHolder]
+  GetPage _newPageRoute(RouteHolder route) {
     return GetPage(
       name: route.routeName,
       page: route.pageBuilder,
-      binding: route.bindings,
+      binding: route.binding,
+      bindings: route.bindings,
       transition: route.transition,
       transitionDuration: route.transitionDuration,
     );
