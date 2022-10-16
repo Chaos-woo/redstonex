@@ -1,7 +1,7 @@
 /// A redstone dio option of creating.
 ///
 /// it's properties will override global configuration
-class RedStoneDioOption {
+class RedstoneDioOption {
   /// auto insert log interceptor for dio
   bool? enableAutoLogInterceptor;
 
@@ -11,7 +11,7 @@ class RedStoneDioOption {
   /// enable request context log
   bool? enableRequestContextInterceptor;
 
-  RedStoneDioOption({
+  RedstoneDioOption({
     this.enableAutoLogInterceptor,
     this.enableHttpLoadingEventPublish,
     this.enableRequestContextInterceptor,

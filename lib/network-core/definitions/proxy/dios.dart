@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:redstonex/app-configs/global_config.dart';
 import 'package:redstonex/commons/standards/of_syntax.dart';
 import 'package:redstonex/network-core/definitions/http/redstone_interceptor.dart';
-import 'package:redstonex/network-core/definitions/interceptors/built_in_interceptors.dart';
+import 'package:redstonex/network-core/definitions/interceptors/builtin_interceptors.dart';
 import 'package:redstonex/network-core/definitions/proxy/redstone_dio.dart';
 import 'package:redstonex/network-core/definitions/proxy/redstone_dio_option.dart';
 
@@ -18,15 +18,15 @@ class Dios with OfSyntax {
   /// Get a new dio proxy instance and put it in memory map
   static RedstoneDio newDio(
     String name,
-    List<RedStoneInterceptor> interceptors,
+    List<RedstoneInterceptor> interceptors,
     BaseOptions? options,
-    RedStoneDioOption? rsDioOption,
+    RedstoneDioOption? rsDioOption,
   ) {
     RedstoneDio rsDio = RedstoneDio.newDio(
       name,
       interceptors: _processBuiltinInterceptor(
         interceptors,
-        rsDioOption ?? RedStoneDioOption(),
+        rsDioOption ?? RedstoneDioOption(),
       ),
       options: options,
     );
@@ -55,7 +55,7 @@ class Dios with OfSyntax {
       return rsDio;
     }
 
-    RedStoneDioOption rsDioOption = RedStoneDioOption(
+    RedstoneDioOption rsDioOption = RedstoneDioOption(
       enableAutoLogInterceptor: true,
       enableRequestContextInterceptor: true,
       enableHttpLoadingEventPublish: true,
@@ -70,36 +70,36 @@ class Dios with OfSyntax {
 
   /// process built-in interceptor
   static List<Interceptor> _processBuiltinInterceptor(
-    List<RedStoneInterceptor> interceptors,
-    RedStoneDioOption rsDioOption,
+    List<RedstoneInterceptor> interceptors,
+    RedstoneDioOption rsDioOption,
   ) {
     if (rsDioOption.enableHttpLoadingEventPublish ??
         GlobalConfig.of().globalHttpOptionConfigs.enableHttpLoadingEventPublish) {
       /// default publish http request event interceptor
-      interceptors.add(BuiltinInterceptors.builtInLoadingPublisher);
+      interceptors.add(BuiltinInterceptors.builtinLoadingPublisher);
     }
 
     if (rsDioOption.enableRequestContextInterceptor ??
         GlobalConfig.of().globalHttpOptionConfigs.enableRequestContextInterceptor) {
       /// default collect request information interceptor
-      interceptors.add(BuiltinInterceptors.builtInRequestCtx);
-      interceptors.add(BuiltinInterceptors.builtInResponseCtx);
-      interceptors.add(BuiltinInterceptors.builtInErrorCtx);
+      interceptors.add(BuiltinInterceptors.builtinRequestCtx);
+      interceptors.add(BuiltinInterceptors.builtinResponseCtx);
+      interceptors.add(BuiltinInterceptors.builtinErrorCtx);
     }
 
     if ((rsDioOption.enableAutoLogInterceptor ??
             GlobalConfig.of().globalHttpOptionConfigs.enableAutoLogInterceptor) &&
         !_hasLogInterceptor(interceptors)) {
       /// default log interceptor
-      interceptors.add(BuiltinInterceptors.builtInLog);
+      interceptors.add(BuiltinInterceptors.builtinLog);
     }
 
     interceptors.sort(
-        (RedStoneInterceptor a, RedStoneInterceptor b) => a.order.compareTo(b.order));
+        (RedstoneInterceptor a, RedstoneInterceptor b) => a.order.compareTo(b.order));
     return interceptors.map((e) => e.interceptor).toList();
   }
 
-  static bool _hasLogInterceptor(List<RedStoneInterceptor> interceptors) {
+  static bool _hasLogInterceptor(List<RedstoneInterceptor> interceptors) {
     return interceptors.isNotEmpty &&
         interceptors.any((e) => e.interceptor is LogInterceptor);
   }
