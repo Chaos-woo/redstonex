@@ -1,39 +1,20 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
-
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+# Redstonex
+一个基于GetX的Flutter项目脚手架框架。
+Basic frame of flutter project.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+* 提供基础的基于get的容器管理，实现app的状态管理器
+* 提供基础的基于reflectable框架的自定义容器管理，实现基于注解的简单容器自动注入管理
+* 提供基础的基于get的路由辅助工具
+* 提供基础的基于dio和retrofit的网络框架封装
+* 提供基础的基于event_bus的事件流监听辅助工具
+* 提供基础的基于get_storage的简单内存、本地存储
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+* to do write something
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
-```dart
-const like = 'sample';
-```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+* to do write something

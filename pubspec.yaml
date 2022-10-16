@@ -34,7 +34,9 @@ dependencies:
   # 事件总线
   event_bus: ^2.0.0
   # 反射
-  reflectable: any
+  reflectable: ^3.0.9
+  # local persist database
+  sqflite: ^2.0.3
 
   #####
   # FUNCTION TOOL
