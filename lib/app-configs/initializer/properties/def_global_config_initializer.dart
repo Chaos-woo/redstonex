@@ -4,7 +4,7 @@ import 'package:redstonex/ioc-core/metadata-core/component.dart';
 import 'package:redstonex/ioc-core/metadata-core/components_configuration.dart';
 
 @ComponentsConfiguration()
-class DefConfigInitializer {
+class DefGlobalConfigInitializer {
 
   /// Inject default global configuration.
   /// Using the same `tag` to initial [GlobalConfig] subclass

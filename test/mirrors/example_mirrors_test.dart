@@ -80,12 +80,13 @@ class Record {
 void main() {
   initializeReflectable(); // 自定义方法名开启reflectable反射的支持
 
-  GlobalConfig.safeOverride(GlobalConfig());
 
   /// 结论：使用有metadataCapability的注解，可以获取到类上
   ///     、方法上、参数上的注解(其他注解)信息，且可以获取到
   ///     其他注解中自带的属性信息
   test('list meta', () {
+    SelfReflectable.startSelfRegistered();
+    GlobalConfig.safeOverride(GlobalConfig());
     // 添加了新的Reflectable类之后要重新build一下生成新的*.reflectable.dart类
     List<ClassMirror> cms = recordRef.annotatedClasses.toList();
     ClassMirror cm = cms[0];
@@ -168,7 +169,6 @@ void main() {
   /// 5.测试@RefsConfiguration()配置类配置类注入容器（TestV类）
   test('auto reflectable', () {
     SelfReflectable.startSelfRegistered();
-
     print('${ReflectionsUtils.find<RefA>()}');
     print('${ReflectionsUtils.find<TestV>()}');
   });

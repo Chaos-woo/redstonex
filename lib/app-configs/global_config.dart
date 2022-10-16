@@ -33,10 +33,10 @@ class GlobalConfig with OfSyntax {
   static void safeOverride(GlobalConfig customGlobalConfig) {
     ReflectionsUtils.put<GlobalConfig>(customGlobalConfig, tag: fixedGlobalConfigTag);
 
-    if (!ReflectionsUtils.existInSelfContainer<GlobalConfig>(tag: fixedGlobalConfigTag)) {
-      I10nBaseExceptionText i10nExText = Depends.on(tag: AppException.fixedI10nExceptionTextTag);
-      throw AppException.internal(AppException.fixedErrCode, i10nExText.errUnknown);
-    }
+    // if (!ReflectionsUtils.existInSelfContainer<GlobalConfig>(tag: fixedGlobalConfigTag)) {
+    //   I10nBaseExceptionText i10nExText = Depends.on(tag: AppException.fixedI10nExceptionTextTag);
+    //   throw AppException.internal(AppException.fixedErrCode, i10nExText.errUnknown);
+    // }
   }
 
   /// Current development mode whether debug mode

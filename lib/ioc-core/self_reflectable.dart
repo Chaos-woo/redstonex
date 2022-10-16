@@ -1,6 +1,7 @@
-import 'package:redstonex/ioc-core/self_container.dart';
+import 'package:redstonex/app-configs/initializer/properties/def_global_config_initializer.dart';
 import 'package:redstonex/ioc-core/metadata-core/component.dart';
 import 'package:redstonex/ioc-core/metadata-core/components_configuration.dart';
+import 'package:redstonex/ioc-core/self_container.dart';
 import 'package:reflectable/reflectable.dart';
 
 ///
@@ -17,18 +18,25 @@ import 'package:reflectable/reflectable.dart';
 ///
 class SelfReflectable {
   static void startSelfRegistered() {
-    _BuiltinReflectable builtin = _BuiltinReflectable();
-    SelfContainer().initializeAppContainer(builtin.builtinDefinitions, builtin.builtinReflectableMetadataList);
-
+    BuiltinReflectableConfiguration builtinConfig = BuiltinReflectableConfiguration();
+    SelfContainer().initializeAppContainer(builtinConfig);
   }
 }
 
 /// Builtin definition that must initialize.
-class _BuiltinReflectable {
+class BuiltinReflectableConfiguration {
   final List<Type> _builtinDefinitions = [];
-  final List<Reflectable> _builtinReflectableMetadataList = [const Component(), const  ComponentsConfiguration()];
+  final List<Reflectable> _builtinReflectableMetadataList = [
+    const ComponentsConfiguration(),
+    const Component(),
+  ];
+  final List<Type> _builtinComponentsConfigHighPriorType = [
+    DefGlobalConfigInitializer,
+  ];
 
   List<Type> get builtinDefinitions => _builtinDefinitions;
 
   List<Reflectable> get builtinReflectableMetadataList => _builtinReflectableMetadataList;
+
+  List<Type> get builtinHighPriorType => _builtinComponentsConfigHighPriorType;
 }

@@ -2,6 +2,7 @@
 
 import 'dart:collection';
 
+import 'package:dartx/dartx.dart';
 import 'package:logger/logger.dart';
 import 'package:redstonex/app-configs/global_config.dart';
 import 'package:redstonex/commons/log/redstone_logger.dart';
@@ -20,6 +21,7 @@ import 'package:redstonex/commons/standards/of_syntax.dart';
 class Loggers with OfSyntax {
   /// fixed redstonex log name
   static const String _fixedRedstoneXLoggerName = '_fixedRedstoneXLogger';
+  static const String _fixedRedstoneXLoggerInfoName = '_fixedRedstoneXInfoLogger';
 
   /// built-in logger
   static RedstoneLogger? _builtinLogger;
@@ -81,12 +83,12 @@ class Loggers with OfSyntax {
   /// If named [name] logger not exist [_namedLoggers],
   /// will create a new logger with [level] and storage in it.
   static RedstoneLogger ofNamed({String? name, Level? level}) {
-    if (name == null) {
+    if (name.isNotNullOrBlank) {
       return builtInLogger();
     } else {
       RedstoneLogger? logger = _namedLoggers[name];
       if (logger == null) {
-        logger = _defLogger(name: name, level: level);
+        logger = _defLogger(name: name!, level: level);
         _storageLoggerInMemory(logger);
       }
       return logger;
@@ -112,8 +114,7 @@ class Loggers with OfSyntax {
   }
 
   /// Default logger, external can not access
-  static RedstoneLogger _defLogger(
-          {required String name, Level? level, bool isBuiltinLog = false}) =>
+  static RedstoneLogger _defLogger({required String name, Level? level, bool isBuiltinLog = false}) =>
       RedstoneLogger.newLogger(
         name,
         printer: RedstoneLogger.defPrettyPrinter(),
@@ -122,4 +123,8 @@ class Loggers with OfSyntax {
                 ? GlobalConfig.of().globalLogConfigs.defBuiltinLogLevel
                 : GlobalConfig.of().globalLogConfigs.defLogLevel),
       );
+
+  static RedstoneLogger safeLogger() =>
+      RedstoneLogger.newLogger(_fixedRedstoneXLoggerInfoName,
+          printer: RedstoneLogger.defPrettyPrinter(), lowestLevel: Level.info);
 }

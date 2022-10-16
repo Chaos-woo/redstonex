@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
 /// Global base option of http
-///
 class GlobalHttpOptionConfigs {
   /// base url
   String get baseUrl => 'www.google.com';

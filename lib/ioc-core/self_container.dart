@@ -12,6 +12,7 @@ import 'package:redstonex/ioc-core/bean-core/bean_definition_holder.dart';
 import 'package:redstonex/ioc-core/bean-core/bean_definition.dart';
 import 'package:redstonex/ioc-core/bean-core/without_bean_definition_holder.dart';
 import 'package:redstonex/ioc-core/reflectable-core/utils/metadata_mirror_utils.dart';
+import 'package:redstonex/ioc-core/self_reflectable.dart';
 import 'package:reflectable/reflectable.dart';
 
 import 'metadata-core/component.dart';
@@ -45,12 +46,15 @@ class SelfContainer {
   /// Builtin reflectable metadata.
   static final List<Reflectable> _builtinReflectableMetadataList = [];
 
-  static final RedstoneLogger _logger = Loggers.of();
+  static final RedstoneLogger _logger = Loggers.safeLogger();
+
+  static late BuiltinReflectableConfiguration _builtinRefConfig;
 
   /// Start point.
-  void initializeAppContainer(List<Type> builtinDefinitions, List<Reflectable> builtinReflectableMetadatas) {
-    _builtinDefinitions.addAll(builtinDefinitions);
-    _builtinReflectableMetadataList.addAll(builtinReflectableMetadatas);
+  void initializeAppContainer(BuiltinReflectableConfiguration builtinRefConfig) {
+    _builtinRefConfig = builtinRefConfig;
+    _builtinDefinitions.addAll(builtinRefConfig.builtinDefinitions);
+    _builtinReflectableMetadataList.addAll(builtinRefConfig.builtinReflectableMetadataList);
 
     /// start parse
     _logger.i('Initialize application container start');
@@ -112,10 +116,28 @@ class SelfContainer {
   Map<String, WithoutBeanDefinitionHolder> _parseWithoutMirrorDefinitionHolders() {
     Map<String, WithoutBeanDefinitionHolder> holders = {};
 
+    // for (Reflectable reflectableMetadata in _builtinReflectableMetadataList) {
+    //   List<ClassMirror> classMirrors = MetadataBeanUtils.annotatedClass(reflectableMetadata);
+    //   if (reflectableMetadata is ComponentsConfiguration) {
+    //     holders.addAll(_doParseReflectionConfiguration(classMirrors));
+    //   }
+    // }
+
     for (Reflectable reflectableMetadata in _builtinReflectableMetadataList) {
-      List<ClassMirror> classMirrors = MetadataBeanUtils.annotatedClass(reflectableMetadata);
+      List<ClassMirror> classMirrors = [];
+      classMirrors.addAll(MetadataBeanUtils.annotatedClass(reflectableMetadata));
       if (reflectableMetadata is ComponentsConfiguration) {
-        holders.addAll(_doParseReflectionConfiguration(classMirrors));
+        List<ClassMirror> sortedClassMirrors = [];
+
+        for(Type highPriorType in _builtinRefConfig.builtinHighPriorType) {
+          int index = classMirrors.indexWhere((ele) => ele.dynamicReflectedType == highPriorType);
+          if (index > -1) {
+            sortedClassMirrors.add(classMirrors[index]);
+            classMirrors.removeAt(index);
+          }
+        }
+        sortedClassMirrors.addAll(classMirrors);
+        holders.addAll(_doParseReflectionConfiguration(sortedClassMirrors));
       }
     }
 
@@ -245,7 +267,7 @@ class SelfContainer {
 
   /// Whether exist dependency in application container
   static bool existDependency<S>({String? tag}) {
-    return findDependencyByCarrierName(S, tag);
+    return findDependencyByCarrierName(S, tag) != null;
   }
 
   /// Find dependency in application container
