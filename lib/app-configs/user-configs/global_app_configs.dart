@@ -1,6 +1,9 @@
 
 /// App global configuration.
 class GlobalAppConfigs {
-  /// whether enable GetStorage
-  bool get enableGetStorage => false;
+  /// whether enable memory cache
+  bool get enableMemoryCache => false;
+
+  /// whether enable local persist cache
+  bool get enableLocalPersistCache => false;
 }
