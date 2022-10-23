@@ -1,6 +1,6 @@
 name: redstonex
 description: 一个基于GetX的Flutter项目脚手架框架。Basic frame of flutter project.
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/Chaos-woo/redstonex
 
 environment:
