@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
-import 'package:redstonex/commons/standards/load_more_syntax.dart';
-import 'package:redstonex/commons/standards/refreshable_syntax.dart';
+import 'package:redstonex/std-core/load_more_syntax.dart';
+import 'package:redstonex/std-core/refreshable_syntax.dart';
 import 'package:redstonex/state-core/ctrls/definitions/loadable_view_ctrl.dart';
 import 'package:redstonex/state-core/ctrls/impls/loaded-ctrl/exts/ctrl_status_mixin.dart';
 import 'package:redstonex/state-core/ctrls/impls/loaded-ctrl/exts/load-data/ctrl_multipart_data_loading_flow_mixin.dart';

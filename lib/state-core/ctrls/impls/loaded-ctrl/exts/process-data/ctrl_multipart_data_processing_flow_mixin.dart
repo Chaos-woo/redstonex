@@ -1,4 +1,4 @@
-import 'package:redstonex/commons/exceptions/commons_app_exception.dart';
+import 'package:redstonex/exceptions/error_stack.dart';
 import 'package:redstonex/state-core/ctrls/definitions/loadable_view_ctrl.dart';
 import 'package:redstonex/state-core/ctrls/impls/loaded-ctrl/exts/load-data/ctrl_multipart_data_loading_flow_mixin.dart';
 
@@ -31,5 +31,5 @@ mixin CtrlMultipartDataProcessingFlowMixin<T> on LoadableViewCtrl {
   void onLoadingCompleted(List<T>? obtainedData) => {};
 
   /// Process error or exception on process data
-  void onProcessDataError(Object e, StackTrace s) => throw CommonException(e, s);
+  void onProcessDataError(Object e, StackTrace s) => throw ErrorStack(e, s);
 }

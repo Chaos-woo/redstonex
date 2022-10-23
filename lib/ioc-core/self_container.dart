@@ -1,7 +1,5 @@
 import 'package:dartx/dartx.dart';
-import 'package:redstonex/commons/exceptions/no_such_mirror_definition_exception.dart';
-import 'package:redstonex/commons/log/loggers.dart';
-import 'package:redstonex/commons/log/redstone_logger.dart';
+import 'package:redstonex/exceptions/no_such_bean_definition_exception.dart';
 import 'package:redstonex/ioc-core/metadata-core/carriers/after_properties_set.dart';
 import 'package:redstonex/ioc-core/metadata-core/carriers/autowired.dart';
 import 'package:redstonex/ioc-core/metadata-core/carriers/named_reference.dart';
@@ -13,6 +11,7 @@ import 'package:redstonex/ioc-core/bean-core/bean_definition.dart';
 import 'package:redstonex/ioc-core/bean-core/without_bean_definition_holder.dart';
 import 'package:redstonex/ioc-core/reflectable-core/utils/metadata_mirror_utils.dart';
 import 'package:redstonex/ioc-core/self_reflectable.dart';
+import 'package:redstonex/log/loggers.dart';
 import 'package:reflectable/reflectable.dart';
 
 import 'metadata-core/component.dart';
@@ -46,7 +45,7 @@ class SelfContainer {
   /// Builtin reflectable metadata.
   static final List<Reflectable> _builtinReflectableMetadataList = [];
 
-  static final RedstoneLogger _logger = Loggers.safeLogger();
+  static final _logger = Loggers.of();
 
   static late BuiltinReflectableConfiguration _builtinRefConfig;
 

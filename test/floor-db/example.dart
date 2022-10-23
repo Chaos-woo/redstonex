@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:redstonex/commons/standards/to_entity_syntax.dart';
+import 'package:redstonex/std-core/to_entity_syntax.dart';
 
 import 'example_entity.dart';
 

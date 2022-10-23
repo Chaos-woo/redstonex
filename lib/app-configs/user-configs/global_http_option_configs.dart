@@ -25,15 +25,6 @@ class GlobalHttpOptionConfigs {
 
   /// default parse response json with using `compute`
   JsonDecodeCallback get jsonDecodeCallback => _parseJson;
-
-  /// auto insert log interceptor for dio
-  bool get enableAutoLogInterceptor => false;
-
-  /// whether enable publish loading event when http request
-  bool get enableHttpLoadingEventPublish => false;
-
-  /// enable request context log
-  bool get enableRequestContextInterceptor => false;
 }
 
 /// Must be a top-level function

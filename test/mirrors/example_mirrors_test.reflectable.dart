@@ -3,18 +3,21 @@
 // @dart = 2.12
 
 import 'dart:core';
+import 'dart:async' as prefix9;
 import 'example_mirrors_test.dart' as prefix0;
-import 'package:redstonex/app-configs/global_config.dart' as prefix8;
-import 'package:redstonex/app-configs/initializer/properties/def_global_config_initializer.dart'
+import 'package:redstonex/app-configs/global_config.dart' as prefix10;
+import 'package:redstonex/app-configs/initializer/configs/builtin_config.dart'
     as prefix3;
-import 'package:redstonex/ioc-core/metadata-core/carriers/after_properties_set.dart'
-    as prefix6;
-import 'package:redstonex/ioc-core/metadata-core/carriers/autowired.dart'
+import 'package:redstonex/app-configs/initializer/properties/def_global_config_initializer.dart'
     as prefix4;
-import 'package:redstonex/ioc-core/metadata-core/carriers/named_reference.dart'
+import 'package:redstonex/ioc-core/metadata-core/carriers/after_properties_set.dart'
     as prefix7;
-import 'package:redstonex/ioc-core/metadata-core/carriers/post_construct.dart'
+import 'package:redstonex/ioc-core/metadata-core/carriers/autowired.dart'
     as prefix5;
+import 'package:redstonex/ioc-core/metadata-core/carriers/named_reference.dart'
+    as prefix8;
+import 'package:redstonex/ioc-core/metadata-core/carriers/post_construct.dart'
+    as prefix6;
 import 'package:redstonex/ioc-core/metadata-core/component.dart' as prefix1;
 import 'package:redstonex/ioc-core/metadata-core/components_configuration.dart'
     as prefix2;
@@ -60,7 +63,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
       ],
       <m.DeclarationMirror>[
         r.VariableMirrorImpl(r'test', 134348805, 0, const prefix0.RecordRef(),
-            -1, -1, -1, null, const <Object>[const prefix4.Autowired()]),
+            -1, -1, -1, null, const <Object>[const prefix5.Autowired()]),
         r.VariableMirrorImpl(r'anyClass', 67239941, 0,
             const prefix0.RecordRef(), -1, -1, -1, null, const []),
         r.MethodMirrorImpl(
@@ -84,7 +87,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
             null,
             const <int>[],
             const prefix0.RecordRef(),
-            const <Object>[const prefix5.PostConstruct()]),
+            const <Object>[const prefix6.PostConstruct()]),
         r.MethodMirrorImpl(
             r'afterPropertiesSet',
             1310722,
@@ -95,7 +98,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
             null,
             const <int>[],
             const prefix0.RecordRef(),
-            const <Object>[const prefix6.AfterPropertiesSet()]),
+            const <Object>[const prefix7.AfterPropertiesSet()]),
         r.ImplicitGetterMirrorImpl(const prefix0.RecordRef(), 0, 5),
         r.ImplicitSetterMirrorImpl(const prefix0.RecordRef(), 0, 6),
         r.ImplicitGetterMirrorImpl(const prefix0.RecordRef(), 1, 7),
@@ -189,15 +192,33 @@ final _data = <r.Reflectable, r.ReflectorData>{
             const <int>[],
             const <Object>[
               const prefix1.Component(),
-              const prefix7.NamedReference(name: 'theNamed')
+              const prefix8.NamedReference(name: 'theNamed')
             ],
+            null),
+        r.NonGenericClassMirrorImpl(
+            r'BuiltinConfiguration',
+            r'.BuiltinConfiguration',
+            134217735,
+            2,
+            const prefix1.Component(),
+            const <int>[16, 17],
+            const <int>[10, 11, 12, 13, 14, 16],
+            const <int>[],
+            -1,
+            {},
+            {},
+            {r'': (bool b) => () => b ? prefix3.BuiltinConfiguration() : null},
+            1,
+            2,
+            const <int>[],
+            const <Object>[const prefix1.Component()],
             null)
       ],
       <m.DeclarationMirror>[
         r.VariableMirrorImpl(r'test', 134348805, 0, const prefix1.Component(),
-            -1, 2, 2, const <int>[], const <Object>[const prefix4.Autowired()]),
+            -1, 3, 3, const <int>[], const <Object>[const prefix5.Autowired()]),
         r.VariableMirrorImpl(r'anyClass', 67239941, 0,
-            const prefix1.Component(), -1, 3, 3, const <int>[], const []),
+            const prefix1.Component(), -1, 4, 4, const <int>[], const []),
         r.MethodMirrorImpl(
             r'methodA',
             1310722,
@@ -219,7 +240,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
             const <int>[],
             const <int>[],
             const prefix1.Component(),
-            const <Object>[const prefix5.PostConstruct()]),
+            const <Object>[const prefix6.PostConstruct()]),
         r.MethodMirrorImpl(
             r'afterPropertiesSet',
             1310722,
@@ -230,37 +251,50 @@ final _data = <r.Reflectable, r.ReflectorData>{
             const <int>[],
             const <int>[],
             const prefix1.Component(),
-            const <Object>[const prefix6.AfterPropertiesSet()]),
+            const <Object>[const prefix7.AfterPropertiesSet()]),
         r.ImplicitGetterMirrorImpl(const prefix1.Component(), 0, 5),
         r.ImplicitSetterMirrorImpl(const prefix1.Component(), 0, 6),
         r.ImplicitGetterMirrorImpl(const prefix1.Component(), 1, 7),
         r.ImplicitSetterMirrorImpl(const prefix1.Component(), 1, 8),
         r.MethodMirrorImpl(r'', 0, 0, -1, 0, 0, const <int>[], const <int>[],
             const prefix1.Component(), const []),
-        r.MethodMirrorImpl(r'==', 2097154, -1, -1, 4, 4, const <int>[],
+        r.MethodMirrorImpl(r'==', 2097154, -1, -1, 5, 5, const <int>[],
             const <int>[2], const prefix1.Component(), const []),
-        r.MethodMirrorImpl(r'toString', 2097154, -1, -1, 5, 5, const <int>[],
+        r.MethodMirrorImpl(r'toString', 2097154, -1, -1, 6, 6, const <int>[],
             const <int>[], const prefix1.Component(), const []),
         r.MethodMirrorImpl(r'noSuchMethod', 524290, -1, -1, -1, -1,
             const <int>[], const <int>[3], const prefix1.Component(), const []),
-        r.MethodMirrorImpl(r'hashCode', 2097155, -1, -1, 6, 6, const <int>[],
+        r.MethodMirrorImpl(r'hashCode', 2097155, -1, -1, 7, 7, const <int>[],
             const <int>[], const prefix1.Component(), const []),
-        r.MethodMirrorImpl(r'runtimeType', 2097155, -1, -1, 7, 7, const <int>[],
+        r.MethodMirrorImpl(r'runtimeType', 2097155, -1, -1, 8, 8, const <int>[],
             const <int>[], const prefix1.Component(), const []),
         r.MethodMirrorImpl(r'', 64, 1, -1, 1, 1, const <int>[], const <int>[],
+            const prefix1.Component(), const []),
+        r.MethodMirrorImpl(
+            r'initialize',
+            35651586,
+            2,
+            -1,
+            9,
+            10,
+            const <int>[-1],
+            const <int>[],
+            const prefix1.Component(),
+            const <Object>[const prefix6.PostConstruct()]),
+        r.MethodMirrorImpl(r'', 64, 2, -1, 2, 2, const <int>[], const <int>[],
             const prefix1.Component(), const [])
       ],
       <m.ParameterMirror>[
         r.ParameterMirrorImpl(r'_test', 134348902, 6, const prefix1.Component(),
-            -1, 2, 2, const <int>[], const [], null, null),
+            -1, 3, 3, const <int>[], const [], null, null),
         r.ParameterMirrorImpl(
             r'_anyClass',
             67240038,
             8,
             const prefix1.Component(),
             -1,
-            3,
-            3,
+            4,
+            4,
             const <int>[],
             const [],
             null,
@@ -271,8 +305,8 @@ final _data = <r.Reflectable, r.ReflectorData>{
             10,
             const prefix1.Component(),
             -1,
-            8,
-            8,
+            11,
+            11,
             const <int>[],
             const [],
             null,
@@ -283,8 +317,8 @@ final _data = <r.Reflectable, r.ReflectorData>{
             12,
             const prefix1.Component(),
             -1,
-            9,
-            9,
+            12,
+            12,
             const <int>[],
             const [],
             null,
@@ -293,16 +327,19 @@ final _data = <r.Reflectable, r.ReflectorData>{
       <Type>[
         prefix0.RefA,
         prefix0.NamedRefTest,
+        prefix3.BuiltinConfiguration,
         prefix0.TestV,
         prefix0.AnyClass,
         bool,
         String,
         int,
         Type,
+        const m.TypeValue<prefix9.Future<void>>().type,
+        prefix9.Future,
         Object,
         Invocation
       ],
-      2,
+      3,
       {
         r'==': (dynamic instance) => (x) => instance == x,
         r'toString': (dynamic instance) => instance.toString,
@@ -314,7 +351,8 @@ final _data = <r.Reflectable, r.ReflectorData>{
         r'afterPropertiesSet': (dynamic instance) =>
             instance.afterPropertiesSet,
         r'test': (dynamic instance) => instance.test,
-        r'anyClass': (dynamic instance) => instance.anyClass
+        r'anyClass': (dynamic instance) => instance.anyClass,
+        r'initialize': (dynamic instance) => instance.initialize
       },
       {
         r'test=': (dynamic instance, value) => instance.test = value,
@@ -322,6 +360,8 @@ final _data = <r.Reflectable, r.ReflectorData>{
       },
       <m.LibraryMirror>[
         r.LibraryMirrorImpl(r'', Uri.parse(r'reflectable://0/'),
+            const prefix1.Component(), const <int>[], {}, {}, const [], null),
+        r.LibraryMirrorImpl(r'', Uri.parse(r'reflectable://1/'),
             const prefix1.Component(), const <int>[], {}, {}, const [], null)
       ],
       []),
@@ -359,7 +399,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
             {},
             {
               r'': (bool b) =>
-                  () => b ? prefix3.DefGlobalConfigInitializer() : null
+                  () => b ? prefix4.DefGlobalConfigInitializer() : null
             },
             1,
             1,
@@ -403,8 +443,8 @@ final _data = <r.Reflectable, r.ReflectorData>{
             const prefix2.ComponentsConfiguration(),
             const <Object>[
               const prefix1.Component(),
-              const prefix7.NamedReference(
-                  name: prefix8.GlobalConfig.fixedGlobalConfigTag)
+              const prefix8.NamedReference(
+                  name: prefix10.GlobalConfig.fixedGlobalConfigTag)
             ]),
         r.MethodMirrorImpl(r'', 64, 1, -1, -1, -1, null, const <int>[],
             const prefix2.ComponentsConfiguration(), const [])
@@ -435,7 +475,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
             null,
             null)
       ],
-      <Type>[prefix0.RefsConfig, prefix3.DefGlobalConfigInitializer],
+      <Type>[prefix0.RefsConfig, prefix4.DefGlobalConfigInitializer],
       2,
       {
         r'==': (dynamic instance) => (x) => instance == x,

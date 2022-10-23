@@ -1,5 +1,5 @@
 import 'package:dartx/dartx.dart';
-import 'package:redstonex/commons/log/loggers.dart';
+import 'package:redstonex/log/loggers.dart';
 import 'package:redstonex/ioc-core/bean-core/utils/definition_utils.dart';
 import 'package:reflectable/reflectable.dart';
 
@@ -24,21 +24,21 @@ class BeanDefinition {
   final Map<String, VariableMirror> _nonVariableFieldMirrors = {};
 
   BeanDefinition(this._classMirror) {
-    _reflectMirrorDefinition(_classMirror);
+    _initActualMirrorProperties(_classMirror);
 
-    _selfParseClassMirror();
-    _selfParseMethodMirror();
-    _selfParseVariableMirror();
+    _parseClassMirror();
+    _parseMethodMirror();
+    _parseVariableMirror();
   }
 
-  void _reflectMirrorDefinition(ClassMirror classMirror) {
+  void _initActualMirrorProperties(ClassMirror classMirror) {
     _actualType = classMirror.dynamicReflectedType;
     _classMetadataList.addAll(classMirror.metadata);
 
     _declarationMirrors.addAll(classMirror.declarations);
   }
 
-  void _selfParseClassMirror() {
+  void _parseClassMirror() {
     try {
       _superclass = _classMirror.superclass;
     } on NoSuchCapabilityError catch(e){
@@ -52,7 +52,7 @@ class BeanDefinition {
     _superInterfaces.addAll(_classMirror.superinterfaces);
   }
 
-  void _selfParseMethodMirror() {
+  void _parseMethodMirror() {
     for (var declarationEntry in _declarationMirrors.entries) {
       var declaration = declarationEntry.value;
       if (declaration is MethodMirror &&
@@ -67,7 +67,7 @@ class BeanDefinition {
     }
   }
 
-  void _selfParseVariableMirror() {
+  void _parseVariableMirror() {
     for (var declarationEntry in _declarationMirrors.entries) {
       var declaration = declarationEntry.value;
       if (declaration is VariableMirror) {

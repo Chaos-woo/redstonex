@@ -1,11 +1,10 @@
-import 'package:dio/dio.dart';
-import 'package:test/test.dart';
 import 'package:get/get.dart';
 import 'package:redstonex/app-configs/global_config.dart';
-import 'package:redstonex/commons/log/loggers.dart';
-import 'package:redstonex/commons/log/redstone_logger.dart';
-import 'package:redstonex/network-core/definitions/proxy/dios.dart';
+import 'package:redstonex/log/loggers.dart';
+import 'package:redstonex/network-core/impls/dios.dart';
+import 'package:redstonex/network-core/impls/self_dio.dart';
 import 'package:redstonex/state-core/ctrls/impls/loaded-ctrl/single_data_view_ctrl.dart';
+import 'package:test/test.dart';
 
 import '../retrofit-dio/http_client_example.dart';
 import '../retrofit-dio/retrofit_dio_test.dart';
@@ -15,7 +14,7 @@ import '../retrofit-dio/retrofit_dio_test.dart';
 /// to translate any you want.
 ///
 class ExampleSingleDataCtrl extends SingleDataViewCtrl<String> implements GetxService {
-  final RedstoneLogger _logger = Loggers.of();
+  final _logger = Loggers.of();
 
   String builtInString = '';
 
@@ -33,11 +32,11 @@ class ExampleSingleDataCtrl extends SingleDataViewCtrl<String> implements GetxSe
 
   @override
   Future<String?> onFetchingData() async {
-    Dio dio = Dios.of();
-    HttpClientExample httpClient = HttpClientExample(dio, baseUrl: 'https://');
+    SelfDio selfDio = Dios.instance('https://');
+    HttpClientExample httpClient = HttpClientExample(selfDio.dio, baseUrl: selfDio.baseUrl);
+    final logger = Loggers.of();
     String string = await httpClient.getBaidu();
-    _logger.i(string);
-    return string;
+    logger.i(string);
   }
 
   @override

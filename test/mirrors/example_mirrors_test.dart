@@ -1,5 +1,4 @@
 import 'package:redstonex/app-configs/global_config.dart';
-import 'package:redstonex/commons/log/loggers.dart';
 import 'package:redstonex/ioc-core/metadata-core/carriers/after_properties_set.dart';
 import 'package:redstonex/ioc-core/metadata-core/carriers/autowired.dart';
 import 'package:redstonex/ioc-core/metadata-core/carriers/named_reference.dart';
@@ -9,6 +8,7 @@ import 'package:redstonex/ioc-core/metadata-core/components_configuration.dart';
 import 'package:redstonex/ioc-core/reflectable-core/utils/metadata_mirror_utils.dart';
 import 'package:redstonex/ioc-core/reflectable-core/utils/reflections_utils.dart';
 import 'package:redstonex/ioc-core/self_reflectable.dart';
+import 'package:redstonex/log/loggers.dart';
 import 'package:reflectable/reflectable.dart';
 import 'package:test/test.dart';
 
@@ -78,6 +78,8 @@ class Record {
 }
 
 void main() {
+  final _logger = Loggers.of();
+  
   initializeReflectable(); // 自定义方法名开启reflectable反射的支持
 
 
@@ -93,7 +95,7 @@ void main() {
 
     Object newInstance = cm.newInstance('', []);
 
-    Loggers.of().i('class === ');
+    _logger.i('class === ');
 
     List<Object> metaData = cm.metadata;
     for (var value in metaData) {
@@ -104,9 +106,9 @@ void main() {
       ///
       /// 结论：可以读取到类上的元注解信息
       if (value is Record) {
-        Loggers.of().i(value.name);
+        _logger.i(value.name);
       } else {
-        Loggers.of().i('not Record, but $value');
+        _logger.i('not Record, but $value');
       }
     }
 
@@ -119,7 +121,7 @@ void main() {
       }
     }
 
-    Loggers.of().i('method === ');
+    _logger.i('method === ');
 
     metaData = mm!.metadata;
     for (var value in metaData) {
@@ -128,21 +130,21 @@ void main() {
       ///
       /// 结论：可以读取到方法上的元注解信息
       if (value is Record) {
-        Loggers.of().i(value.name);
+        _logger.i(value.name);
       } else {
-        Loggers.of().i('not Record, but $value');
+        _logger.i('not Record, but $value');
       }
     }
 
-    Loggers.of().i(' Variable === ');
+    _logger.i(' Variable === ');
 
     Map<String, DeclarationMirror> declarations = cm.declarations;
     for (var entry in declarations.entries) {
-      // Loggers.of().i(entry.key);
+      // _logger.i(entry.key);
 
       var variable = entry.value;
       if (variable is VariableMirror) {
-        Loggers.of().w('variable ${entry.key}');
+        _logger.w('variable ${entry.key}');
 
         Object? reflectable = MetadataBeanUtils.declarationReflectableMetadata(variable);
         if (reflectable == null) {
@@ -153,7 +155,7 @@ void main() {
 
         executeCm.invokeSetter(entry.key, TestV());
       } else if (variable is MethodMirror) {
-        Loggers.of().i('method ${entry.key}');
+        _logger.i('method ${entry.key}');
       }
     }
 

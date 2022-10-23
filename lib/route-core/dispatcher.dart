@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:redstonex/commons/utils/identify_utils.dart';
+import 'package:redstonex/utils/unique_utils.dart';
 import 'package:redstonex/ioc-core/metadata-core/component.dart';
 import 'package:redstonex/route-core/route_holder.dart';
 
@@ -26,7 +26,7 @@ class Dispatcher {
 
   /// Get a [RouteGroupHolder] to organize routes
   RouteGroupHolder group({String? groupName}) {
-    RouteGroupHolder group = RouteGroupHolder(groupName ?? IdentifyUtils.uuidV4());
+    RouteGroupHolder group = RouteGroupHolder(groupName ?? UniqueUtils.uuidV4());
     routeGroups.add(group);
     statistics.routeGroupCount++;
     return group;

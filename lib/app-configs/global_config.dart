@@ -2,10 +2,7 @@ import 'package:redstonex/app-configs/user-configs/global_app_configs.dart';
 import 'package:redstonex/app-configs/user-configs/global_database_configs.dart';
 import 'package:redstonex/app-configs/user-configs/global_http_option_configs.dart';
 import 'package:redstonex/app-configs/user-configs/global_log_configs.dart';
-import 'package:redstonex/commons/exceptions/app_exception.dart';
-import 'package:redstonex/commons/exceptions/exts/i10n_exception_text.dart';
-import 'package:redstonex/commons/standards/of_syntax.dart';
-import 'package:redstonex/ioc-core/providers/depends.dart';
+import 'package:redstonex/std-core//of_syntax.dart';
 import 'package:redstonex/ioc-core/reflectable-core/utils/reflections_utils.dart';
 
 /// A global configuration.
@@ -30,13 +27,22 @@ class GlobalConfig with OfSyntax {
   ///
   /// Default global configuration will put in container when built-in initialing,
   /// using the same tag replace default configuration when want to.
+  ///
+  /// Self-Container will not save default [GlobalConfig] when using this method,
+  /// and call the [safeOverride] will merge self-container default global config
+  /// and [customGlobalConfig] to put new global config to GetX container. Then,
+  /// will remove default global config from self-container.
   static void safeOverride(GlobalConfig customGlobalConfig) {
+    // todo 合并覆盖自定义全局配置
+    // todo 再移除自定义容器中的全局配置
+
     ReflectionsUtils.put<GlobalConfig>(customGlobalConfig, tag: fixedGlobalConfigTag);
 
-    // if (!ReflectionsUtils.existInSelfContainer<GlobalConfig>(tag: fixedGlobalConfigTag)) {
-    //   I10nBaseExceptionText i10nExText = Depends.on(tag: AppException.fixedI10nExceptionTextTag);
-    //   throw AppException.internal(AppException.fixedErrCode, i10nExText.errUnknown);
-    // }
+    _removeDefaultGlobalConfig();
+  }
+
+  static _removeDefaultGlobalConfig() {
+
   }
 
   /// Current development mode whether debug mode

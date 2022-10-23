@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:test/test.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'http_client_example.g.dart';
@@ -10,4 +9,7 @@ abstract class HttpClientExample {
 
   @GET('www.baidu.com')
   Future<String> getBaidu();
+
+  @GET('cn.bing.com')
+  Future<String> getBing();
 }

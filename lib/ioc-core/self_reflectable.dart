@@ -1,5 +1,5 @@
 import 'package:dartx/dartx.dart';
-import 'package:redstonex/app-configs/initializer/configurations/builtin_worker_initializer.dart';
+import 'package:redstonex/app-configs/initializer/configs/builtin_config.dart';
 import 'package:redstonex/app-configs/initializer/properties/def_global_config_initializer.dart';
 import 'package:redstonex/ioc-core/metadata-core/component.dart';
 import 'package:redstonex/ioc-core/metadata-core/components_configuration.dart';
@@ -46,7 +46,7 @@ class BuiltinReflectableConfiguration {
 
   /// High prior component type list.
   final List<Type> _builtinComponentHighPriorType = [
-    BuiltinWorkerInitializer,
+    BuiltinConfiguration,
   ];
 
   List<Type> get builtinDefinitions => _builtinDefinitions;

@@ -1,5 +1,5 @@
 import 'package:floor/floor.dart';
-import 'package:redstonex/commons/standards/to_val_syntax.dart';
+import 'package:redstonex/std-core/to_val_syntax.dart';
 
 /// Base entity properties
 ///
@@ -7,7 +7,7 @@ import 'package:redstonex/commons/standards/to_val_syntax.dart';
 /// continue to use the `abstract` keyword to describe
 /// the key attributes of your database, and the real
 /// entity is decorated with annotation [Entity]
-abstract class BaseEntity<V> with ToValSyntax<V>{
+abstract class BaseEntity<V> with ToValSyntax<V> {
   /// primary key
   @PrimaryKey(autoGenerate: true)
   final int? id;
@@ -20,8 +20,8 @@ abstract class BaseEntity<V> with ToValSyntax<V>{
   @ColumnInfo(name: 'updated_at')
   final String updatedAt;
 
-  BaseEntity(
-    this.id, {
+  BaseEntity({
+    this.id,
     String? createdAt,
     String? updateAt,
   })  : createdAt = createdAt ?? DateTime.now().toIso8601String(),

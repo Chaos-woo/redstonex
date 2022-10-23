@@ -1,6 +1,6 @@
 
 import 'package:get_storage/get_storage.dart';
-import 'package:redstonex/commons/standards/of_syntax.dart';
+import 'package:redstonex/std-core/of_syntax.dart';
 import 'package:redstonex/local-storage-core/definitions/object_cache.dart';
 
 /// Persist cache by get_storage
