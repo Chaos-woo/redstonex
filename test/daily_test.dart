@@ -1,17 +1,6 @@
 
 import 'package:redstonex/state-core/ctrls/models/ctrl_status.dart';
+import 'package:test/test.dart';
 
-void main() {
-  testFactoryKeyword();
-}
-
-void testFactoryKeyword() {
-  CtrlStatus status = CtrlStatus.empty();
-  print('${status.hashCode}');
-  status = CtrlStatus.loading();
-  print('${status.hashCode}');
-  status = CtrlStatus.empty();
-  print('${status.hashCode}');
-  status = CtrlStatus.loading();
-  print('${status.hashCode}');
+void main() async {
 }

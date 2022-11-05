@@ -19,7 +19,7 @@ import 'package:reflectable/reflectable.dart';
 //  note: `reflectable` only output in `main`, so don't do in here.
 ///
 class SelfReflectable {
-  static void startSelfRegistered() {
+  static Future<void> startSelfRegistered() async {
     BuiltinReflectableConfiguration builtinConfig = BuiltinReflectableConfiguration();
     SelfContainer().initializeAppContainer(builtinConfig);
   }

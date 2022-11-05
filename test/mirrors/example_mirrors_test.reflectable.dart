@@ -3,9 +3,8 @@
 // @dart = 2.12
 
 import 'dart:core';
-import 'dart:async' as prefix9;
 import 'example_mirrors_test.dart' as prefix0;
-import 'package:redstonex/app-configs/global_config.dart' as prefix10;
+import 'package:redstonex/app-configs/global_config.dart' as prefix9;
 import 'package:redstonex/app-configs/initializer/configs/builtin_config.dart'
     as prefix3;
 import 'package:redstonex/app-configs/initializer/properties/def_global_config_initializer.dart'
@@ -272,12 +271,12 @@ final _data = <r.Reflectable, r.ReflectorData>{
             const prefix1.Component(), const []),
         r.MethodMirrorImpl(
             r'initialize',
-            35651586,
+            1310722,
             2,
             -1,
-            9,
-            10,
-            const <int>[-1],
+            -1,
+            -1,
+            const <int>[],
             const <int>[],
             const prefix1.Component(),
             const <Object>[const prefix6.PostConstruct()]),
@@ -305,8 +304,8 @@ final _data = <r.Reflectable, r.ReflectorData>{
             10,
             const prefix1.Component(),
             -1,
-            11,
-            11,
+            9,
+            9,
             const <int>[],
             const [],
             null,
@@ -317,8 +316,8 @@ final _data = <r.Reflectable, r.ReflectorData>{
             12,
             const prefix1.Component(),
             -1,
-            12,
-            12,
+            10,
+            10,
             const <int>[],
             const [],
             null,
@@ -334,8 +333,6 @@ final _data = <r.Reflectable, r.ReflectorData>{
         String,
         int,
         Type,
-        const m.TypeValue<prefix9.Future<void>>().type,
-        prefix9.Future,
         Object,
         Invocation
       ],
@@ -444,7 +441,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
             const <Object>[
               const prefix1.Component(),
               const prefix8.NamedReference(
-                  name: prefix10.GlobalConfig.fixedGlobalConfigTag)
+                  name: prefix9.GlobalConfig.fixedGlobalConfigTag)
             ]),
         r.MethodMirrorImpl(r'', 64, 1, -1, -1, -1, null, const <int>[],
             const prefix2.ComponentsConfiguration(), const [])

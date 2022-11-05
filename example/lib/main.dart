@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:redstonex/redstonex.dart';
+import 'main.reflectable.dart';
 
-void main() {
+void main() async {
+  initializeReflectable();
+
+  await SelfReflectable.startSelfRegistered();
+
   runApp(const MyApp());
 }
 
@@ -10,6 +16,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    print('read from MCG ${MCG.of().read('key')}');
+    print('read from PCG ${PCG.of().read('key')}');
+
+    // MCG.of().write('key', 1);
+    // PCG.of().write('key', 2);
+    //
+    // print('write MCG and PCG ok');
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(

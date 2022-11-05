@@ -115,7 +115,7 @@ class SelfContainer {
         }
         /// add-in left all class mirror
         sortedClassMirrors.addAll(classMirrors);
-        holders.addAll(_doParseReflection(classMirrors));
+        holders.addAll(_doParseReflection(sortedClassMirrors));
       }
     }
 
@@ -170,7 +170,6 @@ class SelfContainer {
       String? name = namedRef?.name;
       String key = _getKey(definition.actualType, name);
       BeanDefinitionHolder mirrorDefinitionHolder = BeanDefinitionHolder(definition, name);
-
       if (mirrorDefinitionHolder.instance != null && definition.instanceMemberMethodMirrors.isNotEmpty) {
         /// process instance @PostConstruct marked method
         List<MethodMirror> methodMirrors = definition.instanceMemberMethodMirrors;

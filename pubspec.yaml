@@ -46,7 +46,7 @@ dependencies:
   # dart扩展，集合、int、num、String等
   dartx: ^1.1.0
   # 好用的工具组合。基础APIs：https://github.com/Sky24n/common_utils
-  flustars: ^2.0.1
+  flustars_flutter3: 3.0.0
   # uuid
   uuid: ^3.0.6
   # 加解密处理

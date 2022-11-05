@@ -12,36 +12,37 @@ class MCG implements ObjectCache, OfSyntax {
 
   static MCG of() => _mcg;
 
-  GetStorage? _occ;
+  static final GetStorage _occ = GetStorage(_gsContainerName);
 
-  Future<void> init() async {
+  static GetStorage? occ() => _occ;
+
+  static Future<void> init() async {
     await GetStorage.init(_gsContainerName);
-    _occ = GetStorage(_gsContainerName);
-    await _occ!.erase();
+    await _occ.erase();
   }
 
   @override
   bool exist(String key) {
-    return _occ!.getKeys();
+    return _occ.getKeys<List<String>>().contains(key);
   }
 
   @override
   R? read<R>(String key) {
-    return _occ!.read(key) as R;
+    return _occ.read(key) as R;
   }
 
   @override
   void write<T>(String key, T value) {
-    _occ!.write(key, value);
+    _occ.write(key, value);
   }
 
   void writeIfNull<T>(String key, T value) {
-    _occ!.writeIfNull(key, value);
+    _occ.writeIfNull(key, value);
   }
 
   @override
   void remove(String key) {
-    _occ!.remove(key);
+    _occ.remove(key);
   }
 
 }

@@ -1,46 +1,43 @@
 
-import 'package:get_storage/get_storage.dart';
-import 'package:redstonex/std-core/of_syntax.dart';
+import 'package:flustars_flutter3/flustars_flutter3.dart';
 import 'package:redstonex/local-storage-core/definitions/object_cache.dart';
+import 'package:redstonex/std-core/of_syntax.dart';
 
 /// Persist cache by get_storage
 class PCG implements ObjectCache, OfSyntax {
   /// instance of MCG
-  static final PCG _mcg = PCG();
+  static final PCG _pcg = PCG();
 
-  static const String _psContainerName = 'PCG';
+  static PCG of() => _pcg;
 
-  static PCG of() => _mcg;
-
-  GetStorage? _pcc;
-
-  Future<void> init() async {
-    await GetStorage.init(_psContainerName);
-    _pcc = GetStorage(_psContainerName);
+  static Future<void> init() async {
+    await SpUtil.getInstance();
   }
 
   @override
   bool exist(String key) {
-    return _pcc!.getKeys();
+    bool? notEmpty = SpUtil.getKeys()?.isNotEmpty;
+    return notEmpty != null && notEmpty && SpUtil.getKeys()!.contains(key);
   }
 
   @override
   R? read<R>(String key) {
-    return _pcc!.read(key) as R;
+    return SpUtil.getObj<R>(key, (v) => null as R);
   }
 
   @override
   void write<T>(String key, T value) {
-    _pcc!.write(key, value);
+    SpUtil.putObject(key, value!);
   }
 
   void writeIfNull<T>(String key, T value) {
-    _pcc!.writeIfNull(key, value);
+    if (!exist(key)) {
+      write(key, value);
+    }
   }
 
   @override
   void remove(String key) {
-    _pcc!.remove(key);
+    SpUtil.remove(key);
   }
-
 }

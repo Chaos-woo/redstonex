@@ -39,15 +39,31 @@ dependencies:
     path: ../
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+#  flutter_test:
+#    sdk: flutter
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
+  test: ^1.21.0
+  analyzer: 4.3.1 # 4.4.0以上版本与reflectable-3.0.9有api冲突
+  #  flutter_test:
+  #    sdk: flutter
   flutter_lints: ^2.0.0
+  # json序列化/反序列化代码生成处理器
+  json_serializable: ^6.3.1
+  # flutter packages pub run build_runner build --delete-conflicting-outputs
+  build_runner: any #^2.1.11
+  # floor数据库相关类生成器
+  floor_generator: ^1.3.0
+  # retrofit代码生成器
+  retrofit_generator: '>=4.0.0 <5.0.0'
+
+# dart scripts plugin
+scripts:
+  build_runner_build: flutter packages pub run build_runner build --delete-conflicting-outputs
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

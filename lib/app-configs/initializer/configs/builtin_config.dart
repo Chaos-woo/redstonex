@@ -12,12 +12,12 @@ class BuiltinConfiguration {
   /// Using application container initialize point
   /// to do something.
   @PostConstruct()
-  Future<void> initialize() async {
+  void initialize() {
     /// init device and app package information
-    await _initDevicePackageCollector();
+    _initDevicePackageCollector();
 
     /// init get storage key-value data for [GlobalConfig]
-    await _initSimpleCache();
+    _initSimpleCache();
   }
 
   /// initialize basic functions
@@ -31,11 +31,9 @@ class BuiltinConfiguration {
   Future<void> _initSimpleCache() async {
     GlobalConfig global = GlobalConfig.of();
     if (global.globalAppConfigs.enableMemoryCache) {
-      await MCG.of().init();
+      await MCG.init();
     }
 
-    if (global.globalAppConfigs.enableLocalPersistCache) {
-      await PCG.of().init();
-    }
+    await PCG.init();
   }
 }
