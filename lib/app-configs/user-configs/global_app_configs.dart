@@ -1,6 +1,4 @@
 
-/// App global configuration.
+/// app全局配置
 class GlobalAppConfigs {
-  /// whether enable memory cache
-  bool get enableMemoryCache => false;
 }

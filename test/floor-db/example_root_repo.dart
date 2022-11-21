@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:floor/floor.dart';
 import 'package:redstonex/app-configs/global_config.dart';
-import 'package:redstonex/database-core/base_repository.dart';
-import 'package:redstonex/exceptions/redstone_exception.dart';
+import 'package:redstonex/database/base_repository.dart';
+import 'package:redstonex/exceptions/redstonex_exception.dart';
 
 import 'example_dao.dart';
 import 'example_db.dart';
@@ -28,7 +28,7 @@ abstract class ExampleRootRepo<R> extends BaseRepository<ExampleDb, R> {
   Future<R> getDao() async {
     R? dao = await _innerDao();
     if (dao == null) {
-      throw RsException(RsException.fixedErrCode, 'Unknown database dao instance');
+      throw RSxException(RSxException.fixedErrCode, 'Unknown database dao instance');
     }
     return dao;
   }

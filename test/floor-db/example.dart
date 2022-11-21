@@ -1,12 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:redstonex/std-core/to_entity_syntax.dart';
 
 import 'example_entity.dart';
 
 part 'example.g.dart';
 
 @JsonSerializable()
-class Example with ToEntitySyntax<ExampleEntity> {
+class Example {
   /// example content
   String content;
 
@@ -29,7 +28,6 @@ class Example with ToEntitySyntax<ExampleEntity> {
   /// example
   static int? _dateTimeToEpochUs(DateTime? dateTime) => dateTime?.microsecondsSinceEpoch;
 
-  @override
   ExampleEntity toEntity() {
     return ExampleEntity(content, remark);
   }

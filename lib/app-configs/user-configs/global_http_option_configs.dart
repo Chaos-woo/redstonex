@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
-/// Global base option of http
+/// http全局配置
 class GlobalHttpOptionConfigs {
   /// base url
   String get baseUrl => 'www.google.com';
@@ -25,6 +25,8 @@ class GlobalHttpOptionConfigs {
 
   /// default parse response json with using `compute`
   JsonDecodeCallback get jsonDecodeCallback => _parseJson;
+
+  int get businessSuccCode => 200;
 }
 
 /// Must be a top-level function

@@ -1,1 +1,0 @@
-enum BeanInitialPhase { start, ultimate}

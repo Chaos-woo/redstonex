@@ -1,121 +1,113 @@
 name: redstonex
-description: 一个基于GetX的Flutter项目脚手架框架。Basic frame of flutter project.
-version: 0.0.2
+description: 基于GetX的Flutter快速开发框架。Development flutter framework based GetX frame.
+version: 0.0.3
 homepage: https://github.com/Chaos-woo/redstonex
 
 environment:
   sdk: ">=2.17.0 <3.0.0"
-  flutter: ">=1.17.0"
+  flutter: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
-  #####
-  # BASE FUNCTION
-  #####
-  # 格式化的日志输出
-  logger: ^1.1.0
-  # 注解式本地数据库
-  floor: ^1.3.0
-  # dialog、toast
-  #flutter_smart_dialog: ^4.5.3+6
-  # Beans管理(状态)、路由管理
-  get: ^4.6.5
-  # get storage
-  get_storage: ^2.0.3
-  # 通知//todo，暂不支持
-  #awesome_notifications: ^0.6.21
-  # 简单手势监听
-  #simple_gesture_detector: ^0.2.0
+  # 去除网页URL中的“#”(hash) https://flutter.cn/docs/development/ui/navigation/url-strategies
+  url_strategy: 0.2.0
+  # 启动URL的插件（支持Web） https://github.com/flutter/plugins/tree/master/packages/url_launcher
+  url_launcher: 6.1.5
+  # iOS风格icon
+  cupertino_icons: 1.0.5
+  # Localization https://github.com/dart-lang/intl
+  intl: 0.17.0
+  # Toast插件 https://github.com/OpenFlutter/flutter_oktoast
+  oktoast: 3.3.1
+  # 网络库，相关插件见https://github.com/flutterchina/dio/blob/master/README-ZH.md
+  # https://github.com/flutterchina/dio
+  dio: ^4.0.6
+  # Dart 常用工具类库 https://github.com/Sky24n/common_utils
+  common_utils: 2.1.0
+  # Flutter 常用工具类库 https://github.com/Sky24n/flustars
+  flustars_flutter3: ^3.0.0 # flustars很久不维护，可以使用这个替代
+  # 图片选择插件（支持Web） https://github.com/flutter/plugins/tree/master/packages/image_picker
+  image_picker: 0.8.5+3
+  # WebView插件 https://github.com/flutter/plugins/tree/master/packages/webview_flutter
+  webview_flutter: 3.0.4
+  # 列表悬浮头 https://github.com/fluttercommunity/flutter_sticky_headers
+  sticky_headers: 0.3.0+2
+  # 图片缓存 https://github.com/renefloor/flutter_cached_network_image
+  cached_network_image: 3.2.1
+  # 格式化String https://github.com/Naddiseo/dart-sprintf
+  sprintf: 7.0.0
+  # App Shortcuts桌面快捷方式 https://github.com/flutter/plugins/tree/master/packages/quick_actions
+  quick_actions: 1.0.0
+  # 权限处理
+  permission_handler: 10.0.0
+  # 设备网络连接状态
+  connectivity_plus: 2.3.5
+  # 设备信息 https://github.com/fluttercommunity/plus_plugins/tree/main/packages/device_info_plus
+  device_info_plus: 4.0.0
+  # 应用包信息
+  package_info_plus: 1.4.2
+  # 设备网络信息
+  network_info_plus: 2.1.3
+  # 注解式本地数据库 https://pub.dev/packages/floor
+  floor: 1.3.0
+  # 状态管理，路由管理 https://github.com/jonataslaw/getx
+  get: 4.6.5
+  # 内存存储 https://github.com/jonataslaw/get_storage
+  get_storage: 2.0.3
   # pojo <-> json处理：https://pub.dev/packages/json_serializable
   # json注解使用：https://github.com/google/json_serializable.dart/blob/master/example/lib/example.dart
-  json_annotation: ^4.6.0
-  # 事件总线
-  event_bus: ^2.0.0
-  # 反射
-  reflectable: ^3.0.9
-  # local persist database
-  sqflite: ^2.0.3
-
-  #####
-  # FUNCTION TOOL
-  #####
+  json_annotation: 4.6.0
+  # 事件总线 https://code.makery.ch/library/dart-event-bus/
+  event_bus: 2.0.0
+  # SQLite本地数据库 https://github.com/tekartik/sqflite/tree/master/sqflite
+  sqflite: 2.0.3
   # 应用路径处理，例如临时目录、应用内部文件路径
-  path_provider: ^2.0.11
-  # dart扩展，集合、int、num、String等
-  dartx: ^1.1.0
-  # 好用的工具组合。基础APIs：https://github.com/Sky24n/common_utils
-  flustars_flutter3: 3.0.0
-  # uuid
-  uuid: ^3.0.6
-  # 加解密处理
-  encrypt: ^5.0.1
+  path_provider: 2.0.11
+#  # dart扩展，集合、int、num、String等
+#  dartx: ^1.1.0
+  # uuid https://github.com/Daegalus/dart-uuid
+  uuid: 3.0.6
+  # 加解密处理 https://github.com/leocavalcante/encrypt
+  encrypt: 5.0.1
   # svg图片处理，与Bruno依赖的xml版本冲突，降低至该版本
-  flutter_svg: ^1.0.3
-
-  #####
-  # DEVICE/APP
-  #####
-  # Plus package: https://plus.fluttercommunity.dev/docs/overview/
-  #####
-  # 权限处理
-  permission_handler: ^10.0.0
-  # 设备网络连接状态
-  connectivity_plus: ^2.3.5
-  # 设备信息
-  device_info_plus: ^4.0.0
-  # 应用包信息
-  package_info_plus: ^1.4.2
-  # 设备网络信息
-  network_info_plus: ^2.1.3
-
-  #####
-  # NETWORK
-  #####
-  # 网络请求库，相关插件见https://github.com/flutterchina/dio/blob/master/README-ZH.md
-  dio: ^4.0.6
-  # dio请求日志处理
-  pretty_dio_logger: ^1.1.1
-  # 注解式http网络请求
-  retrofit: '>=3.0.0 <4.0.0'
-  # webview
-  webview_flutter: ^3.0.4
-
-  #####
-  # UI
-  #####
-  # iOS风格icon
-  cupertino_icons: ^1.0.5
-  # google字体
-#  google_fonts: ^3.0.1
-  # 主题
-#  flex_color_scheme: ^5.1.0
-  # 分割线
-#  text_divider: ^1.0.0
-  # Bruno 是基于一整套设计体系的 Flutter UI 组件库
-#  bruno: ^3.0.0
-  # 去除ListView的边界水波纹效果
-#  noripple_overscroll: ^0.0.2
-  # 下拉、上拉加载
-  pull_to_refresh_flutter3: ^2.0.1
+  flutter_svg: 1.1.6
+  # 处理键盘事件 https://github.com/diegoveloper/flutter_keyboard_actions
+  keyboard_actions: 4.1.0
+  # https://github.com/ReactiveX/rxdart
+  rxdart: 0.27.5
+  # 简易使用loading加载 https://github.com/nslogx/flutter_easyloading
+  flutter_easyloading: 3.0.5
+  # dio日志logger https://github.com/Milad-Akarie/pretty_dio_logger
+  pretty_dio_logger: 1.2.0-beta-1
+  # 下拉、上拉加载 https://github.com/xxzj990-game/flutter_pulltorefresh
+  pull_to_refresh_flutter3: 2.0.1
 
 dev_dependencies:
-  test: ^1.21.0
+  # Widget测试
+  flutter_test:
+    sdk: flutter
+  # 集成测试
+  flutter_driver:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  test: 1.21.0
   analyzer: 4.3.1 # 4.4.0以上版本与reflectable-3.0.9有api冲突
 #  flutter_test:
 #    sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: 2.0.0
   # json序列化/反序列化代码生成处理器
-  json_serializable: ^6.3.1
+  json_serializable: 6.3.1
   # flutter packages pub run build_runner build --delete-conflicting-outputs
   build_runner: any #^2.1.11
-  # floor数据库相关类生成器
-  floor_generator: ^1.3.0
-  # retrofit代码生成器
-  retrofit_generator: '>=4.0.0 <5.0.0'
+  # floor数据库代码生成器
+  floor_generator: 1.3.0
 
-# dart scripts plugin
+# dart脚本运行IDE插件
 scripts:
   build_runner_build: flutter packages pub run build_runner build --delete-conflicting-outputs
 

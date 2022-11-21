@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:floor/floor.dart';
-import 'package:redstonex/database-core/base_repository.dart';
 import 'package:sqflite/sqflite.dart' as sqflite;
 
 import 'example_dao.dart';
