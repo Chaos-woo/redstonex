@@ -3,14 +3,17 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 extension FunctionExt on Function {
+  /// 节流：函数执行完成前，不再响应下一次的调用
   VoidCallback throttle() {
     return FunctionProxy(this).throttle;
   }
 
+  /// 超时节流：超时时间后，响应下一次的调用，无论前一次调用是否已完成
   VoidCallback throttleWithTimeout({int? timeout}) {
     return FunctionProxy(this, timeout: timeout).throttleWithTimeout;
   }
 
+  /// 去抖动：超时时间后仅响应一次调用，超时时间内再调用则时间重新计算
   VoidCallback debounce({int? timeout}) {
     return FunctionProxy(this, timeout: timeout).debounce;
   }

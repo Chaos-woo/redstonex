@@ -4,11 +4,11 @@ import 'package:event_bus/event_bus.dart';
 
 /// An event bus simple implement.
 ///
-class EBus {
+class RsxBus {
   /// real event bus entity
   static final EventBus _bus = EventBus();
 
-  EBus._();
+  RsxBus._();
 
   static void _fire<T>(T event) => _bus.fire(event);
 

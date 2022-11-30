@@ -1,12 +1,8 @@
-import 'dart:ui';
-
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
-import 'package:redstonex/res/constant.dart';
 import 'package:redstonex/utils/theme_utils.dart';
 import 'package:redstonex/utils/toast_utils.dart';
-import 'package:sp_util/sp_util.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Utils {
@@ -34,7 +30,8 @@ class Utils {
     return MoneyUtil.changeYWithUnit(NumUtil.getDoubleByValueStr(price) ?? 0, MoneyUnit.YUAN, format: format);
   }
 
-  static KeyboardActionsConfig getKeyboardActionsConfig(BuildContext context, List<FocusNode> list) {
+  static KeyboardActionsConfig getKeyboardActionsConfig(BuildContext context, List<FocusNode> list,
+      {String? closeText}) {
     return KeyboardActionsConfig(
       keyboardBarColor: ThemeUtils.getKeyboardActionsColor(context),
       actions: List.generate(
@@ -47,7 +44,7 @@ class Utils {
                       onTap: () => node.unfocus(),
                       child: Padding(
                         padding: const EdgeInsets.only(right: 16.0),
-                        child: Text(getCurrLocale() == 'zh' ? '关闭' : 'Close'),
+                        child: closeText != null ? Text(closeText) : const Icon(Icons.close),
                       ),
                     );
                   },
@@ -55,56 +52,4 @@ class Utils {
               )),
     );
   }
-
-  static String? getCurrLocale() {
-    final String locale = SpUtil.getString(Constant.locale)!;
-    if (locale == '') {
-      return window.locale.languageCode;
-    }
-    return locale;
-  }
-}
-
-Future<T?> showElasticDialog<T>({
-  required BuildContext context,
-  bool barrierDismissible = true,
-  required WidgetBuilder builder,
-}) {
-  return showGeneralDialog(
-    context: context,
-    pageBuilder: (BuildContext buildContext, Animation<double> animation, Animation<double> secondaryAnimation) {
-      final Widget pageChild = Builder(builder: builder);
-      return SafeArea(
-        child: pageChild,
-      );
-    },
-    barrierDismissible: barrierDismissible,
-    barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
-    barrierColor: Colors.black54,
-    transitionDuration: const Duration(milliseconds: 550),
-    transitionBuilder: _buildDialogTransitions,
-  );
-}
-
-Widget _buildDialogTransitions(
-    BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
-  return FadeTransition(
-    opacity: CurvedAnimation(
-      parent: animation,
-      curve: Curves.easeOut,
-    ),
-    child: SlideTransition(
-      position: Tween<Offset>(begin: const Offset(0.0, 0.3), end: Offset.zero).animate(CurvedAnimation(
-        parent: animation,
-        curve: const ElasticOutCurve(0.85),
-        reverseCurve: Curves.easeOutBack,
-      )),
-      child: child,
-    ),
-  );
-}
-
-/// String 空安全处理
-extension StringExtension on String? {
-  String get nullSafe => this ?? '';
 }

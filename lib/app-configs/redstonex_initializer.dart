@@ -8,7 +8,7 @@ import 'package:redstonex/utils/device_utils.dart';
 import 'package:redstonex/utils/directory_utils.dart';
 import 'package:redstonex/utils/log_utils.dart';
 
-class RSxInit {
+class RsxInit {
   /// 框架初始化
   static void init(Function() preBuiltinInit, Function() postBuiltinInit) {
     preBuiltinInit();

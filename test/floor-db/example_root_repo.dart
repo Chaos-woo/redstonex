@@ -28,7 +28,7 @@ abstract class ExampleRootRepo<R> extends BaseRepository<ExampleDb, R> {
   Future<R> getDao() async {
     R? dao = await _innerDao();
     if (dao == null) {
-      throw RSxException(RSxException.fixedErrCode, 'Unknown database dao instance');
+      throw RsxException(RsxException.fixedErrCode, 'Unknown database dao instance');
     }
     return dao;
   }

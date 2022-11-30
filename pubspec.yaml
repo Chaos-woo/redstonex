@@ -25,11 +25,11 @@ dependencies:
   oktoast: 3.3.1
   # 网络库，相关插件见https://github.com/flutterchina/dio/blob/master/README-ZH.md
   # https://github.com/flutterchina/dio
-  dio: ^4.0.6
+  dio: 4.0.6
   # Dart 常用工具类库 https://github.com/Sky24n/common_utils
   common_utils: 2.1.0
   # Flutter 常用工具类库 https://github.com/Sky24n/flustars
-  flustars_flutter3: ^3.0.0 # flustars很久不维护，可以使用这个替代
+  flustars_flutter3: 3.0.0 # flustars很久不维护，可以使用这个替代
   # 图片选择插件（支持Web） https://github.com/flutter/plugins/tree/master/packages/image_picker
   image_picker: 0.8.5+3
   # WebView插件 https://github.com/flutter/plugins/tree/master/packages/webview_flutter
@@ -42,15 +42,15 @@ dependencies:
   sprintf: 7.0.0
   # App Shortcuts桌面快捷方式 https://github.com/flutter/plugins/tree/master/packages/quick_actions
   quick_actions: 1.0.0
-  # 权限处理
+  # 权限处理 https://github.com/baseflow/flutter-permission-handler
   permission_handler: 10.0.0
-  # 设备网络连接状态
+  # 设备网络连接状态 https://plus.fluttercommunity.dev/
   connectivity_plus: 2.3.5
   # 设备信息 https://github.com/fluttercommunity/plus_plugins/tree/main/packages/device_info_plus
   device_info_plus: 4.0.0
-  # 应用包信息
+  # 应用包信息 https://plus.fluttercommunity.dev/
   package_info_plus: 1.4.2
-  # 设备网络信息
+  # 设备网络信息 https://plus.fluttercommunity.dev/
   network_info_plus: 2.1.3
   # 注解式本地数据库 https://pub.dev/packages/floor
   floor: 1.3.0
@@ -67,18 +67,14 @@ dependencies:
   sqflite: 2.0.3
   # 应用路径处理，例如临时目录、应用内部文件路径
   path_provider: 2.0.11
-#  # dart扩展，集合、int、num、String等
-#  dartx: ^1.1.0
   # uuid https://github.com/Daegalus/dart-uuid
   uuid: 3.0.6
   # 加解密处理 https://github.com/leocavalcante/encrypt
   encrypt: 5.0.1
-  # svg图片处理，与Bruno依赖的xml版本冲突，降低至该版本
+  # svg图片处理 https://github.com/dnfield/flutter_svg
   flutter_svg: 1.1.6
   # 处理键盘事件 https://github.com/diegoveloper/flutter_keyboard_actions
   keyboard_actions: 4.1.0
-  # https://github.com/ReactiveX/rxdart
-  rxdart: 0.27.5
   # 简易使用loading加载 https://github.com/nslogx/flutter_easyloading
   flutter_easyloading: 3.0.5
   # dio日志logger https://github.com/Milad-Akarie/pretty_dio_logger
