@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:redstonex/res/colours.dart';
 
 class ThemeUtils {
@@ -24,6 +25,22 @@ class ThemeUtils {
 
   static Color? getKeyboardActionsColor(BuildContext context) {
     return isDark(context) ? Colours.darkBgColor : Colors.grey[200];
+  }
+
+  static Color? getBgColor(BuildContext context) {
+    return isDark(context) ? Colours.darkBgColor : Colours.bgColor;
+  }
+
+  static Color? getBarrierColor(BuildContext context) {
+    return isDark(context) ? Colors.black38 : Colors.black54;
+  }
+
+  static ThemeData theme() {
+    var theme = ThemeData.fallback();
+    if (Get.context != null) {
+      theme = Theme.of(Get.context!);
+    }
+    return theme;
   }
 
   /// 设置StatusBar、NavigationBar样式。(仅针对安卓)

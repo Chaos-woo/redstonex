@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:flustars_flutter3/flustars_flutter3.dart';
 import 'package:flutter/widgets.dart';
 
 /// https://medium.com/gskinner-team/flutter-simplify-platform-screen-size-detection-4cb6fc4f7ed1
@@ -46,4 +47,10 @@ extension MediaQueryExtension on BuildContext {
   double get height => ScreenUtils.size(this).height;
 
   double get width => ScreenUtils.size(this).width;
+
+  double scaleHeight(double size) => ScreenUtil.getScaleH(this, size);
+
+  double scaleWidth(double size) => ScreenUtil.getScaleW(this, size);
+
+  double scaleSp(double size) => ScreenUtil.getScaleSp(this, size);
 }

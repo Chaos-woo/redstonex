@@ -1,43 +1,108 @@
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:redstonex/utils/theme_utils.dart';
 
 class DialogUtils {
-  Future<T?> showElasticDialog<T>({
-    required BuildContext context,
+  static Future<void> showPromptDialog<T>({
+    required String title,
+    TextStyle? titleStyle,
+    required String content,
+    TextStyle? contentStyle,
+    VoidCallback? onConfirm,
+    VoidCallback? onCancel,
+    Color? cancelTextColor,
+    Color? confirmTextColor,
+    String? textConfirm,
+    String? textCancel,
+    Color? backgroundColor,
+    Color? buttonColor = Colors.transparent,
+    WillPopCallback? onWillPop,
     bool barrierDismissible = true,
-    required WidgetBuilder builder,
-  }) {
-    return showGeneralDialog(
-      context: context,
-      pageBuilder: (BuildContext buildContext, Animation<double> animation, Animation<double> secondaryAnimation) {
-        final Widget pageChild = Builder(builder: builder);
-        return SafeArea(
-          child: pageChild,
-        );
-      },
+    double dialogRadius = 20.0,
+    List<Widget>? actions,
+    Function(T? result)? callback,
+  }) async {
+    T? result = await Get.defaultDialog<T>(
+      title: title,
+      titlePadding: const EdgeInsets.all(3),
+      titleStyle: titleStyle,
+      middleText: content,
+      middleTextStyle: contentStyle,
+      contentPadding: const EdgeInsets.all(5),
+      textConfirm: textConfirm,
+      confirmTextColor: confirmTextColor,
+      onConfirm: onConfirm,
+      textCancel: textCancel,
+      cancelTextColor: cancelTextColor,
+      onCancel: onCancel,
+      backgroundColor: backgroundColor,
+      buttonColor: buttonColor,
+      onWillPop: onWillPop,
       barrierDismissible: barrierDismissible,
-      barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
-      barrierColor: Colors.black54,
-      transitionDuration: const Duration(milliseconds: 550),
-      transitionBuilder: _buildDialogTransitions,
+      radius: dialogRadius,
+      actions: actions,
+    );
+    callback?.call(result);
+  }
+
+  static Widget dialogButton({
+    required String text,
+    Color? buttonColor,
+    Color? textColor,
+    VoidCallback? onTap,
+  }) {
+    return TextButton(
+      style: TextButton.styleFrom(
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        backgroundColor: buttonColor ?? ThemeUtils.theme().colorScheme.secondary,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(color: textColor ?? ThemeUtils.theme().backgroundColor),
+      ),
+      onPressed: () => onTap?.call(),
     );
   }
 
-  Widget _buildDialogTransitions(
-      BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
-    return FadeTransition(
-      opacity: CurvedAnimation(
-        parent: animation,
-        curve: Curves.easeOut,
-      ),
-      child: SlideTransition(
-        position: Tween<Offset>(begin: const Offset(0.0, 0.3), end: Offset.zero).animate(CurvedAnimation(
-          parent: animation,
-          curve: const ElasticOutCurve(0.85),
-          reverseCurve: Curves.easeOutBack,
-        )),
-        child: child,
-      ),
+  static Future<void> showElasticDialog<T>({
+    required String title,
+    TextStyle? titleStyle,
+    required WidgetBuilder contentBuilder,
+    EdgeInsetsGeometry? contentPadding,
+    VoidCallback? onConfirm,
+    VoidCallback? onCancel,
+    Color? cancelTextColor,
+    Color? confirmTextColor,
+    String? textConfirm,
+    String? textCancel,
+    Color? backgroundColor,
+    Color? buttonColor = Colors.transparent,
+    WillPopCallback? onWillPop,
+    bool barrierDismissible = true,
+    double dialogRadius = 20.0,
+    List<Widget>? actions,
+    Function(T? result)? callback,
+  }) async {
+    T? result = await Get.defaultDialog<T>(
+      title: title,
+      titlePadding: const EdgeInsets.all(3),
+      titleStyle: titleStyle,
+      content: contentBuilder.call(Get.context!),
+      contentPadding: contentPadding ?? const EdgeInsets.all(5),
+      textConfirm: textConfirm,
+      confirmTextColor: confirmTextColor,
+      onConfirm: onConfirm,
+      textCancel: textCancel,
+      cancelTextColor: cancelTextColor,
+      onCancel: onCancel,
+      backgroundColor: backgroundColor,
+      buttonColor: buttonColor,
+      onWillPop: onWillPop,
+      barrierDismissible: barrierDismissible,
+      radius: dialogRadius,
+      actions: actions,
     );
+    callback?.call(result);
   }
 }
