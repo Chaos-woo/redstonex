@@ -1,5 +1,6 @@
 import 'package:floor/floor.dart';
 import 'package:redstonex/database/database_callback.dart';
+import 'package:sqflite/sqflite.dart';
 
 /// 基础仓库类
 abstract class BaseRepository<T extends FloorDatabase, R> {
@@ -31,11 +32,16 @@ abstract class BaseRepository<T extends FloorDatabase, R> {
       onOpen: (db) {
         _onOpenCb?.onOpen.call(db);
       },
-      onUpgrade: (db, int oldVersion, int newVersion) {
-        for (OnUpgradeCallback cb in _onUpgradeCbs) {
-          if (cb.predicate.call(oldVersion, newVersion)) {
-            cb.onUpgrade.call(db);
-          }
+      onUpgrade: (db, int oldVersion, int newVersion) async {
+        Batch batch = db.batch();
+        /// 按照升级回调的升级版本排序
+        _onUpgradeCbs.sort((cb1, cb2) => cb1.fromVersion.compareTo(cb2.fromVersion));
+        /// 过滤当前数据库版本之前的回调处理
+        List<OnUpgradeCallback> localUpgradeCbs = _onUpgradeCbs
+            .where((element) => element.fromVersion > oldVersion).toList();
+        /// 依次执行升级回调，直至最新版本。支持逐级升级和跨版本升级
+        for (var element in localUpgradeCbs) {
+          element.onUpgrade.call(batch, oldVersion, newVersion);
         }
       },
     );
