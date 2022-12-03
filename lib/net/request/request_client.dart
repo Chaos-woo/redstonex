@@ -163,7 +163,7 @@ class RequestClient {
   ///业务内容处理
   T? _handleBusinessResponse<T>(ApiResponse<T> response) {
     GlobalHttpOptionConfigs httpConfig = GlobalConfig.of().globalHttpOptionConfigs;
-    if (response.code == httpConfig.businessSuccCode) {
+    if (response.code == httpConfig.businessSuccessCode) {
       return response.data;
     } else {
       var exception = ApiException(response.code, response.message);

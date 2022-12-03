@@ -2,27 +2,25 @@ import 'package:get/get.dart';
 import 'package:redstonex/routes/router.dart';
 import 'package:redstonex/utils/id_utils.dart';
 
-/// A initial quickly GetX routes of [GetPage] class.
+/// 页面路由辅助生成工具
 ///
-/// Help generate [GetPage]s.
-///
-/// Because [Dispatcher] implements [Initializer], so, mapping any
-/// route in this initializer, then registering it to [SingletonInitializerManager],
-/// and then auto initial all routes.
+/// 使用[group]、[route]添加路由后，框架初始化时自动调用
+/// [init]方法初始化页面路由，即可通过[Dispatcher.pageRoutes]
+/// 获取GetX全部配置的路由
 class Dispatcher {
-  /// all routes of app. [GetMaterialApp.getPages] can use this after initial
+  /// 全局GetX页面路由
   static final List<GetPage> pageRoutes = [];
 
-  /// maybe group by business-related, or irrelevant, just in the same group
+  /// 路由组列表
   static final List<RouterGroup> routeGroups = [];
 
-  /// remainder routes
+  /// 单独处理的路由组
   static final RouterGroup otherRouteGroup = RouterGroup('other');
 
-  /// routes statistics
+  /// 路由统计
   static final RoutesStatistics statistics = RoutesStatistics();
 
-  /// Get a [RouterGroup] to organize routes
+  /// 获取路由组
   static RouterGroup group({String? groupName}) {
     RouterGroup group = RouterGroup(groupName ?? IdUtils.uuidV4());
     routeGroups.add(group);
@@ -30,14 +28,13 @@ class Dispatcher {
     return group;
   }
 
-  /// Adding route in [otherRouteGroup] directly
+  /// 添加单个路由
   static void route(Router route) {
     otherRouteGroup.newRoute(route);
     statistics.routeCount++;
   }
 
-  /// Initial [routeGroups]'s routes and [otherRouteGroup]
-  /// to generate all [GetPage], then can use [pageRoutes].
+  /// 初始化路由，并生成GetX页面路由
   static void init() {
     if (statistics.initial) {
       return;
@@ -60,7 +57,7 @@ class Dispatcher {
     statistics.initial = true;
   }
 
-  /// Get new [GetPage] route according to [Router]
+  /// 创建GetX页面路由
   static GetPage _newPageRoute(Router route) {
     return GetPage(
       name: route.routeName,
@@ -73,14 +70,14 @@ class Dispatcher {
   }
 }
 
-/// A singleton Initial statistics information.
+/// 路由统计
 class RoutesStatistics {
-  /// initial state
+  /// 是否初始化
   bool initial = false;
 
-  /// route group count
+  /// 路由组数量
   int routeGroupCount = 0;
 
-  /// route count
+  /// 路由数量
   int routeCount = 0;
 }

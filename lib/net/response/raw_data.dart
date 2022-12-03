@@ -1,3 +1,3 @@
-class RawData{
+class RawData {
   dynamic value;
 }

@@ -1,11 +1,6 @@
 import 'package:floor/floor.dart';
 
-/// Base entity properties
-///
-/// Local database entity necessary attributes,
-/// continue to use the `abstract` keyword to describe
-/// the key attributes of your database, and the real
-/// entity is decorated with annotation [Entity]
+/// 本地数据库实体类基础属性，真实业务实体应使用 [Entity] 注解
 abstract class BaseEntity {
   /// primary key
   @PrimaryKey(autoGenerate: true)

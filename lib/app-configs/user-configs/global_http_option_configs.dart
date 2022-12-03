@@ -5,28 +5,29 @@ import 'package:flutter/foundation.dart';
 
 /// http全局配置
 class GlobalHttpOptionConfigs {
-  /// base url
+  /// 全局url配置
   String get baseUrl => 'www.google.com';
 
-  /// default connect timeout
+  /// 默认连接时间
   int get connectTimeout => 5000;
 
-  /// default receiveTimeout
+  /// 默认读超时
   int get receiveTimeout => 30000;
 
-  /// default send timeout
+  /// 默认写超时
   int get sendTimeout => 10000;
 
-  /// default send content type
+  /// 默认内容类型
   String get sendContentType => 'application/json; charset=utf-8';
 
-  /// default response type
+  /// 默认响应类型
   ResponseType get responseType => ResponseType.json;
 
-  /// default parse response json with using `compute`
+  /// 默认解析
   JsonDecodeCallback get jsonDecodeCallback => _parseJson;
 
-  int get businessSuccCode => 200;
+  /// 默认业务成功码
+  int get businessSuccessCode => 200;
 }
 
 /// Must be a top-level function

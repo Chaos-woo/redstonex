@@ -1,12 +1,4 @@
-import 'package:floor/floor.dart';
-
-/// Base dao interface.
-///
-/// No anything to used, for prompt only.
-/// Use annotation [dao] and keyword `abstract`
-/// to define your database interactions.
-/// Use constant string define table name will
-/// reduce your modification costs.
+/// Floor本地数据库dao类示例
 ///
 /// e.g.
 /// @dao
@@ -17,7 +9,6 @@ import 'package:floor/floor.dart';
 ///   Future<int> insertTodo(BaseEntity entity);
 /// }
 ///
-/// more floor information see also https://pub.dev/packages/floor
-abstract class BaseDao {
-
-}
+/// Floor https://pub.dev/packages/floor
+// @dao
+abstract class BaseDao {}

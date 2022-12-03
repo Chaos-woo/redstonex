@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:redstonex/net/configs/http_constant.dart';
 
-/// Timeout interceptor
+/// 超时拦截器
 class TimeoutInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {

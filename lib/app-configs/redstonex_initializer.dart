@@ -10,10 +10,10 @@ import 'package:redstonex/utils/log_utils.dart';
 
 class RsxInit {
   /// 框架初始化
-  static void init(Function() preBuiltinInit, Function() postBuiltinInit) {
-    preBuiltinInit();
+  static void init({Function()? preBuiltinInit, Function()? postBuiltinInit}) {
+    preBuiltinInit?.call();
     _builtinInit();
-    postBuiltinInit();
+    postBuiltinInit?.call();
   }
 
   static void _builtinInit() {

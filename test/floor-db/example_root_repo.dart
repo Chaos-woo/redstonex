@@ -9,9 +9,9 @@ import 'example_dao.dart';
 import 'example_db.dart';
 
 abstract class ExampleRootRepo<R> extends BaseRepository<ExampleDb, R> {
-  /// Get database
+  /// 获取数据库实例
   @override
-  Future<ExampleDb> getDb() async {
+  Future<ExampleDb> getDbInstance() async {
     if (databaseInstance != null) {
       return databaseInstance!;
     }
@@ -23,7 +23,7 @@ abstract class ExampleRootRepo<R> extends BaseRepository<ExampleDb, R> {
     return databaseInstance!;
   }
 
-  /// Get dao instance with generic type `R`
+  /// 获取类型R的dao类
   @override
   Future<R> getDao() async {
     R? dao = await _innerDao();
@@ -33,9 +33,9 @@ abstract class ExampleRootRepo<R> extends BaseRepository<ExampleDb, R> {
     return dao;
   }
 
-  /// use inner method to get `R` type dao instance
+  /// 使用内部方法获取R类型dao类
   Future<R?> _innerDao() async {
-    final db = await getDb();
+    final db = await getDbInstance();
     if (R is ExampleDao) {
       return db.exampleDao as R;
     }

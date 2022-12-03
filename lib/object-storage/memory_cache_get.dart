@@ -1,6 +1,6 @@
 import 'package:get_storage/get_storage.dart';
 
-/// Memory cache by get_storage
+/// 基于get_storage的内存缓存
 class Mcg {
   static const String _fixed = 'MCG';
   static final GetStorage _ocs = GetStorage(_fixed);

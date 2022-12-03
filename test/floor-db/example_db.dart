@@ -24,7 +24,7 @@ part 'example_db.g.dart';
 ///   be matched one by one. Like [ExampleEntity] and
 ///   [ExampleDb.exampleDao].
 ///   * Implementation class of [BaseRepository] should
-///   complete [BaseRepository.getDb] and [BaseRepository.getDao].
+///   complete [BaseRepository.getDbInstance] and [BaseRepository.getDao].
 ///   Even if [BaseRepository.getDao] is not used in business,
 ///   relevant methods for obtaining xxxDao should be provided.
 ///

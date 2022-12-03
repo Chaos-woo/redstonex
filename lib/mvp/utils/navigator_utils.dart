@@ -1,7 +1,8 @@
 import 'package:redstonex/routes/router_utils.dart';
 
 /// 导航快捷方式
-mixin Navigator {
+mixin Navigators {
+  /// 跳转新路由
   static Future<R?>? to<R>(
     String route, {
     dynamic arguments,
@@ -14,7 +15,7 @@ mixin Navigator {
     );
   }
 
-  /// Pop the current named page and pushes a new `page`
+  /// 弹出当前路由，并跳转新路由
   static Future<R?>? toNewPageAndRemoveCurrentPage<R>(
     String route, {
     dynamic arguments,
@@ -27,7 +28,7 @@ mixin Navigator {
     );
   }
 
-  /// Push a named `page` and pop several pages in the stack
+  /// 弹出所有历史路由，并跳转新路由
   static Future<R?>? toNewPageAndRemoveAllOlderPage<R>(
     String route, {
     dynamic arguments,
@@ -40,11 +41,12 @@ mixin Navigator {
     );
   }
 
+  /// 弹出当前路由，返回至历史路由栈顶
   static void back({dynamic result}) {
     RouterUtils.pop(result: result);
   }
 
-  /// Give current route arguments.
+  /// 获取路由中的参数
   ///
   /// Like [to]/[toNewPageAndRemoveAllOlderPage] method, can set any
   /// type arguments that like string or object, using generic
@@ -52,7 +54,7 @@ mixin Navigator {
   ///
   /// e.g. push("/NextScreen", arguments: 'Get is the best');
   /// ```dart
-  ///   String argument = Navigator.argument('arguments');
+  ///   String argument = Navigators.routeArgument('arguments');
   ///   assert(argument == 'Get is the best');
   /// ```
   static T routeArgument<T>() {
@@ -68,7 +70,7 @@ mixin Navigator {
   ///
   /// e.g. /NextScreen?device=phone&id=354&name=Enzo
   /// ```dart
-  ///   String name = Navigator.parameters('name');
+  ///   String name = Navigators.routeParameters('name');
   ///   assert('Enzo' == name);
   /// ```
   ///

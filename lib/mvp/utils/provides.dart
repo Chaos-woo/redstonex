@@ -1,26 +1,23 @@
 import 'package:redstonex/utils/dependency_utils.dart';
 
-/// Provide simple semantic API to put dependency to GetX container.
-///
+/// 注入依赖
 class Provides {
-  /// Provide put method to add GetX container dependency.
+  /// 向GetX注入依赖
   static S provide<S>(S dependency, {String? tag}) {
     return DependencyUtils.putDependency(dependency, tag: tag);
   }
 
-  /// Provide put method to add GetX container dependency.
+  /// 如果不存在S类型依赖，则向GetX注入依赖，存在时返回已有依赖
   static S provideIfAbsent<S>(S dependency, {String? tag}) {
     return DependencyUtils.putDependencyIfAbsent(dependency, tag: tag);
   }
 
-  /// Provide replace method to replace GetX container dependency directly.
-  /// If container not exist, it also will add to the container.
+  /// 替换GetX中的S类型依赖，假如不存在该依赖，则注入依赖
   static S replace<S>(S dependency, {String? tag}) {
     return DependencyUtils.putDependency(dependency, tag: tag);
   }
 
-  /// Provide replace method to replace GetX container dependency directly.
-  /// If container not exist, it will not add to the container.
+  /// 假如GetX中存在S类型依赖时，才向GetX替换该依赖
   static S? replaceIfExist<S>(S dependency, {String? tag}) {
     if (DependencyUtils.existDependency<S>(tag: tag)) {
       return DependencyUtils.putDependency(dependency, tag: tag);
@@ -29,8 +26,13 @@ class Provides {
     return null;
   }
 
-  /// Provide remove method to remove has existed dependency.
+  /// 安全移除依赖
   static void safeRemove<S>({String? tag}) {
     return DependencyUtils.removeDependencyIfExist<S>(tag: tag);
+  }
+
+  /// 懒加载依赖
+  static void lazyProvide<S>(S dependency, {String? tag, bool fenix = false}) {
+    DependencyUtils.lazyPutDependency(dependency, tag: tag, fenix: fenix);
   }
 }

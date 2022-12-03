@@ -1,6 +1,6 @@
 import 'package:flustars_flutter3/flustars_flutter3.dart';
 
-/// Persist cache by SharedPreferences Util.
+/// 基于shared_preferences的本地化缓存
 class Pcg {
   static final Pcg _pcg = Pcg._();
 

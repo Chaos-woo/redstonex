@@ -2,36 +2,29 @@ import 'dart:async';
 
 import 'package:event_bus/event_bus.dart';
 
-/// An event bus simple implement.
-///
+/// 事件流工具
 class RsxBus {
-  /// real event bus entity
+  /// 单例
   static final EventBus _bus = EventBus();
 
   RsxBus._();
 
   static void _fire<T>(T event) => _bus.fire(event);
 
-  /// Fire a event to bus.
-  ///
-  /// Put immediately event to bus
+  /// 立即触发一个事件
   static Future<void> fire<T>(T event) async => _fire(event);
 
-  /// Fire a event to bus.
-  ///
-  /// Put event to dart next event cycle
+  /// 在dart单线程时间循环的下一个循环触发一个事件
   static Future<void> fireZeroDelay<T>(T event) =>
       Future.delayed(Duration.zero, () => _fire(event));
 
-  /// Fire a event to bus.
-  ///
-  /// Put event to bus when delay x duration
+  /// 延时[duration]后触发一个事件
   static Future<void> fireDelay<T>(T event, {Duration? duration}) => Future.delayed(
         duration ?? Duration.zero,
         () => _bus.fire(event),
       );
 
-  /// subscribe type `T` event and auto cancel on error
+  /// 订阅T类型事件，并在异常错误时自动取消订阅
   static StreamSubscription subscribeAutoCancelOnError<T>(
       void Function(T event) onData, {
         Function? onError,
@@ -45,7 +38,7 @@ class RsxBus {
     );
   }
 
-  /// subscribe type `T` event
+  /// 订阅T类型事件
   static StreamSubscription subscribe<T>(
       void Function(T event) onData, {
         Function? onError,

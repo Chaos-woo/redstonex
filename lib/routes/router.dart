@@ -1,8 +1,6 @@
 import 'package:get/get.dart';
 
-/// A named navigation of GetX route.
-///
-/// [Router]'s properties are a main subset of [GetPage].
+/// 路由对象
 class Router {
   String routeName;
   GetPageBuilder pageBuilder;
@@ -21,9 +19,7 @@ class Router {
   });
 }
 
-/// A named navigation of GetX route group.
-///
-/// Better organize business-related routes.
+/// 命名路由组
 class RouterGroup {
   final String name;
   final List<Router> routes = [];
