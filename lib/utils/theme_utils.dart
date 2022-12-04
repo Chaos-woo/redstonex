@@ -7,6 +7,18 @@ class ThemeUtils {
     return Theme.of(context).brightness == Brightness.dark;
   }
 
+  static bool isDarkFastly() {
+    if (Get.context != null) {
+      return isDark(Get.context!);
+    } else {
+      return false;
+    }
+  }
+
+  static Color? getSecondaryTitleColor() {
+    return isDarkFastly() ? Colours.darkTextGray : Colours.textGray;
+  }
+
   static Color? getDarkColor(BuildContext context, Color darkColor) {
     return isDark(context) ? darkColor : null;
   }

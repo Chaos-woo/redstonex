@@ -1,8 +1,14 @@
 ## 0.0.4
+* 优化sqflite数据升级回调
+* 封装GetX的dialog、snackbar、bottomsheet小工具
+* 增加内置的widget，大部分源自 [flutter_deer项目](https://github.com/simplezhli/flutter_deer)
+* 移除基于 `reflectable` 的反射框架，移除所有可反射注解处理代码
+* 增加widget_chain空安全工具
+* 增加string、list扩展小工具
 
 ## 0.0.3
 **>> BREAKING CHANGE VERSION <<**
-* 提供 `RSxInit.init(Function() preBuiltinInit, Function() postBuiltinInit)` 项目初始化
+* 提供 `RSxInit.init(Function()? preBuiltinInit, Function()? postBuiltinInit)` 项目初始化
 * 提供 `Dispatcher.init()` 初始化基于GetX的项目路由
 * 提供 `GlobalConfig` 配置项目全局配置，可进行个性化配置
 * 提供 `EBus` 基于dart的stream事件流消息处理
