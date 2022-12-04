@@ -1,9 +1,5 @@
 library widget_chain;
 
-export 'src/list_extensions.dart';
-export 'src/widget_extensions.dart';
-export 'src/widget_list_extensions.dart';
-
 import 'package:flutter/material.dart';
 
 class WidgetChain {
