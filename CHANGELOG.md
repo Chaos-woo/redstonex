@@ -1,3 +1,10 @@
+## 0.0.5
+**>> BREAKING CHANGE VERSION <<**
+* 毁灭性地优化了`DialogUtils`、`ToastUtils`、`SnackBarUtils`、`BottomSheetUtils`工具
+* 增加int扩展，处理数字向Duration转换
+* 优化了RedstoneX的内部工具初始化顺序
+* 修复了`OptionBarGroup` 相关组件的展示BUG，增加主组件和扩展组件的比例自动调整
+
 ## 0.0.4
 * 优化sqflite数据升级回调
 * 封装GetX的dialog、snackbar、bottomsheet小工具

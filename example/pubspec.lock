@@ -170,7 +170,7 @@ packages:
     source: hosted
     version: "2.1.0"
   connectivity_plus:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: connectivity_plus
       url: "https://pub.flutter-io.cn"
@@ -268,7 +268,7 @@ packages:
     source: hosted
     version: "2.3.0"
   device_info_plus:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: device_info_plus
       url: "https://pub.flutter-io.cn"
@@ -310,7 +310,7 @@ packages:
     source: hosted
     version: "2.1.1"
   dio:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: dio
       url: "https://pub.flutter-io.cn"
@@ -451,7 +451,7 @@ packages:
     source: hosted
     version: "2.1.3"
   get:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: get
       url: "https://pub.flutter-io.cn"
@@ -464,6 +464,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.3"
+  getwidget:
+    dependency: "direct main"
+    description:
+      name: getwidget
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.1"
   glob:
     dependency: transitive
     description:
@@ -626,7 +633,7 @@ packages:
     source: hosted
     version: "1.0.2"
   network_info_plus:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: network_info_plus
       url: "https://pub.flutter-io.cn"
@@ -689,7 +696,7 @@ packages:
     source: hosted
     version: "1.0.2"
   oktoast:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: oktoast
       url: "https://pub.flutter-io.cn"
@@ -703,7 +710,7 @@ packages:
     source: hosted
     version: "2.1.0"
   package_info_plus:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: package_info_plus
       url: "https://pub.flutter-io.cn"
@@ -967,7 +974,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.0.3"
+    version: "0.0.4"
   rxdart:
     dependency: transitive
     description:

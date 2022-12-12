@@ -33,7 +33,7 @@ class Utils {
   static KeyboardActionsConfig getKeyboardActionsConfig(BuildContext context, List<FocusNode> list,
       {String? closeText}) {
     return KeyboardActionsConfig(
-      keyboardBarColor: ThemeUtils.getKeyboardActionsColor(context),
+      keyboardBarColor: ThemeUtils.getKeyboardActionsColor(),
       actions: List.generate(
           list.length,
           (i) => KeyboardActionsItem(

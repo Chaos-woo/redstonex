@@ -41,7 +41,9 @@ abstract class BaseRepository<T extends FloorDatabase, R> {
             .where((element) => element.fromVersion > oldVersion).toList();
         /// 依次执行升级回调，直至最新版本。支持逐级升级和跨版本升级
         for (var element in localUpgradeCbs) {
-          element.onUpgrade.call(batch, oldVersion, newVersion);
+          int oldVer = oldVersion;
+          int newVer = newVersion;
+          element.onUpgrade.call(batch, oldVer, newVer);
         }
       },
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:redstonex/res/colours.dart';
-import 'package:redstonex/res/dimens.dart';
+import 'package:redstonex/resources/colours.dart';
+import 'package:redstonex/resources/dimens.dart';
 import 'package:redstonex/utils/theme_utils.dart';
 
 class RsxButton extends StatelessWidget {
@@ -36,7 +36,7 @@ class RsxButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDark = context.isDark;
+    final bool isDark = context.isDarkMode;
     return TextButton(
       onPressed: onPressed,
       style: ButtonStyle(

@@ -24,9 +24,6 @@ class Colours {
 
   static const Color line = Color(0xFFEEEEEE);
   static const Color darkLine = Color(0xFF3A3C3D);
-
-  static const Color red = Color(0xFFFF4759);
-  static const Color darkRed = Color(0xFFE03E4E);
   
   static const Color textDisabled = Color(0xFFD4E2FA);
   static const Color darkTextDisabled = Color(0xFFCEDBF2);
@@ -39,10 +36,6 @@ class Colours {
 
   static const Color bgGray_ = Color(0xFFFAFAFA);
   static const Color darkBgGray_ = Color(0xFF242526);
-
-  static const Color gradientBlue = Color(0xFF5793FA);
-  static const Color shadowBlue = Color(0x805793FA);
-  static const Color orange = Color(0xFFFF8547);
 
   static const Color white12 = Colors.white12;
 }

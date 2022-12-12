@@ -39,6 +39,7 @@ class OptionBarGroup extends StatelessWidget {
     }
 
     return ListView.builder(
+      shrinkWrap: true,
       padding: const EdgeInsets.all(0),
       itemCount: optionBarItemGroups.length,
       itemBuilder: (ctx, index) {
@@ -77,8 +78,7 @@ class OptionBarGroup extends StatelessWidget {
 
     if (toolBar.title != null && toolBar.tool != null) {
       /// 处理分组提示文案和组件的位置
-      if (toolBar.titlePosition == OptionGroupToolBarPosition.left &&
-          toolBar.toolPosition == OptionGroupToolBarPosition.left) {
+      if (toolBar.titlePosition == OptionGroupToolBarPosition.left && toolBar.toolPosition == OptionGroupToolBarPosition.left) {
         if (toolBar.titleFirst) {
           rowLeftWidgets.add(Text(toolBar.title!, style: style?.groupTipTextStyle));
           rowLeftWidgets.add(toolBar.tool!);
@@ -86,8 +86,7 @@ class OptionBarGroup extends StatelessWidget {
           rowLeftWidgets.add(toolBar.tool!);
           rowLeftWidgets.add(Text(toolBar.title!, style: style?.groupTipTextStyle));
         }
-      } else if (toolBar.titlePosition == OptionGroupToolBarPosition.right &&
-          toolBar.toolPosition == OptionGroupToolBarPosition.right) {
+      } else if (toolBar.titlePosition == OptionGroupToolBarPosition.right && toolBar.toolPosition == OptionGroupToolBarPosition.right) {
         if (toolBar.titleFirst) {
           rowLeftWidgets.add(toolBar.tool!);
           rowLeftWidgets.add(Text(toolBar.title!, style: style?.groupTipTextStyle));
@@ -126,7 +125,7 @@ class OptionBarGroup extends StatelessWidget {
     }
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -147,18 +146,32 @@ class OptionBarGroup extends StatelessWidget {
     List<Widget> rightWidgets = [];
 
     if (item.leadingWidget != null) {
-      leftWidgets.add(item.leadingWidget!);
+      leftWidgets.add(Expanded(
+        flex: 1,
+        child: item.leadingWidget!,
+      ));
     } else if (item.leadingIcon != null) {
       Widget leadingIcon = Padding(
         padding: const EdgeInsets.only(right: 10),
         child: Icon(item.leadingIcon, size: iconSize, color: item.leadingIconColor ?? _theme.primaryColor),
       );
-      leftWidgets.add(leadingIcon);
+      leftWidgets.add(Expanded(
+        flex: 1,
+        child: leadingIcon,
+      ));
     }
 
-    TextPainter? subTitlePainter;
+    double widgetHeight = style!.optionItemHeight!;
     if (GetUtils.isNullOrBlank(item.subTitle)!) {
-      leftWidgets.add(Text(item.title, style: item.titleTextStyle, maxLines: 1));
+      leftWidgets.add(Expanded(
+        flex: 7,
+        child: Text(
+          item.title,
+          style: item.titleTextStyle,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ));
     } else {
       /// 处理标题和选项详情
       Text title = Text(
@@ -170,26 +183,34 @@ class OptionBarGroup extends StatelessWidget {
         fontSize: item.titleTextStyle.fontSize! - 8,
         color: item.subTitleColor,
       );
-      subTitlePainter = TextPainter(
-        text: TextSpan(text: item.subTitle),
-        textAlign: TextAlign.start,
-        maxLines: 1,
-      );
       Text subTitle = Text(
         item.subTitle!,
         style: subTitleStyle,
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
       );
-      leftWidgets.add(title.addNeighbor(subTitle).intoColumn(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-          ));
+      widgetHeight += OptionBarConst.optionItemHeightPlus;
+      // if (subTitlePainter.didExceedMaxLines) {
+      //
+      // }
+      leftWidgets.add(Expanded(
+        flex: 8,
+        child: title.addNeighbor(subTitle).intoColumn(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+            ),
+      ));
     }
 
     /// 处理扩展组件
-    leftWidgets.addAll(_extComponentsBuilder(item, OptionExtPosition.left));
+    Widget? leftExtWidget = _extComponentsBuilder(item, OptionExtPosition.left);
+    if (leftExtWidget != null) {
+      leftWidgets.add(Expanded(
+        flex: 2,
+        child: leftExtWidget,
+      ));
+    }
 
     /// 选项左边组件
     Widget leftWidget = Row(
@@ -197,17 +218,27 @@ class OptionBarGroup extends StatelessWidget {
       children: leftWidgets,
     );
 
-    rightWidgets.addAll(_extComponentsBuilder(item, OptionExtPosition.right));
+    Widget? rightExtWidget = _extComponentsBuilder(item, OptionExtPosition.right);
+    if (rightExtWidget != null) {
+      rightWidgets.add(Expanded(
+        flex: 1,
+        child: rightExtWidget,
+      ));
+    }
     if (item.rightIconWidget != null) {
-      rightWidgets.add(item.rightIconWidget!);
+      rightWidgets.add(Expanded(
+        flex: 1,
+        child: item.rightIconWidget!,
+      ));
     } else if (item.rightIcon != null) {
-      rightWidgets.add(
-        Icon(
+      rightWidgets.add(Expanded(
+        flex: 1,
+        child: Icon(
           item.rightIcon,
           size: rightIconSize,
           color: item.rightIconColor ?? _theme.primaryColor,
         ),
-      );
+      ));
     }
 
     /// 选项右边组件
@@ -216,21 +247,37 @@ class OptionBarGroup extends StatelessWidget {
       children: rightWidgets,
     );
 
-    double widgetHeight = style!.optionItemHeight!;
-    if (subTitlePainter != null && subTitlePainter.didExceedMaxLines) {
-      widgetHeight += OptionBarConst.optionItemHeightPlus;
+    int leftFlex = 1;
+    int rightFlex = 0;
+    if (rightWidgets.isNotEmpty) {
+      int leftWidgetCount = leftWidgets.length;
+      int rightWidgetCount = rightWidgets.length;
+      double leftWidgetRadio = leftWidgetCount > rightWidgetCount ? 0.9 : 0.75;
+      leftFlex = (10 * leftWidgetRadio).round();
+      rightFlex = (10 * (1 - leftWidgetRadio)).round();
     }
+
     return InkWell(
       onTap: () async => item.onTap?.call(),
       onDoubleTap: () async => item.onDoubleTap?.call(),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+        padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 2),
         color: style?.optionBarItemColor,
         height: widgetHeight,
         child: Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [leftWidget, rightWidgetRow],
+            children: [
+              Expanded(
+                flex: leftFlex,
+                child: leftWidget,
+              ),
+              if (rightWidgets.isNotEmpty)
+                Expanded(
+                  flex: rightFlex,
+                  child: rightWidgetRow,
+                )
+            ],
           ),
         ),
       ),
@@ -238,15 +285,14 @@ class OptionBarGroup extends StatelessWidget {
   }
 
   /// 自定义扩展组件
-  List<Widget> _extComponentsBuilder(OptionBarItem item, OptionExtPosition position) {
-    List<Widget> exts = [];
-
+  Widget? _extComponentsBuilder(OptionBarItem item, OptionExtPosition position) {
     if (item.extPosition == position) {
       if (item.extWidget != null) {
-        exts.add(item.extWidget!);
+        return item.extWidget!;
       } else if (item.extText != null) {
-        exts.add(
-          Text(
+        return Container(
+          margin: const EdgeInsets.only(left: 8),
+          child: Text(
             item.extText!,
             style: item.titleTextStyle.merge(const TextStyle(fontSize: 13)),
           ),
@@ -254,6 +300,6 @@ class OptionBarGroup extends StatelessWidget {
       }
     }
 
-    return exts;
+    return null;
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:redstonex/res/colours.dart';
-import 'package:redstonex/res/dimens.dart';
-import 'package:redstonex/res/gaps.dart';
+import 'package:redstonex/resources/colours.dart';
+import 'package:redstonex/resources/dimens.dart';
+import 'package:redstonex/resources/gaps.dart';
 import 'package:redstonex/utils/theme_utils.dart';
 import 'package:redstonex/widgets/redstonex_button.dart';
 
@@ -10,6 +10,7 @@ import 'package:redstonex/widgets/redstonex_button.dart';
 class RsxAppBar extends StatelessWidget implements PreferredSizeWidget {
   const RsxAppBar({
     super.key,
+    this.leadingWidget,
     this.backgroundColor,
     this.title = '',
     this.centerTitle = '',
@@ -18,6 +19,7 @@ class RsxAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.isBack = true,
   });
 
+  final Widget? leadingWidget;
   final Color? backgroundColor;
   final String title;
   final String centerTitle;
@@ -48,7 +50,7 @@ class RsxAppBar extends StatelessWidget implements PreferredSizeWidget {
                 fontSize: Dimens.fontSp14,
                 minWidth: null,
                 text: actionName,
-                textColor: context.isDark ? Colours.darkText : Colours.text,
+                textColor: context.isDarkMode ? Colours.darkText : Colours.text,
                 backgroundColor: Colors.transparent,
                 onPressed: onPressed,
               ),
@@ -56,7 +58,7 @@ class RsxAppBar extends StatelessWidget implements PreferredSizeWidget {
           )
         : Gaps.empty;
 
-    final Widget back = isBack
+    final Widget leadingWidget = isBack
         ? IconButton(
             onPressed: () async {
               FocusManager.instance.primaryFocus?.unfocus();
@@ -69,7 +71,7 @@ class RsxAppBar extends StatelessWidget implements PreferredSizeWidget {
             padding: const EdgeInsets.all(12.0),
             icon: const Icon(Icons.arrow_back_ios),
           )
-        : Gaps.empty;
+        : this.leadingWidget ?? Gaps.empty;
 
     final Widget titleWidget = Semantics(
       namesRoute: true,
@@ -96,7 +98,7 @@ class RsxAppBar extends StatelessWidget implements PreferredSizeWidget {
             alignment: Alignment.centerLeft,
             children: <Widget>[
               titleWidget,
-              back,
+              leadingWidget,
               action,
             ],
           ),

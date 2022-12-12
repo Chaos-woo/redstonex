@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
-import 'package:redstonex/res/constant.dart';
+import 'package:redstonex/resources/constant.dart';
 
 /// 捕获全局异常，进行统一处理。
 void handleError(void Function() body) {

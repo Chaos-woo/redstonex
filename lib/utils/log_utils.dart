@@ -1,7 +1,7 @@
 
 import 'dart:convert' as convert;
 import 'package:common_utils/common_utils.dart';
-import 'package:redstonex/res/constant.dart';
+import 'package:redstonex/resources/constant.dart';
 
 /// 输出Log工具类
 class LogUtils {

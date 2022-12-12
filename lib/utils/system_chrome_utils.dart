@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:redstonex/utils/colour_utils.dart';
+import 'package:redstonex/exts/colour_ext.dart';
 
 /// [SystemChrome]工具
 class SystemChromeUtils {

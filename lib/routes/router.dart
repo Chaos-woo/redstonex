@@ -8,6 +8,7 @@ class Router {
   List<Bindings> bindings;
   Transition? transition;
   Duration? transitionDuration;
+  CustomTransition? customTransition;
 
   Router(
     this.routeName,
@@ -16,6 +17,7 @@ class Router {
     this.bindings = const [],
     this.transition,
     this.transitionDuration,
+    this.customTransition,
   });
 }
 
@@ -26,5 +28,8 @@ class RouterGroup {
 
   RouterGroup(this.name);
 
-  void newRoute(Router route) => routes.add(route);
+  RouterGroup newRoute(Router route) {
+    routes.add(route);
+    return this;
+  }
 }

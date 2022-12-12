@@ -12,6 +12,10 @@ import 'package:flutter/widgets.dart';
 /// bool isNarrow = Screen.widthInches(context) < 3.5;
 
 class ScreenUtils {
+  static double get screenHeight => ScreenUtil().screenHeight;
+
+  static double get screenWidth => ScreenUtil().screenWidth;
+
   static double get _ppi => (Platform.isAndroid || Platform.isIOS) ? 150 : 96;
 
   static bool isLandscape(BuildContext context) => MediaQuery.of(context).orientation == Orientation.landscape;

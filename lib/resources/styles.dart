@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:redstonex/res/colours.dart';
-import 'package:redstonex/res/dimens.dart';
+import 'package:redstonex/resources/colours.dart';
+import 'package:redstonex/resources/dimens.dart';
 
 class TextStyles {
   
   static const TextStyle textSize12 = TextStyle(
     fontSize: Dimens.fontSp12,
+  );
+  static const TextStyle textSize14 = TextStyle(
+    fontSize: Dimens.fontSp14,
   );
   static const TextStyle textSize16 = TextStyle(
     fontSize: Dimens.fontSp16,

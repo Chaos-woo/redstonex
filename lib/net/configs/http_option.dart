@@ -3,14 +3,14 @@ import 'package:redstonex/app-configs/global_config.dart';
 
 class HttpOption {
   final int _connectTimeout;
-  final int _receiveTimeOut;
+  final int _receiveTimeout;
   final int _sendTimeout;
   final String _sendContentType;
   final ResponseType _responseType;
 
   int get connectTimeout => _connectTimeout;
 
-  int get receiveTimeOut => _receiveTimeOut;
+  int get receiveTimeOut => _receiveTimeout;
 
   ResponseType get responseType => _responseType;
 
@@ -20,7 +20,7 @@ class HttpOption {
 
   HttpOption(HttpOptionBuilder builder)
       : _connectTimeout = builder._connectTimeout,
-        _receiveTimeOut = builder._receiveTimeOut,
+        _receiveTimeout = builder._receiveTimeOut,
         _sendTimeout = builder._sendTimeout,
         _sendContentType = builder._sendContentType,
         _responseType = builder._responseType;
@@ -28,7 +28,7 @@ class HttpOption {
   HttpOption immutable() {
     HttpOptionBuilder builder = HttpOptionBuilder();
     builder.connectTimeout(_connectTimeout);
-    builder.receiveTimeOut(_receiveTimeOut);
+    builder.receiveTimeout(_receiveTimeout);
     builder.sendTimeout(sendTimeout);
     builder.sendContentType(_sendContentType);
     builder.responseType(_responseType);
@@ -50,7 +50,7 @@ class HttpOptionBuilder {
     return this;
   }
 
-  HttpOptionBuilder receiveTimeOut(int value) {
+  HttpOptionBuilder receiveTimeout(int value) {
     _receiveTimeOut = value;
     return this;
   }

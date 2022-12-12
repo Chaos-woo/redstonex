@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:redstonex/res/dimens.dart';
-import 'package:redstonex/res/gaps.dart';
+import 'package:redstonex/resources/dimens.dart';
+import 'package:redstonex/resources/gaps.dart';
 
 class ClickItem extends StatelessWidget {
   const ClickItem(

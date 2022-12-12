@@ -1,50 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:redstonex/res/colours.dart';
+import 'package:redstonex/resources/colours.dart';
 
 class ThemeUtils {
-  static bool isDark(BuildContext context) {
+  static void lightMode() {
+    Get.changeTheme(ThemeData.light());
+  }
+
+  static void dartMode() {
+    Get.changeTheme(ThemeData.dark());
+  }
+
+  static bool isDarkMode(BuildContext context) {
     return Theme.of(context).brightness == Brightness.dark;
   }
 
-  static bool isDarkFastly() {
+  static bool isDarkModeFastly() {
     if (Get.context != null) {
-      return isDark(Get.context!);
+      return isDarkMode(Get.context!);
     } else {
       return false;
     }
   }
 
-  static Color? getSecondaryTitleColor() {
-    return isDarkFastly() ? Colours.darkTextGray : Colours.textGray;
-  }
-
   static Color? getDarkColor(BuildContext context, Color darkColor) {
-    return isDark(context) ? darkColor : null;
+    return isDarkMode(context) ? darkColor : null;
   }
 
-  static Color? getIconColor(BuildContext context) {
-    return isDark(context) ? Colours.darkText : null;
+  static Color? getSecondaryTitleColor() {
+    return isDarkModeFastly() ? Colours.darkTextGray : Colours.textGray;
   }
 
-  static Color getStickyHeaderColor(BuildContext context) {
-    return isDark(context) ? Colours.darkBgGray_ : Colours.bgGray_;
+  static Color? getIconColor() {
+    return isDarkModeFastly() ? Colours.darkText : null;
   }
 
-  static Color getDialogTextFieldColor(BuildContext context) {
-    return isDark(context) ? Colours.darkBgGray_ : Colours.bgGray;
+  static Color getStickyHeaderColor() {
+    return isDarkModeFastly() ? Colours.darkBgGray_ : Colours.bgGray_;
   }
 
-  static Color? getKeyboardActionsColor(BuildContext context) {
-    return isDark(context) ? Colours.darkBgColor : Colors.grey[200];
+  static Color getDialogTextFieldColor() {
+    return isDarkModeFastly() ? Colours.darkText : Colours.text;
   }
 
-  static Color? getBgColor(BuildContext context) {
-    return isDark(context) ? Colours.darkBgColor : Colours.bgColor;
+  static Color? getKeyboardActionsColor() {
+    return isDarkModeFastly() ? Colours.darkBgColor : Colors.grey[200];
   }
 
-  static Color? getBarrierColor(BuildContext context) {
-    return isDark(context) ? Colors.black38 : Colors.black54;
+  static Color? getBgColor() {
+    return isDarkModeFastly() ? Colours.darkBgColor : Colours.bgColor;
+  }
+
+  static Color? getBarrierColor() {
+    return isDarkModeFastly() ? Colors.black38 : Colors.black54;
   }
 
   static ThemeData theme() {
@@ -73,7 +81,7 @@ class ThemeUtils {
 }
 
 extension ThemeExtension on BuildContext {
-  bool get isDark => ThemeUtils.isDark(this);
+  bool get isDarkMode => ThemeUtils.isDarkMode(this);
 
   Color get backgroundColor => Theme.of(this).scaffoldBackgroundColor;
 

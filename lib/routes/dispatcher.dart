@@ -66,6 +66,7 @@ class Dispatcher {
       bindings: route.bindings,
       transition: route.transition,
       transitionDuration: route.transitionDuration,
+      customTransition: route.customTransition,
     );
   }
 }

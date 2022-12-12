@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:redstonex/res/gaps.dart';
+import 'package:redstonex/resources/gaps.dart';
 
 class SelectedItem extends StatelessWidget {
 

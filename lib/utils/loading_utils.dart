@@ -20,7 +20,7 @@ class LoadingUtils {
   }
 
   static void showLoading({
-    String loadingText = '加载中...',
+    String loadingText = 'loading...',
   }) {
     EasyLoading.show(status: loadingText);
   }

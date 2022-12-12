@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:redstonex/res/dimens.dart';
+import 'package:redstonex/resources/dimens.dart';
 
 /// 间隔
 /// 官方做法：https://github.com/flutter/flutter/pull/54394

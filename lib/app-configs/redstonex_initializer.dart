@@ -10,27 +10,32 @@ import 'package:redstonex/utils/log_utils.dart';
 
 class RsxInit {
   /// 框架初始化
-  static void init({Function()? preBuiltinInit, Function()? postBuiltinInit}) {
+  static Future<void> init({Function()? preBuiltinInit, Function()? postBuiltinInit}) async {
+    await _primaryBuiltinInit();
     preBuiltinInit?.call();
-    _builtinInit();
+    await _builtinInit();
     postBuiltinInit?.call();
   }
 
-  static void _builtinInit() {
+  /// 内部工具配置初始化
+  static Future<void> _primaryBuiltinInit() async {
     /// 初始化日志工具
     LogUtils.init();
     /// 初始化全局配置
     GlobalConfig.initDefGlobalConfig();
+  }
+
+  static Future<void> _builtinInit() async {
     /// 初始化设备信息
-    DeviceUtils.initDeviceInfo();
+    await DeviceUtils.initDeviceInfo();
     /// 初始化app信息
-    AppPackageUtils.init();
+    await AppPackageUtils.init();
     /// 初始化存储信息
-    DirectoryUtils.init();
+    await DirectoryUtils.init();
     /// 初始化内存缓存
-    Mcg().initMemoryCache();
+    await Mcg().initMemoryCache();
     /// 初始化本地缓存
-    Pcg().initPersistCache();
+    await Pcg().initPersistCache();
     /// 初始化路由
     Dispatcher.init();
   }

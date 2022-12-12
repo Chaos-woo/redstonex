@@ -34,6 +34,18 @@ class NetUtils {
     }
   }
 
+  static bool checkNetworkConnectivity(ConnectivityResult newConnectivity, {bool bluetooth = false}) {
+    if (newConnectivity == ConnectivityResult.wifi ||
+        newConnectivity == ConnectivityResult.mobile ||
+        newConnectivity == ConnectivityResult.ethernet) {
+      return true;
+    } else if (newConnectivity == ConnectivityResult.bluetooth && bluetooth) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   /// Get connectivity result
   static Future<ConnectivityResult> connectivityResult() async {
     return await _conn.checkConnectivity();
