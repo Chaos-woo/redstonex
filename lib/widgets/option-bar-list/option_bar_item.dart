@@ -78,7 +78,7 @@ class OptionBarItem {
     this.rightIconWidget,
   }) {
     _titleTextStyle = itemFontSize.merge(titleStyle);
-    subTitleColor = subTitleColor ?? ThemeUtils.getSecondaryTitleColor();
+    subTitleColor = subTitleColor ?? ThemeUtils.theme().secondaryHeaderColor;
   }
 
   @override

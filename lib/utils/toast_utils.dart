@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:redstonex/redstonex.dart';
-import 'package:redstonex/resources/colours.dart';
 
 /// Toast工具类
 class ToastUtils {
@@ -12,7 +11,7 @@ class ToastUtils {
     Color iconColor = Colors.white,
     int duration = 2000,
     ToastPosition? position = ToastPosition.bottom,
-    Color? backgroundColor = Colours.darkBgColor,
+    Color? backgroundColor,
     double radius = 10.0,
     VoidCallback? onDismiss,
     EdgeInsetsGeometry? textPadding = const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
@@ -32,7 +31,7 @@ class ToastUtils {
         padding: textPadding,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius),
-          color: backgroundColor,
+          color: backgroundColor ?? Colors.black87,
         ),
         child: ClipRect(
           child: Row(

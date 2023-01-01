@@ -54,6 +54,18 @@ dependencies:
   network_info_plus: ^2.1.3
   # UI组件 https://github.com/ionicfirebaseapp/getwidget
   getwidget: 3.0.1
+  # 随机工具 https://github.com/dinko-pehar/mock_data
+  mock_data: ^2.0.0
+  # 随机头像 https://github.com/saytoonz/random_avatar
+  random_avatar: ^0.0.7
+  # Dart 常用工具类库 https://github.com/Sky24n/common_utils
+  common_utils: 2.1.0
+  # Flutter 常用工具类库 https://github.com/Sky24n/flustars
+  flustars_flutter3: 3.0.0 # flustars很久不维护，可以使用这个替代
+  # 简易使用loading加载 https://github.com/nslogx/flutter_easyloading
+  flutter_easyloading: 3.0.5
+  # 选择器 https://github.com/longer96/flutter_pickers/blob/master
+  flutter_pickers: ^2.1.9
 
 dev_dependencies:
 #  flutter_test:
@@ -97,6 +109,8 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/images/
+    - assets/images/weather/
+    - assets/images/bg/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

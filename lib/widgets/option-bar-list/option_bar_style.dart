@@ -27,7 +27,7 @@ class OptionBarStyle {
     groupTipTextStyle = groupTipTextStyle ??
         TextStyle(
           fontSize: OptionBarConst.itemTitleStyle.fontSize! - 6,
-          color: ThemeUtils.getSecondaryTitleColor(),
+          color: ThemeUtils.theme().secondaryHeaderColor,
         );
   }
 }

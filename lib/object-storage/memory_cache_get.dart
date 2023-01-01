@@ -11,6 +11,8 @@ class Mcg {
 
   factory Mcg() => _single;
 
+  static Mcg of() => _single;
+
   Mcg._();
 
   Future<void> initMemoryCache() async {

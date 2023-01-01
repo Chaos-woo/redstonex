@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:redstonex/resources/colours.dart';
 import 'package:redstonex/utils/theme_utils.dart';
 
 class RsxCard extends StatelessWidget {
@@ -13,7 +12,7 @@ class RsxCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isDark = context.isDarkMode;
 
-    final Color backgroundColor = color ?? (isDark ? Colours.darkBgGray_ : Colors.white);
+    final Color backgroundColor = color ?? ThemeUtils.theme().backgroundColor;
     final Color sColor = isDark ? Colors.transparent : (shadowColor ?? const Color(0x80DCE7FA));
 
     return DecoratedBox(

@@ -94,9 +94,9 @@ class SnackbarToolsComponent extends StatelessWidget {
     return OptionBarItem(
       label,
       leadingIcon: Icons.touch_app,
-      leadingIconColor: ThemeUtils.getIconColor(),
+      leadingIconColor: ThemeUtils.theme().iconTheme.color,
       subTitle: description,
-      subTitleColor: ThemeUtils.getSecondaryTitleColor(),
+      subTitleColor: ThemeUtils.theme().textTheme.bodyText1?.color,
       onTap: onTap,
     );
   }

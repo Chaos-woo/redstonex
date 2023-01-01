@@ -1,5 +1,6 @@
 import 'package:example/homepage/common_tools/common_tools_view.dart';
 import 'package:example/homepage/network_tools/network_tools_view.dart';
+import 'package:example/homepage/simple_information/simple_information_view.dart';
 import 'package:flutter/material.dart';
 import 'package:redstonex/redstonex.dart';
 
@@ -18,7 +19,10 @@ class HomepagePage extends StatelessWidget {
       children: [
         _toolTitleBuilder('通用工具示例'),
         CommonToolsComponent(),
-        Gaps.vGap10,
+        Gaps.vGap16,
+        _toolTitleBuilder('设备软件信息展示'),
+        SimpleInformationComponent(),
+        Gaps.vGap16,
         _toolTitleBuilder('网络请求示例'),
         NetworkToolsComponent(),
       ],
@@ -35,7 +39,10 @@ class HomepagePage extends StatelessWidget {
           children: <Widget>[
             Text(
               title,
-              style: TextStyles.textBold16,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
             ),
             const Spacer(),
           ],

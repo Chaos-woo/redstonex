@@ -4,20 +4,20 @@ import 'package:intl/intl.dart';
 /// @Author: aleksanderwozniak
 /// @GitHub: https://github.com/aleksanderwozniak/table_calendar
 /// @Description: Date Util.
-class DateUtils {
-  static final DateFormat _monthFormat = DateFormat('MMMM yyyy');
-  static final DateFormat _dayFormat = DateFormat('dd');
-  static final DateFormat _firstDayFormat = DateFormat('MMM dd');
-  static final DateFormat _fullDayFormat = DateFormat('EEE MMM dd, yyyy');
-  static final DateFormat _apiDayFormat = DateFormat('yyyy-MM-dd');
-  static final DateFormat _apiDayFormat2 = DateFormat('yy.MM.dd');
+class DatetimeUtils {
+  static final DateFormat _yyyyMMddFormat = DateFormat('yyyy-MM-dd');
+  static final DateFormat _yy0MM0ddFormat = DateFormat('yy.MM.dd');
+  static final DateFormat _yyyyMMddHHmmssFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
+  static final DateFormat _HHmmFormat = DateFormat('HH:mm');
+  static final DateFormat _beginOfDayFormat = DateFormat('yyyy-MM-dd 00:00:00');
+  static final DateFormat _endOfDayFormat = DateFormat('yyyy-MM-dd 23:59:59');
 
-  static String formatMonth(DateTime d) => _monthFormat.format(d);
-  static String formatDay(DateTime d) => _dayFormat.format(d);
-  static String formatFirstDay(DateTime d) => _firstDayFormat.format(d);
-  static String fullDayFormat(DateTime d) => _fullDayFormat.format(d);
-  static String apiDayFormat(DateTime d) => _apiDayFormat.format(d);
-  static String apiDayFormat2(DateTime d) => _apiDayFormat2.format(d);
+  static String yyyyMMddFormat(DateTime d) => _yyyyMMddFormat.format(d);
+  static String yy0MM0ddFormat(DateTime d) => _yy0MM0ddFormat.format(d);
+  static String yyyyMMddHHmmssFormat(DateTime d) => _yyyyMMddHHmmssFormat.format(d);
+  static String HHmmFormat(DateTime d) => _HHmmFormat.format(d);
+  static String beginOfDayFormat(DateTime d) => _beginOfDayFormat.format(d);
+  static String endOfDayFormat(DateTime d) => _endOfDayFormat.format(d);
 
 
   static const List<String> weekdays = [
@@ -175,7 +175,11 @@ class DateUtils {
   }
 
   static String previousWeekToString(DateTime w) {
-    return apiDayFormat2(w.subtract(const Duration(days: 6)));
+    return yy0MM0ddFormat(w.subtract(const Duration(days: 6)));
+  }
+
+  static DateTime previousDay(DateTime w) {
+    return w.subtract(const Duration(days: 1));
   }
 
   static DateTime nextDay(DateTime w) {

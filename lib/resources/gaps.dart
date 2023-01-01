@@ -14,6 +14,10 @@ class Gaps {
   static const Widget hGap15 = SizedBox(width: Dimens.gapDp15);
   static const Widget hGap16 = SizedBox(width: Dimens.gapDp16);
   static const Widget hGap32 = SizedBox(width: Dimens.gapDp32);
+
+  static Widget hGap(double width) {
+    return SizedBox(width: width);
+  }
   
   /// 垂直间隔
   static const Widget vGap4 = SizedBox(height: Dimens.gapDp4);
@@ -27,16 +31,19 @@ class Gaps {
   static const Widget vGap32 = SizedBox(height: Dimens.gapDp32);
   static const Widget vGap50 = SizedBox(height: Dimens.gapDp50);
 
+  static Widget vGap(double width) {
+    return SizedBox(height: width);
+  }
+
   static const Widget line = Divider();
 
-  static const Widget vLine = SizedBox(
-    width: 0.6,
-    height: 24.0,
-    child: VerticalDivider(),
-  );
+  static Widget vLine({double width = 0.6, double height = 24.0}) {
+    return SizedBox(
+      width: width,
+      height: height,
+      child: const VerticalDivider(),
+    );
+  }
   
   static const Widget empty = SizedBox.shrink();
-
-  /// 补充一种空Widget实现 https://github.com/letsar/nil
-  /// https://github.com/flutter/flutter/issues/78159
 }

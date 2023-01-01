@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:redstonex/resources/colours.dart';
 import 'package:redstonex/utils/theme_utils.dart';
 
 class BottomSheetUtils {
@@ -17,12 +16,13 @@ class BottomSheetUtils {
     Duration? exitBottomSheetDuration,
   }) {
     if (Get.context != null) {
-      backgroundColor = backgroundColor ?? ThemeUtils.getBgColor();
+      backgroundColor = backgroundColor ?? Colors.white;
       barrierColor = barrierColor ?? ThemeUtils.getBarrierColor();
     } else {
       backgroundColor = backgroundColor ?? Colors.white;
-      barrierColor = barrierColor ?? Colours.darkBgColor;
+      barrierColor = barrierColor ?? ThemeUtils.getBarrierColor();
     }
+
     Get.bottomSheet(
       bottomSheet,
       backgroundColor: backgroundColor,
@@ -32,10 +32,12 @@ class BottomSheetUtils {
       isDismissible: isDismissible,
       enableDrag: enableDrag,
       shape: shape,
+      enterBottomSheetDuration: enterBottomSheetDuration,
+      exitBottomSheetDuration: exitBottomSheetDuration,
     );
   }
 
-  static ShapeBorder roundedTopLRRadius({double radius = 20.0}) {
+  static ShapeBorder roundedTopLRRadius({double radius = 15.0}) {
     return RoundedRectangleBorder(
       borderRadius: BorderRadius.only(topLeft: Radius.circular(radius), topRight: Radius.circular(radius)),
     );

@@ -12,9 +12,9 @@ import 'package:flutter/widgets.dart';
 /// bool isNarrow = Screen.widthInches(context) < 3.5;
 
 class ScreenUtils {
-  static double get screenHeight => ScreenUtil().screenHeight;
+  static double get screenHeight => ScreenUtil.getInstance().screenHeight;
 
-  static double get screenWidth => ScreenUtil().screenWidth;
+  static double get screenWidth => ScreenUtil.getInstance().screenWidth;
 
   static double get _ppi => (Platform.isAndroid || Platform.isIOS) ? 150 : 96;
 
@@ -48,9 +48,9 @@ class ScreenUtils {
 extension MediaQueryExtension on BuildContext {
   Size get size => ScreenUtils.size(this);
 
-  double get height => ScreenUtils.size(this).height;
+  double get screenHeight => ScreenUtils.size(this).height;
 
-  double get width => ScreenUtils.size(this).width;
+  double get screenWidth => ScreenUtils.size(this).width;
 
   double scaleHeight(double size) => ScreenUtil.getScaleH(this, size);
 

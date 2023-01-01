@@ -77,7 +77,6 @@ class RequestClient {
     String url, {
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
-    bool showLoading = true,
     bool Function(ApiException)? onError,
   }) {
     return request(
@@ -93,7 +92,6 @@ class RequestClient {
     Map<String, dynamic>? queryParameters,
     data,
     Map<String, dynamic>? headers,
-    bool showLoading = true,
     bool Function(ApiException)? onError,
   }) {
     return request(
@@ -111,7 +109,6 @@ class RequestClient {
     Map<String, dynamic>? queryParameters,
     data,
     Map<String, dynamic>? headers,
-    bool showLoading = true,
     bool Function(ApiException)? onError,
   }) {
     return request(
@@ -129,7 +126,6 @@ class RequestClient {
     Map<String, dynamic>? queryParameters,
     data,
     Map<String, dynamic>? headers,
-    bool showLoading = true,
     bool Function(ApiException)? onError,
   }) {
     return request(

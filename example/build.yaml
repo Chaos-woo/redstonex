@@ -1,9 +1,0 @@
-# 开启reflectable生成*_reflectable.dart必须配置的点
-targets:
-  $default:
-    builders:
-      reflectable:
-        generate_for:
-          - lib/main.dart
-        options:
-          formatted: true

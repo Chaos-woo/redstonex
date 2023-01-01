@@ -82,13 +82,16 @@ class DialogToolsComponent extends StatelessWidget {
                     top: 30,
                     child: Text(
                       'example_1211',
-                      style: TextStyles.textBold14,
+                      style: TextStyle(
+                        fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                      ),
                     )),
-                Positioned(
+                const Positioned(
                     top: 48,
                     child: Text(
                       '这个人很懒，什么都没写',
-                      style: const TextStyle(color: Colors.grey).merge(TextStyles.textSize12),
+                      style: TextStyle(color: Colors.grey, fontSize: 12,),
                     )),
               ],
             ),
@@ -143,9 +146,9 @@ class DialogToolsComponent extends StatelessWidget {
     return OptionBarItem(
       label,
       leadingIcon: Icons.touch_app,
-      leadingIconColor: ThemeUtils.getIconColor(),
+      leadingIconColor: ThemeUtils.theme().iconTheme.color,
       subTitle: description,
-      subTitleColor: ThemeUtils.getSecondaryTitleColor(),
+      subTitleColor: ThemeUtils.theme().textTheme.bodyText1?.color,
       onTap: onTap,
     );
   }
@@ -158,12 +161,12 @@ class DialogToolsComponent extends StatelessWidget {
       children: <Widget>[
         Text(
           '$num',
-          style: const TextStyle(color: Colors.black).merge(TextStyles.textBold18),
+          style: const TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
         ),
         Gaps.vGap5,
         Text(
           label,
-          style: const TextStyle(color: Colors.grey).merge(TextStyles.textSize14),
+          style: const TextStyle(color: Colors.grey, fontSize: 14),
         ),
       ],
     );

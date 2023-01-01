@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:redstonex/resources/colours.dart';
 import 'package:redstonex/resources/dimens.dart';
 import 'package:redstonex/resources/gaps.dart';
 import 'package:redstonex/utils/theme_utils.dart';
@@ -14,6 +13,8 @@ class RsxAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.backgroundColor,
     this.title = '',
     this.centerTitle = '',
+    this.titleColor,
+    this.customTitleWidget,
     this.actionName = '',
     this.onPressed,
     this.isBack = true,
@@ -21,8 +22,13 @@ class RsxAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   final Widget? leadingWidget;
   final Color? backgroundColor;
+
   final String title;
   final String centerTitle;
+  final Color? titleColor;
+
+  final Widget? customTitleWidget;
+
   final String actionName;
   final VoidCallback? onPressed;
   final bool isBack;
@@ -50,7 +56,7 @@ class RsxAppBar extends StatelessWidget implements PreferredSizeWidget {
                 fontSize: Dimens.fontSp14,
                 minWidth: null,
                 text: actionName,
-                textColor: context.isDarkMode ? Colours.darkText : Colours.text,
+                textColor: ThemeUtils.theme().appBarTheme.titleTextStyle?.color,
                 backgroundColor: Colors.transparent,
                 onPressed: onPressed,
               ),
@@ -69,11 +75,11 @@ class RsxAppBar extends StatelessWidget implements PreferredSizeWidget {
             },
             tooltip: 'Back',
             padding: const EdgeInsets.all(12.0),
-            icon: const Icon(Icons.arrow_back_ios),
+            icon: Icon(Icons.arrow_back_ios, color: titleColor,),
           )
         : this.leadingWidget ?? Gaps.empty;
 
-    final Widget titleWidget = Semantics(
+    final Widget titleWidget = customTitleWidget ?? Semantics(
       namesRoute: true,
       header: true,
       child: Container(
@@ -82,8 +88,9 @@ class RsxAppBar extends StatelessWidget implements PreferredSizeWidget {
         margin: const EdgeInsets.symmetric(horizontal: 48.0),
         child: Text(
           title.isEmpty ? centerTitle : title,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: Dimens.fontSp18,
+            color: titleColor,
           ),
         ),
       ),

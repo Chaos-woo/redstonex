@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redstonex/exceptions/redstonex_exception.dart';
-import 'package:redstonex/resources/styles.dart';
 import 'package:redstonex/utils/screen_utils.dart';
 
 class SnackBarUtils {
@@ -21,6 +20,7 @@ class SnackBarUtils {
     EdgeInsets padding = const EdgeInsets.all(8),
     TextButton? lightButton,
     OnTap? onTapAny,
+
     /// snackBar的窗口状态回调
     SnackbarStatusCallback? snackBarStatusChanged,
   }) {
@@ -42,7 +42,7 @@ class SnackBarUtils {
   }
 
   static TextButton snackBarAction(String text, {TextStyle? textStyle, VoidCallback? onTap}) {
-    TextStyle defaultStyle = TextStyles.textWhite14.merge(const TextStyle(color: Colors.white));
+    TextStyle defaultStyle = const TextStyle(fontSize: 14, color: Colors.white);
     return TextButton(
         onPressed: onTap,
         child: Text(
@@ -131,7 +131,13 @@ class SnackBarUtils {
         /// style参考GetSnackBar源码
         TextSpan messageSpan = TextSpan(text: message, style: const TextStyle(fontSize: 14.0, color: Colors.white));
         TextPainter painter = TextPainter(text: messageSpan, maxLines: messageMaxLines, textDirection: TextDirection.rtl);
-        painter.layout(minWidth: minWidth, maxWidth: ScreenUtils.screenWidth * 0.75);
+        double maxWidth = ScreenUtils.screenWidth * 0.75;
+        if (minWidth > maxWidth) {
+          double tempWidth = maxWidth;
+          maxWidth = minWidth;
+          minWidth = tempWidth;
+        }
+        painter.layout(minWidth: minWidth, maxWidth: maxWidth);
         if (painter.didExceedMaxLines) {
           messageWidget = Text(
             message,

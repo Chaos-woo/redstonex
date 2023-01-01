@@ -163,7 +163,7 @@ packages:
     source: hosted
     version: "1.16.0"
   common_utils:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: common_utils
       url: "https://pub.flutter-io.cn"
@@ -373,7 +373,7 @@ packages:
     source: hosted
     version: "1.3.0"
   flustars_flutter3:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flustars_flutter3
       url: "https://pub.flutter-io.cn"
@@ -399,7 +399,7 @@ packages:
     source: hosted
     version: "3.3.0"
   flutter_easyloading:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_easyloading
       url: "https://pub.flutter-io.cn"
@@ -417,6 +417,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_pickers:
+    dependency: "direct main"
+    description:
+      name: flutter_pickers
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.1.9"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -632,6 +639,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.2"
+  mock_data:
+    dependency: "direct main"
+    description:
+      name: mock_data
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.0"
   network_info_plus:
     dependency: "direct main"
     description:
@@ -961,6 +975,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.3"
+  random_avatar:
+    dependency: "direct main"
+    description:
+      name: random_avatar
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.0.7"
   rational:
     dependency: transitive
     description:
@@ -974,7 +995,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.0.4"
+    version: "0.0.5"
   rxdart:
     dependency: transitive
     description:

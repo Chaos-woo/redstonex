@@ -4,24 +4,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class ImageUtils {
-  static ImageProvider getAssetImage(String name, {ImageFormat format = ImageFormat.png}) {
-    return AssetImage(getImgPath(name, format: format));
+  static ImageProvider getAssetImageProvider(String path) {
+    return AssetImage(path);
   }
 
-  static String getImgPath(String name, {ImageFormat format = ImageFormat.png}) {
+  static String getImagePath(String name, {ImageFormat format = ImageFormat.png}) {
     return 'assets/images/$name.${format.value}';
   }
 
-  static ImageProvider getImageProvider(String? imageUrl, {String holderImg = ''}) {
+  static String getFullImgPath(String path, {ImageFormat format = ImageFormat.png}) {
+    return 'name.${format.value}';
+  }
+
+  static ImageProvider getHolderImageNetProvider(String? imageUrl, {String holderImg = ''}) {
     if (TextUtil.isEmpty(imageUrl)) {
-      return AssetImage(getImgPath(holderImg));
+      return AssetImage(getImagePath(holderImg));
     }
     return CachedNetworkImageProvider(imageUrl!);
   }
 }
 
-enum ImageFormat { png, jpg, gif, webp }
+enum ImageFormat { png, jpg, jpeg, gif, webp }
 
 extension ImageFormatExtension on ImageFormat {
-  String get value => ['png', 'jpg', 'gif', 'webp'][index];
+  String get value => ['png', 'jpg', 'jpeg', 'gif', 'webp'][index];
 }

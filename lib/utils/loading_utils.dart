@@ -1,7 +1,7 @@
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class LoadingUtils {
-  static Future loadingRequest(
+  static Future loadingProcess(
     Function block, {
     bool isShowLoading = true,
     String? loadingText,

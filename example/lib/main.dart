@@ -1,8 +1,12 @@
 import 'package:example/homepage/homepage/homepage_logic.dart';
 import 'package:example/homepage/homepage/homepage_view.dart';
-import 'package:example/providers/business_providers.dart';
+import 'package:example/net-manager/net_client_manager.dart';
+import 'package:example/providers/providers_manager.dart';
 import 'package:example/routes.dart';
+import 'package:example/services/services_manager.dart';
+import 'package:flustars_flutter3/flustars_flutter3.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:redstonex/redstonex.dart';
@@ -15,7 +19,10 @@ void main() async {
   await RsxInit.init(preBuiltinInit: () {
     Routes.initGlobalRoutes();
   }, postBuiltinInit: () {
-    BusinessProviders.initBusinessProviders();
+    NetClientManager.initNetClients();
+    ProvidersManager.initProviders();
+    ServicesManager.initServices();
+    ScreenUtil.getInstance();
     LogUtils.d('initial end');
   });
 
@@ -30,10 +37,12 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: true,
       title: 'Flutter Demo',
+      getPages: Dispatcher.pageRoutes,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Colors.blue,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      builder: EasyLoading.init(),
     );
   }
 }

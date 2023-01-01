@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:redstonex/resources/colours.dart';
 import 'package:redstonex/resources/dimens.dart';
 import 'package:redstonex/utils/theme_utils.dart';
 
@@ -37,27 +36,28 @@ class RsxButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isDark = context.isDarkMode;
+    ThemeData themeData = ThemeUtils.theme();
     return TextButton(
       onPressed: onPressed,
       style: ButtonStyle(
         // 文字颜色
         foregroundColor: MaterialStateProperty.resolveWith((states) {
             if (states.contains(MaterialState.disabled)) {
-              return disabledTextColor ?? (isDark ? Colours.darkTextDisabled : Colours.textDisabled);
+              return disabledTextColor ?? themeData.disabledColor;
             }
-            return textColor ?? (isDark ? Colours.darkButtonText : Colors.white);
+            return textColor ?? themeData.textTheme.button?.color;
           },
         ),
         // 背景颜色
         backgroundColor: MaterialStateProperty.resolveWith((states) {
           if (states.contains(MaterialState.disabled)) {
-            return disabledBackgroundColor ?? (isDark ? Colours.darkButtonDisabled : Colours.buttonDisabled);
+            return disabledBackgroundColor ?? themeData.unselectedWidgetColor;
           }
-          return backgroundColor ?? (isDark ? Colours.darkAppBaseMain : Colours.appBaseMain);
+          return backgroundColor ?? themeData.appBarTheme.backgroundColor;
         }),
         // 水波纹
         overlayColor: MaterialStateProperty.resolveWith((states) {
-          return (textColor ?? (isDark ? Colours.darkButtonText : Colors.white)).withOpacity(0.12);
+          return (textColor ?? (isDark ? themeData.backgroundColor : Colors.white)).withOpacity(0.12);
         }),
         // 按钮最小大小
         minimumSize: (minWidth == null || minHeight == null) ? null : MaterialStateProperty.all<Size>(Size(minWidth!, minHeight!)),

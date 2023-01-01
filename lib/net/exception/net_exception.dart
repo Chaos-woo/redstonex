@@ -7,7 +7,7 @@ class ApiException implements Exception {
   static const unknownException = "未知错误";
   final String? message;
   final int? code;
-  String? stackInfo;
+  String? exceptStack;
 
   ApiException([this.code, this.message]);
 
@@ -68,7 +68,7 @@ class ApiException implements Exception {
       return exception;
     } else {
       var apiException = ApiException(_apiCommonExceptionCode, unknownException);
-      apiException.stackInfo = exception?.toString();
+      apiException.exceptStack = exception?.toString();
       return apiException;
     }
   }

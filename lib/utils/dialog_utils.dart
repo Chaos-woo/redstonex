@@ -57,7 +57,7 @@ class DialogUtils {
       ),
       child: Text(
         text,
-        style: TextStyle(color: textColor ?? ThemeUtils.getDialogTextFieldColor()),
+        style: TextStyle(color: textColor ?? ThemeUtils.theme().primaryColor),
       ),
       onPressed: () => onTap?.call(),
     );
@@ -72,7 +72,7 @@ class DialogUtils {
     return TextButton(
       child: Text(
         text,
-        style: TextStyle(color: textColor ?? ThemeUtils.getDialogTextFieldColor()),
+        style: TextStyle(color: textColor ?? ThemeUtils.theme().primaryColor),
       ),
       onPressed: () => onTap?.call(),
     );
@@ -119,7 +119,7 @@ class DialogUtils {
     TextStyle? contentTextStyle,
     Widget? titleWidget,
     Widget? contentWidget,
-    Color? backgroundColor,
+    Color? backgroundColor = Colors.white,
     bool barrierDismissible = true,
     WillPopCallback? onWillPop,
     VoidCallback? onConfirm,
@@ -148,7 +148,7 @@ class DialogUtils {
     Widget alertDialog = AlertDialog(
       title: titleWidget ?? Text(title ?? '', style: titleTextStyle),
       content: contentWidget ?? Text(content ?? '', style: contentTextStyle),
-      backgroundColor: backgroundColor ?? ThemeUtils.getBgColor(),
+      backgroundColor: backgroundColor,
       actions: actions,
     );
 
