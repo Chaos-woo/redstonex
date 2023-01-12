@@ -1,57 +1,55 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:redstonex/utils/image_utils.dart';
 
 /// 图片加载（支持本地与网络图片）
-class LoadImage extends StatelessWidget {
-  const LoadImage(
+class RsxImageLoader extends StatelessWidget {
+  const RsxImageLoader(
     this.image, {
-    super.key,
+    Key? key,
     this.width,
     this.height,
-    this.fit = BoxFit.cover,
-    this.format = ImageFormat.png,
+    this.fit = BoxFit.fill,
     this.holderImg = '',
     this.errorImg = '',
     this.cacheWidth,
     this.cacheHeight,
-  });
+    this.netImgProgressIndicatorBuilder,
+  }) : super(key: key);
 
   final String image;
   final double? width;
   final double? height;
   final BoxFit fit;
-  final ImageFormat format;
   final String holderImg;
   final String errorImg;
   final int? cacheWidth;
   final int? cacheHeight;
+  final ProgressIndicatorBuilder? netImgProgressIndicatorBuilder;
 
   @override
   Widget build(BuildContext context) {
     if (image.isEmpty || image.startsWith('http')) {
       return CachedNetworkImage(
         imageUrl: image,
-        placeholder:
-            holderImg.isNotEmpty ? (_, __) => LoadAssetImage(holderImg, height: height, width: width, fit: fit) : null,
+        placeholder: holderImg.isNotEmpty ? (_, __) => LocalAssetImageLoader(holderImg, height: height, width: width, fit: fit) : null,
         errorWidget: errorImg.isNotEmpty
-            ? (_, __, dynamic error) => LoadAssetImage(holderImg, height: height, width: width, fit: fit)
+            ? (_, __, dynamic error) => LocalAssetImageLoader(holderImg, height: height, width: width, fit: fit)
             : holderImg.isNotEmpty
-                ? (_, __, dynamic error) => LoadAssetImage(holderImg, height: height, width: width, fit: fit)
+                ? (_, __, dynamic error) => LocalAssetImageLoader(holderImg, height: height, width: width, fit: fit)
                 : null,
         width: width,
         height: height,
         fit: fit,
         memCacheWidth: cacheWidth,
         memCacheHeight: cacheHeight,
+        progressIndicatorBuilder: netImgProgressIndicatorBuilder,
       );
     } else {
-      return LoadAssetImage(
+      return LocalAssetImageLoader(
         image,
         height: height,
         width: width,
         fit: fit,
-        format: format,
         cacheWidth: cacheWidth,
         cacheHeight: cacheHeight,
       );
@@ -59,17 +57,18 @@ class LoadImage extends StatelessWidget {
   }
 }
 
-/// 加载本地资源图片
-class LoadAssetImage extends StatelessWidget {
-  const LoadAssetImage(this.image,
-      {super.key,
-      this.width,
-      this.height,
-      this.cacheWidth,
-      this.cacheHeight,
-      this.fit,
-      this.format = ImageFormat.png,
-      this.color});
+/// 本地图片加载
+class LocalAssetImageLoader extends StatelessWidget {
+  const LocalAssetImageLoader(
+    this.image, {
+    Key? key,
+    this.width,
+    this.height,
+    this.cacheWidth,
+    this.cacheHeight,
+    this.fit,
+    this.color,
+  }) : super(key: key);
 
   final String image;
   final double? width;
@@ -77,13 +76,12 @@ class LoadAssetImage extends StatelessWidget {
   final int? cacheWidth;
   final int? cacheHeight;
   final BoxFit? fit;
-  final ImageFormat format;
   final Color? color;
 
   @override
   Widget build(BuildContext context) {
     return Image.asset(
-      ImageUtils.getImagePath(image, format: format),
+      image,
       height: height,
       width: width,
       cacheWidth: cacheWidth,

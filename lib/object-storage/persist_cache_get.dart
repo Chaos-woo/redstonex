@@ -1,14 +1,14 @@
 import 'package:flustars_flutter3/flustars_flutter3.dart';
 
 /// 基于shared_preferences的本地化缓存
-class Pcg {
-  static final Pcg _single = Pcg._();
+class RsxPcg {
+  static final RsxPcg _single = RsxPcg._();
 
-  factory Pcg() => _single;
+  factory RsxPcg() => _single;
 
-  static Pcg of() => _single;
+  static RsxPcg of() => _single;
 
-  Pcg._();
+  RsxPcg._();
 
   Future<void> initPersistCache() async {
     await SpUtil.getInstance();

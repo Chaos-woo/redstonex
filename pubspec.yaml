@@ -1,6 +1,6 @@
 name: redstonex
 description: 基于GetX的Flutter快速开发框架。Development flutter framework based GetX frame.
-version: 0.0.5
+version: 0.0.6
 homepage: https://github.com/Chaos-woo/redstonex
 
 environment:
@@ -81,8 +81,10 @@ dependencies:
   pretty_dio_logger: 1.2.0-beta-1
   # 下拉、上拉加载 https://github.com/xxzj990-game/flutter_pulltorefresh
   pull_to_refresh_flutter3: 2.0.1
-  # UI组件 https://github.com/ionicfirebaseapp/getwidget
-  getwidget: 3.0.1
+#  # UI组件 https://github.com/ionicfirebaseapp/getwidget
+#  getwidget: 3.0.1
+  # UI组件Builder模式 https://github.com/ReinBentdal/styled_widget
+  styled_widget: 0.4.1
 
 dev_dependencies:
   # Widget测试

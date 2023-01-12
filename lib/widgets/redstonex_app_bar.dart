@@ -62,7 +62,7 @@ class RsxAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
             ),
           )
-        : Gaps.empty;
+        : Gaps.emptyBox;
 
     final Widget leadingWidget = isBack
         ? IconButton(
@@ -77,7 +77,7 @@ class RsxAppBar extends StatelessWidget implements PreferredSizeWidget {
             padding: const EdgeInsets.all(12.0),
             icon: Icon(Icons.arrow_back_ios, color: titleColor,),
           )
-        : this.leadingWidget ?? Gaps.empty;
+        : this.leadingWidget ?? Gaps.emptyBox;
 
     final Widget titleWidget = customTitleWidget ?? Semantics(
       namesRoute: true,

@@ -33,9 +33,9 @@ class RsxInit {
     /// 初始化存储信息
     await DirectoryUtils.init();
     /// 初始化内存缓存
-    await Mcg().initMemoryCache();
+    await RsxMcg().initMemoryCache();
     /// 初始化本地缓存
-    await Pcg().initPersistCache();
+    await RsxPcg().initPersistCache();
     /// 初始化路由
     Dispatcher.init();
   }

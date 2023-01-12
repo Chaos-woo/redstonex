@@ -4,11 +4,12 @@ import 'package:redstonex/utils/theme_utils.dart';
 
 class BottomSheetUtils {
   static showBottomSheet(
-    Widget bottomSheet, {
+    Widget child, {
     Color? backgroundColor,
     Color? barrierColor,
     bool ignoreSafeArea = true,
-    bool isScrollControlled = false,
+    /// 高度自定义控制，设置为true时需要child组件设置合适高度
+    bool customControlHeight = false,
     bool isDismissible = true,
     bool enableDrag = true,
     ShapeBorder? shape,
@@ -24,22 +25,16 @@ class BottomSheetUtils {
     }
 
     Get.bottomSheet(
-      bottomSheet,
+      child,
       backgroundColor: backgroundColor,
       barrierColor: barrierColor,
       ignoreSafeArea: ignoreSafeArea,
-      isScrollControlled: isScrollControlled,
+      isScrollControlled: customControlHeight,
       isDismissible: isDismissible,
       enableDrag: enableDrag,
       shape: shape,
       enterBottomSheetDuration: enterBottomSheetDuration,
       exitBottomSheetDuration: exitBottomSheetDuration,
-    );
-  }
-
-  static ShapeBorder roundedTopLRRadius({double radius = 15.0}) {
-    return RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(topLeft: Radius.circular(radius), topRight: Radius.circular(radius)),
     );
   }
 }

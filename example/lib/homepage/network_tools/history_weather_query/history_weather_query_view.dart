@@ -74,7 +74,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
   }
 
   Widget _provinceCityPicker(BuildContext context) {
-    return ClickWidget(
+    return RsxClickWidget(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -233,7 +233,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
             ),
           ),
           Gaps.hGap16,
-          ClickWidget(
+          RsxClickWidget(
             child: Stack(
               children: <Widget>[
                 Container(
@@ -316,7 +316,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
                 '当前展示城市: ${cityWeather.cityName}',
                 style: TextStyle(color: daytime ? Colors.black : Colors.white),
               ),
-              ClickWidget(
+              RsxClickWidget(
                 child: CircleAvatar(
                   backgroundColor: Colors.transparent,
                   child: state.userSelectCityOrDatetimeChange

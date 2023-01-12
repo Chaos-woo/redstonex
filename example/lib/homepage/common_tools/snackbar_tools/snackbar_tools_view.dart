@@ -1,3 +1,4 @@
+import 'package:example/widgets/rsx_option_item_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:redstonex/redstonex.dart';
@@ -18,86 +19,105 @@ class SnackbarToolsComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<OptionBarItem> ops = [
-      _opItem('基本SnackBar', _desc, () {
-        SnackBarUtils.showPromptSnackBar(message: _messageString);
-      }),
-      _opItem('无标题SnackBar', _iconDesc, () {
-        SnackBarUtils.showPromptSnackBar(
+    var optionItems = [
+      RsxOptionItemUtils.functionRsxOptionItem(
+        title: '基本SnackBar',
+        description: _desc,
+        onTap: () {
+          SnackBarUtils.showPromptSnackBar(message: _messageString);
+        },
+      ),
+      RsxOptionItemUtils.functionRsxOptionItem(
+        title: '无标题SnackBar',
+        description: _iconDesc,
+        onTap: () {
+          SnackBarUtils.showPromptSnackBar(
+              message: _messageString,
+              icon: const Icon(
+                Icons.image,
+                color: Colors.grey,
+              ));
+        },
+      ),
+      RsxOptionItemUtils.functionRsxOptionItem(
+        title: '全提示性SnackBar',
+        description: _iconTitleDesc,
+        onTap: () {
+          SnackBarUtils.showPromptSnackBar(
+            title: _titleString,
             message: _messageString,
             icon: const Icon(
               Icons.image,
               color: Colors.grey,
-            ));
-      }),
-      _opItem('全提示性SnackBar', _iconTitleDesc, () {
-        SnackBarUtils.showPromptSnackBar(
-          title: _titleString,
-          message: _messageString,
-          icon: const Icon(
-            Icons.image,
-            color: Colors.grey,
-          ),
-        );
-      }),
-      _opItem('可点击的SnackBar', _iconDesc, () {
-        SnackBarUtils.showPromptSnackBar(
-          message: _messageString,
-          icon: const Icon(
-            Icons.image,
-            color: Colors.grey,
-          ),
-          lightButton: SnackBarUtils.snackBarAction('Close', onTap: () {
-            SnackBarUtils.closeCurrentSnackBar();
-          }, textStyle: const TextStyle(color: Colors.green)),
-        );
-      }),
-      _opItem('超长文字的SnackBar', _iconDesc, () {
-        SnackBarUtils.showPromptSnackBar(
-          message: _longTextString,
-          icon: const Icon(
-            Icons.image,
-            color: Colors.grey,
-          ),
-          lightButton: SnackBarUtils.snackBarAction('Close',
-              textStyle: const TextStyle(
-                color: Colors.lightBlue,
-              ), onTap: () {
-            SnackBarUtils.closeCurrentSnackBar();
-          }),
-        );
-      }),
-      _opItem('超长标题和文字的SnackBar', _iconTitleDesc, () {
-        SnackBarUtils.showPromptSnackBar(
-          title: _longTextString,
-          message: _longTextString,
-          icon: const Icon(
-            Icons.image,
-            color: Colors.grey,
-          ),
-        );
-      },),
+            ),
+          );
+        },
+      ),
+      RsxOptionItemUtils.functionRsxOptionItem(
+        title: '可点击的SnackBar',
+        description: _iconDesc,
+        onTap: () {
+          SnackBarUtils.showPromptSnackBar(
+            message: _messageString,
+            icon: const Icon(
+              Icons.image,
+              color: Colors.grey,
+            ),
+            lightButton: SnackBarUtils.snackBarAction('Close', onTap: () {
+              SnackBarUtils.closeCurrentSnackBar();
+            }, textStyle: const TextStyle(color: Colors.green)),
+          );
+        },
+      ),
+      RsxOptionItemUtils.functionRsxOptionItem(
+        title: '超长文字的SnackBar',
+        description: _iconDesc,
+        onTap: () {
+          SnackBarUtils.showPromptSnackBar(
+            message: _longTextString,
+            icon: const Icon(
+              Icons.image,
+              color: Colors.grey,
+            ),
+            lightButton: SnackBarUtils.snackBarAction('Close',
+                textStyle: const TextStyle(
+                  color: Colors.lightBlue,
+                ), onTap: () {
+              SnackBarUtils.closeCurrentSnackBar();
+            }),
+          );
+        },
+      ),
+      RsxOptionItemUtils.functionRsxOptionItem(
+        title: '超长标题和文字的SnackBar',
+        description: _iconTitleDesc,
+        onTap: () {
+          SnackBarUtils.showPromptSnackBar(
+            title: _longTextString,
+            message: _longTextString,
+            icon: const Icon(
+              Icons.image,
+              color: Colors.grey,
+            ),
+          );
+        },
+      ),
     ];
 
-    var obGroup = [ops];
+    var optionGroupItems = RsxOptionGroupItem(
+      optionItems: optionItems,
+    );
+
     return GFAccordion(
       title: 'Snackbar',
-      contentChild: OptionBarGroup(optionBarItemGroups: obGroup),
+      contentChild: RsxOptionGroupWidget(
+        optionGroupItems: [optionGroupItems],
+        physics: const NeverScrollableScrollPhysics(),
+      ),
       margin: EdgeInsets.zero,
       collapsedTitleBackgroundColor: Colors.grey.withOpacity(0.1),
       expandedTitleBackgroundColor: Colors.grey.withOpacity(0.1),
       showAccordion: false,
-    );
-  }
-
-  OptionBarItem _opItem(String label, String? description, VoidCallback onTap) {
-    return OptionBarItem(
-      label,
-      leadingIcon: Icons.touch_app,
-      leadingIconColor: ThemeUtils.theme().iconTheme.color,
-      subTitle: description,
-      subTitleColor: ThemeUtils.theme().textTheme.bodyText1?.color,
-      onTap: onTap,
     );
   }
 }

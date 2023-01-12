@@ -1,3 +1,8 @@
+## 0.0.6
+**>> BREAKING CHANGE VERSION <<**
+* 优化 `RsxOptionGroupWidget` 组件工具
+* 移除部分不需要的内置widget
+
 ## 0.0.5
 **>> BREAKING CHANGE VERSION <<**
 * 毁灭性地优化了`DialogUtils`、`ToastUtils`、`SnackBarUtils`、`BottomSheetUtils`工具

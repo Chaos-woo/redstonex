@@ -23,7 +23,7 @@ class WeatherService extends GetxService {
     String supportProvinceCityKeyPrefix = 'kJvheCities';
     List<Province> pList = await getSupportProvinces();
     for (Province p in pList) {
-      List<City>? cityCache = Pcg.of().readObjList(supportProvinceCityKeyPrefix + p.id, (v) {
+      List<City>? cityCache = RsxPcg.of().readObjList(supportProvinceCityKeyPrefix + p.id, (v) {
         Map<String, dynamic> cData = v as Map<String, dynamic>;
         City city = City();
         city.id = cData['id'];
@@ -37,7 +37,7 @@ class WeatherService extends GetxService {
 
   Future<List<Province>> getSupportProvinces() async {
     String supportProvinceKey = 'kJvheProvinces';
-    List<Province>? pCache = Pcg.of().readObjList(supportProvinceKey, (v) {
+    List<Province>? pCache = RsxPcg.of().readObjList(supportProvinceKey, (v) {
       Map<String, dynamic> pData = v as Map<String, dynamic>;
       Province p = Province();
       p.id = pData['id'];
@@ -49,7 +49,7 @@ class WeatherService extends GetxService {
     if (null == pCache) {
       LogUtils.d('not hit province cache');
       pCache = await _jvheApiProvider.getHistoryWeatherSupportProvinces();
-      Pcg.of().putObjectList(supportProvinceKey, pCache);
+      RsxPcg.of().putObjectList(supportProvinceKey, pCache);
     }
 
     /// 演示仅使用了1个省份
@@ -64,7 +64,7 @@ class WeatherService extends GetxService {
     String supportProvinceCityKeyPrefix = 'kJvheCities';
 
     for (Province p in provinces) {
-      List<City>? cityCache = Pcg.of().readObjList(supportProvinceCityKeyPrefix + p.id, (v) {
+      List<City>? cityCache = RsxPcg.of().readObjList(supportProvinceCityKeyPrefix + p.id, (v) {
         Map<String, dynamic> cData = v as Map<String, dynamic>;
         City city = City();
         city.id = cData['id'];
@@ -88,7 +88,7 @@ class WeatherService extends GetxService {
       List<City> cities = await _jvheApiProvider.getHistoryWeatherMultiProvinceSupportCities(notCacheCitiesProvinceIds);
       for (String pId in notCacheCitiesProvinceIds) {
         List<City> currentProvinceCities = cities.where((element) => pId == element.provinceId).toList();
-        Pcg.of().putObjectList(supportProvinceCityKeyPrefix + pId, currentProvinceCities);
+        RsxPcg.of().putObjectList(supportProvinceCityKeyPrefix + pId, currentProvinceCities);
         provinceCities.add(_pakProvinceCity(provinceMap[pId]!, currentProvinceCities));
       }
     }
@@ -116,13 +116,13 @@ class WeatherService extends GetxService {
 
   /// 缓存当前选择城市
   void cacheSelectLatestProvinceCity(Province province, City city) {
-    Pcg.of().writeObj(kSelectedProvince, province);
-    Pcg.of().writeObj(kSelectedCity, city);
+    RsxPcg.of().writeObj(kSelectedProvince, province);
+    RsxPcg.of().writeObj(kSelectedCity, city);
   }
 
   /// 获取缓存中选中的省份
   Future<Province?> getCacheSelectProvince() async {
-    return Pcg.of().readObj(kSelectedProvince, (v) {
+    return RsxPcg.of().readObj(kSelectedProvince, (v) {
       Map<String, dynamic> pData = v as Map<String, dynamic>;
       Province p = Province();
       p.id = pData['id'];
@@ -133,7 +133,7 @@ class WeatherService extends GetxService {
 
   /// 获取缓存中选中的城市或地区
   Future<City?> getCacheSelectCity() async {
-    return Pcg.of().readObj(kSelectedCity, (v) {
+    return RsxPcg.of().readObj(kSelectedCity, (v) {
       Map<String, dynamic> cData = v as Map<String, dynamic>;
       City c = City();
       c.id = cData['id'];

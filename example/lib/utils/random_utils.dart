@@ -18,4 +18,8 @@ class RandomUtils {
   static Widget getRandomAvatar({double height = 50.0, double width = 50.0}) {
     return randomAvatar(getRandomString(4, 7), trBackground: false, height: height, width: width);
   }
+
+  static Widget getFixedRandomAvatar(String string, {double height = 50.0, double width = 50.0}) {
+    return randomAvatar(string, trBackground: false, height: height, width: width);
+  }
 }
