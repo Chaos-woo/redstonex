@@ -74,6 +74,7 @@ dependencies:
   url_launcher: ^6.1.8
   # SQLite本地数据库 https://github.com/tekartik/sqflite/tree/master/sqflite
   sqflite: 2.0.3
+  sqflite_common: 2.4.2+2
   # 注解式本地数据库 https://pub.dev/packages/floor
   floor: 1.3.0
 
