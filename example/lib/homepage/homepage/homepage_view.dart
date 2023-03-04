@@ -7,15 +7,15 @@ import 'package:redstonex/redstonex.dart';
 import 'homepage_logic.dart';
 
 class HomepagePage extends StatelessWidget {
-  final logic = Depends.on<HomepageLogic>();
-  final state = Depends.on<HomepageLogic>().state;
+  final logic = XDepends().on<HomepageLogic>();
+  final state = XDepends().on<HomepageLogic>().state;
 
   HomepagePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return RsxScrollView(
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+    return RsxVerticalScrollView(
+      scrollViewPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
       children: [
         _toolTitleBuilder('通用工具示例'),
         CommonToolsComponent(),

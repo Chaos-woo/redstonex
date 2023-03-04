@@ -1,11 +1,11 @@
 import 'package:redstonex/generated/json/base/json_convert_content.dart';
-import 'package:redstonex/mvp/paging/paging_params.dart';
+import 'package:redstonex/paging/paging_params.dart';
 
 PagingParams $PagingParamsFromJson(Map<String, dynamic> json) {
 	final PagingParams pagingParams = PagingParams();
-	final int? current = jsonConvert.convert<int>(json['current']);
-	if (current != null) {
-		pagingParams.current = current;
+	final int? currentIndex = jsonConvert.convert<int>(json['currentIndex']);
+	if (currentIndex != null) {
+		pagingParams.currentIndex = currentIndex;
 	}
 	final Map<String, dynamic>? extra = jsonConvert.convert<Map<String, dynamic>>(json['extra']);
 	if (extra != null) {
@@ -36,7 +36,7 @@ PagingParams $PagingParamsFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> $PagingParamsToJson(PagingParams entity) {
 	final Map<String, dynamic> data = <String, dynamic>{};
-	data['current'] = entity.current;
+	data['currentIndex'] = entity.currentIndex;
 	data['extra'] = entity.extra;
 	data['model'] = entity.model;
 	data['order'] = entity.order;

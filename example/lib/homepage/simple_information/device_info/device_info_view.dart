@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redstonex/redstonex.dart';
+import 'package:styled_widget/styled_widget.dart';
 
 import 'device_info_logic.dart';
 
 class DeviceInfoPage extends StatelessWidget {
-  final logic = Depends.on<DeviceInfoLogic>();
-  final state = Depends.on<DeviceInfoLogic>().state;
+  final logic = XDepends().on<DeviceInfoLogic>();
+  final state = XDepends().on<DeviceInfoLogic>().state;
 
   DeviceInfoPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const RsxAppBar(
+      appBar: RsxAppBar(
         title: '设备信息',
-        titleColor: Colors.white,
+        frontColor: Colors.white,
         backgroundColor: Colors.deepPurple,
+        isBack: true,
       ),
       body: Container(
         height: double.infinity,
@@ -28,7 +30,7 @@ class DeviceInfoPage extends StatelessWidget {
         )),
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         child: GetBuilder<DeviceInfoLogic>(
-          builder: (_) => RsxScrollView(
+          builder: (_) => RsxVerticalScrollView(
             children: <Widget>[
               _infoLabel('手机信息'),
               Gaps.vGap10,
@@ -97,43 +99,42 @@ class DeviceInfoPage extends StatelessWidget {
   }
 
   Widget _infoCard(String label, String? text) {
-    return RsxCard(
-      color: Colors.white,
-      shadowColor: Colors.transparent,
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        margin: const EdgeInsets.all(5),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-              flex: 1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    label,
-                    style: const TextStyle(fontSize: 10, color: Colors.grey),
-                  )
-                ],
+    return Container(
+      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.all(5),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Expanded(
+            flex: 1,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  label,
+                  style: const TextStyle(fontSize: 10, color: Colors.grey),
+                )
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 4,
+            child: Center(
+              child: Text(
+                text ?? '--',
+                style: const TextStyle(fontSize: 15, color: Colors.black),
+                maxLines: 2,
+                overflow: TextOverflow.clip,
               ),
             ),
-            Expanded(
-              flex: 4,
-              child: Center(
-                child: Text(
-                  text ?? '--',
-                  style: const TextStyle(fontSize: 15, color: Colors.black),
-                  maxLines: 2,
-                  overflow: TextOverflow.clip,
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
-    );
+    ).decorated(color: Colors.white, borderRadius: BorderRadius.circular(8.0),
+      boxShadow: <BoxShadow>[
+        const BoxShadow(color: Color(0x80DCE7FA), offset: Offset(0.0, 2.0), blurRadius: 8.0),
+      ],);
   }
 
   Widget _infoLabel(String label) {

@@ -1,19 +1,17 @@
 import 'package:get_storage/get_storage.dart';
 
 /// 基于get_storage的内存缓存
-class RsxMcg {
-  static const String _fixed = 'rsx-mcg';
+class XMemoryStorage {
+  static const String _fixed = '&rsx-mcg';
   static final GetStorage _ocs = GetStorage(_fixed);
 
   GetStorage? occ() => _ocs;
 
-  static final RsxMcg _single = RsxMcg._();
+  static final XMemoryStorage _single = XMemoryStorage._internal();
 
-  factory RsxMcg() => _single;
+  factory XMemoryStorage() => _single;
 
-  static RsxMcg of() => _single;
-
-  RsxMcg._();
+  XMemoryStorage._internal();
 
   Future<void> initMemoryCache() async {
     await GetStorage.init(_fixed);

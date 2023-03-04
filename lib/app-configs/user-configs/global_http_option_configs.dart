@@ -18,7 +18,7 @@ class GlobalHttpOptionConfigs {
   int get sendTimeout => 10000;
 
   /// 默认内容类型
-  String get sendContentType => 'application/json; charset=utf-8';
+  String get sendContentType => Headers.jsonContentType;
 
   /// 默认响应类型
   ResponseType get responseType => ResponseType.json;

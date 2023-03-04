@@ -13,21 +13,21 @@ class ToastToolsComponent extends StatelessWidget {
         title: '基本Toast',
         description: 'toast',
         onTap: () {
-          ToastUtils.show('Toast是一种简易的消息提示框');
+          XToast().show('Toast是一种简易的消息提示框');
         },
       ),
       RsxOptionItemUtils.functionRsxOptionItem(
         title: '长文案Toast',
         description: '有很长文案的toast，默认最大展示2行',
         onTap: () {
-          ToastUtils.show('Toast是一种简易的消息提示框。很长的文案，很长的文案，很长的文案，很长的文案，很长的文案，很长的文案，很长的文案，很长的文案');
+          XToast().show('Toast是一种简易的消息提示框。很长的文案，很长的文案，很长的文案，很长的文案，很长的文案，很长的文案，很长的文案，很长的文案');
         },
       ),
       RsxOptionItemUtils.functionRsxOptionItem(
         title: '带图标的Toast',
         description: '有与文案相匹配的图标',
         onTap: () {
-          ToastUtils.show('Toast还可以与icon组合', icon: Icons.tips_and_updates, iconColor: Colors.yellowAccent);
+          XToast().show('Toast还可以与icon组合', icon: Icons.tips_and_updates, iconColor: Colors.yellowAccent);
         },
       ),
     ];

@@ -18,7 +18,7 @@ class DeviceInfoState {
   DeviceInfoState();
 
   void init() {
-    var android = DeviceUtils.androidInfo;
+    var android = XDevice.androidInfo;
     board = android.board;
     brand = android.brand;
     industrialDesignName = android.device;
@@ -28,9 +28,9 @@ class DeviceInfoState {
     host = android.host;
     androidBaseOS = android.version.baseOS;
 
-    appName = AppPackageUtils.appName();
-    appVersion = AppPackageUtils.version();
-    buildNumber = AppPackageUtils.buildNumber();
-    packageName = AppPackageUtils.packageName();
+    appName = XAppPackage().appName();
+    appVersion = XAppPackage().version();
+    buildNumber = XAppPackage().buildNumber();
+    packageName = XAppPackage().packageName();
   }
 }

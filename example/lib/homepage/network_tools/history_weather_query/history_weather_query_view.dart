@@ -13,8 +13,8 @@ import 'history_weather_query_logic.dart';
 import 'models/city_history_weather.dart';
 
 class HistoryWeatherQueryPage extends StatelessWidget {
-  final logic = Depends.on<HistoryWeatherQueryLogic>();
-  final state = Depends.on<HistoryWeatherQueryLogic>().state;
+  final logic = XDepends().on<HistoryWeatherQueryLogic>();
+  final state = XDepends().on<HistoryWeatherQueryLogic>().state;
 
   HistoryWeatherQueryPage({Key? key}) : super(key: key);
 
@@ -24,7 +24,8 @@ class HistoryWeatherQueryPage extends StatelessWidget {
 
     return Scaffold(
       appBar: RsxAppBar(
-        titleColor: Colors.white,
+        frontColor: Colors.white,
+        isBack: true,
         customTitleWidget: Container(
           alignment: Alignment.center,
           width: double.infinity,
@@ -91,7 +92,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
               String cityShowText = '设置城市';
               String? pName = state.selectedProvinceCityState.province?.name;
               String? cName = state.selectedProvinceCityState.city?.name;
-              if (!pName.nullOrBlankObj || !cName.nullOrBlankObj) {
+              if (!pName.oNullOrBlank || !cName.oNullOrBlank) {
                 cityShowText = '$pName,$cName';
               }
 
@@ -135,15 +136,15 @@ class HistoryWeatherQueryPage extends StatelessWidget {
       builder: (_) {
         return Container(
           margin: const EdgeInsets.symmetric(vertical: 10),
-          width: ScreenUtils.screenWidth - 80,
-          height: ScreenUtils.screenHeight * 0.5,
+          width: XScreen().screenWidth - 80,
+          height: XScreen().screenHeight * 0.5,
           decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(10.0)),
           ),
           child: GFCarousel(
             viewportFraction: 1.0,
-            height: ScreenUtils.screenHeight * 0.5,
+            height: XScreen().screenHeight * 0.5,
             items: <Widget>[
               _weatherCarousel(true, state.latestQueryWeatherState.weatherCompose.dayWeather),
               _weatherCarousel(false, state.latestQueryWeatherState.weatherCompose.nightWeather),
@@ -175,7 +176,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
             builder: (_) {
               return TextButton(
                 onPressed: () {
-                  DateTime previousDay = DatetimeUtils.previousDay(DateTime.now());
+                  DateTime previousDay = XDatetime().previousDay(DateTime.now());
                   Pickers.showDatePicker(
                     context,
                     // 模式，详见下方
@@ -194,7 +195,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
                   );
                 },
                 child: Text(
-                  DatetimeUtils.yyyyMMddFormat(state.selectDateTime),
+                  XDatetime().yyyyMMddFormat(state.selectDateTime),
                   style: const TextStyle(
                     fontSize: 20,
                     color: Colors.white,
@@ -221,6 +222,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           ElevatedButton(
+            style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.blue)),
             onPressed: () {
               logic.loadCityHistoryWeather(state.selectDateTime);
             },
@@ -256,7 +258,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
               ],
             ),
             onTap: () {
-              DialogUtils.showPromptDialog(
+              XDialog().showPromptDialog(
                   title: '聚合数据API',
                   content: '''
 天气预报API接口
@@ -266,7 +268,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
                         ''',
                   textConfirm: '了解',
                   onConfirm: () {
-                    Navigators.back();
+                    XNavigator().back();
                   });
             },
           )
@@ -282,7 +284,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(10.0)),
           image: DecorationImage(
-            image: ImageUtils.getAssetImageProvider(daytime ? 'assets/images/bg/bg_daytime.jpeg' : 'assets/images/bg/bg_night.jpeg'),
+            image: XImage().getAssetImageProvider(daytime ? 'assets/images/bg/bg_daytime.jpeg' : 'assets/images/bg/bg_night.jpeg'),
             fit: BoxFit.fill,
           )),
       child: ClipRRect(
@@ -326,7 +328,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
                       : const Spacer(),
                 ),
                 onTap: () {
-                  showPopupWindow(
+                  RsxPopupWindow.show(
                       context: Get.context!,
                       anchor: wChangeTipIconKey.renderBox,
                       child: Container(
@@ -334,7 +336,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
                         margin: const EdgeInsets.symmetric(horizontal: 20),
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: ThemeUtils.isDarkMode() ? ThemeUtils.theme().primaryColorDark : ThemeUtils.theme().primaryColor,
+                          color: XTheme().isDarkMode() ? XTheme().theme().primaryColorDark : XTheme().theme().primaryColor,
                           borderRadius: const BorderRadius.all(Radius.circular(10)),
                         ),
                         child: const Text(
@@ -358,7 +360,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
                 height: 70,
                 width: 70,
                 child: Image(
-                  image: ImageUtils.getAssetImageProvider(logic.getWeatherCodeIconPath(cityWeather.weatherId, daytime: daytime)),
+                  image: XImage().getAssetImageProvider(logic.getWeatherCodeIconPath(cityWeather.weatherId, daytime: daytime)),
                 ),
               ),
               Gaps.hGap15,

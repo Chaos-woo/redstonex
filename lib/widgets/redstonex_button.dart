@@ -1,75 +1,149 @@
 import 'package:flutter/material.dart';
 import 'package:redstonex/resources/dimens.dart';
-import 'package:redstonex/utils/theme_utils.dart';
+import 'package:redstonex/utils/theme.dart';
 
-class RsxButton extends StatelessWidget {
+class RsxTextButton extends StatelessWidget {
+  RsxTextButton({
+    Key? key,
+    this.text = '',
+    this.fontSize = Dimens.fontSp18,
+    this.textColor,
+    this.disabledTextColor,
+    this.backgroundColor = Colors.transparent,
+    this.disabledBackgroundColor,
+    this.onPressed,
+    this.minHeight = 48.0,
+    this.minWidth = double.infinity,
+    this.padding = const EdgeInsets.symmetric(horizontal: 16.0),
+    this.radius,
+    this.side = BorderSide.none,
+  }) : super(key: key);
 
-  const RsxButton({
-    super.key,
+  String text;
+  double fontSize;
+  Color? textColor;
+  Color? disabledTextColor;
+  Color? backgroundColor;
+  Color? disabledBackgroundColor;
+  double? minHeight;
+  double? minWidth;
+  VoidCallback? onPressed;
+  EdgeInsetsGeometry padding;
+  double? radius;
+  BorderSide? side;
+
+  @override
+  Widget build(BuildContext context) {
+    final bool isDark = XTheme().isDarkMode();
+    ThemeData themeData = XTheme().theme();
+    return TextButton(
+        onPressed: onPressed,
+        style: ButtonStyle(
+          // 文字颜色
+          foregroundColor: MaterialStateProperty.resolveWith(
+            (states) {
+              if (states.contains(MaterialState.disabled)) {
+                return disabledTextColor ?? themeData.disabledColor;
+              }
+              return textColor ?? themeData.textTheme.button?.color;
+            },
+          ),
+          // 背景颜色
+          backgroundColor: MaterialStateProperty.resolveWith((states) {
+            if (states.contains(MaterialState.disabled)) {
+              return disabledBackgroundColor ?? themeData.unselectedWidgetColor;
+            }
+            return backgroundColor ?? themeData.buttonTheme.colorScheme?.background;
+          }),
+          // 水波纹
+          overlayColor: MaterialStateProperty.resolveWith((states) {
+            return (textColor ?? (isDark ? themeData.backgroundColor : Colors.white)).withOpacity(0.12);
+          }),
+          // 按钮最小大小
+          minimumSize: (minWidth == null || minHeight == null) ? null : MaterialStateProperty.all<Size>(Size(minWidth!, minHeight!)),
+          padding: MaterialStateProperty.all<EdgeInsetsGeometry>(padding),
+          shape: radius != null
+              ? MaterialStateProperty.all<OutlinedBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(radius!),
+                  ),
+                )
+              : null,
+          side: side != null ? MaterialStateProperty.all<BorderSide>(side!) : null,
+        ),
+        child: Text(text, style: TextStyle(fontSize: fontSize)));
+  }
+}
+
+class RsxElevatedButton extends StatelessWidget {
+  RsxElevatedButton({
+    Key? key,
     this.text = '',
     this.fontSize = Dimens.fontSp18,
     this.textColor,
     this.disabledTextColor,
     this.backgroundColor,
     this.disabledBackgroundColor,
+    this.onPressed,
     this.minHeight = 48.0,
     this.minWidth = double.infinity,
     this.padding = const EdgeInsets.symmetric(horizontal: 16.0),
-    this.radius = 2.0,
+    this.radius,
     this.side = BorderSide.none,
-    required this.onPressed,
-  });
+  }) : super(key: key);
 
-  final String text;
-  final double fontSize;
-  final Color? textColor;
-  final Color? disabledTextColor;
-  final Color? backgroundColor;
-  final Color? disabledBackgroundColor;
-  final double? minHeight;
-  final double? minWidth;
-  final VoidCallback? onPressed;
-  final EdgeInsetsGeometry padding;
-  final double radius;
-  final BorderSide side;
+  String text;
+  double fontSize;
+  Color? textColor;
+  Color? disabledTextColor;
+  Color? backgroundColor;
+  Color? disabledBackgroundColor;
+  double? minHeight;
+  double? minWidth;
+  VoidCallback? onPressed;
+  EdgeInsetsGeometry padding;
+  double? radius;
+  BorderSide? side;
 
   @override
   Widget build(BuildContext context) {
-    final bool isDark = context.isDarkMode;
-    ThemeData themeData = ThemeUtils.theme();
-    return TextButton(
-      onPressed: onPressed,
-      style: ButtonStyle(
-        // 文字颜色
-        foregroundColor: MaterialStateProperty.resolveWith((states) {
-            if (states.contains(MaterialState.disabled)) {
-              return disabledTextColor ?? themeData.disabledColor;
-            }
-            return textColor ?? themeData.textTheme.button?.color;
-          },
-        ),
-        // 背景颜色
-        backgroundColor: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.disabled)) {
-            return disabledBackgroundColor ?? themeData.unselectedWidgetColor;
-          }
-          return backgroundColor ?? themeData.appBarTheme.backgroundColor;
-        }),
-        // 水波纹
-        overlayColor: MaterialStateProperty.resolveWith((states) {
-          return (textColor ?? (isDark ? themeData.backgroundColor : Colors.white)).withOpacity(0.12);
-        }),
-        // 按钮最小大小
-        minimumSize: (minWidth == null || minHeight == null) ? null : MaterialStateProperty.all<Size>(Size(minWidth!, minHeight!)),
-        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(padding),
-        shape: MaterialStateProperty.all<OutlinedBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(radius),
+    final bool isDark = XTheme().isDarkMode();
+    ThemeData themeData = XTheme().theme();
+    return ElevatedButton(
+        onPressed: onPressed,
+        style: ButtonStyle(
+          // 文字颜色
+          foregroundColor: MaterialStateProperty.resolveWith(
+                (states) {
+              if (states.contains(MaterialState.disabled)) {
+                return disabledTextColor ?? themeData.disabledColor;
+              }
+              return textColor ?? themeData.textTheme.button?.color;
+            },
           ),
+          // 背景颜色
+          backgroundColor: MaterialStateProperty.resolveWith((states) {
+            if (states.contains(MaterialState.disabled)) {
+              return disabledBackgroundColor ?? themeData.unselectedWidgetColor;
+            }
+            return backgroundColor ?? themeData.buttonTheme.colorScheme?.background;
+          }),
+          // 水波纹
+          overlayColor: MaterialStateProperty.resolveWith((states) {
+            return (textColor ?? (isDark ? themeData.backgroundColor : Colors.white)).withOpacity(0.12);
+          }),
+          // 按钮最小大小
+          minimumSize: (minWidth == null || minHeight == null) ? null : MaterialStateProperty.all<Size>(Size(minWidth!, minHeight!)),
+          padding: MaterialStateProperty.all<EdgeInsetsGeometry>(padding),
+          shape: radius != null
+              ? MaterialStateProperty.all<OutlinedBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(radius!),
+            ),
+          )
+              : null,
+          side: side != null ? MaterialStateProperty.all<BorderSide>(side!) : null,
         ),
-        side: MaterialStateProperty.all<BorderSide>(side),
-      ),
-      child: Text(text, style: TextStyle(fontSize: fontSize),)
-    );
+        child: Text(text, style: TextStyle(fontSize: fontSize)));
   }
 }

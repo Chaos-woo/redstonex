@@ -7,7 +7,7 @@ import 'package:redstonex/redstonex.dart';
 import 'network_tools_logic.dart';
 
 class NetworkToolsComponent extends StatelessWidget {
-  final logic = Provides.provide(NetworkToolsLogic());
+  final logic = XProvides().provide(NetworkToolsLogic());
 
   NetworkToolsComponent({Key? key}) : super(key: key);
 
@@ -18,7 +18,14 @@ class NetworkToolsComponent extends StatelessWidget {
         title: '历史天气查询',
         description: '异步HTTP网络请求展示',
         onTap: () {
-          Navigators.to(RouteCompose.weatherRoute.homeWeather);
+          XNavigator().to(RouteCompose.weatherRoute.homeWeather);
+        },
+      ),
+      RsxOptionItemUtils.navigatorRsxOptionItem(
+        title: 'Bilibili“综合热门”视频查询',
+        description: '分页查询网络请求展示',
+        onTap: () {
+          XNavigator().to(RouteCompose.biliRoute.hotVideos);
         },
       ),
     ];

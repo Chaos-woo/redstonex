@@ -10,7 +10,7 @@ import 'package:redstonex/redstonex.dart';
 /// 天气服务
 /// 业务服务模块向上提供统一逻辑方法
 class WeatherService extends GetxService {
-  final JvheApiProvider _jvheApiProvider = Depends.on();
+  final JvheApiProvider _jvheApiProvider = XDepends().on();
 
   /// [onError] 用于向下传递错误处理：
   /// 1. view向controller传递的页面处理
@@ -23,7 +23,7 @@ class WeatherService extends GetxService {
     String supportProvinceCityKeyPrefix = 'kJvheCities';
     List<Province> pList = await getSupportProvinces();
     for (Province p in pList) {
-      List<City>? cityCache = RsxPcg.of().readObjList(supportProvinceCityKeyPrefix + p.id, (v) {
+      List<City>? cityCache = XPersistentStorage().readObjList(supportProvinceCityKeyPrefix + p.id, (v) {
         Map<String, dynamic> cData = v as Map<String, dynamic>;
         City city = City();
         city.id = cData['id'];
@@ -31,13 +31,13 @@ class WeatherService extends GetxService {
         city.provinceId = cData['provinceId'];
         return city;
       });
-      LogUtils.d('localCache province(${p.name}, ${p.id}), cities: $cityCache');
+      XLog().debug('localCache province(${p.name}, ${p.id}), cities: $cityCache');
     }
   }
 
   Future<List<Province>> getSupportProvinces() async {
     String supportProvinceKey = 'kJvheProvinces';
-    List<Province>? pCache = RsxPcg.of().readObjList(supportProvinceKey, (v) {
+    List<Province>? pCache = XPersistentStorage().readObjList(supportProvinceKey, (v) {
       Map<String, dynamic> pData = v as Map<String, dynamic>;
       Province p = Province();
       p.id = pData['id'];
@@ -47,9 +47,9 @@ class WeatherService extends GetxService {
 
     /// 缓存不存在时获取新数据
     if (null == pCache) {
-      LogUtils.d('not hit province cache');
+      XLog().debug('not hit province cache');
       pCache = await _jvheApiProvider.getHistoryWeatherSupportProvinces();
-      RsxPcg.of().putObjectList(supportProvinceKey, pCache);
+      XPersistentStorage().putObjectList(supportProvinceKey, pCache);
     }
 
     /// 演示仅使用了1个省份
@@ -64,7 +64,7 @@ class WeatherService extends GetxService {
     String supportProvinceCityKeyPrefix = 'kJvheCities';
 
     for (Province p in provinces) {
-      List<City>? cityCache = RsxPcg.of().readObjList(supportProvinceCityKeyPrefix + p.id, (v) {
+      List<City>? cityCache = XPersistentStorage().readObjList(supportProvinceCityKeyPrefix + p.id, (v) {
         Map<String, dynamic> cData = v as Map<String, dynamic>;
         City city = City();
         city.id = cData['id'];
@@ -88,7 +88,7 @@ class WeatherService extends GetxService {
       List<City> cities = await _jvheApiProvider.getHistoryWeatherMultiProvinceSupportCities(notCacheCitiesProvinceIds);
       for (String pId in notCacheCitiesProvinceIds) {
         List<City> currentProvinceCities = cities.where((element) => pId == element.provinceId).toList();
-        RsxPcg.of().putObjectList(supportProvinceCityKeyPrefix + pId, currentProvinceCities);
+        XPersistentStorage().putObjectList(supportProvinceCityKeyPrefix + pId, currentProvinceCities);
         provinceCities.add(_pakProvinceCity(provinceMap[pId]!, currentProvinceCities));
       }
     }
@@ -116,13 +116,13 @@ class WeatherService extends GetxService {
 
   /// 缓存当前选择城市
   void cacheSelectLatestProvinceCity(Province province, City city) {
-    RsxPcg.of().writeObj(kSelectedProvince, province);
-    RsxPcg.of().writeObj(kSelectedCity, city);
+    XPersistentStorage().writeObj(kSelectedProvince, province);
+    XPersistentStorage().writeObj(kSelectedCity, city);
   }
 
   /// 获取缓存中选中的省份
   Future<Province?> getCacheSelectProvince() async {
-    return RsxPcg.of().readObj(kSelectedProvince, (v) {
+    return XPersistentStorage().readObj(kSelectedProvince, (v) {
       Map<String, dynamic> pData = v as Map<String, dynamic>;
       Province p = Province();
       p.id = pData['id'];
@@ -133,7 +133,7 @@ class WeatherService extends GetxService {
 
   /// 获取缓存中选中的城市或地区
   Future<City?> getCacheSelectCity() async {
-    return RsxPcg.of().readObj(kSelectedCity, (v) {
+    return XPersistentStorage().readObj(kSelectedCity, (v) {
       Map<String, dynamic> cData = v as Map<String, dynamic>;
       City c = City();
       c.id = cData['id'];
@@ -146,8 +146,8 @@ class WeatherService extends GetxService {
   Future<CityHistoryWeatherCompose> getCityHistoryWeatherCompose({required String cityId, required DateTime dateTime}) async {
     CityHistoryWeather dayWeather = CityHistoryWeather.placeholder();
     CityHistoryWeather nightWeather = CityHistoryWeather.placeholder();
-    dayWeather.weatherDate = DatetimeUtils.yyyyMMddFormat(dateTime);
-    nightWeather.weatherDate = DatetimeUtils.yyyyMMddFormat(dateTime);
+    dayWeather.weatherDate = XDatetime().yyyyMMddFormat(dateTime);
+    nightWeather.weatherDate = XDatetime().yyyyMMddFormat(dateTime);
     List<CityHistoryWeather> cityHistoryWeathers = await _jvheApiProvider.getSingleCityWeather(cityId: cityId, dateTime: dateTime);
     if (cityHistoryWeathers.isNotEmpty) {
       dayWeather = cityHistoryWeathers[0];

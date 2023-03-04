@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:redstonex/utils/func_utils.dart';
+import 'package:redstonex/extension/function_extension.dart';
 
 enum ClickType { none, throttle, throttleWithTimeout, debounce }
 

@@ -1,12 +1,12 @@
-class RsxException implements Exception {
-  static int fixedErrCode = -1;
+import 'package:redstonex/exceptions/error_consts.dart';
 
-  final int _code;
-  final String _msg;
+class RsxInternalException implements Exception {
+  final String code;
+  final String msg;
 
-  RsxException(this._code, this._msg);
+  RsxInternalException(this.code, this.msg);
 
-  int get code => _code;
-
-  String get msg => _msg;
+  RsxInternalException.compose(ErrorCompose compose)
+      : code = compose.code,
+        msg = compose.msg;
 }

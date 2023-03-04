@@ -21,9 +21,9 @@ class BottomSheetToolsComponent extends StatelessWidget {
         title: '深色模式选择',
         description: '切换模式',
         onTap: () {
-          BottomSheetUtils.showBottomSheet(
+          XBottomSheet().showBottomSheet(
             _renderDarkModeView(),
-            shape: ShapeBorderUtils.roundedRectangleBorderOnly(topLeft: 15.0, topRight: 15.0),
+            shape: XShapeBorder().roundedRectangleBorderOnly(topLeft: 15.0, topRight: 15.0),
           );
         },
       ),
@@ -31,9 +31,9 @@ class BottomSheetToolsComponent extends StatelessWidget {
         title: '评论区',
         description: '展示用户评论',
         onTap: () {
-          BottomSheetUtils.showBottomSheet(
+          XBottomSheet().showBottomSheet(
             _renderCommentsView(context, commentComponents),
-            shape: ShapeBorderUtils.roundedRectangleBorderOnly(topLeft: 15.0, topRight: 15.0),
+            shape: XShapeBorder().roundedRectangleBorderOnly(topLeft: 15.0, topRight: 15.0),
             enterBottomSheetDuration: 400.milliseconds,
             exitBottomSheetDuration: 300.milliseconds,
           );
@@ -43,9 +43,9 @@ class BottomSheetToolsComponent extends StatelessWidget {
         title: '评论区V2',
         description: '展示用户评论,设置bottom sheet高度',
         onTap: () {
-          BottomSheetUtils.showBottomSheet(
-            _renderCommentsView(context, commentComponents).height(ScreenUtils.screenHeight * 0.85),
-            shape: ShapeBorderUtils.roundedRectangleBorderOnly(topLeft: 15.0, topRight: 15.0),
+          XBottomSheet().showBottomSheet(
+            _renderCommentsView(context, commentComponents).height(XScreen().screenHeight * 0.85),
+            shape: XShapeBorder().roundedRectangleBorderOnly(topLeft: 15.0, topRight: 15.0),
             enterBottomSheetDuration: 400.milliseconds,
             exitBottomSheetDuration: 300.milliseconds,
             customControlHeight: true,
@@ -63,7 +63,7 @@ class BottomSheetToolsComponent extends StatelessWidget {
       contentChild: RsxOptionGroupWidget(
         optionGroupItems: [optionGroupItems],
         physics: const NeverScrollableScrollPhysics(),
-        optionItemDivider: (context) => const Divider(),
+        optionItemDivider: (context) => const Divider().padding(left: 25),
       ),
       margin: EdgeInsets.zero,
       collapsedTitleBackgroundColor: Colors.grey.withOpacity(0.1),
@@ -78,7 +78,7 @@ class BottomSheetToolsComponent extends StatelessWidget {
         'mode': '浅色模式',
         'desc': '适合光线充足使用',
         'onTap': () {
-          Navigators.back();
+          XNavigator().back();
         },
         'modeFlg': 'light',
       },
@@ -86,7 +86,7 @@ class BottomSheetToolsComponent extends StatelessWidget {
         'mode': '深色模式',
         'desc': '适合光线较暗使用',
         'onTap': () {
-          Navigators.back();
+          XNavigator().back();
         },
         'modeFlg': 'dark',
       },
@@ -124,7 +124,7 @@ class BottomSheetToolsComponent extends StatelessWidget {
 
     return <Widget>[
       /// 简单引导
-      SizedBox(width: ScreenUtils.screenWidth / 6, height: 4)
+      SizedBox(width: XScreen().screenWidth / 6, height: 4)
           .decorated(
             color: Colors.grey.withOpacity(0.6),
             borderRadius: const BorderRadius.all(Radius.circular(4)),
@@ -181,7 +181,7 @@ class BottomSheetToolsComponent extends StatelessWidget {
         softWrap: true,
         overflow: TextOverflow.ellipsis,
         maxLines: 2,
-      ).padding(top: 5),
+      ),
       leading: ClipRRect(
         child: RandomUtils.getFixedRandomAvatar(randomUserNickname, height: 20, width: 20),
       ).padding(right: 10),
@@ -190,8 +190,8 @@ class BottomSheetToolsComponent extends StatelessWidget {
         Icons.favorite_outline_sharp,
         color: Colors.grey,
         size: 20,
-      ).gestures(onTap: () => ToastUtils.show('click favorite icon')).padding(left: 10),
-      onLongPress: () => ToastUtils.show('Copied $randomUserNickname\'s comment'),
+      ).gestures(onTap: () => XToast().show('click favorite icon')).padding(left: 10),
+      onLongPress: () => XToast().show('Copied $randomUserNickname\'s comment'),
       onDoubleTap: () => _handleUserCommentDialog({
         'nickname': randomUserNickname,
         'level': randomLevel,
@@ -205,7 +205,7 @@ class BottomSheetToolsComponent extends StatelessWidget {
   }
 
   void _handleUserCommentDialog(Map<String, dynamic> param) {
-    DialogUtils.showPromptDialog(
+    XDialog().showPromptDialog(
       title: '评论详情',
       backgroundColor: Colors.white,
       contentWidget: <Widget>[
@@ -236,7 +236,7 @@ class BottomSheetToolsComponent extends StatelessWidget {
       ),
       textConfirm: '关闭',
       confirmTextColor: Colors.grey,
-      onConfirm: () => Navigators.back(),
+      onConfirm: () => XNavigator().back(),
     );
   }
 

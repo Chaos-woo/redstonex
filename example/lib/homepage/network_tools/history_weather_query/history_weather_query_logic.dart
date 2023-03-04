@@ -9,7 +9,7 @@ import 'history_weather_query_state.dart';
 
 class HistoryWeatherQueryLogic extends GetxController {
   final HistoryWeatherQueryState state = HistoryWeatherQueryState();
-  final WeatherService weatherService = Depends.on();
+  final WeatherService weatherService = XDepends().on();
 
   @override
   void onReady() async {
@@ -39,7 +39,7 @@ class HistoryWeatherQueryLogic extends GetxController {
   Future<void> loadCityHistoryWeather(DateTime dateTime) async {
     String? selectedCityId = state.selectedProvinceCityState.city?.id;
 
-    if (!selectedCityId.nullOrBlankObj) {
+    if (!selectedCityId.oNullOrBlank) {
       /// API查询天气数据
       state.latestQueryWeatherState.weatherCompose =
       await weatherService.getCityHistoryWeatherCompose(cityId: selectedCityId!, dateTime: dateTime);

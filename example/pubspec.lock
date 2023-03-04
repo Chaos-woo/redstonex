@@ -126,7 +126,7 @@ packages:
       name: characters
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.2.0"
+    version: "1.2.1"
   charcode:
     dependency: transitive
     description:
@@ -147,7 +147,7 @@ packages:
       name: clock
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.1.0"
+    version: "1.1.1"
   code_builder:
     dependency: transitive
     description:
@@ -352,7 +352,7 @@ packages:
     source: hosted
     version: "1.0.1"
   floor:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: floor
       url: "https://pub.flutter-io.cn"
@@ -631,14 +631,14 @@ packages:
       name: material_color_utilities
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.1.4"
+    version: "0.1.5"
   meta:
     dependency: transitive
     description:
       name: meta
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.7.0"
+    version: "1.8.0"
   mime:
     dependency: transitive
     description:
@@ -709,6 +709,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.1"
+  number_display:
+    dependency: transitive
+    description:
+      name: number_display
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.0"
   octo_image:
     dependency: transitive
     description:
@@ -778,7 +785,7 @@ packages:
       name: path
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.8.1"
+    version: "1.8.2"
   path_drawing:
     dependency: transitive
     description:
@@ -1002,7 +1009,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.0.5"
+    version: "1.0.0"
   rxdart:
     dependency: transitive
     description:
@@ -1149,7 +1156,7 @@ packages:
     source: hosted
     version: "7.0.0"
   sqflite:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: sqflite
       url: "https://pub.flutter-io.cn"
@@ -1219,7 +1226,7 @@ packages:
     source: hosted
     version: "0.2.2"
   styled_widget:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: styled_widget
       url: "https://pub.flutter-io.cn"
@@ -1282,12 +1289,12 @@ packages:
     source: hosted
     version: "0.3.1"
   url_launcher:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: url_launcher
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "6.1.5"
+    version: "6.1.8"
   url_launcher_android:
     dependency: transitive
     description:
@@ -1387,33 +1394,33 @@ packages:
     source: hosted
     version: "1.2.0"
   webview_flutter:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: webview_flutter
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "3.0.4"
+    version: "4.0.2"
   webview_flutter_android:
     dependency: transitive
     description:
       name: webview_flutter_android
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.10.4"
+    version: "3.2.1"
   webview_flutter_platform_interface:
     dependency: transitive
     description:
       name: webview_flutter_platform_interface
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.9.5"
+    version: "2.0.1"
   webview_flutter_wkwebview:
     dependency: transitive
     description:
       name: webview_flutter_wkwebview
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.9.5"
+    version: "3.0.2"
   win32:
     dependency: transitive
     description:

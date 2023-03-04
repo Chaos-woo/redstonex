@@ -7,7 +7,7 @@ import 'package:redstonex/redstonex.dart';
 import 'simple_information_logic.dart';
 
 class SimpleInformationComponent extends StatelessWidget {
-  final logic = Provides.provide(SimpleInformationLogic());
+  final logic = XProvides().provide(SimpleInformationLogic());
 
   SimpleInformationComponent({Key? key}) : super(key: key);
 
@@ -18,7 +18,7 @@ class SimpleInformationComponent extends StatelessWidget {
         title: '设备信息',
         description: '页面宫格卡片式布局简单演示',
         onTap: () {
-          Navigators.to(RouteCompose.deviceRoute.baseInfo);
+          XNavigator().to(RouteCompose.deviceRoute.baseInfo);
         },
       ),
     ];

@@ -4,17 +4,16 @@ import 'package:example/net-manager/jvhe/jvhe_key_interceptor.dart';
 import 'package:example/net-manager/jvhe/jvhe_response_convert_interceptor.dart';
 import 'package:example/net-manager/jvhe/jvhe_response_error_interceptor.dart';
 import 'package:get/get.dart';
-import 'package:redstonex/net/utils/request_utils.dart';
 import 'package:redstonex/redstonex.dart';
 
 /// 聚合数据API客户端
 class JvheNetClient extends GetxService {
-  late final RequestClient _httpClient;
+  late final HttpClient _httpClient;
 
   JvheNetClient() {
     HttpOption option = HttpOptionBuilder().responseType(ResponseType.json).receiveTimeout(10000).build();
 
-    _httpClient = RequestClient(
+    _httpClient = HttpClient(
       'http://v.juhe.cn',
       httpOption: option,
       interceptors: [
@@ -55,12 +54,12 @@ class JvheNetClient extends GetxService {
     required DateTime historyDate,
     bool Function(ApiException)? onError,
   }) async {
-    RequestData rd = RequestData();
-    rd.param('city_id', cityId);
-    rd.param('weather_date', DatetimeUtils.yyyyMMddFormat(historyDate));
+    HttpDataWrap httpDataWrap = HttpDataWrap();
+    httpDataWrap.param('city_id', cityId);
+    httpDataWrap.param('weather_date', XDatetime().yyyyMMddFormat(historyDate));
     return await _httpClient.get<dynamic>(
       JvheApi.historyWeather,
-      queryParameters: rd.params,
+      queryParameters: httpDataWrap.params,
       onError: onError,
     );
   }

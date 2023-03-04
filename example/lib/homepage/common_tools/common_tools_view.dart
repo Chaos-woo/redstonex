@@ -13,8 +13,8 @@ class CommonToolsComponent extends StatelessWidget {
   late final CommonToolsState state;
 
   CommonToolsComponent({Key? key}) : super(key: key) {
-    logic = Provides.provide(CommonToolsLogic());
-    state = Depends.on<CommonToolsLogic>().state;
+    logic = XProvides().provide(CommonToolsLogic());
+    state = XDepends().on<CommonToolsLogic>().state;
   }
 
   @override

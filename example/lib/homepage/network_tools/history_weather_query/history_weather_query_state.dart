@@ -17,7 +17,7 @@ class HistoryWeatherQueryState {
     selectedProvinceCityState = SelectedProvinceCityState();
     latestQueryWeatherState = LatestQueryWeatherHistoryState();
 
-    selectDateTime = DatetimeUtils.previousDay(DateTime.now());
+    selectDateTime = XDatetime().previousDay(DateTime.now());
   }
 
   void updateSelectedDateTime(DateTime dateTime) {

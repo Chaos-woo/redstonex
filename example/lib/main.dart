@@ -1,3 +1,4 @@
+import 'package:example/db-manager/example_base_floor_database.dart';
 import 'package:example/homepage/homepage/homepage_logic.dart';
 import 'package:example/homepage/homepage/homepage_view.dart';
 import 'package:example/net-manager/net_client_manager.dart';
@@ -16,14 +17,15 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   /// 使用await保证应用初始化
-  await RsxInit.init(preBuiltinInit: () {
+  await RsxInitializer.init(preBuiltinInit: () {
     Routes.initGlobalRoutes();
+    MyExampleDb().initializeDatabase();
   }, postBuiltinInit: () {
     NetClientManager.initNetClients();
     ProvidersManager.initProviders();
     ServicesManager.initServices();
     ScreenUtil.getInstance();
-    LogUtils.d('initial end');
+    XLog().debug('initial end');
   });
 
   runApp(const OKToast(child: MyApp()));
@@ -37,9 +39,10 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: true,
       title: 'Flutter Demo',
-      getPages: Dispatcher.pageRoutes,
+      getPages: XDispatcher.pageRoutes,
       theme: ThemeData(
         primaryColor: Colors.blue,
+        useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
       builder: EasyLoading.init(),
@@ -58,10 +61,10 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    Provides.provide(HomepageLogic());
+    XProvides().provide(HomepageLogic());
     return Scaffold(
       appBar: RsxAppBar(
-        leadingWidget: const Padding(
+        leading: const Padding(
           padding: EdgeInsets.symmetric(horizontal: 2),
           child: Icon(
             Icons.adb,

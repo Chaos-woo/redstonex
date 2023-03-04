@@ -32,7 +32,7 @@ part 'example_db.g.dart';
 ///
 /// How to write upgrade logic, see also:
 ///   * https://stackoverflow.com/questions/63347032/how-do-you-upgrade-a-flutter-app-with-sqlite-database
-@Database(version: 1, entities: [ExampleEntity])
+@Database(version: 2, entities: [ExampleEntity])
 abstract class ExampleDb extends FloorDatabase {
   ExampleDao get exampleDao;
 }

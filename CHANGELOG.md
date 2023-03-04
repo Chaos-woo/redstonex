@@ -1,3 +1,23 @@
+## 1.0.0
+**>> BREAKING CHANGE VERSION <<**
+* 引入flutter BloC思想和Cubit简化Block的编写方法，结合GetX状态管理，优化RSX框架的UI刷新机制
+* 充分利用 `XEventBus` 流监听和GetX的Controller生命周期，完善事件-UI通知机制
+* 使用新UI刷新机制重写PagingController2，并增加对应的example用例
+* 优化所有类名
+
+## 0.0.9
+* 完善example用例，全面测试框架
+
+## 0.0.8
+**>> BREAKING CHANGE VERSION <<**
+* 优化所有类名
+
+## 0.0.7
+**>> BREAKING CHANGE VERSION <<**
+* 优化 `redstonex_button` 组件工具
+* 优化 `redstonex_scroll_view` 组件工具
+* 移除部分不需要的内置widget
+
 ## 0.0.6
 **>> BREAKING CHANGE VERSION <<**
 * 优化 `RsxOptionGroupWidget` 组件工具

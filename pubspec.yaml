@@ -1,6 +1,6 @@
 name: redstonex
 description: 基于GetX的Flutter快速开发框架。Development flutter framework based GetX frame.
-version: 0.0.6
+version: 1.0.0
 homepage: https://github.com/Chaos-woo/redstonex
 
 environment:
@@ -15,8 +15,8 @@ dependencies:
 
   # 去除网页URL中的“#”(hash) https://flutter.cn/docs/development/ui/navigation/url-strategies
   url_strategy: 0.2.0
-  # 启动URL的插件（支持Web） https://github.com/flutter/plugins/tree/master/packages/url_launcher
-  url_launcher: 6.1.5
+  # 资源处理插件（支持Web） https://github.com/flutter/plugins/tree/master/packages/url_launcher
+  url_launcher: 6.1.8
   # iOS风格icon
   cupertino_icons: 1.0.5
   # Localization https://github.com/dart-lang/intl
@@ -33,7 +33,7 @@ dependencies:
   # 图片选择插件（支持Web） https://github.com/flutter/plugins/tree/master/packages/image_picker
   image_picker: 0.8.5+3
   # WebView插件 https://github.com/flutter/plugins/tree/master/packages/webview_flutter
-  webview_flutter: 3.0.4
+  webview_flutter: 4.0.2
   # 列表悬浮头 https://github.com/fluttercommunity/flutter_sticky_headers
   sticky_headers: 0.3.0+2
   # 图片缓存 https://github.com/renefloor/flutter_cached_network_image
@@ -81,10 +81,10 @@ dependencies:
   pretty_dio_logger: 1.2.0-beta-1
   # 下拉、上拉加载 https://github.com/xxzj990-game/flutter_pulltorefresh
   pull_to_refresh_flutter3: 2.0.1
-#  # UI组件 https://github.com/ionicfirebaseapp/getwidget
-#  getwidget: 3.0.1
-  # UI组件Builder模式 https://github.com/ReinBentdal/styled_widget
+  # UI布局语法糖 https://github.com/ReinBentdal/styled_widget
   styled_widget: 0.4.1
+  # 数字展示处理 https://github.com/entronad/number_display
+  number_display: 3.0.0
 
 dev_dependencies:
   # Widget测试
@@ -95,10 +95,7 @@ dev_dependencies:
     sdk: flutter
   integration_test:
     sdk: flutter
-  test: 1.21.0
-  analyzer: 4.3.1 # 4.4.0以上版本与reflectable-3.0.9有api冲突
-#  flutter_test:
-#    sdk: flutter
+  analyzer: 4.3.1
   flutter_lints: 2.0.0
   # json序列化/反序列化代码生成处理器
   json_serializable: 6.3.1

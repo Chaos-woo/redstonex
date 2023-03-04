@@ -7,6 +7,6 @@ import 'package:redstonex/redstonex.dart';
 class DeviceInfoBinding extends Bindings {
   @override
   void dependencies() {
-    Provides.provide(DeviceInfoLogic());
+    XProvides().provide(DeviceInfoLogic());
   }
 }

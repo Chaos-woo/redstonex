@@ -10,10 +10,8 @@ abstract class OnCreateCallback {
 
 /// 本地数据库打开连接回调
 /// 每次打开本地数据库都会调用
-class OnOpenCallback {
-  final FutureOr<void> Function(Database database) onOpen;
-
-  const OnOpenCallback(this.onOpen);
+abstract class OnOpenCallback {
+  FutureOr<void> Function(Database database) get onOpen;
 }
 
 /// 本地数据库升级回调

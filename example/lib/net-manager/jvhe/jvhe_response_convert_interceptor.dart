@@ -15,7 +15,7 @@ class JvheResponseConvertInterceptor extends Interceptor {
 
     response.data = data;
 
-    LogUtils.d('Jvhe data request: ${response.toString()}');
+    XLog().debug('Jvhe data request: ${response.toString()}');
     super.onResponse(response, handler);
   }
 }
