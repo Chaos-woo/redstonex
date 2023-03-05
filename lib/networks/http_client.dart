@@ -138,6 +138,19 @@ class HttpClient {
     );
   }
 
+  Future download(String uri, String localPath, {ProgressCallback? progressCallback}) async {
+    try {
+      await _dio.download(
+        uri,
+        localPath,
+        onReceiveProgress: progressCallback,
+      );
+    } on DioError catch (e) {
+      var exception = ApiException.fromDioError(e);
+      throw exception;
+    }
+  }
+
   ///请求响应内容处理
   T? _handleResponse<T>(Response response) {
     if (response.statusCode == 200) {

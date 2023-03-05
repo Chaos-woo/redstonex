@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:redstonex/networks/response/api_response.dart';
 
-int _apiCommonExceptionCode = _apiCommonExceptionCode;
+int _apiCommonExceptionCode = -1;
 
 class ApiException implements Exception {
   static const unknownException = "未知错误";

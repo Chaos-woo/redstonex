@@ -1,6 +1,8 @@
 library redstonex;
 
 export 'package:redstonex/app-configs/global_config.dart';
+export 'package:redstonex/app-configs/init/application_initializer.dart';
+export 'package:redstonex/app-configs/init/redstonex_default_app.dart';
 export 'package:redstonex/app-configs/init/redstonex_initializer.dart';
 export 'package:redstonex/app-configs/user-configs/global_app_configs.dart';
 export 'package:redstonex/app-configs/user-configs/global_database_configs.dart';
@@ -13,14 +15,13 @@ export 'package:redstonex/database/convertors/datetime_null_convertor.dart';
 export 'package:redstonex/database/database_callback.dart';
 export 'package:redstonex/events/redstonex_event_bus.dart';
 export 'package:redstonex/exceptions/error_consts.dart';
-export 'package:redstonex/exceptions/exception_catcher.dart';
 export 'package:redstonex/exceptions/redstonex_exception.dart';
 export 'package:redstonex/extension/colour_extension.dart';
 export 'package:redstonex/extension/function_extension.dart';
 export 'package:redstonex/extension/list_extension.dart';
 export 'package:redstonex/extension/number_extension.dart';
 export 'package:redstonex/extension/string_extension.dart';
-export 'package:redstonex/networks/configs/def_exception_text.dart';
+export 'package:redstonex/networks/configs/exception_text.dart';
 export 'package:redstonex/networks/configs/http_constant.dart';
 export 'package:redstonex/networks/configs/http_option.dart';
 export 'package:redstonex/networks/exception/api_exception.dart';

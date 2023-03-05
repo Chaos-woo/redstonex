@@ -6,7 +6,7 @@ class XErrorCompose {
 
   factory XErrorCompose() => _single;
 
-  ErrorCompose get common => ErrorCompose('ERR_NO_SPECIAL_COMMON', 'Internal Error');
+  ErrorCompose get common => ErrorCompose('ERR_COMMON', 'Internal Error');
 }
 
 class ErrorCompose {

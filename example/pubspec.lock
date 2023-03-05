@@ -1267,6 +1267,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.0"
+  tuple_dart:
+    dependency: transitive
+    description:
+      name: tuple_dart
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.4.2"
   typed_data:
     dependency: transitive
     description:

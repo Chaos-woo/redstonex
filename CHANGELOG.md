@@ -1,3 +1,7 @@
+## 1.0.1
+* 优化应用初始化器
+* 优化Flutter全局异常捕获器
+
 ## 1.0.0
 **>> BREAKING CHANGE VERSION <<**
 * 引入flutter BloC思想和Cubit简化Block的编写方法，结合GetX状态管理，优化RSX框架的UI刷新机制

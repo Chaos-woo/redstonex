@@ -26,7 +26,7 @@ class _BiliWebViewState extends State<BiliWebView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Bilibili'),
+        title: Text('${_controller.getTitle()}'),
         // This drop down menu demonstrates that Flutter widgets can be shown over the web view.
         actions: <Widget>[
           NavigationControls(webViewController: _controller),
