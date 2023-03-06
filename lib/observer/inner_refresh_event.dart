@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 enum EventState { init, loading, success, fail }
 
 class InnerRefreshEvent<T> {
@@ -6,33 +8,55 @@ class InnerRefreshEvent<T> {
   Exception? exception;
   Type? dataType;
 
+  @mustCallSuper
   InnerRefreshEvent.init({
     this.data,
     this.exception,
-  }) : state = EventState.init;
-
-  InnerRefreshEvent.loading({
-    this.data,
-    this.exception,
-  }) : state = EventState.loading;
-
-  InnerRefreshEvent.success({
-    this.data,
-    this.exception,
-  }) : state = EventState.success;
-
-  InnerRefreshEvent.fail({
-    this.data,
-    this.exception,
-  }) : state = EventState.fail;
-
-  void refresh() {
+  }) : state = EventState.init {
     if (null != data) {
       dataType = data.runtimeType;
     } else {
       dataType = null;
     }
   }
+
+  @mustCallSuper
+  InnerRefreshEvent.loading({
+    this.data,
+    this.exception,
+  }) : state = EventState.loading {
+    if (null != data) {
+      dataType = data.runtimeType;
+    } else {
+      dataType = null;
+    }
+  }
+
+  @mustCallSuper
+  InnerRefreshEvent.success({
+    this.data,
+    this.exception,
+  }) : state = EventState.success {
+    if (null != data) {
+      dataType = data.runtimeType;
+    } else {
+      dataType = null;
+    }
+  }
+
+  @mustCallSuper
+  InnerRefreshEvent.fail({
+    this.data,
+    this.exception,
+  }) : state = EventState.fail {
+    if (null != data) {
+      dataType = data.runtimeType;
+    } else {
+      dataType = null;
+    }
+  }
+
+  void refresh() {}
 }
 
 class InnerRefreshEvents<T> {
@@ -41,27 +65,47 @@ class InnerRefreshEvents<T> {
   Exception? exception;
   Type? dataType;
 
+  @mustCallSuper
   InnerRefreshEvents.init({
     this.data,
     this.exception,
-  }) : state = EventState.init;
+  }) : state = EventState.init {
+    if (null != data && data!.isNotEmpty) {
+      dataType = data?.first.runtimeType;
+    } else {
+      dataType = null;
+    }
+  }
 
+  @mustCallSuper
   InnerRefreshEvents.loading({
     this.data,
     this.exception,
-  }) : state = EventState.loading;
+  }) : state = EventState.loading {
+    if (null != data && data!.isNotEmpty) {
+      dataType = data?.first.runtimeType;
+    } else {
+      dataType = null;
+    }
+  }
 
+  @mustCallSuper
   InnerRefreshEvents.success({
     this.data,
     this.exception,
-  }) : state = EventState.success;
+  }) : state = EventState.success {
+    if (null != data && data!.isNotEmpty) {
+      dataType = data?.first.runtimeType;
+    } else {
+      dataType = null;
+    }
+  }
 
+  @mustCallSuper
   InnerRefreshEvents.fail({
     this.data,
     this.exception,
-  }) : state = EventState.fail;
-
-  void refresh() {
+  }) : state = EventState.fail {
     if (null != data && data!.isNotEmpty) {
       dataType = data?.first.runtimeType;
     } else {
@@ -69,4 +113,3 @@ class InnerRefreshEvents<T> {
     }
   }
 }
-

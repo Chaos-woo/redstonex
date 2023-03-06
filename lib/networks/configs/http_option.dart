@@ -34,6 +34,22 @@ class HttpOption {
     builder.responseType(_responseType);
     return builder.build();
   }
+
+  HttpOption copyWith({
+    int? optionalConnectTimeout,
+    int? optionalReceiveTimeout,
+    int? optionalSendTimeout,
+    String? optionalSendContentType,
+    ResponseType? optionalResponseType,
+  }) {
+    HttpOptionBuilder builder = HttpOptionBuilder();
+    builder.connectTimeout(optionalConnectTimeout ?? _connectTimeout);
+    builder.receiveTimeout(optionalReceiveTimeout ?? _receiveTimeout);
+    builder.sendTimeout(optionalSendTimeout ?? _sendTimeout);
+    builder.sendContentType(optionalSendContentType ?? _sendContentType);
+    builder.responseType(optionalResponseType ?? _responseType);
+    return builder.build();
+  }
 }
 
 class HttpOptionBuilder {
