@@ -11,7 +11,7 @@ class XDelay {
 
   factory XDelay() => _single;
 
-  Future<void> delay0(VoidCallback callback) => delayAny(callback);
+  Future<void> delay(VoidCallback callback) => delayAny(callback);
 
   Future<void> delayAny(VoidCallback callback, {Duration? duration}) =>
       Future.delayed(duration ?? Duration.zero).whenComplete(callback);

@@ -6,7 +6,7 @@ import 'package:redstonex/routes/dispatcher.dart';
 import 'package:redstonex/utils/application_package.dart';
 import 'package:redstonex/utils/device.dart';
 import 'package:redstonex/utils/directory.dart';
-import 'package:redstonex/utils/xlog.dart';
+import 'package:redstonex/utils/rsxlog.dart';
 
 class RsxInitializer {
   /// 框架初始化
