@@ -1,11 +1,12 @@
 import 'package:common_utils/common_utils.dart';
 import 'package:example/db-manager/entity/bili_favorite_video.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:redstonex/redstonex.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 class BiliFavoriteVideoWidget extends StatefulWidget {
-  final BiliFavoriteVideo item;
+  final Rx<BiliFavoriteVideo> item;
 
   const BiliFavoriteVideoWidget({Key? key, required this.item}) : super(key: key);
 
@@ -24,15 +25,15 @@ class _BiliFavoriteVideoWidgetState extends State<BiliFavoriteVideoWidget> with 
       AspectRatio(
         aspectRatio: 1.5,
         child: RsxImageLoader(
-          widget.item.pic,
+          widget.item.value.pic,
           fit: BoxFit.cover,
           holderImg: 'assets/images/bg/image_holder.png',
         ),
       ).height(75).clipRRect(all: 10),
-      Gaps.hGap5,
+      Gaps.hGap8,
       <Widget>[
         Text(
-          widget.item.title,
+          widget.item.value.title,
           style: const TextStyle(
             fontSize: 13,
             color: Colors.black,
@@ -56,7 +57,7 @@ class _BiliFavoriteVideoWidgetState extends State<BiliFavoriteVideoWidget> with 
               ),
           Gaps.hGap(2),
           Text(
-            widget.item.up,
+            widget.item.value.up,
             style: const TextStyle(
               fontSize: 12,
               color: Colors.grey,
@@ -74,7 +75,7 @@ class _BiliFavoriteVideoWidgetState extends State<BiliFavoriteVideoWidget> with 
           Gaps.hGap4,
           Text(
             TimelineUtil.format(
-              widget.item.publishData.millisecondsSinceEpoch,
+              widget.item.value.publishData.millisecondsSinceEpoch,
               locTimeMs: DateTime.now().millisecondsSinceEpoch,
               locale: 'zh_normal',
               dayFormat: DayFormat.Full,

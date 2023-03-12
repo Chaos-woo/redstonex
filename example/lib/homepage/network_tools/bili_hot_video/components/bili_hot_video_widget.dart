@@ -1,11 +1,13 @@
 import 'package:common_utils/common_utils.dart';
+import 'package:example/homepage/network_tools/bili_hot_video/bili_hot_video_logic.dart';
 import 'package:example/services/models/bili_hot_video.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:redstonex/redstonex.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 class BiliHotVideoWidget extends StatefulWidget {
-  final BiliHotVideo item;
+  final Rx<BiliHotVideo> item;
 
   const BiliHotVideoWidget({Key? key, required this.item}) : super(key: key);
 
@@ -44,15 +46,15 @@ class _BiliHotVideoWidgetState extends State<BiliHotVideoWidget> with AutomaticK
     return <Widget>[
       <Widget>[
         Text(
-          widget.item.tagName,
+          widget.item.value.tagName,
           style: const TextStyle(
             fontSize: 10,
             color: Colors.black,
           ),
         ).padding(horizontal: 5).backgroundColor(Colors.green[400]!),
-        if (!widget.item.recommendReason.content.oNullOrBlank)
+        if (!widget.item.value.recommendReason.content.oNullOrBlank)
           Text(
-            '推荐理由: ${widget.item.recommendReason.content}',
+            '推荐理由: ${widget.item.value.recommendReason.content}',
             style: const TextStyle(
               fontSize: 10,
               color: Colors.black,
@@ -64,7 +66,7 @@ class _BiliHotVideoWidgetState extends State<BiliHotVideoWidget> with AutomaticK
         AspectRatio(
           aspectRatio: 1.5,
           child: RsxImageLoader(
-            widget.item.pic,
+            widget.item.value.pic,
             fit: BoxFit.cover,
             holderImg: 'assets/images/bg/image_holder.png',
           ),
@@ -72,7 +74,7 @@ class _BiliHotVideoWidgetState extends State<BiliHotVideoWidget> with AutomaticK
         Gaps.hGap5,
         <Widget>[
           Text(
-            widget.item.title,
+            widget.item.value.title,
             style: const TextStyle(
               fontSize: 13,
               color: Colors.black,
@@ -86,11 +88,11 @@ class _BiliHotVideoWidgetState extends State<BiliHotVideoWidget> with AutomaticK
           <Widget>[
             CircleAvatar(
               radius: 8,
-              foregroundImage: XImage().getHolderImageNetProvider(widget.item.owner.face),
+              foregroundImage: XImage().getHolderImageNetProvider(widget.item.value.owner.face),
             ),
             Gaps.hGap4,
             Text(
-              widget.item.owner.name,
+              widget.item.value.owner.name,
               style: const TextStyle(
                 fontSize: 12,
                 color: Colors.grey,
@@ -109,7 +111,7 @@ class _BiliHotVideoWidgetState extends State<BiliHotVideoWidget> with AutomaticK
             Gaps.hGap4,
             Text(
               TimelineUtil.format(
-                widget.item.pubDate * 1000,
+                widget.item.value.pubDate * 1000,
                 locTimeMs: DateTime.now().millisecondsSinceEpoch,
                 locale: 'zh_normal',
                 dayFormat: DayFormat.Full,
@@ -131,7 +133,7 @@ class _BiliHotVideoWidgetState extends State<BiliHotVideoWidget> with AutomaticK
   }
 
   Widget _renderVideoStats() {
-    var stat = widget.item.stats;
+    var stat = widget.item.value.stats;
     var displayVideoStats = [
       {'name': '播放', 'stat': stat.view},
       {'name': '弹幕', 'stat': stat.danmaku},
@@ -182,16 +184,46 @@ class _BiliHotVideoWidgetState extends State<BiliHotVideoWidget> with AutomaticK
     double tabWidth = boxConstraints.maxWidth / 2 - 30;
     Widget styledWidget(Widget child) => Styled.widget(child: child).center().width(tabWidth);
     return <Widget>[
-      styledWidget(_renderOperateTab(text: '稍后再看', icon: Icons.history, color: Colors.blueAccent, onTap: () {})),
+      styledWidget(Obx(() => _renderOperateTab(
+          text: widget.item.value.isLateSeeing ? '别稍后啦，快看~' : '稍后再看',
+          icon: widget.item.value.isLateSeeing ? Icons.history : Icons.history_toggle_off,
+          color: Colors.blueAccent,
+          onTap: () {
+            XToast().show('功能没做~');
+            widget.item.update((video) {
+              video?.isLateSeeing = !video.isLateSeeing;
+            });
+          }))),
       Gaps.vLine(),
-      styledWidget(_renderOperateTab(text: '收藏', icon: Icons.star_border_rounded, color: Colors.blueAccent, onTap: () {})),
+      styledWidget(Obx(() => _renderOperateTab(
+          text: widget.item.value.isFavorite ? '已收藏' : '收藏',
+          icon: widget.item.value.isFavorite ? Icons.star_rounded : Icons.star_border_rounded,
+          color: Colors.blueAccent,
+          onTap: () {
+            if (widget.item.value.isFavorite) {
+              XDepends().on<BiliHotVideoLogic>().biliService.removeFavoriteBiliVideo(widget.item.value.bVid);
+              XToast().show('取消收藏');
+            } else {
+              XDepends().on<BiliHotVideoLogic>().biliService.favoriteBiliVideo(widget.item.value);
+              XToast().show('收藏成功');
+            }
+
+            widget.item.update((video) {
+              video?.isFavorite = !video.isFavorite;
+            });
+          }))),
     ].toRow(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.center,
     );
   }
 
-  Widget _renderOperateTab({required String text, required IconData icon, required Color color, VoidCallback? onTap,}) {
+  Widget _renderOperateTab({
+    required String text,
+    required IconData icon,
+    required Color color,
+    VoidCallback? onTap,
+  }) {
     var textStyle = TextStyle(
       fontSize: 14,
       color: Colors.blue[200],
@@ -199,7 +231,11 @@ class _BiliHotVideoWidgetState extends State<BiliHotVideoWidget> with AutomaticK
     return RsxClickWidget(
       onTap: onTap,
       child: <Widget>[
-        Icon(icon, size: 17, color: color,),
+        Icon(
+          icon,
+          size: 17,
+          color: color,
+        ),
         Gaps.hGap5,
         Text(
           text,

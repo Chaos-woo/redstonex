@@ -25,6 +25,9 @@ class BiliHotVideo {
   @JSONField(name: 'rcmd_reason')
   late BiliHotVideoRecommendReason recommendReason;
 
+  bool isFavorite = false;
+  bool isLateSeeing = false;
+
   BiliHotVideo();
 
   factory BiliHotVideo.fromJson(Map<String, dynamic> json) => $BiliHotVideoFromJson(json);

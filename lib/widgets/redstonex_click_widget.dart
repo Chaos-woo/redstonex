@@ -8,13 +8,25 @@ class RsxClickWidget extends StatelessWidget {
   final Function? onTap;
   final ClickType type;
   final int? timeout;
+  bool? clickEffect;
 
-  const RsxClickWidget({Key? key, required this.child, this.onTap, this.type = ClickType.throttle, this.timeout})
-      : super(key: key);
+  RsxClickWidget({
+    Key? key,
+    required this.child,
+    this.onTap,
+    this.type = ClickType.throttle,
+    this.timeout,
+    this.clickEffect,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return (clickEffect ?? false)
+        ? InkWell(
+      onTap: _getOnTap(),
+      child: child,
+    )
+        : GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: _getOnTap(),
       child: child,

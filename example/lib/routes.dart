@@ -14,16 +14,20 @@ class Routes {
   /// 业务路由初始化工具
   static void initGlobalRoutes() {
     RouterGroup deviceInfoGroup = XDispatcher.group(groupName: 'deviceInfo');
-    deviceInfoGroup.newRoute(Router(RouteCompose.deviceRoute.baseInfo, () => DeviceInfoPage(), binding: DeviceInfoBinding()));
+    deviceInfoGroup.newRoute(
+        Router(RouteCompose.deviceRoute.baseInfo, () => DeviceInfoPage(), binding: DeviceInfoBinding()));
 
     RouterGroup weatherInfoGroup = XDispatcher.group(groupName: 'weatherInfo');
-    weatherInfoGroup.newRoute(Router(RouteCompose.weatherRoute.homeWeather, () => HistoryWeatherQueryPage(), binding: HistoryWeatherQueryBinding()));
+    weatherInfoGroup.newRoute(Router(RouteCompose.weatherRoute.homeWeather, () => HistoryWeatherQueryPage(),
+        binding: HistoryWeatherQueryBinding()));
 
     RouterGroup bilibiliGroup = XDispatcher.group(groupName: 'bilibili');
     bilibiliGroup
-        .newRoute(Router(RouteCompose.biliRoute.hotVideos, () => BiliHotVideoPage(), binding: BiliHotVideoBinding()))
+        .newRoute(Router(RouteCompose.biliRoute.hotVideos, () => BiliHotVideoPage(),
+            binding: BiliHotVideoBinding()))
         .newRoute(Router(RouteCompose.biliRoute.videoDetail, () => BiliWebView()))
-        .newRoute(Router(RouteCompose.biliRoute.favoriteVideos, () => BiliFavoriteVideoPage(), binding: BiliFavoriteVideoBinding()));
+        .newRoute(Router(RouteCompose.biliRoute.favoriteVideos, () => BiliFavoriteVideoPage(),
+            binding: BiliFavoriteVideoBinding()));
   }
 }
 

@@ -49,13 +49,13 @@ class RefreshWidgets {
   }
 
   static Widget buildRefreshListWidget2<T, C extends PagingController2<T, PagingState<T>>>({
-    required Widget Function(T item, int index) itemBuilder,
+    required Widget Function(Rx<T> item, int index) itemBuilder,
     bool enablePullUp = true,
     bool enablePullDown = true,
     String? tag,
-    Widget Function(T item, int index)? separatorBuilder,
-    Function(T item, int index)? onItemClick,
-    Function(T item, int index)? onItemLongPress,
+    Widget Function(Rx<T> item, int index)? separatorBuilder,
+    Function(Rx<T> item, int index)? onItemClick,
+    Function(Rx<T> item, int index)? onItemLongPress,
     ScrollPhysics? physics,
     bool shrinkWrap = false,
     Axis scrollDirection = Axis.vertical,
@@ -93,13 +93,13 @@ class RefreshWidgets {
 
 
   static Widget buildRefreshListWidget<T, C extends PagingController<T, PagingState<T>>>({
-    required Widget Function(T item, int index) itemBuilder,
+    required Widget Function(Rx<T> item, int index) itemBuilder,
     bool enablePullUp = true,
     bool enablePullDown = true,
     String? tag,
-    Widget Function(T item, int index)? separatorBuilder,
-    Function(T item, int index)? onItemClick,
-    Function(T item, int index)? onItemLongPress,
+    Widget Function(Rx<T> item, int index)? separatorBuilder,
+    Function(Rx<T> item, int index)? onItemClick,
+    Function(Rx<T> item, int index)? onItemLongPress,
     ScrollPhysics? physics,
     bool shrinkWrap = false,
     Axis scrollDirection = Axis.vertical,
@@ -136,11 +136,11 @@ class RefreshWidgets {
   }
 
   static Widget buildListView<T>({
-    required Widget Function(T item, int index) itemBuilder,
-    required List<T> data,
-    Widget Function(T item, int index)? separatorBuilder,
-    Function(T item, int index)? onItemClick,
-    Function(T item, int index)? onItemLongPress,
+    required Widget Function(Rx<T> item, int index) itemBuilder,
+    required List<Rx<T>> data,
+    Widget Function(Rx<T> item, int index)? separatorBuilder,
+    Function(Rx<T> item, int index)? onItemClick,
+    Function(Rx<T> item, int index)? onItemLongPress,
     ScrollPhysics? physics,
     bool shrinkWrap = false,
     Axis scrollDirection = Axis.vertical,

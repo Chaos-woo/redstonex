@@ -13,22 +13,37 @@ import 'package:oktoast/oktoast.dart';
 import 'package:redstonex/redstonex.dart';
 
 void main() async {
-  /// Flutter组件绑定必须
-  WidgetsFlutterBinding.ensureInitialized();
+  // /// Flutter组件绑定必须
+  // WidgetsFlutterBinding.ensureInitialized();
+  //
+  // /// 使用await保证应用初始化
+  // await RsxInitializer.init(preBuiltinInit: () {
+  //   Routes.initGlobalRoutes();
+  //   MyExampleDb().initializeDatabase();
+  // }, postBuiltinInit: () {
+  //   NetClientManager.initNetClients();
+  //   ProvidersManager.initProviders();
+  //   ServicesManager.initServices();
+  //   ScreenUtil.getInstance();
+  //   XLog().debug('initial end');
+  // });
+  //
+  // runApp(const OKToast(child: MyApp()));
 
-  /// 使用await保证应用初始化
-  await RsxInitializer.init(preBuiltinInit: () {
-    Routes.initGlobalRoutes();
-    MyExampleDb().initializeDatabase();
-  }, postBuiltinInit: () {
-    NetClientManager.initNetClients();
-    ProvidersManager.initProviders();
-    ServicesManager.initServices();
-    ScreenUtil.getInstance();
-    XLog().debug('initial end');
-  });
-
-  runApp(const OKToast(child: MyApp()));
+  AppInitializer.run(
+    const OKToast(child: MyApp()),
+    preBuiltinInit: () {
+      Routes.initGlobalRoutes();
+      MyExampleDb().initializeDatabase();
+    },
+    postBuiltinInit: () {
+      NetClientManager.initNetClients();
+      ProvidersManager.initProviders();
+      ServicesManager.initServices();
+      ScreenUtil.getInstance();
+      XLog().debug('initial end');
+    },
+  );
 }
 
 class MyApp extends StatelessWidget {

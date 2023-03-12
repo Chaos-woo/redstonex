@@ -41,6 +41,7 @@ abstract class PagingController2<M, S extends PagingState<M>> extends GetxContro
   void refreshData() async {
     initPaging();
     _refreshOperateType = RefreshOperateType.refresh;
+    beforeRefresh();
     await _loadData();
   }
 
@@ -73,7 +74,8 @@ abstract class PagingController2<M, S extends PagingState<M>> extends GetxContro
     /// 数据不为空，则将数据添加到 data 中
     /// 并且分页页数 pageIndex + 1
     if (list != null && list.isNotEmpty) {
-      pagingState.data.addAll(list);
+      var rxList = list.map((item) => item.obs).toList();
+      pagingState.data.addAll(rxList);
       pagingState.nextIndex += 1;
     }
 
@@ -93,9 +95,9 @@ abstract class PagingController2<M, S extends PagingState<M>> extends GetxContro
 
   /// 加载更多
   void loadMoreData() async {
-    await _loadData();
+    beforeLoadMore();
     _refreshOperateType = RefreshOperateType.loadMore;
-
+    await _loadData();
     /// 加载完成
     refreshController.loadComplete();
   }
@@ -120,4 +122,10 @@ abstract class PagingController2<M, S extends PagingState<M>> extends GetxContro
 
   /// 是否还有更多数据逻辑
   bool hasMoreData();
+
+  /// 每次刷新前的操作
+  Future<void> beforeRefresh() async {}
+
+  /// 每次加载前的操作
+  Future<void> beforeLoadMore() async {}
 }

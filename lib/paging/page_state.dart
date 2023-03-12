@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+
 class PagingState<T> {
   /// 分页的页数
   int nextIndex = 1;
@@ -9,5 +11,5 @@ class PagingState<T> {
   Object refreshId = Object();
 
   /// 列表数据
-  List<T> data = <T>[];
+  List<Rx<T>> data = [];
 }
