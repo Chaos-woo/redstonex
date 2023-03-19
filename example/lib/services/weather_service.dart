@@ -4,6 +4,7 @@ import 'package:example/providers/jvhe_api_provider.dart';
 import 'package:example/services/models/city.dart';
 import 'package:example/services/models/province.dart';
 import 'package:example/services/models/province_with_city.dart';
+import 'package:example/services/models/with_city.dart';
 import 'package:get/get.dart';
 import 'package:redstonex/redstonex.dart';
 

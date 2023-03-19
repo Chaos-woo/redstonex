@@ -1,6 +1,4 @@
-import 'dart:convert';
-
-import 'package:redstonex/paging/paging_data.g.dart';
+part 'paging_data.g.dart';
 
 class PagingData<T> {
   /// 当前页
@@ -10,12 +8,5 @@ class PagingData<T> {
 
   PagingData();
 
-  factory PagingData.fromJson(Map<String, dynamic> json) => $PagingDataFromJson<T>(json);
-
-  Map<String, dynamic> toJson() => $PagingDataToJson(this);
-
-  @override
-  String toString() {
-    return jsonEncode(this);
-  }
+  Map<String, dynamic> toJson() => _$PagingDataToJson(this);
 }

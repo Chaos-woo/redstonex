@@ -1,7 +1,6 @@
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 
-import 'package:example/generated/json/base/json_field.dart';
-import 'package:example/generated/json/bili_hot_video_recommend_reason.g.dart';
+part 'bili_hot_video_recommend_reason.g.dart';
 
 @JsonSerializable()
 class BiliHotVideoRecommendReason {
@@ -9,12 +8,7 @@ class BiliHotVideoRecommendReason {
 
   BiliHotVideoRecommendReason();
 
-  factory BiliHotVideoRecommendReason.fromJson(Map<String, dynamic> json) => $BiliHotVideoRecommendReasonFromJson(json);
+  factory BiliHotVideoRecommendReason.fromJson(Map<String, dynamic> json) => _$BiliHotVideoRecommendReasonFromJson(json);
 
-  Map<String, dynamic> toJson() => $BiliHotVideoRecommendReasonToJson(this);
-
-  @override
-  String toString() {
-    return jsonEncode(this);
-  }
+  Map<String, dynamic> toJson() => _$BiliHotVideoRecommendReasonToJson(this);
 }

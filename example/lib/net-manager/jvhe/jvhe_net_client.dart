@@ -26,11 +26,11 @@ class JvheNetClient extends GetxService {
 
   /// 获取支持的省列表
   Future<List<dynamic>?> requestHistoryWeatherProvinces({bool Function(ApiException)? onError}) async {
-    List<dynamic>? ret = await _httpClient.get<List<dynamic>>(
+    RawData ret = await _httpClient.get<RawData>(
       JvheApi.historyWeatherProvinces,
       onError: onError,
     );
-    return ret;
+    return ret.value;
   }
 
   /// 获取支持的城市列表
@@ -40,12 +40,12 @@ class JvheNetClient extends GetxService {
   }) async {
     Map<String, dynamic> queryParameters = {};
     queryParameters['province_id'] = provinceId;
-    List<dynamic>? ret = await _httpClient.get<List<dynamic>>(
+    RawData ret = await _httpClient.get<RawData>(
       JvheApi.historyWeatherCity,
       queryParameters: queryParameters,
       onError: onError,
     );
-    return ret;
+    return ret.value;
   }
 
   /// 获取地区历史天气
@@ -57,10 +57,10 @@ class JvheNetClient extends GetxService {
     HttpDataWrap httpDataWrap = HttpDataWrap();
     httpDataWrap.param('city_id', cityId);
     httpDataWrap.param('weather_date', XDatetime().yyyyMMddFormat(historyDate));
-    return await _httpClient.get<dynamic>(
+    return (await _httpClient.get<RawData>(
       JvheApi.historyWeather,
       queryParameters: httpDataWrap.params,
       onError: onError,
-    );
+    )).value;
   }
 }

@@ -1,9 +1,9 @@
-import 'package:example/generated/json/base/json_field.dart';
-import 'package:example/generated/json/province_with_city.g.dart';
 import 'package:example/services/models/city.dart';
-import 'dart:convert';
-
 import 'package:example/services/models/province.dart';
+import 'package:example/services/models/with_city.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'province_with_city.g.dart';
 
 @JsonSerializable()
 class ProvinceWithCity {
@@ -14,14 +14,9 @@ class ProvinceWithCity {
   
   ProvinceWithCity();
 
-  factory ProvinceWithCity.fromJson(Map<String, dynamic> json) => $ProvinceWithCityFromJson(json);
+  factory ProvinceWithCity.fromJson(Map<String, dynamic> json) => _$ProvinceWithCityFromJson(json);
 
-  Map<String, dynamic> toJson() => $ProvinceWithCityToJson(this);
-
-  @override
-  String toString() {
-    return jsonEncode(this);
-  }
+  Map<String, dynamic> toJson() => _$ProvinceWithCityToJson(this);
 
   Province getProvince() {
     Province p = Province();
@@ -38,23 +33,5 @@ class ProvinceWithCity {
       c.name = v.cityName;
       return c;
     }).toList();
-  }
-}
-
-@JsonSerializable()
-class WithCity {
-
-	late String cityId;
-	late String cityName;
-  
-  WithCity();
-
-  factory WithCity.fromJson(Map<String, dynamic> json) => $WithCityFromJson(json);
-
-  Map<String, dynamic> toJson() => $WithCityToJson(this);
-
-  @override
-  String toString() {
-    return jsonEncode(this);
   }
 }

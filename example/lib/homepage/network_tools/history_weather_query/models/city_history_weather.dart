@@ -1,7 +1,6 @@
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 
-import 'package:example/generated/json/base/json_field.dart';
-import 'package:example/generated/json/city_history_weather.g.dart';
+part 'city_history_weather.g.dart';
 
 @JsonSerializable()
 class CityHistoryWeather {
@@ -16,14 +15,9 @@ class CityHistoryWeather {
 
   CityHistoryWeather();
 
-  factory CityHistoryWeather.fromJson(Map<String, dynamic> json) => $CityHistoryWeatherFromJson(json);
+  factory CityHistoryWeather.fromJson(Map<String, dynamic> json) => _$CityHistoryWeatherFromJson(json);
 
-  Map<String, dynamic> toJson() => $CityHistoryWeatherToJson(this);
-
-  @override
-  String toString() {
-    return jsonEncode(this);
-  }
+  Map<String, dynamic> toJson() => _$CityHistoryWeatherToJson(this);
 
   CityHistoryWeather.placeholder() {
     cityId = '-1';

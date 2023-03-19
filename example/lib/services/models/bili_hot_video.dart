@@ -1,41 +1,47 @@
-import 'dart:convert';
-
-import 'package:example/generated/json/base/json_field.dart';
-import 'package:example/generated/json/bili_hot_video.g.dart';
 import 'package:example/services/models/bili_hot_video_recommend_reason.dart';
 import 'package:example/services/models/bili_hot_video_stat.dart';
 import 'package:example/services/models/bili_up.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'bili_hot_video.g.dart';
 
 @JsonSerializable()
 class BiliHotVideo {
   late int aid;
-  @JSONField(name: "tname")
+
+  @JsonKey(name: 'tname')
   late String tagName;
+
   late String pic;
+
   late String title;
-  @JSONField(name: "pubdate")
+
+  @JsonKey(name: 'pubdate')
   late int pubDate;
-  @JSONField(name: "short_link")
+
+  @JsonKey(name: 'short_link')
   late String shortLink;
-  @JSONField(name: "bvid")
+
+  @JsonKey(name: 'bvid')
   late String bVid;
+
   late BiliUp owner;
-  @JSONField(name: 'stat')
+
+  @JsonKey(name: 'stat')
   late BiliHotVideoStat stats;
-  @JSONField(name: 'rcmd_reason')
+
+  @JsonKey(name: 'rcmd_reason')
   late BiliHotVideoRecommendReason recommendReason;
 
+  @JsonKey(ignore: true)
   bool isFavorite = false;
+
+  @JsonKey(ignore: true)
   bool isLateSeeing = false;
 
   BiliHotVideo();
 
-  factory BiliHotVideo.fromJson(Map<String, dynamic> json) => $BiliHotVideoFromJson(json);
+  factory BiliHotVideo.fromJson(Map<String, dynamic> json) => _$BiliHotVideoFromJson(json);
 
-  Map<String, dynamic> toJson() => $BiliHotVideoToJson(this);
-
-  @override
-  String toString() {
-    return jsonEncode(this);
-  }
+  Map<String, dynamic> toJson() => _$BiliHotVideoToJson(this);
 }

@@ -33,7 +33,7 @@ class HttpClient {
 
   HttpOption get httpOption => _httpOption.immutable();
 
-  Future<T?> fetchApi<T>(
+  Future<RawData> fetchApi<T>(
     String url, {
     String method = "GET",
     Map<String, dynamic>? queryParameters,
@@ -61,9 +61,8 @@ class HttpClient {
       if (onError?.call(exception) != true) {
         throw exception;
       }
+      return RawData()..value = null;
     }
-
-    return null;
   }
 
   _convertRequestData(data) {
@@ -73,7 +72,7 @@ class HttpClient {
     return data;
   }
 
-  Future<T?> get<T>(
+  Future<RawData> get<T>(
     String url, {
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
@@ -87,7 +86,7 @@ class HttpClient {
     );
   }
 
-  Future<T?> post<T>(
+  Future<RawData> post<T>(
     String url, {
     Map<String, dynamic>? queryParameters,
     data,
@@ -104,7 +103,7 @@ class HttpClient {
     );
   }
 
-  Future<T?> delete<T>(
+  Future<RawData> delete<T>(
     String url, {
     Map<String, dynamic>? queryParameters,
     data,
@@ -121,7 +120,7 @@ class HttpClient {
     );
   }
 
-  Future<T?> put<T>(
+  Future<RawData> put<T>(
     String url, {
     Map<String, dynamic>? queryParameters,
     data,
@@ -152,16 +151,14 @@ class HttpClient {
   }
 
   ///请求响应内容处理
-  T? _handleResponse<T>(Response response) {
+  RawData _handleResponse<T>(Response response) {
     if (response.statusCode == 200) {
-      if (T.toString() == (RawData).toString()) {
-        /// 不使用框架中的ApiResponse封装时，T使用RawData类型
-        RawData raw = RawData();
-        raw.value = response.data;
-        return raw as T;
+      if (T is RawData) {
+        /// T类型为RawData时，不按照Rest处理，直接返回结果
+        return RawData()..value = response.data;
       } else {
-        ApiResponse<T> apiResponse = ApiResponse<T>.fromJson(response.data);
-        return _handleBusinessResponse<T>(apiResponse);
+        ApiResponse apiResponse = ApiResponse.fromJson(response.data);
+        return _handleBusinessResponse(apiResponse);
       }
     } else {
       var exception = ApiException(response.statusCode, ApiException.unknownException);
@@ -170,7 +167,7 @@ class HttpClient {
   }
 
   ///业务内容处理
-  T? _handleBusinessResponse<T>(ApiResponse<T> response) {
+  RawData _handleBusinessResponse(ApiResponse response) {
     GlobalHttpOptionConfigs httpConfig = GlobalConfig.of().globalHttpOptionConfigs;
     if (response.code == httpConfig.businessSuccessCode) {
       return response.data;

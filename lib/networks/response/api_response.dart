@@ -1,20 +1,15 @@
-import 'dart:convert';
+import 'package:redstonex/networks/response/raw_data.dart';
 
-import 'package:redstonex/networks/response/api_response.g.dart';
+part 'api_response.g.dart';
 
-class ApiResponse<T> {
+class ApiResponse {
   int? code;
   String? message;
-  T? data;
+  late RawData data;
 
   ApiResponse();
 
-  factory ApiResponse.fromJson(Map<String, dynamic> json) => $ApiResponseFromJson<T>(json);
+  factory ApiResponse.fromJson(Map<String, dynamic> json) => _$ApiResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => $ApiResponseToJson(this);
-
-  @override
-  String toString() {
-    return jsonEncode(this);
-  }
+  Map<String, dynamic> toJson() => _$ApiResponseToJson(this);
 }

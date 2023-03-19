@@ -1,7 +1,6 @@
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 
-import 'package:redstonex/generated/json/base/json_field.dart';
-import 'package:redstonex/generated/json/paging_params.g.dart';
+part 'paging_params.g.dart';
 
 @JsonSerializable()
 class PagingParams {
@@ -14,19 +13,13 @@ class PagingParams {
   int size = 10;
   String? sort = "id";
 
-  @JSONField(serialize: false)
   int? total;
 
   PagingParams();
 
-  factory PagingParams.fromJson(Map<String, dynamic> json) => $PagingParamsFromJson(json);
+  factory PagingParams.fromJson(Map<String, dynamic> json) => _$PagingParamsFromJson(json);
 
-  Map<String, dynamic> toJson() => $PagingParamsToJson(this);
-
-  @override
-  String toString() {
-    return jsonEncode(this);
-  }
+  Map<String, dynamic> toJson() => _$PagingParamsToJson(this);
 
   factory PagingParams.create({
     required int pageIndex,

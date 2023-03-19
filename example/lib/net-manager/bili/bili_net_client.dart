@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:example/net-manager/bili/bili_api.dart';
 import 'package:example/net-manager/bili/bili_response_convert_interceptor.dart';
+import 'package:example/services/models/bili_hot_video.dart';
 import 'package:get/get.dart';
 import 'package:redstonex/redstonex.dart';
 
@@ -25,11 +26,26 @@ class BiliNetClient extends GetxService {
     HttpDataWrap httpDataWrap = HttpDataWrap();
     httpDataWrap.param('ps', pagingParams.size);
     httpDataWrap.param('pn', pagingParams.currentIndex);
-    dynamic ret = await _httpClient.get<dynamic>(
+    // dynamic ret = await _httpClient.get<dynamic>(
+    //   BiliApi.hotVideoPagingQuery,
+    //   queryParameters: httpDataWrap.params,
+    //   onError: onError,
+    // );
+
+    RawData? rawRet = await _httpClient.get<RawData>(
       BiliApi.hotVideoPagingQuery,
       queryParameters: httpDataWrap.params,
       onError: onError,
     );
-    return ret;
+
+    /// RawData新增方法测试
+    // RawData rawData = RawData();
+    // rawData.value = rawRet.objectAs<ApiResponse>(fromJsonConvertor: ApiResponse.fromJson);
+    // print('${rawData.mapAs()}');
+    // RawData rawBiliVideos = RawData();
+    // rawBiliVideos.value = (rawData.mapAs()['data'] as Map<String, dynamic>)['list'];
+    // print('${rawBiliVideos.listAs<BiliHotVideo>(fromJsonConvertor: BiliHotVideo.fromJson)}');
+
+    return rawRet.value;
   }
 }

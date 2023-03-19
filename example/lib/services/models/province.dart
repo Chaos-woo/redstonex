@@ -1,6 +1,6 @@
-import 'package:example/generated/json/base/json_field.dart';
-import 'package:example/generated/json/province.g.dart';
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'province.g.dart';
 
 @JsonSerializable()
 class Province {
@@ -10,12 +10,7 @@ class Province {
   
   Province();
 
-  factory Province.fromJson(Map<String, dynamic> json) => $ProvinceFromJson(json);
+  factory Province.fromJson(Map<String, dynamic> json) => _$ProvinceFromJson(json);
 
-  Map<String, dynamic> toJson() => $ProvinceToJson(this);
-
-  @override
-  String toString() {
-    return jsonEncode(this);
-  }
+  Map<String, dynamic> toJson() => _$ProvinceToJson(this);
 }

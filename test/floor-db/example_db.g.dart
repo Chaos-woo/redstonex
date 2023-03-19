@@ -66,7 +66,7 @@ class _$ExampleDb extends ExampleDb {
   Future<sqflite.Database> open(String path, List<Migration> migrations,
       [Callback? callback]) async {
     final databaseOptions = sqflite.OpenDatabaseOptions(
-      version: 1,
+      version: 2,
       onConfigure: (database) async {
         await database.execute('PRAGMA foreign_keys = ON');
         await callback?.onConfigure?.call(database);
@@ -82,7 +82,7 @@ class _$ExampleDb extends ExampleDb {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `tb_example` (`content` TEXT NOT NULL, `remark` TEXT, `id` INTEGER PRIMARY KEY AUTOINCREMENT, `created_at` TEXT NOT NULL, `updated_at` TEXT NOT NULL)');
+            'CREATE TABLE IF NOT EXISTS `tb_example` (`id` INTEGER, `content` TEXT NOT NULL, `remark` TEXT, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },

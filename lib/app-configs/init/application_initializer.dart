@@ -26,7 +26,7 @@ class AppInitializer {
     /// 捕获异常的回调
     FlutterError.onError = (FlutterErrorDetails details) {
       if (!Constant.inProduction) {
-        /// debug时，直接将异常信息打印。
+        /// 非生产环境，直接将异常信息打印。
         FlutterError.dumpErrorToConsole(details);
       } else {
         /// release时，将异常交由zone统一处理。

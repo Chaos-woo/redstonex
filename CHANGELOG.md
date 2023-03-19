@@ -1,3 +1,9 @@
+## 1.0.5
+* 增加RawData类扩展操作，使其更方便处理内部dynamic类型数据
+* 移除FlutterJsonBeanFactory插件生成fromJson、toJson方法
+* 增加依赖@JsonSerializable()三方库管理POJOs的fromJson、toJson方法
+* 修复example示例中json转换插件更换引起的POJOs转换问题
+
 ## 1.0.4
 * 增加列表控制器item项局部更新
 * 增加dialog仅有操作按钮的场景

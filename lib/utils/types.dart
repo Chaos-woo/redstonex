@@ -6,7 +6,10 @@ class XType {
   factory XType() => _single;
 
   bool isBaseType(dynamic data) {
-    return data is String || data is double || data is bool || data is int;
+    return data.runtimeType is String ||
+        data.runtimeType is double ||
+        data.runtimeType is bool ||
+        data.runtimeType is int;
   }
 
   Type typeAs<T>() => T;

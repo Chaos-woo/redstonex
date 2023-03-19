@@ -1,6 +1,6 @@
-import 'package:example/generated/json/base/json_field.dart';
-import 'package:example/generated/json/bili_hot_video_stat.g.dart';
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'bili_hot_video_stat.g.dart';
 
 @JsonSerializable()
 class BiliHotVideoStat {
@@ -16,12 +16,7 @@ class BiliHotVideoStat {
   
   BiliHotVideoStat();
 
-  factory BiliHotVideoStat.fromJson(Map<String, dynamic> json) => $BiliHotVideoStatFromJson(json);
+  factory BiliHotVideoStat.fromJson(Map<String, dynamic> json) => _$BiliHotVideoStatFromJson(json);
 
-  Map<String, dynamic> toJson() => $BiliHotVideoStatToJson(this);
-
-  @override
-  String toString() {
-    return jsonEncode(this);
-  }
+  Map<String, dynamic> toJson() => _$BiliHotVideoStatToJson(this);
 }

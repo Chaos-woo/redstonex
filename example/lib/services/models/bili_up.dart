@@ -1,7 +1,6 @@
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 
-import 'package:example/generated/json/base/json_field.dart';
-import 'package:example/generated/json/bili_up.g.dart';
+part 'bili_up.g.dart';
 
 @JsonSerializable()
 class BiliUp {
@@ -11,12 +10,7 @@ class BiliUp {
 
   BiliUp();
 
-  factory BiliUp.fromJson(Map<String, dynamic> json) => $BiliUpFromJson(json);
+  factory BiliUp.fromJson(Map<String, dynamic> json) => _$BiliUpFromJson(json);
 
-  Map<String, dynamic> toJson() => $BiliUpToJson(this);
-
-  @override
-  String toString() {
-    return jsonEncode(this);
-  }
+  Map<String, dynamic> toJson() => _$BiliUpToJson(this);
 }
