@@ -12,10 +12,10 @@ Fast development framework of flutter project based on GetX.
 
 ## Usage
 
-* install sdk
+* 安装 - 使用最新版本
 ```yaml
 dependencies:
-  redstonex: ^1.0.4
+  redstonex: any
 ```
 
 * 模板初始化
