@@ -86,6 +86,7 @@ export 'package:redstonex/widgets/redstonex_click_widget.dart';
 export 'package:redstonex/widgets/redstonex_image_loader.dart';
 export 'package:redstonex/widgets/redstonex_popup_window.dart';
 export 'package:redstonex/widgets/redstonex_scroll_view.dart';
+export 'package:redstonex/widgets/redstonex_keep_alive_widget.dart';
 export 'package:redstonex/widgets/rsx-item-list/redstonex_horizontal_toolbar_widget.dart';
 export 'package:redstonex/widgets/rsx-item-list/redstonex_horizontal_widget.dart';
 export 'package:redstonex/widgets/rsx-item-list/redstonex_item_list_model.dart';
