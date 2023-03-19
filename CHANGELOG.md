@@ -1,3 +1,9 @@
+## 1.0.7
+* 完善CHANGE LOG
+
+## 1.0.6
+* 增加 `RsxKeepAliveWidget` 组件
+
 ## 1.0.5
 * 增加RawData类扩展操作，使其更方便处理内部dynamic类型数据
 * 移除FlutterJsonBeanFactory插件生成fromJson、toJson方法
