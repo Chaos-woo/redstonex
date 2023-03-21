@@ -1,3 +1,6 @@
+## 1.0.8
+* 增加json_serializable默认数据转换类
+
 ## 1.0.7
 * 完善CHANGE LOG
 

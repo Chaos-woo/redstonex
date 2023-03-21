@@ -51,7 +51,7 @@ export 'package:redstonex/paging/utils/provides.dart';
 export 'package:redstonex/resources/constant.dart';
 export 'package:redstonex/resources/dimens.dart';
 export 'package:redstonex/resources/gaps.dart';
-export 'package:redstonex/resources/md3.dart';
+export 'package:redstonex/resources/material_design_3.dart';
 export 'package:redstonex/routes/dispatcher.dart';
 export 'package:redstonex/routes/router.dart';
 export 'package:redstonex/utils/application_package.dart';

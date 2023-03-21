@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-class Md3Dimens {
+class MaterialDesign3 {
   static TextDimens headlineLarge = TextDimens(40, 32, FontWeight.w400);
   static TextDimens headlineMedium = TextDimens(36, 28, FontWeight.w400);
   static TextDimens headlineSmall = TextDimens(32, 24, FontWeight.w400);
