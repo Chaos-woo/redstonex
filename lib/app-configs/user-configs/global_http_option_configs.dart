@@ -5,9 +5,6 @@ import 'package:flutter/foundation.dart';
 
 /// http全局配置
 class GlobalHttpOptionConfigs {
-  /// 全局url配置
-  String get baseUrl => 'www.google.com';
-
   /// 默认连接时间
   int get connectTimeout => 5000;
 

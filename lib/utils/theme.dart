@@ -24,48 +24,9 @@ class XTheme {
     }
   }
 
-  // bool isDarkMode(BuildContext context) {
-  //   return Theme.of(context).brightness == Brightness.dark;
-  // }
-
-  // bool isDarkModeFastly() {
-  //   if (Get.context != null) {
-  //     return isDarkMode(Get.context!);
-  //   } else {
-  //     return false;
-  //   }
-  // }
-  //
-  // Color? getDarkColor(BuildContext context, Color darkColor) {
-  //   return isDarkMode(context) ? darkColor : null;
-  // }
-  //
-  // Color? getSecondaryTitleColor() {
-  //   return isDarkModeFastly() ? Colours.darkTextGray : Colours.textGray;
-  // }
-  //
-  // Color? getIconColor() {
-  //   return isDarkModeFastly() ? Colours.darkText : null;
-  // }
-  //
-  // Color getStickyHeaderColor() {
-  //   return isDarkModeFastly() ? Colours.darkBgGray_ : Colours.bgGray_;
-  // }
-  //
-  // Color getDialogTextFieldColor() {
-  //   return isDarkModeFastly() ? Colours.darkText : Colours.text;
-  // }
-  //
-
   Color? getKeyboardActionsColor() {
     return isDarkMode() ? const Color(0xFF18191A) : Colors.grey[200];
   }
-
-  //
-  // Color? getBgColor() {
-  //   return isDarkModeFastly() ? Colours.darkBgColor : Colours.bgColor;
-  // }
-  //
 
   Color? getBarrierColor() {
     return isDarkMode() ? Colors.black38 : Colors.black54;

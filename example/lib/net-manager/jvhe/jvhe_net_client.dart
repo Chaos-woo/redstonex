@@ -11,7 +11,10 @@ class JvheNetClient extends GetxService {
   late final HttpClient _httpClient;
 
   JvheNetClient() {
-    HttpOption option = HttpOptionBuilder().responseType(ResponseType.json).receiveTimeout(10000).build();
+    HttpOption option = (HttpOptionBuilder()
+      ..responseType = ResponseType.json
+      ..receiveTimeOut = 10000)
+        .build();
 
     _httpClient = HttpClient(
       'http://v.juhe.cn',

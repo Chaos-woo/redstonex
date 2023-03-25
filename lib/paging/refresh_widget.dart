@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart' as pull2Refresh;
-import 'package:redstonex/paging/page_controller_2.dart';
 import 'package:redstonex/paging/page_controller.dart';
+import 'package:redstonex/paging/page_controller_2.dart';
 import 'package:redstonex/paging/page_state.dart';
 import 'package:redstonex/paging/refresh_text.dart';
 import 'package:redstonex/paging/utils/depends.dart';
@@ -50,6 +50,7 @@ class RefreshWidgets {
 
   static Widget buildRefreshListWidget2<T, C extends PagingController2<T, PagingState<T>>>({
     required Widget Function(Rx<T> item, int index) itemBuilder,
+    ScrollController? scrollController,
     bool enablePullUp = true,
     bool enablePullDown = true,
     String? tag,
@@ -69,6 +70,7 @@ class RefreshWidgets {
         return buildRefreshWidget(
           builder: () => buildListView<T>(
               data: controller.pagingState.data,
+              scrollController: scrollController,
               separatorBuilder: separatorBuilder,
               itemBuilder: itemBuilder,
               onItemClick: onItemClick,
@@ -91,9 +93,9 @@ class RefreshWidgets {
     );
   }
 
-
   static Widget buildRefreshListWidget<T, C extends PagingController<T, PagingState<T>>>({
     required Widget Function(Rx<T> item, int index) itemBuilder,
+    ScrollController? scrollController,
     bool enablePullUp = true,
     bool enablePullDown = true,
     String? tag,
@@ -113,6 +115,7 @@ class RefreshWidgets {
         return buildRefreshWidget(
           builder: () => buildListView<T>(
               data: controller.pagingState.data,
+              scrollController: scrollController,
               separatorBuilder: separatorBuilder,
               itemBuilder: itemBuilder,
               onItemClick: onItemClick,
@@ -138,6 +141,7 @@ class RefreshWidgets {
   static Widget buildListView<T>({
     required Widget Function(Rx<T> item, int index) itemBuilder,
     required List<Rx<T>> data,
+    ScrollController? scrollController,
     Widget Function(Rx<T> item, int index)? separatorBuilder,
     Function(Rx<T> item, int index)? onItemClick,
     Function(Rx<T> item, int index)? onItemLongPress,
@@ -149,16 +153,18 @@ class RefreshWidgets {
     pull2Refresh.LoadIndicator? loadIndicator,
   }) {
     return ListView.separated(
-        shrinkWrap: shrinkWrap,
-        physics: physics,
-        padding: EdgeInsets.zero,
-        scrollDirection: scrollDirection,
-        itemBuilder: (ctx, index) => GestureDetector(
-              child: itemBuilder.call(data[index], index),
-              onTap: () => onItemClick?.call(data[index], index),
-              onLongPress: () => onItemLongPress?.call(data[index], index),
-            ),
-        separatorBuilder: (ctx, index) => separatorBuilder?.call(data[index], index) ?? Container(),
-        itemCount: data.length);
+      shrinkWrap: shrinkWrap,
+      physics: physics,
+      controller: scrollController,
+      padding: EdgeInsets.zero,
+      scrollDirection: scrollDirection,
+      itemBuilder: (ctx, index) => GestureDetector(
+        child: itemBuilder.call(data[index], index),
+        onTap: () => onItemClick?.call(data[index], index),
+        onLongPress: () => onItemLongPress?.call(data[index], index),
+      ),
+      separatorBuilder: (ctx, index) => separatorBuilder?.call(data[index], index) ?? Container(),
+      itemCount: data.length,
+    );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:redstonex/networks/exception/api_exception.dart';
@@ -92,4 +93,14 @@ abstract class PagingController<M, S extends PagingState<M>> extends GetxControl
 
   /// 每次加载前的操作
   Future<void> beforeLoadMore() async {}
+
+  /// 滑动至列表顶部并刷新
+  Future<void> scrollToTopAndRefresh(
+      ScrollController scrollController, {
+        Duration animateDuration = const Duration(seconds: 2),
+        Curve curve = Curves.linear,
+      }) async {
+    await scrollController.animateTo(0, duration: animateDuration, curve: curve);
+    refreshData();
+  }
 }

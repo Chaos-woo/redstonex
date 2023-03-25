@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:example/net-manager/bili/bili_api.dart';
 import 'package:example/net-manager/bili/bili_response_convert_interceptor.dart';
-import 'package:example/services/models/bili_hot_video.dart';
 import 'package:get/get.dart';
 import 'package:redstonex/redstonex.dart';
 
@@ -10,7 +9,10 @@ class BiliNetClient extends GetxService {
   late final HttpClient _httpClient;
 
   BiliNetClient() {
-    HttpOption option = HttpOptionBuilder().responseType(ResponseType.json).receiveTimeout(10000).build();
+    HttpOption option = (HttpOptionBuilder()
+          ..responseType = ResponseType.json
+          ..receiveTimeOut = 10000)
+        .build();
 
     _httpClient = HttpClient(
       'https://api.bilibili.com',

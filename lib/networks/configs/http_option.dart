@@ -7,6 +7,8 @@ class HttpOption {
   final int _sendTimeout;
   final String _sendContentType;
   final ResponseType _responseType;
+  final HttpClientAdapter? _httpClientAdapter;
+  final JsonDecodeCallback _jsonDecodeCallback;
 
   int get connectTimeout => _connectTimeout;
 
@@ -18,21 +20,29 @@ class HttpOption {
 
   int get sendTimeout => _sendTimeout;
 
+  HttpClientAdapter? get httpClientAdapter => _httpClientAdapter;
+
+  JsonDecodeCallback get jsonDecodeCallback => _jsonDecodeCallback;
+
   HttpOption(HttpOptionBuilder builder)
-      : _connectTimeout = builder._connectTimeout,
-        _receiveTimeout = builder._receiveTimeOut,
-        _sendTimeout = builder._sendTimeout,
-        _sendContentType = builder._sendContentType,
-        _responseType = builder._responseType;
+      : _connectTimeout = builder.connectTimeout,
+        _receiveTimeout = builder.receiveTimeOut,
+        _sendTimeout = builder.sendTimeout,
+        _sendContentType = builder.sendContentType,
+        _responseType = builder.responseType,
+        _httpClientAdapter = builder.httpClientAdapter,
+        _jsonDecodeCallback = builder.jsonDecodeCallback;
 
   HttpOption immutable() {
-    HttpOptionBuilder builder = HttpOptionBuilder();
-    builder.connectTimeout(_connectTimeout);
-    builder.receiveTimeout(_receiveTimeout);
-    builder.sendTimeout(sendTimeout);
-    builder.sendContentType(_sendContentType);
-    builder.responseType(_responseType);
-    return builder.build();
+    return (HttpOptionBuilder()
+          ..connectTimeout = _connectTimeout
+          ..receiveTimeOut = _receiveTimeout
+          ..sendTimeout = _sendTimeout
+          ..sendContentType = _sendContentType
+          ..responseType = _responseType
+          ..httpClientAdapter = _httpClientAdapter
+          ..jsonDecodeCallback = _jsonDecodeCallback)
+        .build();
   }
 
   HttpOption copyWith({
@@ -41,50 +51,31 @@ class HttpOption {
     int? optionalSendTimeout,
     String? optionalSendContentType,
     ResponseType? optionalResponseType,
+    HttpClientAdapter? optionalHttpClientAdapter,
+    JsonDecodeCallback? optionalJsonDecodeCallback,
   }) {
-    HttpOptionBuilder builder = HttpOptionBuilder();
-    builder.connectTimeout(optionalConnectTimeout ?? _connectTimeout);
-    builder.receiveTimeout(optionalReceiveTimeout ?? _receiveTimeout);
-    builder.sendTimeout(optionalSendTimeout ?? _sendTimeout);
-    builder.sendContentType(optionalSendContentType ?? _sendContentType);
-    builder.responseType(optionalResponseType ?? _responseType);
-    return builder.build();
+    return (HttpOptionBuilder()
+          ..connectTimeout = optionalConnectTimeout ?? _connectTimeout
+          ..receiveTimeOut = optionalReceiveTimeout ?? _receiveTimeout
+          ..sendTimeout = optionalSendTimeout ?? _sendTimeout
+          ..sendContentType = optionalSendContentType ?? _sendContentType
+          ..responseType = optionalResponseType ?? _responseType
+          ..httpClientAdapter = optionalHttpClientAdapter ?? _httpClientAdapter
+          ..jsonDecodeCallback = optionalJsonDecodeCallback ?? _jsonDecodeCallback)
+        .build();
   }
 }
 
 class HttpOptionBuilder {
   static final globalHttpConfig = GlobalConfig.of().globalHttpOptionConfigs;
 
-  int _connectTimeout = globalHttpConfig.connectTimeout;
-  int _receiveTimeOut = globalHttpConfig.receiveTimeout;
-  int _sendTimeout = globalHttpConfig.sendTimeout;
-  String _sendContentType = globalHttpConfig.sendContentType;
-  ResponseType _responseType = globalHttpConfig.responseType;
-
-  HttpOptionBuilder connectTimeout(int value) {
-    _connectTimeout = value;
-    return this;
-  }
-
-  HttpOptionBuilder receiveTimeout(int value) {
-    _receiveTimeOut = value;
-    return this;
-  }
-
-  HttpOptionBuilder sendTimeout(int value) {
-    _sendTimeout = value;
-    return this;
-  }
-
-  HttpOptionBuilder sendContentType(String value) {
-    _sendContentType = value;
-    return this;
-  }
-
-  HttpOptionBuilder responseType(ResponseType value) {
-    _responseType = value;
-    return this;
-  }
+  int connectTimeout = globalHttpConfig.connectTimeout;
+  int receiveTimeOut = globalHttpConfig.receiveTimeout;
+  int sendTimeout = globalHttpConfig.sendTimeout;
+  String sendContentType = globalHttpConfig.sendContentType;
+  ResponseType responseType = globalHttpConfig.responseType;
+  HttpClientAdapter? httpClientAdapter;
+  JsonDecodeCallback jsonDecodeCallback = globalHttpConfig.jsonDecodeCallback;
 
   HttpOption build() => HttpOption(this);
 }

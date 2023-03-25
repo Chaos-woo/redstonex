@@ -28,6 +28,15 @@ class HttpClient {
       contentType: optional.sendContentType,
     );
     _dio = Dio(options);
+
+    /// http适配器设置
+    if (optional.httpClientAdapter != null) {
+      _dio.httpClientAdapter = optional.httpClientAdapter!;
+    }
+
+    /// 解码
+    _dio.transformer = DefaultTransformer()..jsonDecodeCallback = optional.jsonDecodeCallback;
+
     _dio.interceptors.addAll(interceptors ?? const []);
   }
 
@@ -39,6 +48,7 @@ class HttpClient {
     Map<String, dynamic>? queryParameters,
     data,
     Map<String, dynamic>? headers,
+    CancelToken? cancelToken,
     bool Function(ApiException)? onError,
   }) async {
     try {
@@ -52,6 +62,7 @@ class HttpClient {
         url,
         queryParameters: queryParameters,
         data: data,
+        cancelToken: cancelToken,
         options: options,
       );
 
@@ -76,10 +87,12 @@ class HttpClient {
     String url, {
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
+    CancelToken? cancelToken,
     bool Function(ApiException)? onError,
   }) {
     return fetchApi(
       url,
+      cancelToken: cancelToken,
       queryParameters: queryParameters,
       headers: headers,
       onError: onError,
@@ -91,11 +104,13 @@ class HttpClient {
     Map<String, dynamic>? queryParameters,
     data,
     Map<String, dynamic>? headers,
+    CancelToken? cancelToken,
     bool Function(ApiException)? onError,
   }) {
     return fetchApi(
       url,
       method: "POST",
+      cancelToken: cancelToken,
       queryParameters: queryParameters,
       data: data,
       headers: headers,
@@ -108,11 +123,13 @@ class HttpClient {
     Map<String, dynamic>? queryParameters,
     data,
     Map<String, dynamic>? headers,
+    CancelToken? cancelToken,
     bool Function(ApiException)? onError,
   }) {
     return fetchApi(
       url,
       method: "DELETE",
+      cancelToken: cancelToken,
       queryParameters: queryParameters,
       data: data,
       headers: headers,
@@ -125,11 +142,13 @@ class HttpClient {
     Map<String, dynamic>? queryParameters,
     data,
     Map<String, dynamic>? headers,
+    CancelToken? cancelToken,
     bool Function(ApiException)? onError,
   }) {
     return fetchApi(
       url,
       method: "PUT",
+      cancelToken: cancelToken,
       queryParameters: queryParameters,
       data: data,
       headers: headers,
@@ -137,12 +156,29 @@ class HttpClient {
     );
   }
 
-  Future download(String uri, String localPath, {ProgressCallback? progressCallback}) async {
+  /// 下载
+  Future download(
+    String uri,
+    String savePath, {
+    ProgressCallback? progressCallback,
+    Map<String, dynamic>? queryParameters,
+    CancelToken? cancelToken,
+    bool deleteOnError = true,
+    String lengthHeader = Headers.contentLengthHeader,
+    Object? data,
+    Options? options,
+  }) async {
     try {
       await _dio.download(
         uri,
-        localPath,
+        savePath,
         onReceiveProgress: progressCallback,
+        queryParameters: queryParameters,
+        cancelToken: cancelToken,
+        deleteOnError: deleteOnError,
+        lengthHeader: lengthHeader,
+        data: data,
+        options: options,
       );
     } on DioError catch (e) {
       var exception = ApiException.fromDioError(e);
@@ -150,7 +186,7 @@ class HttpClient {
     }
   }
 
-  ///请求响应内容处理
+  /// 请求响应内容处理
   RawData _handleResponse<T>(Response response) {
     if (response.statusCode == 200) {
       if (T is RawData) {

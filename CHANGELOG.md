@@ -1,3 +1,9 @@
+## 1.0.9
+* 增加PagingController滚动至顶部并刷新接口
+* 支持HttpClient代理设置
+* 支持HttpClient请求取消CancelToken
+* 优化网络监听工具处理
+
 ## 1.0.8
 * 增加json_serializable默认数据转换类
 
