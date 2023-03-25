@@ -110,7 +110,7 @@ abstract class PagingController2<M, S extends PagingState<M>> extends GetxContro
   }
 
   /// 自定义数据加载
-  Future<PagingData<M>?> loadData(PagingParams pagingParams);
+  Future loadData(PagingParams pagingParams);
 
   /// 自定义加载异常处理
   void loadError(Exception? exception) => () {};

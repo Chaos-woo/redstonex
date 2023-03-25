@@ -1,3 +1,6 @@
+## 1.0.10
+* PageController2#loadData方法返回值类型调整
+
 ## 1.0.9
 * 增加PagingController滚动至顶部并刷新接口
 * 支持HttpClient代理设置

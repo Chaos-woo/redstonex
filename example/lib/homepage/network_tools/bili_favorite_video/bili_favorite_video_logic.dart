@@ -14,10 +14,8 @@ class BiliFavoriteVideoLogic extends PagingController2<BiliFavoriteVideo, BiliFa
   }
 
   @override
-  Future<PagingData<BiliFavoriteVideo>?> loadData(PagingParams pagingParams) async {
-    PagingData<BiliFavoriteVideo> pagingData = PagingData();
+  Future loadData(PagingParams pagingParams) async {
     _biliService.pagingFavoriteBiliVideos(pagingParams.extra?['minId'] as int, pagingParams.size);
-    return pagingData;
   }
 
   @override
