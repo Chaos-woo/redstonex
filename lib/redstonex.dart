@@ -19,6 +19,7 @@ export 'package:redstonex/exceptions/redstonex_exception.dart';
 export 'package:redstonex/extension/colour_extension.dart';
 export 'package:redstonex/extension/function_extension.dart';
 export 'package:redstonex/extension/list_extension.dart';
+export 'package:redstonex/extension/map_extension.dart';
 export 'package:redstonex/extension/number_extension.dart';
 export 'package:redstonex/extension/string_extension.dart';
 export 'package:redstonex/networks/configs/exception_text.dart';
