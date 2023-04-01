@@ -43,7 +43,7 @@ dependencies:
   # App Shortcuts桌面快捷方式 https://github.com/flutter/plugins/tree/master/packages/quick_actions
   quick_actions: ^1.0.0
   # 权限处理 https://github.com/baseflow/flutter-permission-handler
-  permission_handler: ^10.0.0
+  permission_handler: ^10.2.0
   # 设备网络连接状态 https://plus.fluttercommunity.dev/
   connectivity_plus: ^2.3.5
   # 设备信息 https://github.com/fluttercommunity/plus_plugins/tree/main/packages/device_info_plus
@@ -56,8 +56,6 @@ dependencies:
   floor: ^1.3.0
   # 状态管理，路由管理 https://github.com/jonataslaw/getx
   get: ^4.6.5
-  # 内存存储 https://github.com/jonataslaw/get_storage
-  get_storage: ^2.0.3
   # pojo <-> json处理：https://pub.dev/packages/json_serializable
   # json注解使用：https://github.com/google/json_serializable.dart/blob/master/example/lib/example.dart
   json_annotation: ^4.6.0

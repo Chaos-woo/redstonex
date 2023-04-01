@@ -9,23 +9,23 @@ class XDirectory {
 
   factory XDirectory() => _single;
 
-  /// temporary directory
-  Directory? temporaryDir;
+  /// 临时目录
+  late Directory temporaryDirectory;
 
-  /// app directory
-  late Directory appDir;
+  /// 应用支持文件目录，不暴露给用户
+  late Directory applicationInnerSupportDirectory;
 
-  /// external directory for android
-  Directory? externalDir;
+  /// 存放用户数据文件目录，用户可查看
+  late Directory applicationDataDirectory;
 
-  /// Initial directory information
-  ///
-  /// Need call [init] method before using path
-  Future<void> init() async {
-    temporaryDir = await getTemporaryDirectory();
-    appDir = await getApplicationDocumentsDirectory();
-    if (Platform.isAndroid) {
-      externalDir = await getExternalStorageDirectory();
-    }
+  Future<void> initial() async {
+    /// 未备份的临时目录的路径
+    temporaryDirectory = await getTemporaryDirectory();
+
+    /// 存放应用支持文件目录
+    applicationInnerSupportDirectory = await getApplicationSupportDirectory();
+
+    /// 存放用户数据文件目录
+    applicationDataDirectory = await getApplicationDocumentsDirectory();
   }
 }

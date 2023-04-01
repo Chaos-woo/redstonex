@@ -7,28 +7,20 @@ class XAppPackage {
 
   factory XAppPackage() => _single;
 
-  /// base package information
-  static late PackageInfo _pak;
+  /// 应用包信息
+  static late PackageInfo _package;
 
-  /// Initial package information
-  ///
-  /// Need call [init] method before using package information
-  Future<void> init() async {
-    _pak = await PackageInfo.fromPlatform();
+  Future<void> initial() async {
+    _package = await PackageInfo.fromPlatform();
   }
 
-  /// App name
-  String appName() => _pak.appName;
+  String appName() => _package.appName;
 
-  /// Package name
-  String packageName() => _pak.packageName;
+  String packageName() => _package.packageName;
 
-  /// Version
-  String version() => _pak.version;
+  String version() => _package.version;
 
-  /// Build number
-  String buildNumber() => _pak.buildNumber;
+  String buildNumber() => _package.buildNumber;
 
-  /// Build signature
-  String buildSignature() => _pak.buildSignature;
+  String buildSignature() => _package.buildSignature;
 }

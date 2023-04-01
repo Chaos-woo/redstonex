@@ -10,7 +10,7 @@ class GlobalConfig {
 
   static GlobalConfig of() => XDepends().on<GlobalConfig>(tag: _globalConfigTag);
 
-  static initDefGlobalConfig() {
+  static initial() {
     XProvides().provide(GlobalConfig(), tag: _globalConfigTag);
   }
 

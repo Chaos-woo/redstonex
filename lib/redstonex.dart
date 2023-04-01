@@ -36,7 +36,6 @@ export 'package:redstonex/networks/interceptors/token_interceptor.dart';
 export 'package:redstonex/networks/requester.dart';
 export 'package:redstonex/networks/response/api_response.dart';
 export 'package:redstonex/networks/response/raw_data.dart';
-export 'package:redstonex/object-storage/memory_cache_get.dart';
 export 'package:redstonex/object-storage/persist_cache_get.dart';
 export 'package:redstonex/observer/has_event_emitter.dart';
 export 'package:redstonex/observer/has_event_observer.dart';

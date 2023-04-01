@@ -5,7 +5,7 @@ import 'package:redstonex/utils/id_generator.dart';
 /// 页面路由辅助生成工具
 ///
 /// 使用[group]、[route]添加路由后，框架初始化时自动调用
-/// [init]方法初始化页面路由，即可通过[XDispatcher.pageRoutes]
+/// [initial]方法初始化页面路由，即可通过[XDispatcher.pageRoutes]
 /// 获取GetX全部配置的路由
 class XDispatcher {
   /// 是否初始化
@@ -38,7 +38,7 @@ class XDispatcher {
   }
 
   /// 初始化路由，并生成GetX页面路由
-  static void init() {
+  static void initial() {
     if (routesInit) {
       return;
     }

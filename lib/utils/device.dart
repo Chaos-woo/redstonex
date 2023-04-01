@@ -20,7 +20,7 @@ class XDevice {
 
   static late IosDeviceInfo iosDeviceInfo;
 
-  static Future<void> initDeviceInfo() async {
+  static Future<void> initial() async {
     final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     if (isAndroid) {
       androidInfo = await deviceInfo.androidInfo;

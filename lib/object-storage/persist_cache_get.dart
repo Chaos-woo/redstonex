@@ -1,14 +1,14 @@
 import 'package:flustars_flutter3/flustars_flutter3.dart';
 
 /// 基于shared_preferences的本地化缓存
-class XPersistentStorage {
-  static final XPersistentStorage _single = XPersistentStorage._internal();
+class XSharedPersistent {
+  static final XSharedPersistent _single = XSharedPersistent._internal();
 
-  factory XPersistentStorage() => _single;
+  factory XSharedPersistent() => _single;
 
-  XPersistentStorage._internal();
+  XSharedPersistent._internal();
 
-  Future<void> initPersistCache() async {
+  Future<void> initial() async {
     await SpUtil.getInstance();
   }
 

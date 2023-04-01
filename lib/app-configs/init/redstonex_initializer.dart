@@ -1,6 +1,5 @@
 
 import 'package:redstonex/app-configs/global_config.dart';
-import 'package:redstonex/object-storage/memory_cache_get.dart';
 import 'package:redstonex/object-storage/persist_cache_get.dart';
 import 'package:redstonex/routes/dispatcher.dart';
 import 'package:redstonex/utils/application_package.dart';
@@ -22,22 +21,20 @@ class RsxInitializer {
     /// 初始化日志工具
     XLog().init();
     /// 初始化全局配置
-    GlobalConfig.initDefGlobalConfig();
+    GlobalConfig.initial();
   }
 
   static Future<void> _builtinInit() async {
     /// 初始化设备信息
-    await XDevice.initDeviceInfo();
+    await XDevice.initial();
     /// 初始化app信息
-    await XAppPackage().init();
+    await XAppPackage().initial();
     /// 初始化存储信息
-    await XDirectory().init();
-    /// 初始化内存缓存
-    await XMemoryStorage().initMemoryCache();
+    await XDirectory().initial();
     /// 初始化本地缓存
-    await XPersistentStorage().initPersistCache();
+    await XSharedPersistent().initial();
     /// 初始化路由
-    XDispatcher.init();
+    XDispatcher.initial();
   }
 
 }
