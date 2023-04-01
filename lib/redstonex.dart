@@ -72,6 +72,7 @@ export 'package:redstonex/utils/launch.dart';
 export 'package:redstonex/utils/loading.dart';
 export 'package:redstonex/utils/network.dart';
 export 'package:redstonex/utils/other_utils.dart';
+export 'package:redstonex/utils/permission.dart';
 export 'package:redstonex/utils/rsxlog.dart';
 export 'package:redstonex/utils/screen.dart';
 export 'package:redstonex/utils/shape_border.dart';
