@@ -95,4 +95,7 @@ export 'package:redstonex/widgets/rsx-item-list/redstonex_horizontal_toolbar_wid
 export 'package:redstonex/widgets/rsx-item-list/redstonex_horizontal_widget.dart';
 export 'package:redstonex/widgets/rsx-item-list/redstonex_item_list_model.dart';
 export 'package:redstonex/widgets/rsx-item-list/redstonex_option_group_widget.dart';
+export 'package:redstonex/widgets/redstonex_getx_bottom_navigation_bar.dart';
+export 'package:redstonex/widgets/redstonex_lottie_bottom_navigation_bar.dart';
+export 'package:redstonex/widgets/redstonex_text_bottom_navigation_bar.dart';
 export 'package:redstonex/widgets/text_field_item.dart';

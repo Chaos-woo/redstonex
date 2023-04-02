@@ -1,3 +1,4 @@
+import 'package:example/routes.dart';
 import 'package:example/utils/random_utils.dart';
 import 'package:example/widgets/rsx_option_item_utils.dart';
 import 'package:flutter/material.dart';
@@ -50,6 +51,20 @@ class BottomSheetToolsComponent extends StatelessWidget {
             exitBottomSheetDuration: 300.milliseconds,
             customControlHeight: true,
           );
+        },
+      ),
+      RsxOptionItemUtils.functionRsxOptionItem(
+        title: 'Lottie动画',
+        description: 'Lottie bottom navigation',
+        onTap: () {
+          XNavigator().to(RouteCompose.lottieRoute.index);
+        },
+      ),
+      RsxOptionItemUtils.functionRsxOptionItem(
+        title: 'Persistent Bottom NavBar',
+        description: '文字路由导航',
+        onTap: () {
+          XNavigator().to(RouteCompose.textRoute.index);
         },
       ),
     ];
