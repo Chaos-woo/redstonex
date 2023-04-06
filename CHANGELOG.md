@@ -1,4 +1,7 @@
-### 1.1.2
+## 1.1.3
+* 修复JsonSerializable类型转换器const构造函数作为注解使用方式的语法错误
+
+## 1.1.2
 * 增加支持Lottie动画的Bottom Navigation Bar-PageView
 * 增加persistent_bottom_nav_bar_v2三方库的文字Bottom Navigation Bar-PageView
 

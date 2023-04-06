@@ -1,6 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 
 class BoolIntConverter implements JsonConverter<bool, int> {
+  const BoolIntConverter();
+
   @override
   bool fromJson(int json) {
     return 0 == json ? false : true;
@@ -13,6 +15,8 @@ class BoolIntConverter implements JsonConverter<bool, int> {
 }
 
 class BoolStringConverter implements JsonConverter<bool, String> {
+  const BoolStringConverter();
+
   @override
   bool fromJson(String json) {
     return 'true' == json.toLowerCase();

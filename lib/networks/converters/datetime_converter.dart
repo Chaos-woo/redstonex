@@ -4,6 +4,8 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:redstonex/extension/string_extension.dart';
 
 class EpochMillisecondDateTimeConverter implements JsonConverter<DateTime, int> {
+  const EpochMillisecondDateTimeConverter();
+
   @override
   DateTime fromJson(int json) {
     return DateTime.fromMillisecondsSinceEpoch(json);
@@ -16,6 +18,8 @@ class EpochMillisecondDateTimeConverter implements JsonConverter<DateTime, int> 
 }
 
 class EpochSecondDateTimeConverter implements JsonConverter<DateTime, int> {
+  const EpochSecondDateTimeConverter();
+
   @override
   DateTime fromJson(int json) {
     return DateTime.fromMillisecondsSinceEpoch(json * 1000);
