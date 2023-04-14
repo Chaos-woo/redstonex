@@ -1,6 +1,6 @@
 name: redstonex
 description: 基于GetX的Flutter快速开发框架。Development flutter framework based GetX frame.
-version: 1.1.3
+version: 1.1.4
 homepage: https://github.com/Chaos-woo/redstonex
 
 environment:
@@ -82,8 +82,6 @@ dependencies:
   styled_widget: ^0.4.1
   # 数字展示处理 https://github.com/entronad/number_display
   number_display: ^3.0.0
-  # 支持tuple结构 https://github.com/avdosev/tuple_dart
-  tuple_dart: ^1.4.2
   # flutter钩子 https://pub.dev/packages/flutter_hooks
   flutter_hooks: ^0.18.6
   # Lottie帧动画 https://github.com/xvrh/lottie-flutter

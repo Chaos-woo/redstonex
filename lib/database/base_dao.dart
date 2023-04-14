@@ -19,4 +19,10 @@ abstract class BaseDao<T> {
 
   @delete
   Future<int> batchDelete0(List<T> records);
+
+  @Query("SELECT * FROM :table")
+  Future<List<T>> list0(String table);
+
+  @Query("SELECT * FROM :table WHERE id = :id")
+  Future<List<T>> selectOne0(String table, int id);
 }

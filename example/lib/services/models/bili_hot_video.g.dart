@@ -29,6 +29,6 @@ Map<String, dynamic> _$BiliHotVideoToJson(BiliHotVideo instance) =>
       'short_link': instance.shortLink,
       'bvid': instance.bVid,
       'owner': instance.owner,
-      'stats': instance.stats,
+      'stat': instance.stats,
       'rcmd_reason': instance.recommendReason,
     };

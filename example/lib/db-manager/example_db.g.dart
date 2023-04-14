@@ -211,6 +211,43 @@ class _$BiliFavoriteVideoDao extends BiliFavoriteVideoDao {
   }
 
   @override
+  Future<List<BiliFavoriteVideo>> list0(String table) async {
+    return _queryAdapter.queryList('SELECT * FROM ?1',
+        mapper: (Map<String, Object?> row) => BiliFavoriteVideo(
+            bVid: row['bvid'] as String,
+            tag: row['tag'] as String,
+            pic: row['pic'] as String,
+            title: row['title'] as String,
+            publishData: _datetimeConvertor.decode(row['publish_date'] as int),
+            shortLink: row['short_link'] as String,
+            up: row['up'] as String,
+            createdAt: _datetimeConvertor.decode(row['created_at'] as int),
+            updatedAt: _datetimeConvertor.decode(row['updated_at'] as int),
+            id: row['id'] as int?),
+        arguments: [table]);
+  }
+
+  @override
+  Future<List<BiliFavoriteVideo>> selectOne0(
+    String table,
+    int id,
+  ) async {
+    return _queryAdapter.queryList('SELECT * FROM ?1 WHERE id = ?2',
+        mapper: (Map<String, Object?> row) => BiliFavoriteVideo(
+            bVid: row['bvid'] as String,
+            tag: row['tag'] as String,
+            pic: row['pic'] as String,
+            title: row['title'] as String,
+            publishData: _datetimeConvertor.decode(row['publish_date'] as int),
+            shortLink: row['short_link'] as String,
+            up: row['up'] as String,
+            createdAt: _datetimeConvertor.decode(row['created_at'] as int),
+            updatedAt: _datetimeConvertor.decode(row['updated_at'] as int),
+            id: row['id'] as int?),
+        arguments: [table, id]);
+  }
+
+  @override
   Future<int> insert0(BiliFavoriteVideo record) {
     return _biliFavoriteVideoInsertionAdapter.insertAndReturnId(
         record, OnConflictStrategy.abort);

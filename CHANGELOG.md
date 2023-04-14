@@ -1,3 +1,7 @@
+## 1.1.4
+* 增加BaseDao提供的基础查询方法
+* 移除多余的dart_tuple三方库
+
 ## 1.1.3
 * 修复JsonSerializable类型转换器const构造函数作为注解使用方式的语法错误
 
