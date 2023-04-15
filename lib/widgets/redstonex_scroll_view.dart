@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:keyboard_actions/keyboard_actions.dart';
 
 class RsxVerticalScrollView extends StatelessWidget {
   RsxVerticalScrollView({
@@ -11,7 +10,6 @@ class RsxVerticalScrollView extends StatelessWidget {
     this.childrenCrossAxisAlignment = CrossAxisAlignment.start,
     this.topWidget,
     this.bottomWidget,
-    this.keyboardConfig,
     this.tapOutsideToDismiss = false,
     this.overScroll = 16.0,
   }) : super(key: key);
@@ -22,7 +20,6 @@ class RsxVerticalScrollView extends StatelessWidget {
   CrossAxisAlignment childrenCrossAxisAlignment;
   Widget? topWidget;
   Widget? bottomWidget;
-  KeyboardActionsConfig? keyboardConfig;
 
   /// 键盘外部按下将其关闭
   bool tapOutsideToDismiss;
@@ -37,19 +34,12 @@ class RsxVerticalScrollView extends StatelessWidget {
       children: children,
     );
 
-    if (defaultTargetPlatform == TargetPlatform.iOS && keyboardConfig != null) {
+    if (defaultTargetPlatform == TargetPlatform.iOS) {
       /// iOS 键盘处理
 
       if (scrollViewPadding != null) {
         contents = Padding(padding: scrollViewPadding!, child: contents);
       }
-
-      contents = KeyboardActions(
-          isDialog: bottomWidget != null,
-          overscroll: overScroll,
-          config: keyboardConfig!,
-          tapOutsideBehavior: tapOutsideToDismiss ? TapOutsideBehavior.opaqueDismiss : TapOutsideBehavior.none,
-          child: contents);
     } else {
       contents = SingleChildScrollView(
         padding: scrollViewPadding,

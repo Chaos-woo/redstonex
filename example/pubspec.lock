@@ -590,13 +590,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "6.3.1"
-  keyboard_actions:
-    dependency: transitive
-    description:
-      name: keyboard_actions
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "4.1.0"
   lint:
     dependency: transitive
     description:
@@ -1023,7 +1016,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "1.1.4"
+    version: "1.1.6"
   rxdart:
     dependency: transitive
     description:

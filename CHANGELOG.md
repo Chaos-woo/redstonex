@@ -1,3 +1,9 @@
+## 1.1.6
+* 修复BaseDao提供的list方法
+
+## 1.1.5
+* 移除keyboard_action三方包
+
 ## 1.1.4
 * 增加BaseDao提供的基础查询方法
 * 移除多余的dart_tuple三方库
