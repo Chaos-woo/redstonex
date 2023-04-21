@@ -36,7 +36,7 @@ class BiliHotVideoLogic extends PagingController<BiliHotVideo, BiliHotVideoPagin
   }
 
   @override
-  BiliHotVideoPagingState providePagingState() {
+  BiliHotVideoPagingState customPagingState() {
     return state.biliHotVideoPagingState;
   }
 

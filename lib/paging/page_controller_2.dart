@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:redstonex/observer/has_event_observer.dart';
 import 'package:redstonex/paging/page_state.dart';
-import 'package:redstonex/paging/paging_data.dart';
 import 'package:redstonex/paging/paging_params.dart';
 
 enum RefreshOperateType { refresh, loadMore }
@@ -17,12 +16,12 @@ abstract class PagingController2<M, S extends PagingState<M>> extends GetxContro
   late RefreshOperateType _refreshOperateType;
 
   /// 刷新控件的 Controller
-  RefreshController refreshController = RefreshController();
+  late RefreshController refreshController;
 
   @override
   void onInit() {
     super.onInit();
-    pagingState = getPagingState();
+    pagingState = customPagingState();
 
     onMulti(
       onSuccess: <M2>(data, exception) => _loadSuccess(data, exception),
@@ -119,7 +118,7 @@ abstract class PagingController2<M, S extends PagingState<M>> extends GetxContro
   PagingParams getPagingParams() => PagingParams.create(pageIndex: pagingState.nextIndex);
 
   /// 获取State
-  S getPagingState();
+  S customPagingState();
 
   /// 是否还有更多数据逻辑
   bool hasMoreData();
@@ -139,4 +138,7 @@ abstract class PagingController2<M, S extends PagingState<M>> extends GetxContro
     await scrollController.animateTo(0, duration: animateDuration, curve: curve);
     refreshData();
   }
+
+  /// 自定义刷新控制器
+  RefreshController customRefreshController() => RefreshController(initialRefresh: false);
 }

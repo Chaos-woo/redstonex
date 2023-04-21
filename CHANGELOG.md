@@ -1,3 +1,8 @@
+## 1.1.7
+* 修复PagingController中提供的RefreshController初始化状态异常
+* PagingController支持自定义RefreshController
+* 增加GenericPersistentHeaderBuilder
+
 ## 1.1.6
 * 修复BaseDao提供的list方法
 

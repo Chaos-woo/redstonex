@@ -30,7 +30,7 @@ class BiliFavoriteVideoLogic extends PagingController2<BiliFavoriteVideo, BiliFa
   }
 
   @override
-  BiliFavoriteVideoPagingState getPagingState() {
+  BiliFavoriteVideoPagingState customPagingState() {
     return state.biliFavoriteVideoPagingState;
   }
 }

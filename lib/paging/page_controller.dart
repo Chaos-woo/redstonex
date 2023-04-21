@@ -11,13 +11,13 @@ abstract class PagingController<M, S extends PagingState<M>> extends GetxControl
   late S pagingState;
 
   /// 刷新控件的 Controller
-  RefreshController refreshController = RefreshController();
+  late RefreshController refreshController;
 
   @override
   void onInit() {
     super.onInit();
-
-    pagingState = providePagingState();
+    refreshController = customRefreshController();
+    pagingState = customPagingState();
   }
 
   @override
@@ -83,7 +83,7 @@ abstract class PagingController<M, S extends PagingState<M>> extends GetxControl
   PagingParams providePagingParams() => PagingParams.create(pageIndex: pagingState.nextIndex);
 
   /// 获取State
-  S providePagingState();
+  S customPagingState();
 
   /// 是否还有更多数据逻辑
   bool hasMoreData();
@@ -103,4 +103,7 @@ abstract class PagingController<M, S extends PagingState<M>> extends GetxControl
     await scrollController.animateTo(0, duration: animateDuration, curve: curve);
     refreshData();
   }
+
+  /// 自定义刷新控制器
+  RefreshController customRefreshController() => RefreshController(initialRefresh: false);
 }
