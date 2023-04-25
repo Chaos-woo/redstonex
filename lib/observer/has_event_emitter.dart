@@ -1,16 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:redstonex/events/redstonex_event_bus.dart';
-import 'package:redstonex/observer/inner_refresh_event.dart';
 
-/// 支持事件方式更新UI
+/// 支持事件方式更新
 mixin HasEventEmitter {
-  @protected
-  void emitSingle<T extends InnerRefreshEvent>(T event) async {
-    await XEventBus().fire(event);
-  }
 
   @protected
-  void emitMulti<T extends InnerRefreshEvents>(T event) async {
+  void emitEvent<T>(T event) async {
     await XEventBus().fire(event);
   }
 }

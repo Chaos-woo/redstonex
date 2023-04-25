@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
-import 'package:redstonex/observer/has_event_observer.dart';
+import 'package:redstonex/observer/has_paging_event_observer.dart';
+import 'package:redstonex/observer/refresh_list_event.dart';
 import 'package:redstonex/paging/page_state.dart';
 import 'package:redstonex/paging/paging_params.dart';
 
 enum RefreshOperateType { refresh, loadMore }
 
 /// 支持事件方式更新UI的分页控制器
-abstract class PagingController2<M, S extends PagingState<M>> extends GetxController with HasEventObserver<M> {
+abstract class EventPagingController<M, S extends PagingState<M>, E extends ListRefreshableEvent<M>>
+    extends GetxController with HasEventPagingObserver<M, E> {
   /// 分页数据
   late S pagingState;
 
@@ -23,7 +25,7 @@ abstract class PagingController2<M, S extends PagingState<M>> extends GetxContro
     super.onInit();
     pagingState = customPagingState();
 
-    onMulti(
+    onPagingEvent(
       onSuccess: <M2>(data, exception) => _loadSuccess(data, exception),
       onFail: <M2>(data, exception) => _loadError(data, exception),
     );
@@ -88,7 +90,7 @@ abstract class PagingController2<M, S extends PagingState<M>> extends GetxContro
 
   /// 数据加载
   Future<void> _loadData() async {
-    PagingParams pagingParams = getPagingParams();
+    PagingParams pagingParams = customPagingParams();
     pagingParams.currentIndex = pagingState.nextIndex;
     await loadData(pagingParams);
   }
@@ -115,7 +117,7 @@ abstract class PagingController2<M, S extends PagingState<M>> extends GetxContro
   void loadError(Exception? exception) => () {};
 
   /// 获取分页请求参数
-  PagingParams getPagingParams() => PagingParams.create(pageIndex: pagingState.nextIndex);
+  PagingParams customPagingParams() => PagingParams.create(pageIndex: pagingState.nextIndex);
 
   /// 获取State
   S customPagingState();

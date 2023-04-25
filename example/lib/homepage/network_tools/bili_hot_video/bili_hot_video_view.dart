@@ -33,7 +33,7 @@ class BiliHotVideoPage extends StatelessWidget {
             ).padding(horizontal: 12),
           ],
         ),
-        body: RefreshWidgets.buildRefreshListWidget<BiliHotVideo, BiliHotVideoLogic>(
+        body: RefreshableWidgets.buildRefreshableListWidget<BiliHotVideo, BiliHotVideoLogic>(
           itemBuilder: (Rx<BiliHotVideo> item, int index) => BiliHotVideoWidget(item: item),
           separatorBuilder: (item, index) => Gaps.vGap10,
           onItemClick: (item, index) => XNavigator().to(RouteCompose.biliRoute.videoDetail, parameters: {'url': item.value.shortLink}),

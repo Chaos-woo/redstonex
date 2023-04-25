@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart' as pull2Refresh;
+import 'package:redstonex/observer/refresh_list_event.dart';
 import 'package:redstonex/paging/page_controller.dart';
-import 'package:redstonex/paging/page_controller_2.dart';
+import 'package:redstonex/paging/event_page_controller.dart';
 import 'package:redstonex/paging/page_state.dart';
 import 'package:redstonex/paging/refresh_text.dart';
 import 'package:redstonex/paging/utils/depends.dart';
 
-class RefreshWidgets {
-  static Widget buildRefreshWidget({
+class RefreshableWidgets {
+  static Widget buildRefreshableWidget({
     required Widget Function() builder,
     VoidCallback? onRefresh,
     VoidCallback? onLoad,
@@ -48,7 +49,7 @@ class RefreshWidgets {
     );
   }
 
-  static Widget buildRefreshListWidget2<T, C extends PagingController2<T, PagingState<T>>>({
+  static Widget buildEventRefreshableListWidget<T, C extends EventPagingController<T, PagingState<T>, ListRefreshableEvent<T>>>({
     required Widget Function(Rx<T> item, int index) itemBuilder,
     ScrollController? scrollController,
     bool enablePullUp = true,
@@ -67,7 +68,7 @@ class RefreshWidgets {
     C controller = XDepends().on(tag: tag);
     return GetBuilder<C>(
       builder: (controller) {
-        return buildRefreshWidget(
+        return buildRefreshableWidget(
           builder: () => buildListView<T>(
               data: controller.pagingState.data,
               scrollController: scrollController,
@@ -93,7 +94,8 @@ class RefreshWidgets {
     );
   }
 
-  static Widget buildRefreshListWidget<T, C extends PagingController<T, PagingState<T>>>({
+  @Deprecated("Recommend use #buildEventRefreshableListWidget")
+  static Widget buildRefreshableListWidget<T, C extends PagingController<T, PagingState<T>>>({
     required Widget Function(Rx<T> item, int index) itemBuilder,
     ScrollController? scrollController,
     bool enablePullUp = true,
@@ -112,7 +114,7 @@ class RefreshWidgets {
     C controller = XDepends().on(tag: tag);
     return GetBuilder<C>(
       builder: (controller) {
-        return buildRefreshWidget(
+        return buildRefreshableWidget(
           builder: () => buildListView<T>(
               data: controller.pagingState.data,
               scrollController: scrollController,

@@ -28,7 +28,7 @@ class BiliHotVideoLogic extends PagingController<BiliHotVideo, BiliHotVideoPagin
   }
 
   @override
-  PagingParams providePagingParams() {
+  PagingParams customPagingParams() {
     return PagingParams.create(
       pageIndex: state.biliHotVideoPagingState.nextIndex,
       pageSize: state.biliHotVideoPagingState.pageSize,

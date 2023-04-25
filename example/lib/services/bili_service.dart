@@ -7,7 +7,7 @@ import 'package:example/services/models/paging_bili_hot_video.dart';
 import 'package:get/get.dart';
 import 'package:redstonex/redstonex.dart';
 
-class BiliService extends GetxService with HasEventEmitter {
+class BiliService extends GetxService with HasEventPagingEmitter {
   final BiliNetClient _biliNetClient = XDepends().on();
   final BiliFavoriteVideoDao _biliFavoriteVideoDao = MyExampleDb().database.biliFavoriteVideoDao;
 
@@ -78,7 +78,15 @@ class BiliService extends GetxService with HasEventEmitter {
 
   void pagingFavoriteBiliVideos(int minId, int size) async {
     List<BiliFavoriteVideo> pagingBiliFavoriteVideo = await _biliFavoriteVideoDao.listBiliFavoriteVideos();
-    InnerRefreshEvents<BiliFavoriteVideo> event = InnerRefreshEvents.success(data: pagingBiliFavoriteVideo);
-    emitMulti(event);
+    BiliFavoriteVideoListRefreshableEvent<BiliFavoriteVideo> event =
+    BiliFavoriteVideoListRefreshableEvent.success(data: pagingBiliFavoriteVideo);
+    emitPagingEvent(event);
   }
+}
+
+class BiliFavoriteVideoListRefreshableEvent<BiliFavoriteVideo> extends ListRefreshableEvent<BiliFavoriteVideo> {
+  BiliFavoriteVideoListRefreshableEvent.fail({required super.data}) : super.fail();
+  BiliFavoriteVideoListRefreshableEvent.loading({required super.data}) : super.loading();
+  BiliFavoriteVideoListRefreshableEvent.success({required super.data}) : super.success();
+  BiliFavoriteVideoListRefreshableEvent.init({required super.data}) : super.init();
 }

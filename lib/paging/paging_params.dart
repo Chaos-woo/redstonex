@@ -4,14 +4,12 @@ part 'paging_params.g.dart';
 
 @JsonSerializable()
 class PagingParams {
+  int size = 10;
   int currentIndex = 1;
   /// 额外请求参数
   Map<String, dynamic>? extra = {};
   /// 任意模型参数
   Map<String, dynamic> model = {};
-  String? order = 'descending';
-  int size = 10;
-  String? sort = "id";
 
   int? total;
 

@@ -2,8 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:redstonex/exceptions/error_consts.dart';
-import 'package:redstonex/exceptions/redstonex_exception.dart';
 import 'package:redstonex/utils/screen.dart';
 
 class XSnackBar {
@@ -111,7 +109,7 @@ class XSnackBar {
     OnTap? onTapAny,
   }) {
     if (title == null && message == null && titleWidget == null && messageWidget == null) {
-      throw RsxInternalException.compose(XErrorCompose().common);
+      title = '';
     }
 
     if (icon == null) {

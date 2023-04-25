@@ -1,5 +1,5 @@
 
-extension MapExtension on Map<String, dynamic> {
+extension ExtMap on Map<String, dynamic> {
   T getAs<T>(String key) {
     return this[key] as T;
   }

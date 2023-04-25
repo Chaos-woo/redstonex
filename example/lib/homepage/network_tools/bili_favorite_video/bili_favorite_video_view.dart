@@ -22,7 +22,7 @@ class BiliFavoriteVideoPage extends StatelessWidget {
           isBack: true,
           backgroundColor: Colors.grey[200],
         ),
-        body: RefreshWidgets.buildRefreshListWidget2<BiliFavoriteVideo, BiliFavoriteVideoLogic>(
+        body: RefreshableWidgets.buildEventRefreshableListWidget<BiliFavoriteVideo, BiliFavoriteVideoLogic>(
           itemBuilder: (Rx<BiliFavoriteVideo> item, int index) => BiliFavoriteVideoWidget(item: item),
           separatorBuilder: (item, index) => Gaps.vGap10,
           onItemClick: (item, index) =>

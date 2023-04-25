@@ -6,6 +6,7 @@ import 'package:redstonex/paging/page_state.dart';
 import 'package:redstonex/paging/paging_data.dart';
 import 'package:redstonex/paging/paging_params.dart';
 
+@Deprecated("Recommend use EventPagingController based event bus")
 abstract class PagingController<M, S extends PagingState<M>> extends GetxController {
   /// 分页数据
   late S pagingState;
@@ -47,7 +48,7 @@ abstract class PagingController<M, S extends PagingState<M>> extends GetxControl
 
   /// 数据加载
   Future<void> _loadData() async {
-    PagingParams pagingParams = providePagingParams();
+    PagingParams pagingParams = customPagingParams();
     pagingParams.currentIndex = pagingState.nextIndex;
     PagingData<M>? pagingData = await loadData(pagingParams);
     List<M>? list = pagingData?.data;
@@ -80,7 +81,7 @@ abstract class PagingController<M, S extends PagingState<M>> extends GetxControl
   Future<PagingData<M>?> loadData(PagingParams pagingParams, {bool Function(ApiException)? onError});
 
   /// 获取分页请求参数
-  PagingParams providePagingParams() => PagingParams.create(pageIndex: pagingState.nextIndex);
+  PagingParams customPagingParams() => PagingParams.create(pageIndex: pagingState.nextIndex);
 
   /// 获取State
   S customPagingState();

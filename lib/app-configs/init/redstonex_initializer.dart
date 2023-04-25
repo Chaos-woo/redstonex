@@ -1,6 +1,6 @@
 
 import 'package:redstonex/app-configs/global_config.dart';
-import 'package:redstonex/object-storage/persist_cache_get.dart';
+import 'package:redstonex/object-storage/shared_persistent.dart';
 import 'package:redstonex/routes/dispatcher.dart';
 import 'package:redstonex/utils/application_package.dart';
 import 'package:redstonex/utils/device.dart';

@@ -1,3 +1,16 @@
+## 1.1.9
+**>> BREAKING CHANGE VERSION <<**
+* 优化HasPagingEventEmitter及传递的事件类型
+* 增加非EventPagingController使用事件传递方法扩展HasEventEmitter
+* 移除原有的RsxException内部异常类
+* 简化并语义化GetxService和GetxController的注入和依赖类my_getx_extension
+* PagingController增加@Deprecated标签，推荐使用Event事件传递方式解耦页面logic与服务上下层或服务之间的依赖
+
+## 1.1.8
+* 修复PagingController中提供的RefreshController初始化状态异常
+* PagingController支持自定义RefreshController
+* 增加GenericPersistentHeaderBuilder
+
 ## 1.1.7
 * 修复PagingController中提供的RefreshController初始化状态异常
 * PagingController支持自定义RefreshController
