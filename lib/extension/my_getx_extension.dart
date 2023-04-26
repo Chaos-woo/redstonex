@@ -6,6 +6,8 @@ class xDeps_ {
   static T ofGetxService<T extends GetxService>({String? tag}) => XDepends().on<T>(tag: tag);
 
   static T ofGetxController<T extends GetxController>({String? tag}) => XDepends().on<T>(tag: tag);
+
+  static T of<T>({String? tag}) => XDepends().on<T>(tag: tag);
 }
 
 class xInject_ {
@@ -19,4 +21,8 @@ class xInject_ {
 
   static void lazyInjectController<T extends GetxController>(T injection, {String? tag}) =>
       XProvides().lazyProvide(() => injection, tag: tag);
+
+  static T inject<T>(T injection, {String? tag}) => XProvides().provide(injection, tag: tag);
+
+  static void lazyInject<T>(T injection, {String? tag}) => XProvides().lazyProvide(() => injection, tag: tag);
 }

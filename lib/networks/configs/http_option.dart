@@ -67,7 +67,7 @@ class HttpOption {
 }
 
 class HttpOptionBuilder {
-  static final globalHttpConfig = GlobalConfig.of().globalHttpOptionConfigs;
+  static final globalHttpConfig = GlobalConfig.instance.globalHttpOptionConfigs;
 
   int connectTimeout = globalHttpConfig.connectTimeout;
   int receiveTimeOut = globalHttpConfig.receiveTimeout;

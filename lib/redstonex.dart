@@ -33,7 +33,7 @@ export 'package:redstonex/networks/http_client.dart';
 export 'package:redstonex/networks/http_data_wrap.dart';
 export 'package:redstonex/networks/interceptors/timeout_interceptor.dart';
 export 'package:redstonex/networks/interceptors/token_interceptor.dart';
-export 'package:redstonex/networks/requester.dart';
+export 'package:redstonex/networks/loader.dart';
 export 'package:redstonex/networks/response/api_response.dart';
 export 'package:redstonex/networks/response/raw_data.dart';
 export 'package:redstonex/object-storage/shared_persistent.dart';

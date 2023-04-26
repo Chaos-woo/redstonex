@@ -2,8 +2,8 @@ import 'package:redstonex/networks/exception/exception_handler.dart';
 import 'package:redstonex/networks/exception/api_exception.dart';
 import 'package:redstonex/utils/loading.dart';
 
-class SyncRequester {
-  static Future load(
+class SyncLoader {
+  static Future execute(
     Function() block, {
     bool showLoading = true,
     String? loadingText,
@@ -30,20 +30,20 @@ class ParallelRequest {
   ParallelRequest(this.future, {this.onValue});
 }
 
-class ParallelRequester {
-  static Future load(
-    List<ParallelRequest> requestFutures, {
+class ParallelLoader {
+  static Future execute(
+    List<ParallelRequest> loaderFutures, {
     bool showLoading = true,
     String? loadingText,
     bool Function(ApiException)? onError,
   }) async {
-    List<Future<dynamic>> futures = requestFutures.map((e) => e.future).toList();
+    List<Future<dynamic>> futures = loaderFutures.map((e) => e.future).toList();
 
     try {
       await XLoading().loading(
         () => Future.wait<dynamic>(futures).then((value) {
-          for (int i = 0; i < requestFutures.length; i++) {
-            ParallelRequest pr = requestFutures[i];
+          for (int i = 0; i < loaderFutures.length; i++) {
+            ParallelRequest pr = loaderFutures[i];
             pr.onValue?.call(value[i]);
           }
         }),

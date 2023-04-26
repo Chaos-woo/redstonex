@@ -1,27 +1,31 @@
 import 'package:dio/dio.dart';
+import 'package:redstonex/app-configs/global_config.dart';
+import 'package:redstonex/app-configs/user-configs/global_app_configs.dart';
+import 'package:redstonex/app-configs/user-configs/global_http_option_configs.dart';
 import 'package:redstonex/networks/response/api_response.dart';
 
-int _apiCommonExceptionCode = -1;
-
 class ApiException implements Exception {
-  static const unknownException = "未知错误";
   final String? message;
   final int? code;
-  String? exceptStack;
+  String? details;
 
   ApiException([this.code, this.message]);
 
   factory ApiException.fromDioError(DioError error) {
+    GlobalAppConfigs globalAppConfigs = GlobalConfig.instance.globalAppConfigs;
+    GlobalDioError gDioError = GlobalConfig.instance.globalHttpOptionConfigs.dioError;
+
     switch (error.type) {
       case DioErrorType.cancel:
-        return BadRequestException(_apiCommonExceptionCode, "请求取消");
+        return BadRequestException(globalAppConfigs.appErrorCode, gDioError.cancel);
       case DioErrorType.connectTimeout:
-        return BadRequestException(_apiCommonExceptionCode, "连接超时");
+        return BadRequestException(globalAppConfigs.appErrorCode, gDioError.connectTimeout);
       case DioErrorType.sendTimeout:
-        return BadRequestException(_apiCommonExceptionCode, "请求超时");
+        return BadRequestException(globalAppConfigs.appErrorCode, gDioError.sendTimeout);
       case DioErrorType.receiveTimeout:
-        return BadRequestException(_apiCommonExceptionCode, "响应超时");
+        return BadRequestException(globalAppConfigs.appErrorCode, gDioError.receiveTimeout);
       case DioErrorType.response:
+        GlobalHttpError gHttpError = GlobalConfig.instance.globalHttpOptionConfigs.httpError;
         try {
           /// http错误码带业务错误信息
           ApiResponse apiResponse = ApiResponse.fromJson(error.response?.data);
@@ -32,31 +36,31 @@ class ApiException implements Exception {
           int? errCode = error.response?.statusCode;
           switch (errCode) {
             case 400:
-              return BadRequestException(errCode, "请求语法错误");
+              return BadRequestException(errCode, gHttpError.e400);
             case 401:
-              return UnauthorisedException(errCode!, "没有权限");
+              return UnauthorisedException(errCode!, gHttpError.e401);
             case 403:
-              return UnauthorisedException(errCode!, "服务器拒绝执行");
+              return UnauthorisedException(errCode!, gHttpError.e403);
             case 404:
-              return UnauthorisedException(errCode!, "无法连接服务器");
+              return UnauthorisedException(errCode!, gHttpError.e404);
             case 405:
-              return UnauthorisedException(errCode!, "请求方法被禁止");
+              return UnauthorisedException(errCode!, gHttpError.e405);
             case 500:
-              return UnauthorisedException(errCode!, "服务器内部错误");
+              return UnauthorisedException(errCode!, gHttpError.e500);
             case 502:
-              return UnauthorisedException(errCode!, "无效的请求");
+              return UnauthorisedException(errCode!, gHttpError.e502);
             case 503:
-              return UnauthorisedException(errCode!, "服务器异常");
+              return UnauthorisedException(errCode!, gHttpError.e503);
             case 505:
-              return UnauthorisedException(errCode!, "不支持HTTP协议请求");
+              return UnauthorisedException(errCode!, gHttpError.e505);
             default:
-              return ApiException(errCode, error.response?.statusMessage ?? '未知错误');
+              return ApiException(errCode, error.response?.statusMessage ?? gHttpError.eDefault);
           }
         } on Exception {
-          return ApiException(_apiCommonExceptionCode, unknownException);
+          return ApiException(globalAppConfigs.appErrorCode, gHttpError.eDefault);
         }
       default:
-        return ApiException(_apiCommonExceptionCode, error.message);
+        return ApiException(globalAppConfigs.appErrorCode, error.message);
     }
   }
 
@@ -67,8 +71,9 @@ class ApiException implements Exception {
     if (exception is ApiException) {
       return exception;
     } else {
-      var apiException = ApiException(_apiCommonExceptionCode, unknownException);
-      apiException.exceptStack = exception?.toString();
+      var apiException = ApiException(GlobalConfig.instance.globalAppConfigs.appErrorCode,
+          GlobalConfig.instance.globalHttpOptionConfigs.httpError.eDefault);
+      apiException.details = exception?.toString();
       return apiException;
     }
   }

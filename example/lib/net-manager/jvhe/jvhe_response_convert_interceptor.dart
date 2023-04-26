@@ -9,7 +9,7 @@ class JvheResponseConvertInterceptor extends Interceptor {
     data.remove('result');
 
     if (0 == data['error_code']) {
-      data['code'] = GlobalConfig.of().globalHttpOptionConfigs.businessSuccessCode;
+      data['code'] = 200;
       data.remove('error_code');
     }
 

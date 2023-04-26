@@ -4,7 +4,7 @@ import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:redstonex/extension/string_extension.dart';
 
-class HttpClientAdapterConfig {
+class HttpClientAdapterBuilder {
   static HttpClientAdapter defaultClientAdapter({String? proxy}) {
     return DefaultHttpClientAdapter()
       ..onHttpClientCreate = (client) {

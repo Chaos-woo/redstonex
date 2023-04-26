@@ -1,24 +1,24 @@
 import 'package:redstonex/app-configs/user-configs/global_app_configs.dart';
 import 'package:redstonex/app-configs/user-configs/global_database_configs.dart';
 import 'package:redstonex/app-configs/user-configs/global_http_option_configs.dart';
-import 'package:redstonex/paging/utils/depends.dart';
+import 'package:redstonex/extension/my_getx_extension.dart';
 import 'package:redstonex/paging/utils/provides.dart';
 
 /// 全局配置
 class GlobalConfig {
   static const String _globalConfigTag = '&globalConfigTag';
 
-  static GlobalConfig of() => XDepends().on<GlobalConfig>(tag: _globalConfigTag);
+  static GlobalConfig get instance => xDeps_.of<GlobalConfig>(tag: _globalConfigTag);
 
   static initial() {
     XProvides().provide(GlobalConfig(), tag: _globalConfigTag);
   }
 
-  static replaceDefGlobalConfig(GlobalConfig targetConfig) {
+  static replaceDefaultGlobalConfig(GlobalConfig targetConfig) {
     XProvides().replace(targetConfig, tag: _globalConfigTag);
   }
 
-  /// app模式
+  /// debug模式
   bool get debugMode => false;
 
   /// app全局配置

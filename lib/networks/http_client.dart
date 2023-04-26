@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:redstonex/app-configs/global_config.dart';
-import 'package:redstonex/app-configs/user-configs/global_http_option_configs.dart';
 import 'package:redstonex/networks/configs/http_option.dart';
 import 'package:redstonex/networks/exception/api_exception.dart';
 import 'package:redstonex/networks/response/api_response.dart';
@@ -194,21 +193,10 @@ class HttpClient {
         return RawData()..value = response.data;
       } else {
         ApiResponse apiResponse = ApiResponse.fromJson(response.data);
-        return _handleBusinessResponse(apiResponse);
+        return GlobalConfig.instance.globalHttpOptionConfigs.customBusinessResponseProcessor.call(apiResponse);
       }
     } else {
-      var exception = ApiException(response.statusCode, ApiException.unknownException);
-      throw exception;
-    }
-  }
-
-  ///业务内容处理
-  RawData _handleBusinessResponse(ApiResponse response) {
-    GlobalHttpOptionConfigs httpConfig = GlobalConfig.of().globalHttpOptionConfigs;
-    if (response.code == httpConfig.businessSuccessCode) {
-      return response.data;
-    } else {
-      var exception = ApiException(response.code, response.message);
+      var exception = ApiException(response.statusCode, GlobalConfig.instance.globalHttpOptionConfigs.httpError.eDefault);
       throw exception;
     }
   }

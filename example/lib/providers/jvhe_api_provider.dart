@@ -13,7 +13,7 @@ class JvheApiProvider extends GetxService {
   /// 历史天气支持的省份
   Future<List<Province>> getHistoryWeatherSupportProvinces({bool Function(ApiException)? onError}) async {
     final List<Province> supportProvinces = [];
-    await SyncRequester.load(
+    await SyncLoader.execute(
       () async {
         List<dynamic>? provinces = await _jvheNetClient.requestHistoryWeatherProvinces(onError: onError);
         if (null != provinces) {
@@ -36,7 +36,7 @@ class JvheApiProvider extends GetxService {
   /// 历史天气支持的城市地区
   Future<List<City>> getHistoryWeatherSingleProvinceSupportCities(String provinceId, {bool Function(ApiException)? onError}) async {
     final List<City> supportProvinces = [];
-    await SyncRequester.load(
+    await SyncLoader.execute(
       () async {
         List<City> cities = await getSingleProvinceRelatedCities(provinceId);
         supportProvinces.addAll(cities);
@@ -51,7 +51,7 @@ class JvheApiProvider extends GetxService {
   Future<List<City>> getHistoryWeatherMultiProvinceSupportCities(List<String> provinceIds, {bool Function(ApiException)? onError}) async {
     final List<City> supportCities = [];
     DateTime start = DateTime.now();
-    await ParallelRequester.load(
+    await ParallelLoader.execute(
       provinceIds
           .map((e) => ParallelRequest(
                 getSingleProvinceRelatedCities(e),

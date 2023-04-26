@@ -6,7 +6,7 @@ class BiliResponseConvertInterceptor extends Interceptor {
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     Map<String, dynamic> data = response.data;
     if (0 == data['code']) {
-      data['code'] = GlobalConfig.of().globalHttpOptionConfigs.businessSuccessCode;
+      data['code'] = 200;
       data.remove('error_code');
     }
 
