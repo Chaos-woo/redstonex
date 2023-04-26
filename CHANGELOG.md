@@ -8,10 +8,11 @@
 * 全局配置中增加异常提示文案；全局配置中增加http业务自定义处理
 * 优化部分类/文件名
 
-## 1.1.8
-* 修复PagingController中提供的RefreshController初始化状态异常
-* PagingController支持自定义RefreshController
-* 增加GenericPersistentHeaderBuilder
+## 版本号更新异常😢
+~~1.1.8~~
+~~修复PagingController中提供的RefreshController初始化状态异常~~
+~~PagingController支持自定义RefreshController~~
+~~增加GenericPersistentHeaderBuilder~~
 
 ## 1.1.7
 * 修复PagingController中提供的RefreshController初始化状态异常
