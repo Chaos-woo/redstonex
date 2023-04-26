@@ -5,6 +5,8 @@
 * 移除原有的RsxException内部异常类
 * 简化并语义化GetxService和GetxController的注入和依赖类my_getx_extension
 * PagingController增加@Deprecated标签，推荐使用Event事件传递方式解耦页面logic与服务上下层或服务之间的依赖
+* 全局配置中增加异常提示文案；全局配置中增加http业务自定义处理
+* 优化部分类/文件名
 
 ## 1.1.8
 * 修复PagingController中提供的RefreshController初始化状态异常
