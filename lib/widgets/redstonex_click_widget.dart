@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:redstonex/extension/function_extension.dart';
+
+import '../extension/function_extension.dart';
 
 enum ClickType { none, throttle, throttleWithTimeout, debounce }
 
@@ -23,14 +24,14 @@ class RsxClickWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return (clickEffect ?? false)
         ? InkWell(
-      onTap: _getOnTap(),
-      child: child,
-    )
+            onTap: _getOnTap(),
+            child: child,
+          )
         : GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: _getOnTap(),
-      child: child,
-    );
+            behavior: HitTestBehavior.opaque,
+            onTap: _getOnTap(),
+            child: child,
+          );
   }
 
   VoidCallback? _getOnTap() {

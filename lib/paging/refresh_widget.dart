@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart' as pull2Refresh;
-import 'package:redstonex/observer/refresh_list_event.dart';
-import 'package:redstonex/paging/page_controller.dart';
-import 'package:redstonex/paging/event_page_controller.dart';
-import 'package:redstonex/paging/page_state.dart';
-import 'package:redstonex/paging/refresh_text.dart';
-import 'package:redstonex/paging/utils/depends.dart';
+
+import '../observer/refresh_list_event.dart';
+import 'event_page_controller.dart';
+import 'page_controller.dart';
+import 'page_state.dart';
+import 'refresh_text.dart';
+import 'utils/depends.dart';
 
 class RefreshableWidgets {
   static Widget buildRefreshableWidget({
@@ -49,7 +50,8 @@ class RefreshableWidgets {
     );
   }
 
-  static Widget buildEventRefreshableListWidget<T, C extends EventPagingController<T, PagingState<T>, ListRefreshableEvent<T>>>({
+  static Widget buildEventRefreshableListWidget<T,
+      C extends EventPagingController<T, PagingState<T>, ListRefreshableEvent<T>>>({
     required Widget Function(Rx<T> item, int index) itemBuilder,
     ScrollController? scrollController,
     bool enablePullUp = true,

@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:lottie/lottie.dart';
-import 'package:redstonex/widgets/redstonex_getx_bottom_navigation_bar.dart';
+
+import 'redstonex_getx_bottom_navigation_bar.dart';
 
 class LottieBottomNavigationItem {
   final String label;
   final String lottieJsonPath;
   final int index;
 
-  LottieBottomNavigationItem({required this.label, required this.lottieJsonPath, required this.index});
+  LottieBottomNavigationItem(
+      {required this.label, required this.lottieJsonPath, required this.index});
 }
 
-abstract class LottieGetxBottomNavigationBarPage extends HookWidget implements RsxBottomNavigationBarPageScaffold {
+abstract class LottieGetxBottomNavigationBarPage extends HookWidget
+    implements RsxBottomNavigationBarPageScaffold {
   int currentIndex = 0;
 
   Duration animationDuration;

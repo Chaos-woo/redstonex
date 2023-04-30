@@ -1,3 +1,6 @@
+## 1.1.10
+* 修复EventPagingController的RefreshController未初始化的问题
+
 ## 1.1.9
 **>> BREAKING CHANGE VERSION <<**
 * 优化HasPagingEventEmitter及传递的事件类型

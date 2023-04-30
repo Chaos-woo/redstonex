@@ -1,7 +1,7 @@
-
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:redstonex/extension/string_extension.dart';
+
+import '../../extension/string_extension.dart';
 
 class EpochMillisecondDateTimeConverter implements JsonConverter<DateTime, int> {
   const EpochMillisecondDateTimeConverter();

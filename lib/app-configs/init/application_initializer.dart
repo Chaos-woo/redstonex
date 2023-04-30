@@ -1,8 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:redstonex/app-configs/init/redstonex_default_app.dart';
-import 'package:redstonex/resources/constant.dart';
+
+import '../../resources/constant.dart';
+import 'redstonex_default_app.dart';
 
 typedef FlutterErrorReporter = void Function(FlutterErrorDetails details);
 
@@ -17,8 +18,10 @@ class AppInitializer {
     FlutterErrorReporter? errorReporter,
   }) {
     _errorReporter = errorReporter;
+
     /// 捕获异常
-    catchException(() => RsxDefaultApp.run(myApp, preBuiltinInit: preBuiltinInit, postBuiltinInit: postBuiltinInit));
+    catchException(() =>
+        RsxDefaultApp.run(myApp, preBuiltinInit: preBuiltinInit, postBuiltinInit: postBuiltinInit));
   }
 
   ///异常捕获处理

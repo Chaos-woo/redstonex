@@ -1,6 +1,7 @@
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:redstonex/app-configs/global_config.dart';
-import 'package:redstonex/networks/exception/api_exception.dart';
+
+import '../../app-configs/global_config.dart';
+import 'api_exception.dart';
 
 bool handleException(ApiException exception, {bool Function(ApiException)? onError}) {
   if (onError?.call(exception) == true) {
@@ -11,7 +12,8 @@ bool handleException(ApiException exception, {bool Function(ApiException)? onErr
     return true;
   }
 
-  EasyLoading.showError(exception.message ?? GlobalConfig.instance.globalHttpOptionConfigs.httpError.eDefault);
+  EasyLoading.showError(
+      exception.message ?? GlobalConfig.instance.globalHttpOptionConfigs.httpError.eDefault);
 
   return false;
 }

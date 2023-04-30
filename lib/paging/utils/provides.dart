@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import 'package:redstonex/utils/dependency.dart';
+
+import '../../utils/dependency.dart';
 
 /// 注入依赖
 class XProvides {

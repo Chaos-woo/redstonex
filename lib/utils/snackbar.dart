@@ -2,7 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:redstonex/utils/screen.dart';
+
+import 'screen.dart';
 
 class XSnackBar {
   static final XSnackBar _single = XSnackBar._internal();
@@ -134,9 +135,10 @@ class XSnackBar {
         messageMaxLines = min(messageMaxLines, 3);
 
         /// style参考GetSnackBar源码
-        TextSpan messageSpan = TextSpan(text: message, style: const TextStyle(fontSize: 14.0, color: Colors.white));
-        TextPainter painter =
-            TextPainter(text: messageSpan, maxLines: messageMaxLines, textDirection: TextDirection.rtl);
+        TextSpan messageSpan =
+            TextSpan(text: message, style: const TextStyle(fontSize: 14.0, color: Colors.white));
+        TextPainter painter = TextPainter(
+            text: messageSpan, maxLines: messageMaxLines, textDirection: TextDirection.rtl);
         double maxWidth = XScreen().screenWidth * 0.75;
         if (minWidth > maxWidth) {
           double tempWidth = maxWidth;
@@ -165,7 +167,8 @@ class XSnackBar {
               color: Colors.white,
               fontWeight: FontWeight.bold,
             ));
-        TextPainter painter = TextPainter(text: titleSpan, maxLines: titleMaxLines, textDirection: TextDirection.rtl);
+        TextPainter painter =
+            TextPainter(text: titleSpan, maxLines: titleMaxLines, textDirection: TextDirection.rtl);
         painter.layout(minWidth: minWidth, maxWidth: XScreen().screenWidth * 0.75);
         if (painter.didExceedMaxLines) {
           titleWidget = Text(

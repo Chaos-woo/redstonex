@@ -1,6 +1,6 @@
-import 'package:redstonex/networks/exception/exception_handler.dart';
-import 'package:redstonex/networks/exception/api_exception.dart';
-import 'package:redstonex/utils/loading.dart';
+import '../utils/loading.dart';
+import 'exception/api_exception.dart';
+import 'exception/exception_handler.dart';
 
 class SyncLoader {
   static Future execute(

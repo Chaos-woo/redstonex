@@ -1,11 +1,12 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:redstonex/app-configs/global_config.dart';
-import 'package:redstonex/networks/configs/http_option.dart';
-import 'package:redstonex/networks/exception/api_exception.dart';
-import 'package:redstonex/networks/response/api_response.dart';
-import 'package:redstonex/networks/response/raw_data.dart';
+
+import '../app-configs/global_config.dart';
+import 'configs/http_option.dart';
+import 'exception/api_exception.dart';
+import 'response/api_response.dart';
+import 'response/raw_data.dart';
 
 class HttpClient {
   late Dio _dio;
@@ -193,10 +194,12 @@ class HttpClient {
         return RawData()..value = response.data;
       } else {
         ApiResponse apiResponse = ApiResponse.fromJson(response.data);
-        return GlobalConfig.instance.globalHttpOptionConfigs.customBusinessResponseProcessor.call(apiResponse);
+        return GlobalConfig.instance.globalHttpOptionConfigs.customBusinessResponseProcessor
+            .call(apiResponse);
       }
     } else {
-      var exception = ApiException(response.statusCode, GlobalConfig.instance.globalHttpOptionConfigs.httpError.eDefault);
+      var exception = ApiException(
+          response.statusCode, GlobalConfig.instance.globalHttpOptionConfigs.httpError.eDefault);
       throw exception;
     }
   }

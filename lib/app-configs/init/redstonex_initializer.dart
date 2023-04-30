@@ -1,11 +1,11 @@
 
-import 'package:redstonex/app-configs/global_config.dart';
-import 'package:redstonex/object-storage/shared_persistent.dart';
-import 'package:redstonex/routes/dispatcher.dart';
-import 'package:redstonex/utils/application_package.dart';
-import 'package:redstonex/utils/device.dart';
-import 'package:redstonex/utils/directory.dart';
-import 'package:redstonex/utils/rsxlog.dart';
+import '../global_config.dart';
+import '../../object-storage/shared_persistent.dart';
+import '../../routes/dispatcher.dart';
+import '../../utils/application_package.dart';
+import '../../utils/device.dart';
+import '../../utils/directory.dart';
+import '../../utils/rsxlog.dart';
 
 class RsxInitializer {
   /// 框架初始化

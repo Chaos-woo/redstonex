@@ -1,4 +1,4 @@
-import 'package:redstonex/networks/response/raw_data.dart';
+import 'raw_data.dart';
 
 part 'api_response.g.dart';
 

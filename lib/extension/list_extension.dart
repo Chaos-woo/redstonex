@@ -1,4 +1,4 @@
-import 'package:redstonex/utils/rsxlog.dart';
+import '../utils/rsxlog.dart';
 
 extension ExtMultiSort on List {
   /// @param rawPropsAscCriteria  升降序标准：升序为true，降序为false
@@ -15,7 +15,7 @@ extension ExtMultiSort on List {
     /// 比较a和b的第i个属性
     /// 若a的i属性为null时，则默认b大于的情况，反之
     int _compare(int i, dynamic a, dynamic b) {
-      if(a.get(rawProps[i]) == null && b.get(rawProps[i]) == null) {
+      if (a.get(rawProps[i]) == null && b.get(rawProps[i]) == null) {
         return 0;
       }
 

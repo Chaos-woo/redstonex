@@ -1,6 +1,7 @@
 import 'package:floor/floor.dart';
-import 'package:redstonex/database/database_callback.dart';
 import 'package:sqflite/sqflite.dart';
+
+import 'database_callback.dart';
 
 abstract class BaseFloorDatabase<T extends FloorDatabase> {
   /// 数据库实例
@@ -30,7 +31,8 @@ abstract class BaseFloorDatabase<T extends FloorDatabase> {
     return Callback(
       onCreate: (db, version) => _onCreateCallback?.onCreate.call(db, version),
       onOpen: (db) => _onOpenCallback?.onOpen.call(db),
-      onUpgrade: (db, int oldVersion, int newVersion) => _migrationUpgrade(db, oldVersion, newVersion),
+      onUpgrade: (db, int oldVersion, int newVersion) =>
+          _migrationUpgrade(db, oldVersion, newVersion),
     );
   }
 

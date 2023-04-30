@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
-import 'package:redstonex/routes/router.dart';
-import 'package:redstonex/utils/id_generator.dart';
+
+import '../utils/id_generator.dart';
+import 'router.dart';
 
 /// 页面路由辅助生成工具
 ///

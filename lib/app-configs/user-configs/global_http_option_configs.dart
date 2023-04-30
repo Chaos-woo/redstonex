@@ -2,8 +2,9 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:redstonex/networks/response/api_response.dart';
-import 'package:redstonex/networks/response/raw_data.dart';
+
+import '../../networks/response/api_response.dart';
+import '../../networks/response/raw_data.dart';
 
 /// http全局配置
 class GlobalHttpOptionConfigs {
@@ -26,7 +27,8 @@ class GlobalHttpOptionConfigs {
   JsonDecodeCallback get jsonDecodeCallback => _parseJson;
 
   /// 业务响应处理
-  GlobalCustomHttpBusinessResponseProcessor get customBusinessResponseProcessor => (ApiResponse response) {
+  GlobalCustomHttpBusinessResponseProcessor get customBusinessResponseProcessor =>
+      (ApiResponse response) {
         return response.data;
       };
 

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:redstonex/networks/configs/http_constant.dart';
+
+import '../configs/http_constant.dart';
 
 /// 超时拦截器
 class TimeoutInterceptor extends Interceptor {

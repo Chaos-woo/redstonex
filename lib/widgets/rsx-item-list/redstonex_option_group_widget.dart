@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:redstonex/resources/gaps.dart';
-import 'package:redstonex/widgets/rsx-item-list/redstonex_horizontal_widget.dart';
-import 'package:redstonex/widgets/rsx-item-list/redstonex_horizontal_toolbar_widget.dart';
-import 'package:redstonex/widgets/rsx-item-list/redstonex_item_list_model.dart';
 import 'package:styled_widget/styled_widget.dart';
+
+import '../../resources/gaps.dart';
+import 'redstonex_horizontal_toolbar_widget.dart';
+import 'redstonex_horizontal_widget.dart';
+import 'redstonex_item_list_model.dart';
 
 typedef RsxOptionDivider = Widget Function(BuildContext context);
 
@@ -29,7 +30,8 @@ class RsxOptionGroupWidget extends StatelessWidget {
       return false;
     }
 
-    int optionItemCnt = optionGroupItems.map((gItem) => gItem.optionItems.length).reduce((int a, int b) => a + b);
+    int optionItemCnt =
+        optionGroupItems.map((gItem) => gItem.optionItems.length).reduce((int a, int b) => a + b);
     return optionItemCnt > 0;
   }
 

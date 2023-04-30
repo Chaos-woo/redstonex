@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:redstonex/extension/colour_extension.dart';
+
+import '../extension/colour_extension.dart';
 
 /// [SystemChrome]工具
 class XSystemChrome {
@@ -47,8 +47,8 @@ class XSystemChrome {
 
   /// 设置底部状态栏颜色
   void setBottomSystemOverlayStyle(Color color, Brightness iconBrightness) {
-    SystemUiOverlayStyle systemUiOverlayStyle =
-        SystemUiOverlayStyle(systemNavigationBarColor: color, systemNavigationBarIconBrightness: iconBrightness);
+    SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
+        systemNavigationBarColor: color, systemNavigationBarIconBrightness: iconBrightness);
     SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
   }
 

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:redstonex/extension/string_extension.dart';
-import 'package:redstonex/resources/gaps.dart';
-import 'package:redstonex/widgets/rsx-item-list/redstonex_item_list_model.dart';
 import 'package:styled_widget/styled_widget.dart';
+
+import '../../extension/string_extension.dart';
+import '../../resources/gaps.dart';
+import 'redstonex_item_list_model.dart';
 
 class RsxHorizontalToolbarWidget extends StatelessWidget {
   final RsxHorizontalToolbar? toolbar;
@@ -21,7 +22,9 @@ class RsxHorizontalToolbarWidget extends StatelessWidget {
     var labelPos = toolbar!.labelPosition;
     var toolPos = toolbar!.toolPosition;
     RsxHorizontalToolbarPosition targetLeftPos = RsxHorizontalToolbarPosition.left;
-    var labelWidget = toolbar!.label.oNullOrBlank ? Gaps.emptyBox : Text(toolbar!.label!, style: toolbar!.labelStyle);
+    var labelWidget = toolbar!.label.oNullOrBlank
+        ? Gaps.emptyBox
+        : Text(toolbar!.label!, style: toolbar!.labelStyle);
     var toolWidget = null == toolbar!.toolBuilder ? Gaps.emptyBox : toolbar!.toolBuilder!;
     var toolbarRow = <Widget>[];
     if (labelPos != toolPos) {
@@ -46,10 +49,13 @@ class RsxHorizontalToolbarWidget extends StatelessWidget {
       }
     }
 
-    return toolbarRow.toRow(mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center);
+    return toolbarRow.toRow(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center);
   }
 
-  bool _checkPosition(RsxHorizontalToolbarPosition position, RsxHorizontalToolbarPosition targetPosition) {
+  bool _checkPosition(
+      RsxHorizontalToolbarPosition position, RsxHorizontalToolbarPosition targetPosition) {
     return position == targetPosition;
   }
 }

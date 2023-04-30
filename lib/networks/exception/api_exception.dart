@@ -1,8 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:redstonex/app-configs/global_config.dart';
-import 'package:redstonex/app-configs/user-configs/global_app_configs.dart';
-import 'package:redstonex/app-configs/user-configs/global_http_option_configs.dart';
-import 'package:redstonex/networks/response/api_response.dart';
+
+import '../../app-configs/global_config.dart';
+import '../../app-configs/user-configs/global_app_configs.dart';
+import '../../app-configs/user-configs/global_http_option_configs.dart';
+import '../response/api_response.dart';
 
 class ApiException implements Exception {
   final String? message;

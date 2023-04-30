@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
-import 'package:redstonex/networks/exception/api_exception.dart';
-import 'package:redstonex/paging/page_state.dart';
-import 'package:redstonex/paging/paging_data.dart';
-import 'package:redstonex/paging/paging_params.dart';
+
+import '../networks/exception/api_exception.dart';
+import 'page_state.dart';
+import 'paging_data.dart';
+import 'paging_params.dart';
 
 @Deprecated("Recommend use EventPagingController based event bus")
 abstract class PagingController<M, S extends PagingState<M>> extends GetxController {
@@ -78,7 +79,8 @@ abstract class PagingController<M, S extends PagingState<M>> extends GetxControl
   }
 
   /// 自定义数据加载
-  Future<PagingData<M>?> loadData(PagingParams pagingParams, {bool Function(ApiException)? onError});
+  Future<PagingData<M>?> loadData(PagingParams pagingParams,
+      {bool Function(ApiException)? onError});
 
   /// 获取分页请求参数
   PagingParams customPagingParams() => PagingParams.create(pageIndex: pagingState.nextIndex);
@@ -97,10 +99,10 @@ abstract class PagingController<M, S extends PagingState<M>> extends GetxControl
 
   /// 滑动至列表顶部并刷新
   Future<void> scrollToTopAndRefresh(
-      ScrollController scrollController, {
-        Duration animateDuration = const Duration(seconds: 2),
-        Curve curve = Curves.linear,
-      }) async {
+    ScrollController scrollController, {
+    Duration animateDuration = const Duration(seconds: 2),
+    Curve curve = Curves.linear,
+  }) async {
     await scrollController.animateTo(0, duration: animateDuration, curve: curve);
     refreshData();
   }

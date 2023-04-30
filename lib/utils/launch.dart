@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
-import 'package:redstonex/utils/toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'toast.dart';
 
 class XLaunch {
   static final XLaunch _single = XLaunch._internal();
@@ -12,10 +12,10 @@ class XLaunch {
 
   /// 打开链接
   Future<void> launch(
-      String url, {
-        VoidCallback? launchPreCallback,
-        VoidCallback? exceptCallback,
-      }) async {
+    String url, {
+    VoidCallback? launchPreCallback,
+    VoidCallback? exceptCallback,
+  }) async {
     final Uri uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
       launchPreCallback?.call();

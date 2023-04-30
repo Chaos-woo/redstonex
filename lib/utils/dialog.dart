@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:redstonex/routes/router.dart';
-import 'package:redstonex/utils/shape_border.dart';
-import 'package:redstonex/utils/theme.dart';
-import 'package:redstonex/widgets/redstonex_click_widget.dart';
 import 'package:styled_widget/styled_widget.dart';
+
+import '../routes/router.dart';
+import '../widgets/redstonex_click_widget.dart';
+import 'shape_border.dart';
+import 'theme.dart';
 
 class DialogActionButton {
   final String text;
@@ -154,7 +155,8 @@ class XDialog {
       ),
       child: Text(
         text,
-        style: textStyle ?? TextStyle(color: textColor ?? XTheme().theme().primaryColor).merge(textStyle),
+        style: textStyle ??
+            TextStyle(color: textColor ?? XTheme().theme().primaryColor).merge(textStyle),
       ),
       onPressed: () => onTap?.call(),
     );
@@ -170,7 +172,8 @@ class XDialog {
     return TextButton(
       child: Text(
         text,
-        style: textStyle ?? TextStyle(color: textColor ?? XTheme().theme().primaryColor).merge(textStyle),
+        style: textStyle ??
+            TextStyle(color: textColor ?? XTheme().theme().primaryColor).merge(textStyle),
       ),
       onPressed: () => onTap?.call(),
     );
@@ -250,7 +253,8 @@ class XDialog {
       bottomActions: bottomActions,
     );
     Widget alertDialog = AlertDialog(
-      title: titleWidget ?? Text(title ?? '', style: titleTextStyle, overflow: TextOverflow.ellipsis, maxLines: 1),
+      title: titleWidget ??
+          Text(title ?? '', style: titleTextStyle, overflow: TextOverflow.ellipsis, maxLines: 1),
       content: contentWidget ?? Text(content ?? '', style: contentTextStyle),
       backgroundColor: backgroundColor,
       actions: actions,

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:redstonex/paging/utils/navigators.dart';
-import 'package:redstonex/resources/dimens.dart';
-import 'package:redstonex/resources/gaps.dart';
-import 'package:redstonex/utils/theme.dart';
 import 'package:styled_widget/styled_widget.dart';
+
+import '../paging/utils/navigators.dart';
+import '../resources/dimens.dart';
+import '../resources/gaps.dart';
+import '../utils/theme.dart';
 
 /// 自定义AppBar
 class RsxAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -47,7 +48,8 @@ class RsxAppBar extends StatelessWidget implements PreferredSizeWidget {
     final Color bgColor = backgroundColor ?? context.backgroundColor;
 
     var bgColorDarkMode = ThemeData.estimateBrightnessForColor(bgColor) == Brightness.dark;
-    final SystemUiOverlayStyle overlayStyle = bgColorDarkMode ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark;
+    final SystemUiOverlayStyle overlayStyle =
+        bgColorDarkMode ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark;
     frontColor = frontColor ?? (bgColorDarkMode ? Colors.white : Colors.black);
 
     final Widget actionWidget = actions.isNotEmpty
@@ -62,7 +64,8 @@ class RsxAppBar extends StatelessWidget implements PreferredSizeWidget {
     final Widget leadingWidget = isBack
         ? IconButton(
             iconSize: backIconSize!,
-            style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent)),
+            style:
+                ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent)),
             onPressed: () async {
               FocusManager.instance.primaryFocus?.unfocus();
               final isBack = await Navigator.maybePop(context);

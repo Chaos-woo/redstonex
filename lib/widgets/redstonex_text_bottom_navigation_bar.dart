@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
-import 'package:redstonex/redstonex.dart';
 
-abstract class RsxTextBottomNavigationBarPage extends StatelessWidget implements RsxBottomNavigationBarPageScaffold {
+import '../redstonex.dart';
+
+abstract class RsxTextBottomNavigationBarPage extends StatelessWidget
+    implements RsxBottomNavigationBarPageScaffold {
   final PersistentTabController _controller = PersistentTabController(initialIndex: 0);
   var selectedIndex = 0.obs;
 

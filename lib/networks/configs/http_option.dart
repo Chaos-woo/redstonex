@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:redstonex/app-configs/global_config.dart';
+
+import '../../app-configs/global_config.dart';
 
 class HttpOption {
   final int _connectTimeout;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:redstonex/resources/dimens.dart';
-import 'package:redstonex/utils/theme.dart';
+
+import '../resources/dimens.dart';
+import '../utils/theme.dart';
 
 class RsxTextButton extends StatelessWidget {
   RsxTextButton({
@@ -57,10 +58,13 @@ class RsxTextButton extends StatelessWidget {
           }),
           // 水波纹
           overlayColor: MaterialStateProperty.resolveWith((states) {
-            return (textColor ?? (isDark ? themeData.backgroundColor : Colors.white)).withOpacity(0.12);
+            return (textColor ?? (isDark ? themeData.backgroundColor : Colors.white))
+                .withOpacity(0.12);
           }),
           // 按钮最小大小
-          minimumSize: (minWidth == null || minHeight == null) ? null : MaterialStateProperty.all<Size>(Size(minWidth!, minHeight!)),
+          minimumSize: (minWidth == null || minHeight == null)
+              ? null
+              : MaterialStateProperty.all<Size>(Size(minWidth!, minHeight!)),
           padding: MaterialStateProperty.all<EdgeInsetsGeometry>(padding),
           shape: radius != null
               ? MaterialStateProperty.all<OutlinedBorder>(
@@ -114,7 +118,7 @@ class RsxElevatedButton extends StatelessWidget {
         style: ButtonStyle(
           // 文字颜色
           foregroundColor: MaterialStateProperty.resolveWith(
-                (states) {
+            (states) {
               if (states.contains(MaterialState.disabled)) {
                 return disabledTextColor ?? themeData.disabledColor;
               }
@@ -130,17 +134,20 @@ class RsxElevatedButton extends StatelessWidget {
           }),
           // 水波纹
           overlayColor: MaterialStateProperty.resolveWith((states) {
-            return (textColor ?? (isDark ? themeData.backgroundColor : Colors.white)).withOpacity(0.12);
+            return (textColor ?? (isDark ? themeData.backgroundColor : Colors.white))
+                .withOpacity(0.12);
           }),
           // 按钮最小大小
-          minimumSize: (minWidth == null || minHeight == null) ? null : MaterialStateProperty.all<Size>(Size(minWidth!, minHeight!)),
+          minimumSize: (minWidth == null || minHeight == null)
+              ? null
+              : MaterialStateProperty.all<Size>(Size(minWidth!, minHeight!)),
           padding: MaterialStateProperty.all<EdgeInsetsGeometry>(padding),
           shape: radius != null
               ? MaterialStateProperty.all<OutlinedBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(radius!),
-            ),
-          )
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(radius!),
+                  ),
+                )
               : null,
           side: side != null ? MaterialStateProperty.all<BorderSide>(side!) : null,
         ),

@@ -1,4 +1,4 @@
-import 'package:redstonex/utils/dependency.dart';
+import '../../utils/dependency.dart';
 
 /// 依赖获取
 class XDepends {

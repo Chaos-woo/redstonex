@@ -1,8 +1,8 @@
-import 'package:redstonex/app-configs/user-configs/global_app_configs.dart';
-import 'package:redstonex/app-configs/user-configs/global_database_configs.dart';
-import 'package:redstonex/app-configs/user-configs/global_http_option_configs.dart';
-import 'package:redstonex/extension/my_getx_extension.dart';
-import 'package:redstonex/paging/utils/provides.dart';
+import '../extension/my_getx_extension.dart';
+import '../paging/utils/provides.dart';
+import 'user-configs/global_app_configs.dart';
+import 'user-configs/global_database_configs.dart';
+import 'user-configs/global_http_option_configs.dart';
 
 /// 全局配置
 class GlobalConfig {

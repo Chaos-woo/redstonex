@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:redstonex/resources/gaps.dart';
-import 'package:redstonex/utils/input_formatter/number_text_input_formatter.dart';
+
+import '../resources/gaps.dart';
+import '../utils/input_formatter/number_text_input_formatter.dart';
 
 /// 封装输入框
 class TextFieldItem extends StatelessWidget {

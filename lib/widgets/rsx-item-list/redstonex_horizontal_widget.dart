@@ -1,9 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:redstonex/resources/gaps.dart';
-import 'package:redstonex/widgets/rsx-item-list/redstonex_item_list_model.dart';
 import 'package:styled_widget/styled_widget.dart';
+
+import '../../resources/gaps.dart';
+import 'redstonex_item_list_model.dart';
 
 class RsxHorizontalItemWidget extends StatelessWidget {
   final RsxHorizontalItem item;
@@ -28,7 +29,8 @@ class RsxHorizontalItemWidget extends StatelessWidget {
       ]
           .toRow(
             mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: calcLeadingTop ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+            crossAxisAlignment:
+                calcLeadingTop ? CrossAxisAlignment.start : CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
           )
           .flexible(),
@@ -67,7 +69,9 @@ class RsxHorizontalItemWidget extends StatelessWidget {
       contentCol = contentCol.flexible(flex: contentColFlex);
       extWidget = extWidget
           .alignment(
-            RsxHorizontalItemExtPosition.left == item.extWidgetPosition ? Alignment.centerLeft : Alignment.centerRight,
+            RsxHorizontalItemExtPosition.left == item.extWidgetPosition
+                ? Alignment.centerLeft
+                : Alignment.centerRight,
           )
           .flexible(flex: extWidgetFlex);
     } else {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
-import 'package:redstonex/redstonex.dart';
+
+import '../redstonex.dart';
 
 /// Toast工具类
 class XToast {

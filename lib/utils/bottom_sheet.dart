@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:redstonex/redstonex.dart';
-import 'package:redstonex/utils/theme.dart';
+
+import '../redstonex.dart';
+import 'theme.dart';
 
 class XBottomSheet {
   static final XBottomSheet _single = XBottomSheet._internal();

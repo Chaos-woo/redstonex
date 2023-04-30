@@ -1,4 +1,4 @@
-import 'package:redstonex/routes/router.dart';
+import '../../routes/router.dart';
 
 /// 导航快捷方式
 class XNavigator {

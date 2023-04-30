@@ -3,20 +3,20 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:redstonex/events/redstonex_event_bus.dart';
 
+import '../events/redstonex_event_bus.dart';
 
 abstract class EventObserver {
   List<StreamSubscription?> customAutoCancelableStreamSubscriptions();
 
   @protected
   StreamSubscription onEventObserve<T>(
-      void Function(T event) onEvent,
-      Function? onError,
-      void Function()? onDone,
-      ) {
+    void Function(T event) onEvent,
+    Function? onError,
+    void Function()? onDone,
+  ) {
     StreamSubscription subscription = XEventBus().subscribeAutoCancelOnError<T>(
-          (T event) => onEvent.call(event),
+      (T event) => onEvent.call(event),
       onDone: onDone,
       onError: onError,
     );

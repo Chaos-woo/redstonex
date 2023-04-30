@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
-import 'package:redstonex/observer/has_paging_event_observer.dart';
-import 'package:redstonex/observer/refresh_list_event.dart';
-import 'package:redstonex/paging/page_state.dart';
-import 'package:redstonex/paging/paging_params.dart';
+
+import '../observer/has_paging_event_observer.dart';
+import '../observer/refresh_list_event.dart';
+import 'page_state.dart';
+import 'paging_params.dart';
 
 enum RefreshOperateType { refresh, loadMore }
 
@@ -23,6 +24,7 @@ abstract class EventPagingController<M, S extends PagingState<M>, E extends List
   @override
   void onInit() {
     super.onInit();
+    refreshController = customRefreshController();
     pagingState = customPagingState();
 
     onPagingEvent(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:redstonex/paging/utils/provides.dart';
+
+import '../paging/utils/provides.dart';
 
 typedef BottomNavigationBarItemChanged = void Function(int selectedIndex);
 typedef BottomNavigationBarItemProvider = List<BottomNavigationBarItem> Function(
@@ -58,7 +59,8 @@ class RsxBottomNavigationBarPage extends StatelessWidget {
               splashColor: Colors.transparent,
             ),
             child: BottomNavigationBar(
-              items: navigationItemsProvider.call(logic.preSelectedIndex, logic.selectedIndex.value),
+              items:
+                  navigationItemsProvider.call(logic.preSelectedIndex, logic.selectedIndex.value),
               currentIndex: logic.selectedIndex.value,
               type: BottomNavigationBarType.fixed,
               selectedItemColor: selectedItemColor,
@@ -76,7 +78,8 @@ class RsxBottomNavigationBarPage extends StatelessWidget {
                 if (pageChangeType == PageChangeType.jump) {
                   pageController.jumpToPage(index);
                 } else {
-                  pageController.animateToPage(index, duration: pageChangeAnimateDuration, curve: Curves.ease);
+                  pageController.animateToPage(index,
+                      duration: pageChangeAnimateDuration, curve: Curves.ease);
                 }
               },
             ),

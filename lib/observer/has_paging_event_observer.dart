@@ -3,10 +3,12 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:redstonex/events/redstonex_event_bus.dart';
-import 'package:redstonex/observer/refresh_list_event.dart';
 
-typedef RefreshListMultiEventObserverCallback = void Function<T>(List<T>? data, Exception? exception);
+import '../events/redstonex_event_bus.dart';
+import 'refresh_list_event.dart';
+
+typedef RefreshListMultiEventObserverCallback = void Function<T>(
+    List<T>? data, Exception? exception);
 
 /// 支持事件方式更新UI
 mixin HasEventPagingObserver<T, E extends ListRefreshableEvent<T>> on GetxController {

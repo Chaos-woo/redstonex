@@ -1,6 +1,6 @@
 name: redstonex
 description: 基于GetX的Flutter快速开发框架。Development flutter framework based GetX frame.
-version: 1.1.9
+version: 1.1.10
 homepage: https://github.com/Chaos-woo/redstonex
 
 environment:
