@@ -1,5 +1,7 @@
 ## 1.1.10
 * 修复EventPagingController的RefreshController未初始化的问题
+* 增加Dio流式响应
+* 增加Dio SSE（Server Send Event）支持
 
 ## 1.1.9
 **>> BREAKING CHANGE VERSION <<**

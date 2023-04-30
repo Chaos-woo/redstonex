@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
@@ -81,6 +82,24 @@ class HttpClient {
       data = jsonDecode(jsonEncode(data));
     }
     return data;
+  }
+
+  /// 请求响应内容处理
+  RawData _handleResponse<T>(Response response) {
+    if (response.statusCode == 200) {
+      if (T is RawData) {
+        /// T类型为RawData时，不按照Rest处理，直接返回结果
+        return RawData()..value = response.data;
+      } else {
+        ApiResponse apiResponse = ApiResponse.fromJson(response.data);
+        return GlobalConfig.instance.globalHttpOptionConfigs.customBusinessResponseProcessor
+            .call(apiResponse);
+      }
+    } else {
+      var exception = ApiException(
+          response.statusCode, GlobalConfig.instance.globalHttpOptionConfigs.httpError.eDefault);
+      throw exception;
+    }
   }
 
   Future<RawData> get<T>(
@@ -186,21 +205,94 @@ class HttpClient {
     }
   }
 
-  /// 请求响应内容处理
-  RawData _handleResponse<T>(Response response) {
-    if (response.statusCode == 200) {
-      if (T is RawData) {
-        /// T类型为RawData时，不按照Rest处理，直接返回结果
-        return RawData()..value = response.data;
-      } else {
-        ApiResponse apiResponse = ApiResponse.fromJson(response.data);
-        return GlobalConfig.instance.globalHttpOptionConfigs.customBusinessResponseProcessor
-            .call(apiResponse);
-      }
-    } else {
-      var exception = ApiException(
-          response.statusCode, GlobalConfig.instance.globalHttpOptionConfigs.httpError.eDefault);
-      throw exception;
-    }
+  Stream<T> getStream<T>(String url, CancelToken cancelToken,
+      {required bool Function(String data) validDataPredictor,
+      required bool Function(String data) donePredictor,
+      required String Function(String data) dataProcessor,
+      required T Function(Map<String, dynamic>) onSuccess}) {
+    final controller = StreamController<T>.broadcast();
+    _dio
+        .get(url, cancelToken: cancelToken, options: Options(responseType: ResponseType.stream))
+        .then((it) {
+      (it.data.stream as Stream).listen((it) {
+        final rawData = utf8.decode(it);
+
+        final dataList = rawData.split("\n").where((element) => element.isNotEmpty).toList();
+
+        for (final data in dataList) {
+          if (!validDataPredictor.call(data)) {
+            continue;
+          }
+          if (!donePredictor.call(data)) {
+            controller
+              ..sink
+              ..add(onSuccess(jsonDecode(dataProcessor.call(data))));
+          } else {
+            return;
+          }
+        }
+      }, onDone: () {
+        controller.close();
+      }, onError: (err, t) {
+        controller
+          ..sink
+          ..addError(err, t);
+      });
+    }, onError: (err, t) {
+      controller
+        ..sink
+        ..addError(err, t);
+    });
+
+    return controller.stream;
+  }
+
+  Stream<T> sse<T>(
+    String url,
+    CancelToken cancelToken,
+    Map<String, dynamic> request, {
+    required bool Function(String data) validDataPredictor,
+    required bool Function(String data) donePredictor,
+    required String Function(String data) dataProcessor,
+    required T Function(Map<String, dynamic> value) completeCallback,
+  }) {
+    final controller = StreamController<T>.broadcast();
+
+    _dio
+        .post(url,
+            cancelToken: cancelToken,
+            data: json.encode(request),
+            options: Options(responseType: ResponseType.stream))
+        .then((iterator) {
+      iterator.data.stream.listen((it) {
+        final raw = utf8.decode(it);
+        final dataList = raw.split("\n").where((element) => element.isNotEmpty).toList();
+
+        for (final data in dataList) {
+          if (!validDataPredictor.call(data)) {
+            continue;
+          }
+
+          if (!donePredictor.call(data)) {
+            controller
+              ..sink
+              ..add(completeCallback(jsonDecode(dataProcessor.call(data))));
+          } else {
+            return;
+          }
+        }
+      }, onDone: () {
+        controller.close();
+      }, onError: (error, t) {
+        controller
+          ..sink
+          ..addError(error, t);
+      });
+    }, onError: (err, t) {
+      controller
+        ..sink
+        ..addError(err, t);
+    });
+    return controller.stream;
   }
 }
