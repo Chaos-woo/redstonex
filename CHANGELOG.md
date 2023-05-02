@@ -1,3 +1,7 @@
+## 1.1.11
+* 修复xInject_中lazy*方法注入提前初始化GetxController或GetxService
+* RefreshableWidgets组件增加跟随列表滑动的前置组件和后置组件
+
 ## 1.1.10
 * 修复EventPagingController的RefreshController未初始化的问题
 * 增加Dio流式响应

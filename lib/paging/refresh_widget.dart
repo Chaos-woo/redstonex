@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart' as pull2Refresh;
+import 'package:styled_widget/styled_widget.dart';
 
 import '../observer/refresh_list_event.dart';
 import 'event_page_controller.dart';
@@ -46,7 +47,7 @@ class RefreshableWidgets {
       onLoading: onLoad,
       header: refreshDataIndicator,
       footer: loadDataIndicator,
-      child: builder(),
+      child: builder.call(),
     );
   }
 
@@ -66,21 +67,26 @@ class RefreshableWidgets {
     RefreshTextCompose? refreshText,
     pull2Refresh.RefreshIndicator? refreshIndicator,
     pull2Refresh.LoadIndicator? loadIndicator,
+    Widget Function()? prefixWidgetBuilder,
+    Widget Function()? suffixWidgetBuilder,
   }) {
     C controller = XDepends().on(tag: tag);
     return GetBuilder<C>(
       builder: (controller) {
         return buildRefreshableWidget(
           builder: () => buildListView<T>(
-              data: controller.pagingState.data,
-              scrollController: scrollController,
-              separatorBuilder: separatorBuilder,
-              itemBuilder: itemBuilder,
-              onItemClick: onItemClick,
-              onItemLongPress: onItemLongPress,
-              physics: physics,
-              shrinkWrap: shrinkWrap,
-              scrollDirection: scrollDirection),
+            data: controller.pagingState.data,
+            scrollController: scrollController,
+            separatorBuilder: separatorBuilder,
+            itemBuilder: itemBuilder,
+            onItemClick: onItemClick,
+            onItemLongPress: onItemLongPress,
+            physics: physics,
+            shrinkWrap: shrinkWrap,
+            scrollDirection: scrollDirection,
+            prefixWidgetBuilder: prefixWidgetBuilder,
+            suffixWidgetBuilder: suffixWidgetBuilder,
+          ),
           refreshController: controller.refreshController,
           onRefresh: controller.refreshData,
           onLoad: controller.loadMoreData,
@@ -112,21 +118,26 @@ class RefreshableWidgets {
     RefreshTextCompose? refreshText,
     pull2Refresh.RefreshIndicator? refreshIndicator,
     pull2Refresh.LoadIndicator? loadIndicator,
+    Widget Function()? prefixWidgetBuilder,
+    Widget Function()? suffixWidgetBuilder,
   }) {
     C controller = XDepends().on(tag: tag);
     return GetBuilder<C>(
       builder: (controller) {
         return buildRefreshableWidget(
           builder: () => buildListView<T>(
-              data: controller.pagingState.data,
-              scrollController: scrollController,
-              separatorBuilder: separatorBuilder,
-              itemBuilder: itemBuilder,
-              onItemClick: onItemClick,
-              onItemLongPress: onItemLongPress,
-              physics: physics,
-              shrinkWrap: shrinkWrap,
-              scrollDirection: scrollDirection),
+            data: controller.pagingState.data,
+            scrollController: scrollController,
+            separatorBuilder: separatorBuilder,
+            itemBuilder: itemBuilder,
+            onItemClick: onItemClick,
+            onItemLongPress: onItemLongPress,
+            physics: physics,
+            shrinkWrap: shrinkWrap,
+            scrollDirection: scrollDirection,
+            prefixWidgetBuilder: prefixWidgetBuilder,
+            suffixWidgetBuilder: suffixWidgetBuilder,
+          ),
           refreshController: controller.refreshController,
           onRefresh: controller.refreshData,
           onLoad: controller.loadMoreData,
@@ -155,6 +166,8 @@ class RefreshableWidgets {
     RefreshTextCompose? refreshText,
     pull2Refresh.RefreshIndicator? refreshIndicator,
     pull2Refresh.LoadIndicator? loadIndicator,
+    Widget Function()? prefixWidgetBuilder,
+    Widget Function()? suffixWidgetBuilder,
   }) {
     return ListView.separated(
       shrinkWrap: shrinkWrap,
@@ -162,11 +175,33 @@ class RefreshableWidgets {
       controller: scrollController,
       padding: EdgeInsets.zero,
       scrollDirection: scrollDirection,
-      itemBuilder: (ctx, index) => GestureDetector(
-        child: itemBuilder.call(data[index], index),
-        onTap: () => onItemClick?.call(data[index], index),
-        onLongPress: () => onItemLongPress?.call(data[index], index),
-      ),
+      itemBuilder: (ctx, index) {
+        if (index == 0 && null != prefixWidgetBuilder) {
+          return <Widget>[
+            prefixWidgetBuilder.call(),
+            GestureDetector(
+              child: itemBuilder.call(data[index], index),
+              onTap: () => onItemClick?.call(data[index], index),
+              onLongPress: () => onItemLongPress?.call(data[index], index),
+            ),
+          ].toColumn(mainAxisSize: MainAxisSize.min);
+        } else if (index == data.length - 1 && null != suffixWidgetBuilder) {
+          return <Widget>[
+            GestureDetector(
+              child: itemBuilder.call(data[index], index),
+              onTap: () => onItemClick?.call(data[index], index),
+              onLongPress: () => onItemLongPress?.call(data[index], index),
+            ),
+            suffixWidgetBuilder.call(),
+          ].toColumn(mainAxisSize: MainAxisSize.min);
+        } else {
+          return GestureDetector(
+            child: itemBuilder.call(data[index], index),
+            onTap: () => onItemClick?.call(data[index], index),
+            onLongPress: () => onItemLongPress?.call(data[index], index),
+          );
+        }
+      },
       separatorBuilder: (ctx, index) => separatorBuilder?.call(data[index], index) ?? Container(),
       itemCount: data.length,
     );

@@ -15,17 +15,17 @@ class xInject_ {
   static T injectService<T extends GetxService>(T injection, {String? tag}) =>
       XProvides().provide(injection, tag: tag);
 
-  static void lazyInjectService<T extends GetxService>(T injection, {String? tag}) =>
-      XProvides().lazyProvide(() => injection, tag: tag);
+  static void lazyInjectService<T extends GetxService>(T Function() injection, {String? tag}) =>
+      XProvides().lazyProvide(injection, tag: tag);
 
   static T injectController<T extends GetxController>(T injection, {String? tag}) =>
       XProvides().provide(injection, tag: tag);
 
-  static void lazyInjectController<T extends GetxController>(T injection, {String? tag}) =>
-      XProvides().lazyProvide(() => injection, tag: tag);
+  static void lazyInjectController<T extends GetxController>(T Function() injection, {String? tag}) =>
+      XProvides().lazyProvide(injection, tag: tag);
 
   static T inject<T>(T injection, {String? tag}) => XProvides().provide(injection, tag: tag);
 
-  static void lazyInject<T>(T injection, {String? tag}) =>
-      XProvides().lazyProvide(() => injection, tag: tag);
+  static void lazyInject<T>(T Function() injection, {String? tag}) =>
+      XProvides().lazyProvide(injection, tag: tag);
 }
