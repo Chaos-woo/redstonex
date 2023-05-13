@@ -22,7 +22,7 @@ class RsxAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.actions = const [],
     this.backgroundColor,
     this.frontColor,
-    this.preferredHeight = 48.0,
+    this.appBarHeight,
     this.padding = const EdgeInsets.symmetric(horizontal: 12),
   }) : super(key: key);
 
@@ -38,7 +38,7 @@ class RsxAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   List<Widget> actions;
 
-  double? preferredHeight;
+  double? appBarHeight;
   Color? backgroundColor;
   Color? frontColor;
   EdgeInsetsGeometry? padding;
@@ -113,5 +113,5 @@ class RsxAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(preferredHeight ?? 48.0);
+  Size get preferredSize => Size.fromHeight(appBarHeight ?? kMinInteractiveDimension);
 }

@@ -1012,10 +1012,10 @@ packages:
     dependency: transitive
     description:
       name: persistent_bottom_nav_bar_v2
-      sha256: "2fbaf1e8b18108d8a303304a306d68bcfb78abfd553295f489a8a315dff479e2"
+      sha256: b9d28af56af148e63142bb5f2aeb7f7dc74541e605f7280ed9256d94679cda8b
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "4.2.8"
+    version: "5.0.0-beta.5"
   petitparser:
     dependency: transitive
     description:
@@ -1142,7 +1142,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "1.1.11"
+    version: "1.2.0"
   rxdart:
     dependency: transitive
     description:

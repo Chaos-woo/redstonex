@@ -35,9 +35,9 @@ class Routes {
     lottieGroup.newRoute(
         Router(RouteCompose.lottieRoute.index, () => LottieIndex(),));
 
-    RouterGroup textGroup = XDispatcher.group(groupName: 'text');
-    textGroup.newRoute(
-        Router(RouteCompose.textRoute.index, () => TextIndex(),));
+    // RouterGroup textGroup = XDispatcher.group(groupName: 'text');
+    // textGroup.newRoute(
+    //     Router(RouteCompose.textRoute.index, () => TextIndex(),));
   }
 }
 

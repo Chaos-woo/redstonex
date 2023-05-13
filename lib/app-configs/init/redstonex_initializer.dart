@@ -32,7 +32,7 @@ class RsxInitializer {
     /// 初始化存储信息
     await XDirectory().initial();
     /// 初始化本地缓存
-    await XSharedPersistent().initial();
+    await XShared().initial();
     /// 初始化路由
     XDispatcher.initial();
   }

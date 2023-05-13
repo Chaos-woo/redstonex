@@ -95,6 +95,7 @@ class _RsxBaseBottomNavigationLogic extends GetxController {
   var preSelectedIndex = 0;
 }
 
+/// 抽象带有底部页面导航的Scaffold组件
 abstract class RsxBottomNavigationBarPageScaffold {
   PreferredSizeWidget? appBar();
 

@@ -24,7 +24,7 @@ class WeatherService extends GetxService {
     String supportProvinceCityKeyPrefix = 'kJvheCities';
     List<Province> pList = await getSupportProvinces();
     for (Province p in pList) {
-      List<City>? cityCache = XSharedPersistent().readObjList(supportProvinceCityKeyPrefix + p.id, (v) {
+      List<City>? cityCache = XShared().getObjList(supportProvinceCityKeyPrefix + p.id, (v) {
         Map<String, dynamic> cData = v as Map<String, dynamic>;
         City city = City();
         city.id = cData['id'];
@@ -38,7 +38,7 @@ class WeatherService extends GetxService {
 
   Future<List<Province>> getSupportProvinces() async {
     String supportProvinceKey = 'kJvheProvinces';
-    List<Province>? pCache = XSharedPersistent().readObjList(supportProvinceKey, (v) {
+    List<Province>? pCache = XShared().getObjList(supportProvinceKey, (v) {
       Map<String, dynamic> pData = v as Map<String, dynamic>;
       Province p = Province();
       p.id = pData['id'];
@@ -50,7 +50,7 @@ class WeatherService extends GetxService {
     if (null == pCache) {
       XLog().debug('not hit province cache');
       pCache = await _jvheApiProvider.getHistoryWeatherSupportProvinces();
-      XSharedPersistent().putObjectList(supportProvinceKey, pCache);
+      XShared().putObjectList(supportProvinceKey, pCache);
     }
 
     /// 演示仅使用了1个省份
@@ -65,7 +65,7 @@ class WeatherService extends GetxService {
     String supportProvinceCityKeyPrefix = 'kJvheCities';
 
     for (Province p in provinces) {
-      List<City>? cityCache = XSharedPersistent().readObjList(supportProvinceCityKeyPrefix + p.id, (v) {
+      List<City>? cityCache = XShared().getObjList(supportProvinceCityKeyPrefix + p.id, (v) {
         Map<String, dynamic> cData = v as Map<String, dynamic>;
         City city = City();
         city.id = cData['id'];
@@ -89,7 +89,7 @@ class WeatherService extends GetxService {
       List<City> cities = await _jvheApiProvider.getHistoryWeatherMultiProvinceSupportCities(notCacheCitiesProvinceIds);
       for (String pId in notCacheCitiesProvinceIds) {
         List<City> currentProvinceCities = cities.where((element) => pId == element.provinceId).toList();
-        XSharedPersistent().putObjectList(supportProvinceCityKeyPrefix + pId, currentProvinceCities);
+        XShared().putObjectList(supportProvinceCityKeyPrefix + pId, currentProvinceCities);
         provinceCities.add(_pakProvinceCity(provinceMap[pId]!, currentProvinceCities));
       }
     }
@@ -117,13 +117,13 @@ class WeatherService extends GetxService {
 
   /// 缓存当前选择城市
   void cacheSelectLatestProvinceCity(Province province, City city) {
-    XSharedPersistent().writeObj(kSelectedProvince, province);
-    XSharedPersistent().writeObj(kSelectedCity, city);
+    XShared().putObj(kSelectedProvince, province);
+    XShared().putObj(kSelectedCity, city);
   }
 
   /// 获取缓存中选中的省份
   Future<Province?> getCacheSelectProvince() async {
-    return XSharedPersistent().readObj(kSelectedProvince, (v) {
+    return XShared().getObj(kSelectedProvince, (v) {
       Map<String, dynamic> pData = v as Map<String, dynamic>;
       Province p = Province();
       p.id = pData['id'];
@@ -134,7 +134,7 @@ class WeatherService extends GetxService {
 
   /// 获取缓存中选中的城市或地区
   Future<City?> getCacheSelectCity() async {
-    return XSharedPersistent().readObj(kSelectedCity, (v) {
+    return XShared().getObj(kSelectedCity, (v) {
       Map<String, dynamic> cData = v as Map<String, dynamic>;
       City c = City();
       c.id = cData['id'];
