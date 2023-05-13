@@ -34,6 +34,22 @@ abstract class RsxTextBottomNavigationBarPage extends StatelessWidget
 
   double navBarHeight() => kBottomNavigationBarHeight;
 
+  bool handleAndroidBackButtonPress() => true;
+
+  bool resizeToAvoidBottomInset() => true;
+
+  bool stateManagement() => true;
+
+  bool popAllScreensOnTapOfSelectedTab() => true;
+
+  bool popAllScreensOnTapAnyTabs() => true;
+
+  EdgeInsets margin() => EdgeInsets.zero;
+
+  Widget? drawerBuilder() => null;
+
+  double? drawerEdgeDragWidth() => null;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,11 +59,12 @@ abstract class RsxTextBottomNavigationBarPage extends StatelessWidget
         controller: _controller,
         tabs: getNavigationTabConfig(),
         backgroundColor: backgroundColor() ?? Colors.white,
-        handleAndroidBackButtonPress: true,
-        resizeToAvoidBottomInset: true,
-        stateManagement: true,
-        popAllScreensOnTapOfSelectedTab: true,
+        handleAndroidBackButtonPress: handleAndroidBackButtonPress(),
+        resizeToAvoidBottomInset: resizeToAvoidBottomInset(),
+        stateManagement: stateManagement(),
+        popAllScreensOnTapOfSelectedTab: popAllScreensOnTapOfSelectedTab(),
         popActionScreens: PopActionScreensType.all,
+        margin: margin(),
         screenTransitionAnimation: screenTransitionAnimation(),
         navBarBuilder: navBarDecoration(),
         floatingActionButton: floatingActionButton(),
@@ -57,6 +74,9 @@ abstract class RsxTextBottomNavigationBarPage extends StatelessWidget
           onItemSelected()?.call(index);
         },
         navBarHeight: navBarHeight(),
+        popAllScreensOnTapAnyTabs: popAllScreensOnTapAnyTabs(),
+        drawer: drawerBuilder(),
+        drawerEdgeDragWidth: drawerEdgeDragWidth(),
       ),
     );
   }

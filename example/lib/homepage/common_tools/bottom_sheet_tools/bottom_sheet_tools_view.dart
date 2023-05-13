@@ -60,13 +60,13 @@ class BottomSheetToolsComponent extends StatelessWidget {
           XNavigator().to(RouteCompose.lottieRoute.index);
         },
       ),
-      // RsxOptionItemUtils.functionRsxOptionItem(
-      //   title: 'Persistent Bottom NavBar',
-      //   description: '文字路由导航',
-      //   onTap: () {
-      //     XNavigator().to(RouteCompose.textRoute.index);
-      //   },
-      // ),
+      RsxOptionItemUtils.functionRsxOptionItem(
+        title: 'Persistent Bottom NavBar',
+        description: '文字路由导航',
+        onTap: () {
+          XNavigator().to(RouteCompose.textRoute.index);
+        },
+      ),
     ];
 
     var optionGroupItems = RsxOptionGroupItem(

@@ -80,6 +80,8 @@ dependencies:
   # pojo <-> json处理：https://pub.dev/packages/json_serializable
   # json注解使用：https://github.com/google/json_serializable.dart/blob/master/example/lib/example.dart
   json_annotation: ^4.6.0
+  # https://github.com/jb3rndt/PersistentBottomNavBarV2
+  persistent_bottom_nav_bar_v2: ^5.0.0-beta.5
 
 dev_dependencies:
 #  flutter_test:

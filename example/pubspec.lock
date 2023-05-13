@@ -1009,7 +1009,7 @@ packages:
     source: hosted
     version: "0.1.2"
   persistent_bottom_nav_bar_v2:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: persistent_bottom_nav_bar_v2
       sha256: b9d28af56af148e63142bb5f2aeb7f7dc74541e605f7280ed9256d94679cda8b

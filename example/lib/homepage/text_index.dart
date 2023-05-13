@@ -1,68 +1,106 @@
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-// import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
-// import 'package:redstonex/redstonex.dart';
-// import 'package:styled_widget/styled_widget.dart';
-//
-// class TextIndex extends RsxTextBottomNavigationBarPage {
-//   @override
-//   List<Widget> getPages() {
-//     return [
-//       const TextEmptyPage(title: 'Book page'),
-//       const TextEmptyPage(title: 'Setting page1'),
-//       const TextEmptyPage(title: 'Setting page2'),
-//       const TextEmptyPage(title: 'Setting page3'),
-//     ];
-//   }
-//
-//   @override
-//   PreferredSizeWidget? appBar() {
-//     return RsxAppBar(
-//       title: 'Persistent Bottom NavBar',
-//       isBack: true,
-//       actions: [
-//         Obx(() {
-//           if (selectedIndex.value == 0) {
-//             return const Icon(
-//               Icons.star_rounded,
-//               size: 24,
-//               color: Colors.yellow,
-//             ).padding(right: 10);
-//           }
-//           return const SizedBox();
-//         }),
-//       ],
-//     );
-//   }
-//
-//   @override
-//   List<PersistentBottomNavBarItem> getNavigationTabConfig() {
-//     return [
-//       PersistentBottomNavBarItem(icon: const Icon(Icons.abc), title: 'abc'),
-//       PersistentBottomNavBarItem(icon: const Icon(Icons.settings), title: 'setting'),
-//       PersistentBottomNavBarItem(icon: const Icon(Icons.pages), title: 'pages'),
-//       PersistentBottomNavBarItem(icon: const Icon(Icons.one_k), title: '1K'),
-//     ];
-//   }
-//
-//   @override
-//   NavBarStyle navBarDecoration() {
-//     return NavBarStyle.style12;
-//   }
-// }
-//
-// class TextEmptyPage extends StatelessWidget {
-//   final String title;
-//
-//   const TextEmptyPage({Key? key, required this.title}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       color: Colors.red,
-//       child: Center(
-//         child: Text(title),
-//       ),
-//     );
-//   }
-// }
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
+import 'package:redstonex/redstonex.dart';
+import 'package:styled_widget/styled_widget.dart';
+
+class TextIndex extends RsxTextBottomNavigationBarPage {
+  @override
+  List<PersistentTabConfig> getNavigationTabConfig() {
+    return <PersistentTabConfig>[
+      // Feed/Rss订阅项
+      PersistentTabConfig(
+        screen: TextEmptyPage(title: 'Book page3'),
+        item: ItemConfig(
+          icon: const Icon(Icons.rss_feed_rounded),
+          inactiveIcon: const Icon(Icons.rss_feed_rounded),
+          title: 'feed',
+          activeColorPrimary: Colors.blue,
+          inactiveColorPrimary: Colors.blue[300]!,
+        ),
+      ),
+      // 综合项
+      PersistentTabConfig(
+        screen: ListView.builder(itemCount: 50, itemBuilder: (context, index) => Text('$index'),),
+        item: ItemConfig(
+          icon: const Icon(Icons.other_houses_outlined),
+          inactiveIcon: const Icon(Icons.other_houses_rounded),
+          title: 'others',
+          activeColorPrimary: Colors.deepOrange,
+          inactiveColorPrimary: Colors.deepOrange[300]!,
+        ),
+      ),
+      // 应用设置项
+      PersistentTabConfig(
+        screen: TextEmptyPage(title: 'Book page1'),
+        item: ItemConfig(
+          icon: const Icon(Icons.settings_rounded),
+          inactiveIcon: const Icon(Icons.settings_outlined),
+          title: 'mine',
+          activeColorPrimary: Colors.green,
+          inactiveColorPrimary: Colors.green[300]!,
+        ),
+      ),
+      PersistentTabConfig(
+        screen: TextEmptyPage(title: 'Book page14'),
+        item: ItemConfig(
+          icon: const Icon(Icons.settings_rounded),
+          inactiveIcon: const Icon(Icons.settings_outlined),
+          title: 'mine2',
+          activeColorPrimary: Colors.green,
+          inactiveColorPrimary: Colors.green[300]!,
+        ),
+      ),
+    ];
+  }
+
+  @override
+  Widget Function(NavBarConfig) navBarDecoration() => (navBarConfig) => Style12BottomNavBar(
+      navBarConfig: navBarConfig,
+      navBarDecoration: NavBarDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: Colors.black,
+      ));
+
+  @override
+  PreferredSizeWidget? appBar() {
+    return RsxAppBar(
+      title: 'Persistent Bottom NavBar',
+      isBack: true,
+      actions: [
+        Obx(() {
+          if (selectedIndex.value == 0) {
+            return const Icon(
+              Icons.star_rounded,
+              size: 24,
+              color: Colors.yellow,
+            ).padding(right: 10);
+          }
+          return const SizedBox();
+        }),
+      ],
+    );
+  }
+
+  @override
+  Widget? floatingActionButton() => CircleAvatar(child: Icon(Icons.abc),).paddingAll(60);
+
+  @override
+  FloatingActionButtonLocation? floatingActionButtonLocation() => FloatingActionButtonLocation.endDocked;
+}
+
+class TextEmptyPage extends StatelessWidget {
+  final String title;
+
+  const TextEmptyPage({Key? key, required this.title}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.red,
+      child: Center(
+        child: Text(title),
+      ),
+    );
+  }
+}

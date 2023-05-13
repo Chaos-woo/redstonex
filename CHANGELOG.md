@@ -1,3 +1,6 @@
+## 1.2.1
+* 更新RsxTextBottomNavigationBarPage组件，支持更多自定义属性设置
+
 ## 1.2.0
 * 缓存组件更名为XShared，支持获取缓存中基本类型列表
 * 更新依赖persistent_bottom_nav_bar_v2升级至^5.0.0-beta.5，支持floatingActionButtonLocation
