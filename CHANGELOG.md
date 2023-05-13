@@ -1,5 +1,6 @@
 ## 1.2.1
 * 更新RsxTextBottomNavigationBarPage组件，支持更多自定义属性设置
+* 增加ExtDouble扩展，支持EdgeInsetsGeometry快速设置
 
 ## 1.2.0
 * 缓存组件更名为XShared，支持获取缓存中基本类型列表
