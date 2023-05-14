@@ -1,17 +1,22 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
-import '../observer/has_paging_event_observer.dart';
+import '../events/redstonex_event_bus.dart';
 import '../observer/refresh_list_event.dart';
 import 'page_state.dart';
 import 'paging_params.dart';
 
 enum RefreshOperateType { refresh, loadMore }
 
+typedef RefreshListMultiEventObserverCallback = void Function<T>(
+    List<T>? data, Exception? exception);
+
 /// 支持事件方式更新UI的分页控制器
 abstract class EventPagingController<M, S extends PagingState<M>, E extends ListRefreshableEvent<M>>
-    extends GetxController with HasEventPagingObserver<M, E> {
+    extends GetxController {
   /// 分页数据
   late S pagingState;
 
@@ -20,6 +25,9 @@ abstract class EventPagingController<M, S extends PagingState<M>, E extends List
 
   /// 刷新控件的 Controller
   late RefreshController refreshController;
+
+  /// 订阅事件
+  final List<StreamSubscription?> _autoCloseableSubStreams = [];
 
   @override
   void onInit() {
@@ -107,9 +115,13 @@ abstract class EventPagingController<M, S extends PagingState<M>, E extends List
     refreshController.loadComplete();
   }
 
+  @mustCallSuper
   @override
   void onClose() {
     super.onClose();
+    for (var ss in _autoCloseableSubStreams) {
+      ss?.cancel();
+    }
   }
 
   /// 自定义数据加载
@@ -145,4 +157,33 @@ abstract class EventPagingController<M, S extends PagingState<M>, E extends List
 
   /// 自定义刷新控制器
   RefreshController customRefreshController() => RefreshController(initialRefresh: false);
+
+  @protected
+  StreamSubscription onPagingEvent({
+    RefreshListMultiEventObserverCallback? onInit,
+    RefreshListMultiEventObserverCallback? onLoading,
+    RefreshListMultiEventObserverCallback? onSuccess,
+    RefreshListMultiEventObserverCallback? onFail,
+    Function? onError,
+  }) {
+    StreamSubscription subscription = XEventBus().subscribeAutoCancelOnError<E>((E event) {
+      switch (event.state) {
+        case EventState.init:
+          onInit?.call(event.data, event.exception);
+          break;
+        case EventState.loading:
+          onLoading?.call(event.data, event.exception);
+          break;
+        case EventState.success:
+          onSuccess?.call(event.data, event.exception);
+          break;
+        case EventState.fail:
+          onFail?.call(event.data, event.exception);
+          break;
+      }
+    }, onError: onError);
+
+    _autoCloseableSubStreams.add(subscription);
+    return subscription;
+  }
 }

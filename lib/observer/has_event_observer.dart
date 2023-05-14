@@ -6,66 +6,86 @@ import 'package:get/get.dart';
 
 import '../events/redstonex_event_bus.dart';
 
-abstract class EventObserver {
-  List<StreamSubscription?> customAutoCancelableStreamSubscriptions();
+class EventObserverUtil {
+  static List<StreamSubscription?> createAutoCloseableSubStreams() => [];
+}
+
+/// 支持事件方式更新UI
+mixin HasEventObserverOfController on GetxController {
+  getAutoCloseableSubStreams();
+
+  @mustCallSuper
+  @override
+  void onClose() {
+    super.onClose();
+    for (var ss in getAutoCloseableSubStreams()) {
+      ss?.cancel();
+    }
+  }
 
   @protected
   StreamSubscription onEventObserve<T>(
-    void Function(T event) onEvent,
-    Function? onError,
-    void Function()? onDone,
-  ) {
+      void Function(T event) onEvent,
+      Function? onError,
+      void Function()? onDone,
+      ) {
     StreamSubscription subscription = XEventBus().subscribeAutoCancelOnError<T>(
-      (T event) => onEvent.call(event),
+          (T event) => onEvent.call(event),
       onDone: onDone,
       onError: onError,
     );
 
-    customAutoCancelableStreamSubscriptions().add(subscription);
+    getAutoCloseableSubStreams().add(subscription);
     return subscription;
   }
 
   @protected
   Future<void> closeEventObserve(StreamSubscription? subscription) async {
+    subscription?.cancel();
     try {
-      customAutoCancelableStreamSubscriptions().remove(subscription);
+      getAutoCloseableSubStreams().remove(subscription);
     } catch (e) {
       // do nothing
     }
-    subscription?.cancel();
   }
 }
 
 /// 支持事件方式更新UI
-mixin HasEventObserverOfController on GetxController implements EventObserver {
-  final List<StreamSubscription?> _cancelableStreamSubscriptions = [];
-
-  @override
-  customAutoCancelableStreamSubscriptions() => _cancelableStreamSubscriptions;
+mixin HasEventObserverOfService on GetxService {
+  getAutoCloseableSubStreams();
 
   @mustCallSuper
   @override
   void onClose() {
     super.onClose();
-    for (var ss in _cancelableStreamSubscriptions) {
+    for (var ss in getAutoCloseableSubStreams()) {
       ss?.cancel();
     }
   }
-}
 
-/// 支持事件方式更新UI
-mixin HasEventObserverOfService on GetxService implements EventObserver {
-  final List<StreamSubscription?> _cancelableStreamSubscriptions = [];
+  @protected
+  StreamSubscription onEventObserve<T>(
+      void Function(T event) onEvent,
+      Function? onError,
+      void Function()? onDone,
+      ) {
+    StreamSubscription subscription = XEventBus().subscribeAutoCancelOnError<T>(
+          (T event) => onEvent.call(event),
+      onDone: onDone,
+      onError: onError,
+    );
 
-  @override
-  customAutoCancelableStreamSubscriptions() => _cancelableStreamSubscriptions;
+    getAutoCloseableSubStreams().add(subscription);
+    return subscription;
+  }
 
-  @mustCallSuper
-  @override
-  void onClose() {
-    super.onClose();
-    for (var ss in _cancelableStreamSubscriptions) {
-      ss?.cancel();
+  @protected
+  Future<void> closeEventObserve(StreamSubscription? subscription) async {
+    subscription?.cancel();
+    try {
+      getAutoCloseableSubStreams().remove(subscription);
+    } catch (e) {
+      // do nothing
     }
   }
 }

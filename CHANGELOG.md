@@ -1,3 +1,7 @@
+## 1.2.2
+* 修复使用HasEventObserverOfController仍需实现父类方法的问题，新增EventObserverUtil工具类快速创建需要使用的StreamSubscription列表
+* 修复EventPagingController使用mixin导致StreamSubscription列表共用问题
+
 ## 1.2.1
 * 更新RsxTextBottomNavigationBarPage组件，支持更多自定义属性设置
 * 增加ExtDouble扩展，支持EdgeInsetsGeometry快速设置

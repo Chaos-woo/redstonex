@@ -19,7 +19,7 @@ class BiliHotVideo {
   @JsonKey(name: 'pubdate')
   late int pubDate;
 
-  @JsonKey(name: 'short_link')
+  @JsonKey(name: 'short_link_v2')
   late String shortLink;
 
   @JsonKey(name: 'bvid')

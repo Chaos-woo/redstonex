@@ -40,7 +40,6 @@ export 'package:redstonex/object-storage/shared_persistent.dart';
 export 'package:redstonex/observer/has_event_emitter.dart';
 export 'package:redstonex/observer/has_event_observer.dart';
 export 'package:redstonex/observer/has_paging_event_emitter.dart';
-export 'package:redstonex/observer/has_paging_event_observer.dart';
 export 'package:redstonex/observer/refresh_list_event.dart';
 export 'package:redstonex/paging/event_page_controller.dart';
 export 'package:redstonex/paging/page_controller.dart';

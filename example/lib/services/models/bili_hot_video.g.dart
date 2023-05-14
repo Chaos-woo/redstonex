@@ -12,7 +12,7 @@ BiliHotVideo _$BiliHotVideoFromJson(Map<String, dynamic> json) => BiliHotVideo()
   ..pic = json['pic'] as String
   ..title = json['title'] as String
   ..pubDate = json['pubdate'] as int
-  ..shortLink = json['short_link'] as String
+  ..shortLink = json['short_link_v2'] as String
   ..bVid = json['bvid'] as String
   ..owner = BiliUp.fromJson(json['owner'] as Map<String, dynamic>)
   ..stats = BiliHotVideoStat.fromJson(json['stat'] as Map<String, dynamic>)
@@ -26,7 +26,7 @@ Map<String, dynamic> _$BiliHotVideoToJson(BiliHotVideo instance) =>
       'pic': instance.pic,
       'title': instance.title,
       'pubdate': instance.pubDate,
-      'short_link': instance.shortLink,
+      'short_link_v2': instance.shortLink,
       'bvid': instance.bVid,
       'owner': instance.owner,
       'stat': instance.stats,
