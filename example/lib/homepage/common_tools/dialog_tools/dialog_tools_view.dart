@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:example/widgets/rsx_option_item_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
@@ -52,15 +50,19 @@ class DialogToolsComponent extends StatelessWidget {
         title: '应用升级Dialog',
         description: '标题,描述,确认按钮,取消按钮',
         onTap: () {
-          XDialog().showPromptDialog(title: '新版本来袭！', content: '应用发布了更多好看好玩的功能，快去应用市场更新吧~', actions: <Widget>[
-            XDialog().textButton(text: '暂不提醒', onTap: () => XNavigator().back(), textColor: Colors.grey),
-            XDialog().dialogButton(
-              text: '去升级 >>',
-              onTap: () => XNavigator().back(),
-              buttonColor: Colors.blue,
-              textColor: Colors.white,
-            ),
-          ]);
+          XDialog().showPromptDialog(
+              title: '新版本来袭！',
+              content: '应用发布了更多好看好玩的功能，快去应用市场更新吧~',
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('暂不提醒'),
+                  onPressed: () => XNavigator().back(),
+                ),
+                TextButton(
+                  child: const Text('去升级 >>'),
+                  onPressed: () => XNavigator().back(),
+                ),
+              ]);
         },
       ),
       RsxOptionItemUtils.functionRsxOptionItem(
@@ -77,22 +79,20 @@ class DialogToolsComponent extends StatelessWidget {
               _customStatisticsItem('Ta的鲜花', flowerCount),
             ].toRow(mainAxisAlignment: MainAxisAlignment.spaceAround),
             actions: <Widget>[
-              XDialog().textButton(
-                  text: '私信Ta',
-                  onTap: () {
-                    XToast().show('Ta似乎并不理你~');
-                    XNavigator().back();
-                  },
-                  textColor: Colors.grey),
-              XDialog().dialogButton(
-                text: '送Ta鲜花',
-                onTap: () {
+              TextButton(
+                child: const Text('私信Ta'),
+                onPressed: () {
+                  XToast().show('Ta似乎并不理你~');
+                  XNavigator().back();
+                },
+              ),
+              TextButton(
+                child: const Text('送Ta鲜花'),
+                onPressed: () {
                   flowerCount++;
                   XToast().show('送出鲜花1朵');
                   XNavigator().back();
                 },
-                buttonColor: Colors.red,
-                textColor: Colors.white,
               ),
             ],
           );
@@ -126,7 +126,8 @@ class DialogToolsComponent extends StatelessWidget {
           )
           .positioned(top: -63),
       const GFAvatar(
-        backgroundImage: NetworkImage('https://pic1.zhimg.com/50/v2-bc4cd78275421fbc79f362f011cbd265_hd.jpg?source=1940ef5c'),
+        backgroundImage: NetworkImage(
+            'https://pic1.zhimg.com/50/v2-bc4cd78275421fbc79f362f011cbd265_hd.jpg?source=1940ef5c'),
       ).height(80).width(80).positioned(top: -60),
       const Text('example_1211',
           style: TextStyle(

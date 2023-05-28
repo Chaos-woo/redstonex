@@ -21,7 +21,10 @@ class TextIndex extends RsxTextBottomNavigationBarPage {
       ),
       // 综合项
       PersistentTabConfig(
-        screen: ListView.builder(itemCount: 50, itemBuilder: (context, index) => Text('$index'),),
+        screen: ListView.builder(
+          itemCount: 50,
+          itemBuilder: (context, index) => Text('$index'),
+        ),
         item: ItemConfig(
           icon: const Icon(Icons.other_houses_outlined),
           inactiveIcon: const Icon(Icons.other_houses_rounded),
@@ -64,9 +67,12 @@ class TextIndex extends RsxTextBottomNavigationBarPage {
 
   @override
   PreferredSizeWidget? appBar() {
-    return RsxAppBar(
-      title: 'Persistent Bottom NavBar',
-      isBack: true,
+    return AppBar(
+      title: const Text('Persistent Bottom NavBar'),
+      leading: RsxClickWidget(
+        child: const Icon(Icons.arrow_back_ios_new),
+        onTap: () => XNavigator().back(),
+      ),
       actions: [
         Obx(() {
           if (selectedIndex.value == 0) {
@@ -83,7 +89,9 @@ class TextIndex extends RsxTextBottomNavigationBarPage {
   }
 
   @override
-  Widget? floatingActionButton() => CircleAvatar(child: Icon(Icons.abc),).paddingAll(60);
+  Widget? floatingActionButton() => CircleAvatar(
+        child: Icon(Icons.abc),
+      ).paddingAll(60);
 
   @override
   FloatingActionButtonLocation? floatingActionButtonLocation() => FloatingActionButtonLocation.endDocked;

@@ -25,19 +25,16 @@ class RsxHorizontalItemWidget extends StatelessWidget {
     var optionItemRow = <Widget>[
       <Widget>[
         item.leading ?? Gaps.emptyBox,
-        _renderMainContent().flexible(),
+        _buildMainContent().flexible(),
       ]
           .toRow(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment:
-                calcLeadingTop ? CrossAxisAlignment.start : CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-          )
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment:
+                  calcLeadingTop ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min)
           .flexible(),
       item.suffix ?? Gaps.emptyBox,
-    ].toRow(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    );
+    ].toRow(mainAxisAlignment: MainAxisAlignment.spaceBetween);
 
     /// 使单个选项卡高度尽可能符合实际高度
     var adaptiveOptionItemCol = <Widget>[
@@ -47,10 +44,10 @@ class RsxHorizontalItemWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
     );
 
-    return _renderOuterBox(child: adaptiveOptionItemCol);
+    return _buildOuterBox(child: adaptiveOptionItemCol);
   }
 
-  Widget _renderMainContent() {
+  Widget _buildMainContent() {
     var contentCol = <Widget>[
       item.titleWidget ?? Text(item.title ?? '', style: item.titleStyle),
       item.description ?? Gaps.emptyBox,
@@ -88,7 +85,7 @@ class RsxHorizontalItemWidget extends StatelessWidget {
     );
   }
 
-  Widget _renderOuterBox({Widget? child}) {
+  Widget _buildOuterBox({Widget? child}) {
     BoxConstraints constraints = item.constraints ??
         const BoxConstraints(
           minHeight: 45.0,

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../redstonex.dart';
-import 'theme.dart';
-
 class XBottomSheet {
   static final XBottomSheet _single = XBottomSheet._internal();
 
@@ -16,23 +13,13 @@ class XBottomSheet {
     Color? backgroundColor,
     Color? barrierColor,
     bool ignoreSafeArea = true,
-
-    /// 高度自定义控制，设置为true时需要child组件设置合适高度
-    bool customControlHeight = false,
-    bool isDismissible = true,
-    bool enableDrag = true,
+    bool customControlHeight = false, // 高度自定义控制，设置为true时需要child组件设置合适高度
+    bool isDismissible = true, // 点击BottomSheet外部是否可关闭
+    bool enableDrag = true, // 开启BottomSheet是否可拖拽
     ShapeBorder? shape,
     Duration? enterBottomSheetDuration,
     Duration? exitBottomSheetDuration,
   }) {
-    if (Get.context != null) {
-      backgroundColor = backgroundColor ?? Colors.white;
-      barrierColor = barrierColor ?? XTheme().getBarrierColor();
-    } else {
-      backgroundColor = backgroundColor ?? Colors.white;
-      barrierColor = barrierColor ?? XTheme().getBarrierColor();
-    }
-
     Get.bottomSheet(
       child,
       backgroundColor: backgroundColor,

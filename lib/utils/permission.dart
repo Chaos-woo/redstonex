@@ -45,7 +45,7 @@ class XPermission {
     VoidCallback? onDenied,
     VoidCallback? onPermanentlyDenied,
   }) async {
-    var status = await Permission.location.request();
+    var status = await permission.request();
     if (status.isGranted) {
       // 用户授予了权限
       onGranted?.call();

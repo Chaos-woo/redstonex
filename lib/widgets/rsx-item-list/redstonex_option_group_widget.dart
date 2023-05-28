@@ -6,20 +6,25 @@ import 'redstonex_horizontal_toolbar_widget.dart';
 import 'redstonex_horizontal_widget.dart';
 import 'redstonex_item_list_model.dart';
 
-typedef RsxOptionDivider = Widget Function(BuildContext context);
+typedef RsxOptionDividerBuilder = Widget Function(BuildContext context);
 
-// ignore: must_be_immutable
+/// 选项组组件
 class RsxOptionGroupWidget extends StatelessWidget {
+  /// 选项组
   final List<RsxOptionGroupItem> optionGroupItems;
-  final RsxOptionDivider? optionItemDivider;
+  /// 选项间的分隔构造器
+  RsxOptionDividerBuilder? optionItemDividerBuilder;
+  /// 工具条和分组内容间的间隙
   double? toolbarItemGap;
+  /// 多个分组之间的间隙
   double? optionGroupGap;
+  /// 整个选项组列表的物理滑动效果
   ScrollPhysics? physics;
 
   RsxOptionGroupWidget({
     Key? key,
     required this.optionGroupItems,
-    this.optionItemDivider,
+    this.optionItemDividerBuilder,
     this.toolbarItemGap = 0.0,
     this.optionGroupGap = 10.0,
     this.physics,
@@ -54,10 +59,10 @@ class RsxOptionGroupWidget extends StatelessWidget {
         var toolbar = RsxHorizontalToolbarWidget(toolbar: optionGroup.toolbar);
         var optionItems = optionGroup.optionItems.map((item) {
           var itemWidget = RsxHorizontalItemWidget(item: item);
-          if (null != optionItemDivider && optionGroup.optionItems.last != item) {
+          if (null != optionItemDividerBuilder && optionGroup.optionItems.last != item) {
             return <Widget>[
               itemWidget,
-              optionItemDivider!.call(context),
+              optionItemDividerBuilder!.call(context),
             ].toColumn(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,

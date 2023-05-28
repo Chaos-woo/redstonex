@@ -18,10 +18,13 @@ class BiliHotVideoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: RsxAppBar(
-          title: 'Bilibili综合热门视频',
-          isBack: true,
+        appBar: AppBar(
           backgroundColor: Colors.grey[200],
+          title: const Text('Bilibili综合热门视频'),
+          leading: RsxClickWidget(
+            child: const Icon(Icons.arrow_back_ios_new),
+            onTap: () => XNavigator().back(),
+          ),
           actions: [
             RsxClickWidget(
               child: const Icon(Icons.video_collection, color: Colors.blueGrey, size: 22),

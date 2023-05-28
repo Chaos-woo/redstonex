@@ -8,12 +8,12 @@ class XTheme {
 
   factory XTheme() => _single;
 
-  void setLightMode() {
-    Get.changeTheme(ThemeData.light());
+  void setLightMode(ThemeData theme) {
+    Get.changeTheme(theme);
   }
 
-  void setDartMode() {
-    Get.changeTheme(ThemeData.dark());
+  void setDartMode(ThemeData theme) {
+    Get.changeTheme(theme);
   }
 
   bool isDarkMode() {
@@ -24,14 +24,6 @@ class XTheme {
     }
   }
 
-  Color? getKeyboardActionsColor() {
-    return isDarkMode() ? const Color(0xFF18191A) : Colors.grey[200];
-  }
-
-  Color? getBarrierColor() {
-    return isDarkMode() ? Colors.black38 : Colors.black54;
-  }
-
   ThemeData theme() {
     var theme = ThemeData.fallback();
     if (Get.context != null) {
@@ -39,12 +31,4 @@ class XTheme {
     }
     return theme;
   }
-}
-
-extension ExtTheme on BuildContext {
-  bool get isDarkMode => XTheme().isDarkMode();
-
-  Color get backgroundColor => Theme.of(this).scaffoldBackgroundColor;
-
-  Color get dialogBackgroundColor => Theme.of(this).dialogBackgroundColor;
 }

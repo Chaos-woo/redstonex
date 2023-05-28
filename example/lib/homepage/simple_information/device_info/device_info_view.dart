@@ -14,11 +14,13 @@ class DeviceInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: RsxAppBar(
-        title: '设备信息',
-        frontColor: Colors.white,
+      appBar: AppBar(
+        title: const Text('设备信息'),
         backgroundColor: Colors.deepPurple,
-        isBack: true,
+        leading: RsxClickWidget(
+          child: const Icon(Icons.arrow_back_ios_new),
+          onTap: () => XNavigator().back(),
+        ),
       ),
       body: Container(
         height: double.infinity,

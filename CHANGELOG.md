@@ -1,3 +1,9 @@
+## 1.2.3
+* 修复XPermission请求授权错误的问题
+* 删除不需要的AppBar自定义组件和其他组件
+* 修复XTheme的多余方法
+* 删除XDialog的框架自定义配置
+
 ## 1.2.2
 * 修复使用HasEventObserverOfController仍需实现父类方法的问题，新增EventObserverUtil工具类快速创建需要使用的StreamSubscription列表
 * 修复EventPagingController使用mixin导致StreamSubscription列表共用问题

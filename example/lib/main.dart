@@ -62,18 +62,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     XProvides().provide(HomepageLogic());
     return Scaffold(
-      appBar: RsxAppBar(
-        leading: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 2),
-          child: Icon(
-            Icons.adb,
-            color: Colors.green,
-          ),
-        ),
-        title: widget.title,
-        isBack: false,
-        backgroundColor: Colors.grey.withOpacity(0.1),
-      ),
       body: HomepagePage(),
     );
   }

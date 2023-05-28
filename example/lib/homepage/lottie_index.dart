@@ -28,7 +28,13 @@ class LottieIndex extends LottieGetxBottomNavigationBarPage {
 
   @override
   PreferredSizeWidget? appBar() {
-    return RsxAppBar(title: 'Lottie', isBack: true);
+    return AppBar(
+      title: const Text('Lottie'),
+      leading: RsxClickWidget(
+        child: const Icon(Icons.arrow_back_ios_new),
+        onTap: () => XNavigator().back(),
+      ),
+    );
   }
 }
 

@@ -78,7 +78,7 @@ class BottomSheetToolsComponent extends StatelessWidget {
       contentChild: RsxOptionGroupWidget(
         optionGroupItems: [optionGroupItems],
         physics: const NeverScrollableScrollPhysics(),
-        optionItemDivider: (context) => const Divider().padding(left: 25),
+        optionItemDividerBuilder: (context) => const Divider().padding(left: 25),
       ),
       margin: EdgeInsets.zero,
       collapsedTitleBackgroundColor: Colors.grey.withOpacity(0.1),

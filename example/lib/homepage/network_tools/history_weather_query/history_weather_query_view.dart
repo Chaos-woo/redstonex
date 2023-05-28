@@ -23,16 +23,11 @@ class HistoryWeatherQueryPage extends StatelessWidget {
     Color bgColor = RGB(11, 12, 30).color;
 
     return Scaffold(
-      appBar: RsxAppBar(
-        frontColor: Colors.white,
-        isBack: true,
-        customTitleWidget: Container(
-          alignment: Alignment.center,
-          width: double.infinity,
-          margin: const EdgeInsets.symmetric(horizontal: 48.0),
-
-          /// 省-地区选择器
-          child: _provinceCityPicker(context),
+      appBar: AppBar(
+        title: const Text('Persistent Bottom NavBar'),
+        leading: RsxClickWidget(
+          child: const Icon(Icons.arrow_back_ios_new),
+          onTap: () => XNavigator().back(),
         ),
         backgroundColor: bgColor,
       ),
