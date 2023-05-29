@@ -13,7 +13,7 @@ import 'package:oktoast/oktoast.dart';
 import 'package:redstonex/redstonex.dart';
 
 void main() async {
-  rAppInitializer.run(
+  rApplicationInitializer.run(
     const OKToast(child: MyApp()),
     preBuiltinInit: () {
       Routes.initGlobalRoutes();

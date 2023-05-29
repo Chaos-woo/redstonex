@@ -228,7 +228,7 @@ class _BiliHotVideoWidgetState extends State<BiliHotVideoWidget> with AutomaticK
       fontSize: 14,
       color: Colors.blue[200],
     );
-    return rRsxClickWidget(
+    return rClickWidget(
       onTap: onTap,
       child: <Widget>[
         Icon(

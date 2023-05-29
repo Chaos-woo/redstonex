@@ -1,3 +1,8 @@
+## 1.2.5
+**>> BREAKING CHANGE VERSION <<**
+* 修复应用初始化器类名
+* 修复未完全修改`r`开头的组件
+
 ## 1.2.4
 **>> BREAKING CHANGE VERSION <<**
 * 修改组件包工具类名，所有类改为以 `r` 作为类名开头

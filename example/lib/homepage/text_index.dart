@@ -69,7 +69,7 @@ class TextIndex extends rTextBottomNavigationBarPage {
   PreferredSizeWidget? appBar() {
     return AppBar(
       title: const Text('Persistent Bottom NavBar'),
-      leading: rRsxClickWidget(
+      leading: rClickWidget(
         child: const Icon(Icons.arrow_back_ios_new),
         onTap: () => rNavigator().back(),
       ),

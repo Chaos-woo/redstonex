@@ -17,7 +17,7 @@ class DeviceInfoPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('设备信息'),
         backgroundColor: Colors.deepPurple,
-        leading: rRsxClickWidget(
+        leading: rClickWidget(
           child: const Icon(Icons.arrow_back_ios_new),
           onTap: () => rNavigator().back(),
         ),

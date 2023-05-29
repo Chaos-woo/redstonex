@@ -20,7 +20,7 @@ class BiliFavoriteVideoPage extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.grey[200],
           title: const Text('Bilibili收藏视频'),
-          leading: rRsxClickWidget(
+          leading: rClickWidget(
             child: const Icon(Icons.arrow_back_ios_new),
             onTap: () => rNavigator().back(),
           ),

@@ -21,16 +21,16 @@ class BiliHotVideoPage extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.grey[200],
           title: const Text('Bilibili综合热门视频'),
-          leading: rRsxClickWidget(
+          leading: rClickWidget(
             child: const Icon(Icons.arrow_back_ios_new),
             onTap: () => rNavigator().back(),
           ),
           actions: [
-            rRsxClickWidget(
+            rClickWidget(
               child: const Icon(Icons.video_collection, color: Colors.blueGrey, size: 22),
               onTap: () {},
             ).padding(horizontal: 5),
-            rRsxClickWidget(
+            rClickWidget(
               child: Icon(Icons.star_border_rounded, color: Colors.yellow[700], size: 28),
               onTap: () => rNavigator().to(RouteCompose.biliRoute.favoriteVideos),
             ).padding(horizontal: 12),

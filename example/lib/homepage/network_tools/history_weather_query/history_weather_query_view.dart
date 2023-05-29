@@ -25,7 +25,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Persistent Bottom NavBar'),
-        leading: rRsxClickWidget(
+        leading: rClickWidget(
           child: const Icon(Icons.arrow_back_ios_new),
           onTap: () => rNavigator().back(),
         ),
@@ -70,7 +70,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
   }
 
   Widget _provinceCityPicker(BuildContext context) {
-    return rRsxClickWidget(
+    return rClickWidget(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -230,7 +230,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
             ),
           ),
           rGaps.hGap16,
-          rRsxClickWidget(
+          rClickWidget(
             child: Stack(
               children: <Widget>[
                 Container(
@@ -313,7 +313,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
                 '当前展示城市: ${cityWeather.cityName}',
                 style: TextStyle(color: daytime ? Colors.black : Colors.white),
               ),
-              rRsxClickWidget(
+              rClickWidget(
                 child: CircleAvatar(
                   backgroundColor: Colors.transparent,
                   child: state.userSelectCityOrDatetimeChange

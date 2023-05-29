@@ -4,14 +4,14 @@ import '../extension/function_extension.dart';
 
 enum ClickType { none, throttle, throttleWithTimeout, debounce }
 
-class rRsxClickWidget extends StatelessWidget {
+class rClickWidget extends StatelessWidget {
   final Widget child;
   final Function? onTap;
   final ClickType type;
   final int? timeout;
   bool? clickEffect;
 
-  rRsxClickWidget({
+  rClickWidget({
     Key? key,
     required this.child,
     this.onTap,

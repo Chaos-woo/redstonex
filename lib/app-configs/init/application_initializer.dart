@@ -7,8 +7,8 @@ import 'redstonex_default_app.dart';
 
 typedef FlutterErrorReporter = void Function(FlutterErrorDetails details);
 
-/// 应用初始化器
-class rAppInitializer {
+/// 应用初始化器，默认情况下使用该初始化器即能完成简单集成redstonex
+class rApplicationInitializer {
   /// 自定义异常上报器
   static FlutterErrorReporter? _errorReporter;
 
