@@ -16,13 +16,13 @@ class DialogToolsComponent extends StatelessWidget {
         title: '基本Dialog',
         description: '标题,描述,确认按钮',
         onTap: () {
-          XDialog().showPromptDialog(
+          rDialog().showPromptDialog(
               title: '什么是Dialog?',
               content: 'dialog是在当前界面弹出的一个小窗口，用于显示重要提示信息。',
               textConfirm: 'Ok',
               confirmTextColor: Colors.blue,
               onConfirm: () {
-                XNavigator().back();
+                rNavigator().back();
               });
         },
       ),
@@ -30,19 +30,19 @@ class DialogToolsComponent extends StatelessWidget {
         title: '处理事件Dialog',
         description: '标题,描述,确认按钮,取消按钮',
         onTap: () {
-          XDialog().showPromptDialog(
+          rDialog().showPromptDialog(
               title: '删除?',
               content: '是否删除该条消息?',
               textConfirm: '确定',
               confirmTextColor: Colors.blue,
               onConfirm: () {
-                XToast().show('已删除');
-                XNavigator().back();
+                rToast().show('已删除');
+                rNavigator().back();
               },
               textCancel: '取消',
               cancelTextColor: Colors.grey,
               onCancel: () {
-                XNavigator().back();
+                rNavigator().back();
               });
         },
       ),
@@ -50,17 +50,17 @@ class DialogToolsComponent extends StatelessWidget {
         title: '应用升级Dialog',
         description: '标题,描述,确认按钮,取消按钮',
         onTap: () {
-          XDialog().showPromptDialog(
+          rDialog().showPromptDialog(
               title: '新版本来袭！',
               content: '应用发布了更多好看好玩的功能，快去应用市场更新吧~',
               actions: <Widget>[
                 TextButton(
                   child: const Text('暂不提醒'),
-                  onPressed: () => XNavigator().back(),
+                  onPressed: () => rNavigator().back(),
                 ),
                 TextButton(
                   child: const Text('去升级 >>'),
-                  onPressed: () => XNavigator().back(),
+                  onPressed: () => rNavigator().back(),
                 ),
               ]);
         },
@@ -69,7 +69,7 @@ class DialogToolsComponent extends StatelessWidget {
         title: '自定义Dialog',
         description: '自定义',
         onTap: () {
-          XDialog().showElasticDialog(
+          rDialog().showElasticDialog(
             backgroundColor: Colors.white.withOpacity(0.95),
             title: _renderCustomPersonalInformationDialogTitle(),
             content: <Widget>[
@@ -82,16 +82,16 @@ class DialogToolsComponent extends StatelessWidget {
               TextButton(
                 child: const Text('私信Ta'),
                 onPressed: () {
-                  XToast().show('Ta似乎并不理你~');
-                  XNavigator().back();
+                  rToast().show('Ta似乎并不理你~');
+                  rNavigator().back();
                 },
               ),
               TextButton(
                 child: const Text('送Ta鲜花'),
                 onPressed: () {
                   flowerCount++;
-                  XToast().show('送出鲜花1朵');
-                  XNavigator().back();
+                  rToast().show('送出鲜花1朵');
+                  rNavigator().back();
                 },
               ),
             ],
@@ -100,13 +100,13 @@ class DialogToolsComponent extends StatelessWidget {
       ),
     ];
 
-    var optionGroupItems = RsxOptionGroupItem(
+    var optionGroupItems = rOptionGroupItem(
       optionItems: optionItems,
     );
 
     return GFAccordion(
       title: 'Dialog',
-      contentChild: RsxOptionGroupWidget(
+      contentChild: rOptionGroupWidget(
         optionGroupItems: [optionGroupItems],
         physics: const NeverScrollableScrollPhysics(),
       ),
@@ -158,7 +158,7 @@ class DialogToolsComponent extends StatelessWidget {
           '$num',
           style: const TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
         ),
-        Gaps.vGap5,
+        rGaps.vGap5,
         Text(
           label,
           style: const TextStyle(color: Colors.grey, fontSize: 10),

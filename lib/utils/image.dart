@@ -9,12 +9,12 @@ extension ImageFormatExtension on ImageFormat {
   String get value => ['png', 'jpg', 'jpeg', 'gif', 'webp', 'bmp'][index];
 }
 
-class XImage {
-  static final XImage _single = XImage._internal();
+class rImage {
+  static final rImage _single = rImage._internal();
 
-  XImage._internal();
+  rImage._internal();
 
-  factory XImage() => _single;
+  factory rImage() => _single;
 
   ImageProvider getAssetImageProvider(String path) {
     return AssetImage(path);

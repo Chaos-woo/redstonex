@@ -1,12 +1,12 @@
 import 'package:number_display/number_display.dart';
 
-class XCompactNumber {
-  static final XCompactNumber _single = XCompactNumber._internal();
+class rCompactNumber {
+  static final rCompactNumber _single = rCompactNumber._internal();
   static final _innerCompactDisplay = createDisplay();
 
-  XCompactNumber._internal();
+  rCompactNumber._internal();
 
-  factory XCompactNumber() => _single;
+  factory rCompactNumber() => _single;
 
   Display customDisplayConfig({
     int length = 9,

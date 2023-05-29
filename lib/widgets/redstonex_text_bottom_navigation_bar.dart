@@ -5,12 +5,12 @@ import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import '../redstonex.dart';
 
 /// 基于PersistentTabView带有BottomNavigation的页面导航
-abstract class RsxTextBottomNavigationBarPage extends StatelessWidget
-    implements RsxBottomNavigationBarPageScaffold {
+abstract class rTextBottomNavigationBarPage extends StatelessWidget
+    implements rBottomNavigationBarPageScaffold {
   late final PersistentTabController _controller;
   var selectedIndex = 0.obs;
 
-  RsxTextBottomNavigationBarPage({
+  rTextBottomNavigationBarPage({
     super.key,
     PersistentTabController? tabController,
   }) {

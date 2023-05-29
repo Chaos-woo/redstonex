@@ -4,12 +4,12 @@ import 'package:intl/intl.dart';
 /// @Author: aleksanderwozniak
 /// @GitHub: https://github.com/aleksanderwozniak/table_calendar
 /// @Description: Date Util.
-class XDatetime {
-  static final XDatetime _single = XDatetime._internal();
+class rDatetime {
+  static final rDatetime _single = rDatetime._internal();
 
-  XDatetime._internal();
+  rDatetime._internal();
 
-  factory XDatetime() => _single;
+  factory rDatetime() => _single;
 
   static final DateFormat _yyyyMMddFormat = DateFormat('yyyy-MM-dd');
   static final DateFormat _yy0MM0ddFormat = DateFormat('yy.MM.dd');

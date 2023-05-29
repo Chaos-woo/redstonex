@@ -2,21 +2,21 @@ import '../utils/loading.dart';
 import 'exception/api_exception.dart';
 import 'exception/exception_handler.dart';
 
-class SyncLoader {
+class rSyncLoader {
   static Future execute(
     Function() block, {
     bool showLoading = true,
     String? loadingText,
-    bool Function(ApiException)? onError,
+    bool Function(rApiException)? onError,
   }) async {
     try {
-      await XLoading().loading(
+      await rLoading().loading(
         block,
         isShowLoading: showLoading,
         loadingText: loadingText,
       );
     } catch (e) {
-      handleException(ApiException.from(e), onError: onError);
+      handleException(rApiException.from(e), onError: onError);
     }
   }
 }
@@ -30,17 +30,17 @@ class ParallelRequest {
   ParallelRequest(this.future, {this.onValue});
 }
 
-class ParallelLoader {
+class rParallelLoader {
   static Future execute(
     List<ParallelRequest> loaderFutures, {
     bool showLoading = true,
     String? loadingText,
-    bool Function(ApiException)? onError,
+    bool Function(rApiException)? onError,
   }) async {
     List<Future<dynamic>> futures = loaderFutures.map((e) => e.future).toList();
 
     try {
-      await XLoading().loading(
+      await rLoading().loading(
         () => Future.wait<dynamic>(futures).then((value) {
           for (int i = 0; i < loaderFutures.length; i++) {
             ParallelRequest pr = loaderFutures[i];
@@ -51,7 +51,7 @@ class ParallelLoader {
         loadingText: loadingText,
       );
     } catch (e) {
-      handleException(ApiException.from(e), onError: onError);
+      handleException(rApiException.from(e), onError: onError);
     }
   }
 }

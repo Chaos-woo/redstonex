@@ -6,8 +6,8 @@ import 'package:styled_widget/styled_widget.dart';
 import 'device_info_logic.dart';
 
 class DeviceInfoPage extends StatelessWidget {
-  final logic = XDepends().on<DeviceInfoLogic>();
-  final state = XDepends().on<DeviceInfoLogic>().state;
+  final logic = rDepends().on<DeviceInfoLogic>();
+  final state = rDepends().on<DeviceInfoLogic>().state;
 
   DeviceInfoPage({Key? key}) : super(key: key);
 
@@ -17,9 +17,9 @@ class DeviceInfoPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('设备信息'),
         backgroundColor: Colors.deepPurple,
-        leading: RsxClickWidget(
+        leading: rRsxClickWidget(
           child: const Icon(Icons.arrow_back_ios_new),
-          onTap: () => XNavigator().back(),
+          onTap: () => rNavigator().back(),
         ),
       ),
       body: Container(
@@ -32,14 +32,14 @@ class DeviceInfoPage extends StatelessWidget {
         )),
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         child: GetBuilder<DeviceInfoLogic>(
-          builder: (_) => RsxVerticalScrollView(
+          builder: (_) => rVerticalScrollView(
             children: <Widget>[
               _infoLabel('手机信息'),
-              Gaps.vGap10,
+              rGaps.vGap10,
               _mobilePhoneInfoBuilder(),
-              Gaps.vGap16,
+              rGaps.vGap16,
               _infoLabel('包信息'),
-              Gaps.vGap10,
+              rGaps.vGap10,
               _appPackageInfoBuilder1(),
             ],
           ),

@@ -9,8 +9,8 @@ typedef BottomNavigationBarItemProvider = List<BottomNavigationBarItem> Function
 
 enum PageChangeType { jump, animate }
 
-class RsxBottomNavigationBarPage extends StatelessWidget {
-  final logic = XProvides().provide(_RsxBaseBottomNavigationLogic());
+class rBottomNavigationBarPage extends StatelessWidget {
+  final logic = rProvides().provide(_rBaseBottomNavigationLogic());
   final List<Widget> pages;
   final BottomNavigationBarItemProvider navigationItemsProvider;
   final PageController pageController = PageController();
@@ -27,7 +27,7 @@ class RsxBottomNavigationBarPage extends StatelessWidget {
   bool showSelectedLabels;
   bool showUnselectedLabels;
 
-  RsxBottomNavigationBarPage({
+  rBottomNavigationBarPage({
     super.key,
     required this.navigationItemsProvider,
     required this.pages,
@@ -90,13 +90,13 @@ class RsxBottomNavigationBarPage extends StatelessWidget {
   }
 }
 
-class _RsxBaseBottomNavigationLogic extends GetxController {
+class _rBaseBottomNavigationLogic extends GetxController {
   var selectedIndex = 0.obs;
   var preSelectedIndex = 0;
 }
 
 /// 抽象带有底部页面导航的Scaffold组件
-abstract class RsxBottomNavigationBarPageScaffold {
+abstract class rBottomNavigationBarPageScaffold {
   PreferredSizeWidget? appBar();
 
   Widget? floatingActionButton();

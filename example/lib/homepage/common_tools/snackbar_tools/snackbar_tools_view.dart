@@ -24,14 +24,14 @@ class SnackbarToolsComponent extends StatelessWidget {
         title: '基本SnackBar',
         description: _desc,
         onTap: () {
-          XSnackBar().showPromptSnackBar(message: _messageString);
+          rSnackBar().showPromptSnackBar(message: _messageString);
         },
       ),
       RsxOptionItemUtils.functionRsxOptionItem(
         title: '无标题SnackBar',
         description: _iconDesc,
         onTap: () {
-          XSnackBar().showPromptSnackBar(
+          rSnackBar().showPromptSnackBar(
               message: _messageString,
               icon: const Icon(
                 Icons.image,
@@ -43,7 +43,7 @@ class SnackbarToolsComponent extends StatelessWidget {
         title: '全提示性SnackBar',
         description: _iconTitleDesc,
         onTap: () {
-          XSnackBar().showPromptSnackBar(
+          rSnackBar().showPromptSnackBar(
             title: _titleString,
             message: _messageString,
             icon: const Icon(
@@ -57,14 +57,14 @@ class SnackbarToolsComponent extends StatelessWidget {
         title: '可点击的SnackBar',
         description: _iconDesc,
         onTap: () {
-          XSnackBar().showPromptSnackBar(
+          rSnackBar().showPromptSnackBar(
             message: _messageString,
             icon: const Icon(
               Icons.image,
               color: Colors.grey,
             ),
-            lightButton: XSnackBar().snackBarAction('Close', onTap: () {
-              XSnackBar().closeCurrentSnackBar();
+            lightButton: rSnackBar().snackBarAction('Close', onTap: () {
+              rSnackBar().closeCurrentSnackBar();
             }, textStyle: const TextStyle(color: Colors.green)),
           );
         },
@@ -73,17 +73,17 @@ class SnackbarToolsComponent extends StatelessWidget {
         title: '超长文字的SnackBar',
         description: _iconDesc,
         onTap: () {
-          XSnackBar().showPromptSnackBar(
+          rSnackBar().showPromptSnackBar(
             message: _longTextString,
             icon: const Icon(
               Icons.image,
               color: Colors.grey,
             ),
-            lightButton: XSnackBar().snackBarAction('Close',
+            lightButton: rSnackBar().snackBarAction('Close',
                 textStyle: const TextStyle(
                   color: Colors.lightBlue,
                 ), onTap: () {
-              XSnackBar().closeCurrentSnackBar();
+              rSnackBar().closeCurrentSnackBar();
             }),
           );
         },
@@ -92,7 +92,7 @@ class SnackbarToolsComponent extends StatelessWidget {
         title: '超长标题和文字的SnackBar',
         description: _iconTitleDesc,
         onTap: () {
-          XSnackBar().showPromptSnackBar(
+          rSnackBar().showPromptSnackBar(
             title: _longTextString,
             message: _longTextString,
             icon: const Icon(
@@ -104,13 +104,13 @@ class SnackbarToolsComponent extends StatelessWidget {
       ),
     ];
 
-    var optionGroupItems = RsxOptionGroupItem(
+    var optionGroupItems = rOptionGroupItem(
       optionItems: optionItems,
     );
 
     return GFAccordion(
       title: 'Snackbar',
-      contentChild: RsxOptionGroupWidget(
+      contentChild: rOptionGroupWidget(
         optionGroupItems: [optionGroupItems],
         physics: const NeverScrollableScrollPhysics(),
       ),

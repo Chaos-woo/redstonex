@@ -3,12 +3,12 @@ import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 
-class XNetwork {
-  static final XNetwork _single = XNetwork._internal();
+class rNetwork {
+  static final rNetwork _single = rNetwork._internal();
 
-  XNetwork._internal();
+  rNetwork._internal();
 
-  factory XNetwork() => _single;
+  factory rNetwork() => _single;
 
   /// 基础网络信息
   static final NetworkInfo _network = NetworkInfo();

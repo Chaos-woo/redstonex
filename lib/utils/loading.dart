@@ -1,11 +1,11 @@
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
-class XLoading {
-  static final XLoading _single = XLoading.internal();
+class rLoading {
+  static final rLoading _single = rLoading.internal();
 
-  XLoading.internal();
+  rLoading.internal();
 
-  factory XLoading() => _single;
+  factory rLoading() => _single;
 
   Future loading(
     Function block, {

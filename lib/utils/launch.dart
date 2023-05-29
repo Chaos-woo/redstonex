@@ -3,12 +3,12 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'toast.dart';
 
-class XLaunch {
-  static final XLaunch _single = XLaunch._internal();
+class rLaunch {
+  static final rLaunch _single = rLaunch._internal();
 
-  XLaunch._internal();
+  rLaunch._internal();
 
-  factory XLaunch() => _single;
+  factory rLaunch() => _single;
 
   /// 打开链接
   Future<void> launch(
@@ -31,7 +31,7 @@ class XLaunch {
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
     } else {
-      XToast().show('ERR TEL URL');
+      rToast().show('ERR TEL URL');
     }
   }
 }

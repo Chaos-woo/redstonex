@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class XPermission {
-  static final XPermission _single = XPermission._internal();
+class rPermission {
+  static final rPermission _single = rPermission._internal();
 
-  XPermission._internal();
+  rPermission._internal();
 
-  factory XPermission() => _single;
+  factory rPermission() => _single;
 
   Future<void> checkPermission(
     Permission permission, {

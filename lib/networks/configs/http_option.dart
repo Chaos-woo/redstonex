@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 
 import '../../app-configs/global_config.dart';
 
-class HttpOption {
+class rHttpOption {
   final int _connectTimeout;
   final int _receiveTimeout;
   final int _sendTimeout;
@@ -25,7 +25,7 @@ class HttpOption {
 
   JsonDecodeCallback get jsonDecodeCallback => _jsonDecodeCallback;
 
-  HttpOption(HttpOptionBuilder builder)
+  rHttpOption(rHttpOptionBuilder builder)
       : _connectTimeout = builder.connectTimeout,
         _receiveTimeout = builder.receiveTimeOut,
         _sendTimeout = builder.sendTimeout,
@@ -34,8 +34,8 @@ class HttpOption {
         _httpClientAdapter = builder.httpClientAdapter,
         _jsonDecodeCallback = builder.jsonDecodeCallback;
 
-  HttpOption immutable() {
-    return (HttpOptionBuilder()
+  rHttpOption immutable() {
+    return (rHttpOptionBuilder()
           ..connectTimeout = _connectTimeout
           ..receiveTimeOut = _receiveTimeout
           ..sendTimeout = _sendTimeout
@@ -46,7 +46,7 @@ class HttpOption {
         .build();
   }
 
-  HttpOption copyWith({
+  rHttpOption copyWith({
     int? optionalConnectTimeout,
     int? optionalReceiveTimeout,
     int? optionalSendTimeout,
@@ -55,7 +55,7 @@ class HttpOption {
     HttpClientAdapter? optionalHttpClientAdapter,
     JsonDecodeCallback? optionalJsonDecodeCallback,
   }) {
-    return (HttpOptionBuilder()
+    return (rHttpOptionBuilder()
           ..connectTimeout = optionalConnectTimeout ?? _connectTimeout
           ..receiveTimeOut = optionalReceiveTimeout ?? _receiveTimeout
           ..sendTimeout = optionalSendTimeout ?? _sendTimeout
@@ -67,8 +67,8 @@ class HttpOption {
   }
 }
 
-class HttpOptionBuilder {
-  static final globalHttpConfig = GlobalConfig.instance.globalHttpOptionConfigs;
+class rHttpOptionBuilder {
+  static final globalHttpConfig = rGlobalConfig.instance.globalHttpOptionConfigs;
 
   int connectTimeout = globalHttpConfig.connectTimeout;
   int receiveTimeOut = globalHttpConfig.receiveTimeout;
@@ -78,5 +78,5 @@ class HttpOptionBuilder {
   HttpClientAdapter? httpClientAdapter;
   JsonDecodeCallback jsonDecodeCallback = globalHttpConfig.jsonDecodeCallback;
 
-  HttpOption build() => HttpOption(this);
+  rHttpOption build() => rHttpOption(this);
 }

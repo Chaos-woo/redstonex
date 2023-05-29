@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class PagingState<T> {
+class rPagingState<T> {
   /// 分页的页数
   int nextIndex = 1;
 

@@ -7,7 +7,7 @@ import 'bili_hot_video_state.dart';
 
 class BiliHotVideoLogic extends PagingController<BiliHotVideo, BiliHotVideoPagingState> {
   final BiliHotVideoState state = BiliHotVideoState();
-  final BiliService biliService = XDepends().on();
+  final BiliService biliService = rDepends().on();
 
   @override
   bool hasMoreData() {
@@ -15,10 +15,10 @@ class BiliHotVideoLogic extends PagingController<BiliHotVideo, BiliHotVideoPagin
   }
 
   @override
-  Future<PagingData<BiliHotVideo>?> loadData(PagingParams pagingParams,
-      {bool Function(ApiException)? onError}) async {
+  Future<rPagingData<BiliHotVideo>?> loadData(rPagingParams pagingParams,
+      {bool Function(rApiException)? onError}) async {
     PagingBiliHotVideo pagingBiliHotVideo = await biliService.getBilibiliHotVideos(pagingParams);
-    PagingData<BiliHotVideo> pagingData = PagingData();
+    rPagingData<BiliHotVideo> pagingData = rPagingData();
     pagingData.data = pagingBiliHotVideo.list;
     pagingData.currentIndex = state.biliHotVideoPagingState.nextIndex;
 
@@ -28,8 +28,8 @@ class BiliHotVideoLogic extends PagingController<BiliHotVideo, BiliHotVideoPagin
   }
 
   @override
-  PagingParams customPagingParams() {
-    return PagingParams.create(
+  rPagingParams customPagingParams() {
+    return rPagingParams.create(
       pageIndex: state.biliHotVideoPagingState.nextIndex,
       pageSize: state.biliHotVideoPagingState.pageSize,
     );

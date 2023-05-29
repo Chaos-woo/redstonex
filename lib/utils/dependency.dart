@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
 
 /// 依赖工具
-class XDependency {
-  static final XDependency _single = XDependency._internal();
+class rDependency {
+  static final rDependency _single = rDependency._internal();
 
-  XDependency._internal();
+  rDependency._internal();
 
-  factory XDependency() => _single;
+  factory rDependency() => _single;
 
   /// 从GetX获取S类型依赖
   S findDependency<S>({String? tag}) {

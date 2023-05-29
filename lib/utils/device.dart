@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 import '../resources/constant.dart';
 
 /// https://medium.com/gskinner-team/flutter-simplify-platform-screen-size-detection-4cb6fc4f7ed1
-class XDevice {
+class rDevice {
   static bool get isDesktop => !isWeb && (isWindows || isLinux || isMacOS);
 
   static bool get isMobile => isAndroid || isIOS;
@@ -42,7 +42,7 @@ class XDevice {
 
   /// 使用前记得初始化
   static int getAndroidSdkInt() {
-    if (Constant.isDriverTest) {
+    if (rConstant.isDriverTest) {
       return -1;
     }
     if (isAndroid) {

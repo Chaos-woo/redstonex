@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class XShapeBorder {
-  static final XShapeBorder _single = XShapeBorder._internal();
+class rShapeBorder {
+  static final rShapeBorder _single = rShapeBorder._internal();
 
-  XShapeBorder._internal();
+  rShapeBorder._internal();
 
-  factory XShapeBorder() => _single;
+  factory rShapeBorder() => _single;
 
   ShapeBorder roundedRectangleBorder({double radius = 0.0}) {
     return RoundedRectangleBorder(

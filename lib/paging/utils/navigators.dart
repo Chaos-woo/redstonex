@@ -1,12 +1,12 @@
 import '../../routes/router.dart';
 
 /// 导航快捷方式
-class XNavigator {
-  static final XNavigator _single = XNavigator._internal();
+class rNavigator {
+  static final rNavigator _single = rNavigator._internal();
 
-  XNavigator._internal();
+  rNavigator._internal();
 
-  factory XNavigator() => _single;
+  factory rNavigator() => _single;
 
   /// 跳转新路由
   Future<R?>? to<R>(
@@ -14,7 +14,7 @@ class XNavigator {
     dynamic arguments,
     Map<String, String>? parameters,
   }) {
-    return XRouter.push<R>(
+    return rRouter.push<R>(
       route,
       arguments: arguments,
       parameters: parameters,
@@ -27,7 +27,7 @@ class XNavigator {
     dynamic arguments,
     Map<String, String>? parameters,
   }) {
-    return XRouter.popAndPushNamed<R>(
+    return rRouter.popAndPushNamed<R>(
       route,
       arguments: arguments,
       parameters: parameters,
@@ -40,7 +40,7 @@ class XNavigator {
     dynamic arguments,
     Map<String, String>? parameters,
   }) {
-    return XRouter.pushNamedAndRemoveUntil<R>(
+    return rRouter.pushNamedAndRemoveUntil<R>(
       route,
       arguments: arguments,
       parameters: parameters,
@@ -49,7 +49,7 @@ class XNavigator {
 
   /// 弹出当前路由，返回至历史路由栈顶
   void back({dynamic result}) {
-    XRouter.pop(result: result);
+    rRouter.pop(result: result);
   }
 
   /// 获取路由中的参数
@@ -64,7 +64,7 @@ class XNavigator {
   ///   assert(argument == 'Get is the best');
   /// ```
   T routeArgument<T>() {
-    return XRouter.argument<T>();
+    return rRouter.argument<T>();
   }
 
   ///
@@ -81,6 +81,6 @@ class XNavigator {
   /// ```
   ///
   String? routeParameters(String name) {
-    return XRouter.parameters(name);
+    return rRouter.parameters(name);
   }
 }

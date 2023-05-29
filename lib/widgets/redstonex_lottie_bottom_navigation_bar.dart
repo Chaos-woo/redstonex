@@ -4,17 +4,17 @@ import 'package:lottie/lottie.dart';
 
 import 'redstonex_getx_bottom_navigation_bar.dart';
 
-class LottieBottomNavigationItem {
+class rLottieBottomNavigationItem {
   final String label;
   final String lottieJsonPath;
   final int index;
 
-  LottieBottomNavigationItem(
+  rLottieBottomNavigationItem(
       {required this.label, required this.lottieJsonPath, required this.index});
 }
 
-abstract class LottieGetxBottomNavigationBarPage extends HookWidget
-    implements RsxBottomNavigationBarPageScaffold {
+abstract class rLottieGetxBottomNavigationBarPage extends HookWidget
+    implements rBottomNavigationBarPageScaffold {
   int currentIndex = 0;
 
   Duration animationDuration;
@@ -24,7 +24,7 @@ abstract class LottieGetxBottomNavigationBarPage extends HookWidget
   bool showSelectedLabels;
   bool showUnselectedLabels;
 
-  LottieGetxBottomNavigationBarPage({
+  rLottieGetxBottomNavigationBarPage({
     super.key,
     required this.animationDuration,
     required this.iconHeight,
@@ -34,7 +34,7 @@ abstract class LottieGetxBottomNavigationBarPage extends HookWidget
     this.showUnselectedLabels = true,
   });
 
-  List<LottieBottomNavigationItem> getLottieBottomNavigationItems();
+  List<rLottieBottomNavigationItem> getLottieBottomNavigationItems();
 
   List<Widget> getPages();
 
@@ -44,7 +44,7 @@ abstract class LottieGetxBottomNavigationBarPage extends HookWidget
     final onSelectedAnimationController = useAnimationController(duration: animationDuration);
     final onChangedAnimationController = useAnimationController(duration: animationDuration);
 
-    return RsxBottomNavigationBarPage(
+    return rBottomNavigationBarPage(
       showUnselectedLabels: showUnselectedLabels,
       showSelectedLabels: showSelectedLabels,
       pageChangeAnimateDuration: pageChangeAnimateDuration,

@@ -6,6 +6,6 @@ import 'history_weather_query_logic.dart';
 class HistoryWeatherQueryBinding extends Bindings {
   @override
   void dependencies() {
-    XProvides().lazyProvide(() => HistoryWeatherQueryLogic());
+    rProvides().lazyProvide(() => HistoryWeatherQueryLogic());
   }
 }

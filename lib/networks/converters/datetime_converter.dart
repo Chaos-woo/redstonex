@@ -3,8 +3,9 @@ import 'package:json_annotation/json_annotation.dart';
 
 import '../../extension/string_extension.dart';
 
-class EpochMillisecondDateTimeConverter implements JsonConverter<DateTime, int> {
-  const EpochMillisecondDateTimeConverter();
+/// json时间转换器
+class rEpochMillisecondDateTimeConverter implements JsonConverter<DateTime, int> {
+  const rEpochMillisecondDateTimeConverter();
 
   @override
   DateTime fromJson(int json) {
@@ -17,8 +18,9 @@ class EpochMillisecondDateTimeConverter implements JsonConverter<DateTime, int> 
   }
 }
 
-class EpochSecondDateTimeConverter implements JsonConverter<DateTime, int> {
-  const EpochSecondDateTimeConverter();
+/// json时间转换器
+class rEpochSecondDateTimeConverter implements JsonConverter<DateTime, int> {
+  const rEpochSecondDateTimeConverter();
 
   @override
   DateTime fromJson(int json) {

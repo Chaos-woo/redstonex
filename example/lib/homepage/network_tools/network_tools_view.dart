@@ -7,7 +7,7 @@ import 'package:redstonex/redstonex.dart';
 import 'network_tools_logic.dart';
 
 class NetworkToolsComponent extends StatelessWidget {
-  final logic = XProvides().provide(NetworkToolsLogic());
+  final logic = rProvides().provide(NetworkToolsLogic());
 
   NetworkToolsComponent({Key? key}) : super(key: key);
 
@@ -18,25 +18,25 @@ class NetworkToolsComponent extends StatelessWidget {
         title: '历史天气查询',
         description: '异步HTTP网络请求展示',
         onTap: () {
-          XNavigator().to(RouteCompose.weatherRoute.homeWeather);
+          rNavigator().to(RouteCompose.weatherRoute.homeWeather);
         },
       ),
       RsxOptionItemUtils.navigatorRsxOptionItem(
         title: 'Bilibili“综合热门”视频查询',
         description: '分页查询网络请求展示',
         onTap: () {
-          XNavigator().to(RouteCompose.biliRoute.hotVideos);
+          rNavigator().to(RouteCompose.biliRoute.hotVideos);
         },
       ),
     ];
 
-    var optionGroupItems = RsxOptionGroupItem(
+    var optionGroupItems = rOptionGroupItem(
       optionItems: optionItems,
     );
 
     return GFAccordion(
       title: '简单三方API对接',
-      contentChild: RsxOptionGroupWidget(
+      contentChild: rOptionGroupWidget(
         optionGroupItems: [optionGroupItems],
         physics: const NeverScrollableScrollPhysics(),
       ),

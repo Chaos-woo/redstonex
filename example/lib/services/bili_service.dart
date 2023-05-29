@@ -7,8 +7,8 @@ import 'package:example/services/models/paging_bili_hot_video.dart';
 import 'package:get/get.dart';
 import 'package:redstonex/redstonex.dart';
 
-class BiliService extends GetxService with HasEventPagingEmitter {
-  final BiliNetClient _biliNetClient = XDepends().on();
+class BiliService extends GetxService with rHasEventPagingEmitter {
+  final BiliNetClient _biliNetClient = rDepends().on();
   final BiliFavoriteVideoDao _biliFavoriteVideoDao = MyExampleDb().database.biliFavoriteVideoDao;
 
   final List<String> _favoriteVideoBids = [];
@@ -41,8 +41,8 @@ class BiliService extends GetxService with HasEventPagingEmitter {
     _lateSeeingVideoBids.remove(bVid);
   }
 
-  Future<PagingBiliHotVideo> getBilibiliHotVideos(PagingParams pagingParams,
-      {bool Function(ApiException)? onError}) async {
+  Future<PagingBiliHotVideo> getBilibiliHotVideos(rPagingParams pagingParams,
+      {bool Function(rApiException)? onError}) async {
     dynamic ret = await _biliNetClient.requestBilibiliHotVideos(pagingParams, onError: onError);
     if (null != ret) {
       PagingBiliHotVideo pagingBiliHotVideo = PagingBiliHotVideo();

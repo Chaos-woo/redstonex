@@ -1,11 +1,11 @@
 import 'package:package_info_plus/package_info_plus.dart';
 
-class XAppPackage {
-  static final XAppPackage _single = XAppPackage._internal();
+class rApplicationPackage {
+  static final rApplicationPackage _single = rApplicationPackage._internal();
 
-  XAppPackage._internal();
+  rApplicationPackage._internal();
 
-  factory XAppPackage() => _single;
+  factory rApplicationPackage() => _single;
 
   /// 应用包信息
   static late PackageInfo _package;

@@ -15,7 +15,7 @@ typedef RefreshListMultiEventObserverCallback = void Function<T>(
     List<T>? data, Exception? exception);
 
 /// 支持事件方式更新UI的分页控制器
-abstract class EventPagingController<M, S extends PagingState<M>, E extends ListRefreshableEvent<M>>
+abstract class rEventPagingController<M, S extends rPagingState<M>, E extends ListRefreshableEvent<M>>
     extends GetxController {
   /// 分页数据
   late S pagingState;
@@ -100,7 +100,7 @@ abstract class EventPagingController<M, S extends PagingState<M>, E extends List
 
   /// 数据加载
   Future<void> _loadData() async {
-    PagingParams pagingParams = customPagingParams();
+    rPagingParams pagingParams = customPagingParams();
     pagingParams.currentIndex = pagingState.nextIndex;
     await loadData(pagingParams);
   }
@@ -125,13 +125,13 @@ abstract class EventPagingController<M, S extends PagingState<M>, E extends List
   }
 
   /// 自定义数据加载
-  Future loadData(PagingParams pagingParams);
+  Future loadData(rPagingParams pagingParams);
 
   /// 自定义加载异常处理
   void loadError(Exception? exception) => () {};
 
   /// 获取分页请求参数
-  PagingParams customPagingParams() => PagingParams.create(pageIndex: pagingState.nextIndex);
+  rPagingParams customPagingParams() => rPagingParams.create(pageIndex: pagingState.nextIndex);
 
   /// 获取State
   S customPagingState();
@@ -166,7 +166,7 @@ abstract class EventPagingController<M, S extends PagingState<M>, E extends List
     RefreshListMultiEventObserverCallback? onFail,
     Function? onError,
   }) {
-    StreamSubscription subscription = XEventBus().subscribeAutoCancelOnError<E>((E event) {
+    StreamSubscription subscription = rEventBus().subscribeAutoCancelOnError<E>((E event) {
       switch (event.state) {
         case EventState.init:
           onInit?.call(event.data, event.exception);

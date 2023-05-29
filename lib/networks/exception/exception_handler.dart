@@ -3,7 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import '../../app-configs/global_config.dart';
 import 'api_exception.dart';
 
-bool handleException(ApiException exception, {bool Function(ApiException)? onError}) {
+bool handleException(rApiException exception, {bool Function(rApiException)? onError}) {
   if (onError?.call(exception) == true) {
     return true;
   }
@@ -13,7 +13,8 @@ bool handleException(ApiException exception, {bool Function(ApiException)? onErr
   }
 
   EasyLoading.showError(
-      exception.message ?? GlobalConfig.instance.globalHttpOptionConfigs.httpError.eDefault);
+    exception.message ?? rGlobalConfig.instance.globalHttpOptionConfigs.httpError.eDefault,
+  );
 
   return false;
 }

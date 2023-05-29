@@ -10,7 +10,7 @@ import 'page_state.dart';
 import 'refresh_text.dart';
 import 'utils/depends.dart';
 
-class RefreshableWidgets {
+class rRefreshableWidgets {
   static Widget buildRefreshableWidget({
     required Widget Function() builder,
     VoidCallback? onRefresh,
@@ -18,13 +18,13 @@ class RefreshableWidgets {
     required pull2Refresh.RefreshController refreshController,
     bool enablePullUp = true,
     bool enablePullDown = true,
-    RefreshTextCompose? refreshText,
+    rRefreshTextCompose? refreshText,
     pull2Refresh.RefreshIndicator? refreshIndicator,
     pull2Refresh.LoadIndicator? loadIndicator,
   }) {
-    RefreshTextCompose textCompose = refreshText ?? RefreshTextCompose();
-    RefreshHeaderText headerText = textCompose.header;
-    RefreshFooterText footerText = textCompose.footer;
+    rRefreshTextCompose textCompose = refreshText ?? rRefreshTextCompose();
+    rRefreshHeaderText headerText = textCompose.header;
+    rRefreshFooterText footerText = textCompose.footer;
     pull2Refresh.RefreshIndicator refreshDataIndicator = refreshIndicator ??
         pull2Refresh.ClassicHeader(
           idleText: headerText.idleText,
@@ -52,7 +52,7 @@ class RefreshableWidgets {
   }
 
   static Widget buildEventRefreshableListWidget<T,
-      C extends EventPagingController<T, PagingState<T>, ListRefreshableEvent<T>>>({
+      C extends rEventPagingController<T, rPagingState<T>, ListRefreshableEvent<T>>>({
     required Widget Function(Rx<T> item, int index) itemBuilder,
     ScrollController? scrollController,
     bool enablePullUp = true,
@@ -64,13 +64,13 @@ class RefreshableWidgets {
     ScrollPhysics? physics,
     bool shrinkWrap = false,
     Axis scrollDirection = Axis.vertical,
-    RefreshTextCompose? refreshText,
+    rRefreshTextCompose? refreshText,
     pull2Refresh.RefreshIndicator? refreshIndicator,
     pull2Refresh.LoadIndicator? loadIndicator,
     Widget Function()? prefixWidgetBuilder,
     Widget Function()? suffixWidgetBuilder,
   }) {
-    C controller = XDepends().on(tag: tag);
+    C controller = rDepends().on(tag: tag);
     return GetBuilder<C>(
       builder: (controller) {
         return buildRefreshableWidget(
@@ -103,7 +103,7 @@ class RefreshableWidgets {
   }
 
   @Deprecated("Recommend use #buildEventRefreshableListWidget")
-  static Widget buildRefreshableListWidget<T, C extends PagingController<T, PagingState<T>>>({
+  static Widget buildRefreshableListWidget<T, C extends PagingController<T, rPagingState<T>>>({
     required Widget Function(Rx<T> item, int index) itemBuilder,
     ScrollController? scrollController,
     bool enablePullUp = true,
@@ -115,13 +115,13 @@ class RefreshableWidgets {
     ScrollPhysics? physics,
     bool shrinkWrap = false,
     Axis scrollDirection = Axis.vertical,
-    RefreshTextCompose? refreshText,
+    rRefreshTextCompose? refreshText,
     pull2Refresh.RefreshIndicator? refreshIndicator,
     pull2Refresh.LoadIndicator? loadIndicator,
     Widget Function()? prefixWidgetBuilder,
     Widget Function()? suffixWidgetBuilder,
   }) {
-    C controller = XDepends().on(tag: tag);
+    C controller = rDepends().on(tag: tag);
     return GetBuilder<C>(
       builder: (controller) {
         return buildRefreshableWidget(
@@ -163,7 +163,7 @@ class RefreshableWidgets {
     ScrollPhysics? physics,
     bool shrinkWrap = false,
     Axis scrollDirection = Axis.vertical,
-    RefreshTextCompose? refreshText,
+    rRefreshTextCompose? refreshText,
     pull2Refresh.RefreshIndicator? refreshIndicator,
     pull2Refresh.LoadIndicator? loadIndicator,
     Widget Function()? prefixWidgetBuilder,

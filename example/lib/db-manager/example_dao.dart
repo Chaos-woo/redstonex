@@ -3,7 +3,7 @@ import 'package:floor/floor.dart';
 import 'package:redstonex/redstonex.dart';
 
 @dao
-abstract class BiliFavoriteVideoDao extends BaseDao<BiliFavoriteVideo> {
+abstract class BiliFavoriteVideoDao extends rBaseDao<BiliFavoriteVideo> {
   static const String tableName = 'tb_bili_video_favorite';
 
   @Query("SELECT * FROM $tableName")

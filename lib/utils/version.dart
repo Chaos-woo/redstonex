@@ -1,11 +1,11 @@
 import 'package:flutter/services.dart';
 
-class XVersion {
-  static final XVersion _single = XVersion._internal();
+class rVersion {
+  static final rVersion _single = rVersion._internal();
 
-  XVersion._internal();
+  rVersion._internal();
 
-  factory XVersion() => _single;
+  factory rVersion() => _single;
 
   static const MethodChannel _kChannel = MethodChannel('version');
 

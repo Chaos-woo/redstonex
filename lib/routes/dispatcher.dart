@@ -6,9 +6,9 @@ import 'router.dart';
 /// 页面路由辅助生成工具
 ///
 /// 使用[group]、[route]添加路由后，框架初始化时自动调用
-/// [initial]方法初始化页面路由，即可通过[XDispatcher.pageRoutes]
+/// [initial]方法初始化页面路由，即可通过[rDispatcher.pageRoutes]
 /// 获取GetX全部配置的路由
-class XDispatcher {
+class rDispatcher {
   /// 是否初始化
   static bool routesInit = false;
 
@@ -16,24 +16,24 @@ class XDispatcher {
   static final List<GetPage> pageRoutes = [];
 
   /// 路由组列表
-  static final List<RouterGroup> routeGroups = [];
+  static final List<rRouteGroup> routeGroups = [];
 
   /// 单独处理的路由组
-  static final RouterGroup otherRouteGroup = RouterGroup('other');
+  static final rRouteGroup otherRouteGroup = rRouteGroup('other');
 
   /// 路由统计
   static final RoutesStatistics statistics = RoutesStatistics();
 
   /// 获取路由组
-  static RouterGroup group({String? groupName}) {
-    RouterGroup group = RouterGroup(groupName ?? XId().uuidV4());
+  static rRouteGroup group({String? groupName}) {
+    rRouteGroup group = rRouteGroup(groupName ?? rId().uuidV4());
     routeGroups.add(group);
     statistics.routeGroupCount++;
     return group;
   }
 
   /// 添加单个路由
-  static void route(Router route) {
+  static void route(rRoute route) {
     otherRouteGroup.newRoute(route);
     statistics.routeCount++;
   }
@@ -45,8 +45,8 @@ class XDispatcher {
     }
     routesInit = true;
 
-    for (RouterGroup group in routeGroups) {
-      for (Router route in group.routes) {
+    for (rRouteGroup group in routeGroups) {
+      for (rRoute route in group.routes) {
         pageRoutes.add(_newPageRoute(route));
       }
     }
@@ -57,11 +57,11 @@ class XDispatcher {
     if (otherRouteGroup.routes.isNotEmpty) {
       statistics.routeGroupCount++;
       statistics.routeCount += otherRouteGroup.routes.length;
-      for (Router route in otherRouteGroup.routes) {
+      for (rRoute route in otherRouteGroup.routes) {
         pageRoutes.add(_newPageRoute(route));
       }
 
-      RouterGroup otherRouteGroupCopy = RouterGroup('other');
+      rRouteGroup otherRouteGroupCopy = rRouteGroup('other');
       otherRouteGroupCopy.routes.addAll(otherRouteGroup.routes);
       statistics.otherRouteGroup = otherRouteGroupCopy;
       otherRouteGroup.clearRoutes();
@@ -71,7 +71,7 @@ class XDispatcher {
   }
 
   /// 创建GetX页面路由
-  static GetPage _newPageRoute(Router route) {
+  static GetPage _newPageRoute(rRoute route) {
     return GetPage(
       name: route.routeName,
       page: route.pageBuilder,
@@ -96,8 +96,8 @@ class RoutesStatistics {
   int routeCount = 0;
 
   /// 路由组列表
-  List<RouterGroup> routeGroups = [];
+  List<rRouteGroup> routeGroups = [];
 
   /// 单独处理的路由组
-  RouterGroup? otherRouteGroup;
+  rRouteGroup? otherRouteGroup;
 }

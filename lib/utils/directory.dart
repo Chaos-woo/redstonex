@@ -2,12 +2,12 @@ import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
 
-class XDirectory {
-  static final XDirectory _single = XDirectory._internal();
+class rDirectory {
+  static final rDirectory _single = rDirectory._internal();
 
-  XDirectory._internal();
+  rDirectory._internal();
 
-  factory XDirectory() => _single;
+  factory rDirectory() => _single;
 
   /// 临时目录
   late Directory temporaryDirectory;

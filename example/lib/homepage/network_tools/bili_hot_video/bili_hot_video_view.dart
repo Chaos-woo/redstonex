@@ -9,8 +9,8 @@ import 'package:styled_widget/styled_widget.dart';
 import 'bili_hot_video_logic.dart';
 
 class BiliHotVideoPage extends StatelessWidget {
-  final logic = XDepends().on<BiliHotVideoLogic>();
-  final state = XDepends().on<BiliHotVideoLogic>().state;
+  final logic = rDepends().on<BiliHotVideoLogic>();
+  final state = rDepends().on<BiliHotVideoLogic>().state;
 
   BiliHotVideoPage({super.key});
 
@@ -21,25 +21,25 @@ class BiliHotVideoPage extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.grey[200],
           title: const Text('Bilibili综合热门视频'),
-          leading: RsxClickWidget(
+          leading: rRsxClickWidget(
             child: const Icon(Icons.arrow_back_ios_new),
-            onTap: () => XNavigator().back(),
+            onTap: () => rNavigator().back(),
           ),
           actions: [
-            RsxClickWidget(
+            rRsxClickWidget(
               child: const Icon(Icons.video_collection, color: Colors.blueGrey, size: 22),
               onTap: () {},
             ).padding(horizontal: 5),
-            RsxClickWidget(
+            rRsxClickWidget(
               child: Icon(Icons.star_border_rounded, color: Colors.yellow[700], size: 28),
-              onTap: () => XNavigator().to(RouteCompose.biliRoute.favoriteVideos),
+              onTap: () => rNavigator().to(RouteCompose.biliRoute.favoriteVideos),
             ).padding(horizontal: 12),
           ],
         ),
-        body: RefreshableWidgets.buildRefreshableListWidget<BiliHotVideo, BiliHotVideoLogic>(
+        body: rRefreshableWidgets.buildRefreshableListWidget<BiliHotVideo, BiliHotVideoLogic>(
           itemBuilder: (Rx<BiliHotVideo> item, int index) => BiliHotVideoWidget(item: item),
-          separatorBuilder: (item, index) => Gaps.vGap10,
-          onItemClick: (item, index) => XNavigator().to(RouteCompose.biliRoute.videoDetail, parameters: {'url': item.value.shortLink}),
+          separatorBuilder: (item, index) => rGaps.vGap10,
+          onItemClick: (item, index) => rNavigator().to(RouteCompose.biliRoute.videoDetail, parameters: {'url': item.value.shortLink}),
           physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
         ).padding(vertical: 10, horizontal: 10).decorated(color: Colors.grey[200]),
       ),

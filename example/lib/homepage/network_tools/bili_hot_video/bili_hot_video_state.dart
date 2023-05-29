@@ -10,7 +10,7 @@ class BiliHotVideoState {
   }
 }
 
-class BiliHotVideoPagingState extends PagingState<BiliHotVideo>{
+class BiliHotVideoPagingState extends rPagingState<BiliHotVideo>{
   final int pageSize = 10;
 
   BiliHotVideoPagingState() {

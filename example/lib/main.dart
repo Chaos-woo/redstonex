@@ -13,7 +13,7 @@ import 'package:oktoast/oktoast.dart';
 import 'package:redstonex/redstonex.dart';
 
 void main() async {
-  AppInitializer.run(
+  rAppInitializer.run(
     const OKToast(child: MyApp()),
     preBuiltinInit: () {
       Routes.initGlobalRoutes();
@@ -24,7 +24,7 @@ void main() async {
       ProvidersManager.initProviders();
       ServicesManager.initServices();
       ScreenUtil.getInstance();
-      XLog().debug('initial end');
+      rLog().debug('initial end');
     },
     errorReporter: (details) => FlutterError.dumpErrorToConsole(details),
   );
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: true,
       title: 'Flutter Demo',
-      getPages: XDispatcher.pageRoutes,
+      getPages: rDispatcher.pageRoutes,
       theme: ThemeData(
         primaryColor: Colors.blue,
         useMaterial3: true,
@@ -60,7 +60,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    XProvides().provide(HomepageLogic());
+    rProvides().provide(HomepageLogic());
     return Scaffold(
       body: HomepagePage(),
     );

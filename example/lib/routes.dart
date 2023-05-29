@@ -15,29 +15,29 @@ import 'package:redstonex/routes/router.dart';
 class Routes {
   /// 业务路由初始化工具
   static void initGlobalRoutes() {
-    RouterGroup deviceInfoGroup = XDispatcher.group(groupName: 'deviceInfo');
+    rRouteGroup deviceInfoGroup = rDispatcher.group(groupName: 'deviceInfo');
     deviceInfoGroup.newRoute(
-        Router(RouteCompose.deviceRoute.baseInfo, () => DeviceInfoPage(), binding: DeviceInfoBinding()));
+        rRoute(RouteCompose.deviceRoute.baseInfo, () => DeviceInfoPage(), binding: DeviceInfoBinding()));
 
-    RouterGroup weatherInfoGroup = XDispatcher.group(groupName: 'weatherInfo');
-    weatherInfoGroup.newRoute(Router(RouteCompose.weatherRoute.homeWeather, () => HistoryWeatherQueryPage(),
+    rRouteGroup weatherInfoGroup = rDispatcher.group(groupName: 'weatherInfo');
+    weatherInfoGroup.newRoute(rRoute(RouteCompose.weatherRoute.homeWeather, () => HistoryWeatherQueryPage(),
         binding: HistoryWeatherQueryBinding()));
 
-    RouterGroup bilibiliGroup = XDispatcher.group(groupName: 'bilibili');
+    rRouteGroup bilibiliGroup = rDispatcher.group(groupName: 'bilibili');
     bilibiliGroup
-        .newRoute(Router(RouteCompose.biliRoute.hotVideos, () => BiliHotVideoPage(),
+        .newRoute(rRoute(RouteCompose.biliRoute.hotVideos, () => BiliHotVideoPage(),
             binding: BiliHotVideoBinding()))
-        .newRoute(Router(RouteCompose.biliRoute.videoDetail, () => BiliWebView()))
-        .newRoute(Router(RouteCompose.biliRoute.favoriteVideos, () => BiliFavoriteVideoPage(),
+        .newRoute(rRoute(RouteCompose.biliRoute.videoDetail, () => BiliWebView()))
+        .newRoute(rRoute(RouteCompose.biliRoute.favoriteVideos, () => BiliFavoriteVideoPage(),
             binding: BiliFavoriteVideoBinding()));
 
-    RouterGroup lottieGroup = XDispatcher.group(groupName: 'lottie');
+    rRouteGroup lottieGroup = rDispatcher.group(groupName: 'lottie');
     lottieGroup.newRoute(
-        Router(RouteCompose.lottieRoute.index, () => LottieIndex(),));
+        rRoute(RouteCompose.lottieRoute.index, () => LottieIndex(),));
 
-    RouterGroup textGroup = XDispatcher.group(groupName: 'text');
+    rRouteGroup textGroup = rDispatcher.group(groupName: 'text');
     textGroup.newRoute(
-        Router(RouteCompose.textRoute.index, () => TextIndex(),));
+        rRoute(RouteCompose.textRoute.index, () => TextIndex(),));
   }
 }
 

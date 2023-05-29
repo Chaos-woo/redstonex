@@ -3,7 +3,8 @@ import 'package:sqflite/sqflite.dart';
 
 import 'database_callback.dart';
 
-abstract class BaseFloorDatabase<T extends FloorDatabase> {
+/// floor基础胡数据库实例
+abstract class rBaseFloorDatabase<T extends FloorDatabase> {
   /// 数据库实例
   T? _db;
 

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class XBottomSheet {
-  static final XBottomSheet _single = XBottomSheet._internal();
+class rBottomSheet {
+  static final rBottomSheet _single = rBottomSheet._internal();
 
-  XBottomSheet._internal();
+  rBottomSheet._internal();
 
-  factory XBottomSheet() => _single;
+  factory rBottomSheet() => _single;
 
   showBottomSheet(
     Widget child, {

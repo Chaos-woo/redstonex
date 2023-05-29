@@ -22,7 +22,7 @@ class _BiliHotVideoWidgetState extends State<BiliHotVideoWidget> with AutomaticK
     return LayoutBuilder(
       builder: (_, BoxConstraints boxConstraints) => <Widget>[
         _renderVideoMainContent(),
-        Gaps.vGap5,
+        rGaps.vGap5,
         _renderVideoStats(),
         const Divider(),
         _renderOperateTabs(boxConstraints),
@@ -61,17 +61,17 @@ class _BiliHotVideoWidgetState extends State<BiliHotVideoWidget> with AutomaticK
             ),
           ).padding(horizontal: 5).backgroundColor(Colors.orange)
       ].toWrap(spacing: 5, runSpacing: 5),
-      Gaps.vGap5,
+      rGaps.vGap5,
       <Widget>[
         AspectRatio(
           aspectRatio: 1.5,
-          child: RsxImageLoader(
+          child: rImageLoader(
             widget.item.value.pic,
             fit: BoxFit.cover,
             holderImg: 'assets/images/bg/image_holder.png',
           ),
         ).height(75).clipRRect(all: 10),
-        Gaps.hGap5,
+        rGaps.hGap5,
         <Widget>[
           Text(
             widget.item.value.title,
@@ -84,13 +84,13 @@ class _BiliHotVideoWidgetState extends State<BiliHotVideoWidget> with AutomaticK
             overflow: TextOverflow.ellipsis,
           ),
           const Spacer(),
-          Gaps.vGap4,
+          rGaps.vGap4,
           <Widget>[
             CircleAvatar(
               radius: 8,
-              foregroundImage: XImage().getHolderImageNetProvider(widget.item.value.owner.face),
+              foregroundImage: rImage().getHolderImageNetProvider(widget.item.value.owner.face),
             ),
-            Gaps.hGap4,
+            rGaps.hGap4,
             Text(
               widget.item.value.owner.name,
               style: const TextStyle(
@@ -108,7 +108,7 @@ class _BiliHotVideoWidgetState extends State<BiliHotVideoWidget> with AutomaticK
                 color: Colors.grey,
               ),
             ),
-            Gaps.hGap4,
+            rGaps.hGap4,
             Text(
               TimelineUtil.format(
                 widget.item.value.pubDate * 1000,
@@ -164,7 +164,7 @@ class _BiliHotVideoWidgetState extends State<BiliHotVideoWidget> with AutomaticK
             style: statTextStyle,
           ),
           Text(
-            XCompactNumber().compact((displayStat['stat']) as int),
+            rCompactNumber().compact((displayStat['stat']) as int),
             style: statTextStyle,
           ),
         ].toRow(mainAxisSize: MainAxisSize.min);
@@ -189,23 +189,23 @@ class _BiliHotVideoWidgetState extends State<BiliHotVideoWidget> with AutomaticK
           icon: widget.item.value.isLateSeeing ? Icons.history : Icons.history_toggle_off,
           color: Colors.blueAccent,
           onTap: () {
-            XToast().show('功能没做~');
+            rToast().show('功能没做~');
             widget.item.update((video) {
               video?.isLateSeeing = !video.isLateSeeing;
             });
           }))),
-      Gaps.vLine(),
+      rGaps.vLine(),
       styledWidget(Obx(() => _renderOperateTab(
           text: widget.item.value.isFavorite ? '已收藏' : '收藏',
           icon: widget.item.value.isFavorite ? Icons.star_rounded : Icons.star_border_rounded,
           color: Colors.blueAccent,
           onTap: () {
             if (widget.item.value.isFavorite) {
-              XDepends().on<BiliHotVideoLogic>().biliService.removeFavoriteBiliVideo(widget.item.value.bVid);
-              XToast().show('取消收藏');
+              rDepends().on<BiliHotVideoLogic>().biliService.removeFavoriteBiliVideo(widget.item.value.bVid);
+              rToast().show('取消收藏');
             } else {
-              XDepends().on<BiliHotVideoLogic>().biliService.favoriteBiliVideo(widget.item.value);
-              XToast().show('收藏成功');
+              rDepends().on<BiliHotVideoLogic>().biliService.favoriteBiliVideo(widget.item.value);
+              rToast().show('收藏成功');
             }
 
             widget.item.update((video) {
@@ -228,7 +228,7 @@ class _BiliHotVideoWidgetState extends State<BiliHotVideoWidget> with AutomaticK
       fontSize: 14,
       color: Colors.blue[200],
     );
-    return RsxClickWidget(
+    return rRsxClickWidget(
       onTap: onTap,
       child: <Widget>[
         Icon(
@@ -236,7 +236,7 @@ class _BiliHotVideoWidgetState extends State<BiliHotVideoWidget> with AutomaticK
           size: 17,
           color: color,
         ),
-        Gaps.hGap5,
+        rGaps.hGap5,
         Text(
           text,
           style: textStyle,

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class RsxKeepAliveWidget extends StatefulWidget {
+class rKeepAliveWidget extends StatefulWidget {
   final Widget child;
 
-  const RsxKeepAliveWidget(this.child, {Key? key}) : super(key: key);
+  const rKeepAliveWidget(this.child, {Key? key}) : super(key: key);
 
   @override
-  State<RsxKeepAliveWidget> createState() => _RsxKeepAliveWidgetState();
+  State<rKeepAliveWidget> createState() => _rKeepAliveWidgetState();
 }
 
-class _RsxKeepAliveWidgetState extends State<RsxKeepAliveWidget> with AutomaticKeepAliveClientMixin {
+class _rKeepAliveWidgetState extends State<rKeepAliveWidget> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);

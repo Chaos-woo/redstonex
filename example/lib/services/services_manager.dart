@@ -5,7 +5,7 @@ import 'package:redstonex/redstonex.dart';
 
 class ServicesManager {
   static void initServices() {
-    XProvides().provide(WeatherService());
-    XProvides().provide(BiliService());
+    rProvides().provide(WeatherService());
+    rProvides().provide(BiliService());
   }
 }

@@ -4,12 +4,12 @@ import 'package:flutter/foundation.dart';
 typedef Callable<R> = R Function();
 
 /// 延时执行工具
-class XDelay {
-  static final XDelay _single = XDelay._internal();
+class rDelay {
+  static final rDelay _single = rDelay._internal();
 
-  XDelay._internal();
+  rDelay._internal();
 
-  factory XDelay() => _single;
+  factory rDelay() => _single;
 
   Future<void> delay(VoidCallback callback) => delayAny(callback);
 

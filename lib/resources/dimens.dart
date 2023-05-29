@@ -1,4 +1,4 @@
-class Dimens {
+class rDimens {
   static const double fontSp10 = 10.0;
   static const double fontSp12 = 12.0;
   static const double fontSp14 = 14.0;

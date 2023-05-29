@@ -3,12 +3,12 @@ import 'package:flutter/services.dart';
 import '../extension/colour_extension.dart';
 
 /// [SystemChrome]工具
-class XSystemChrome {
-  static final XSystemChrome _single = XSystemChrome._internal();
+class rSystemChrome {
+  static final rSystemChrome _single = rSystemChrome._internal();
 
-  XSystemChrome._internal();
+  rSystemChrome._internal();
 
-  factory XSystemChrome() => _single;
+  factory rSystemChrome() => _single;
 
   /// 设置应用程序方向：竖直上
   void setDeviceOrientationPortraitUp() {

@@ -1,44 +1,44 @@
 import 'package:flutter/material.dart';
 
-class RsxOptionGroupItem {
-  final RsxHorizontalToolbar? toolbar;
-  final List<RsxHorizontalItem> optionItems;
+class rOptionGroupItem {
+  final rHorizontalToolbar? toolbar;
+  final List<rHorizontalItem> optionItems;
 
-  RsxOptionGroupItem({required this.optionItems, this.toolbar});
+  rOptionGroupItem({required this.optionItems, this.toolbar});
 }
 
-enum RsxHorizontalToolbarPosition { left, right }
+enum rHorizontalToolbarPosition { left, right }
 
-enum RsxHorizontalToolbarType { label, tool }
+enum rHorizontalToolbarType { label, tool }
 
-class RsxHorizontalToolbar {
+class rHorizontalToolbar {
   String? label;
   TextStyle? labelStyle;
   Widget? toolBuilder;
-  RsxHorizontalToolbarPosition labelPosition;
-  RsxHorizontalToolbarPosition toolPosition;
-  RsxHorizontalToolbarType priorType;
+  rHorizontalToolbarPosition labelPosition;
+  rHorizontalToolbarPosition toolPosition;
+  rHorizontalToolbarType priorType;
 
-  RsxHorizontalToolbar({
+  rHorizontalToolbar({
     this.label,
     this.labelStyle,
     this.toolBuilder,
-    this.labelPosition = RsxHorizontalToolbarPosition.left,
-    this.toolPosition = RsxHorizontalToolbarPosition.left,
-    this.priorType = RsxHorizontalToolbarType.label,
+    this.labelPosition = rHorizontalToolbarPosition.left,
+    this.toolPosition = rHorizontalToolbarPosition.left,
+    this.priorType = rHorizontalToolbarType.label,
   });
 }
 
-enum RsxHorizontalItemExtPosition { left, right }
+enum rHorizontalItemExtPosition { left, right }
 
-class RsxHorizontalItem {
+class rHorizontalItem {
   String? title;
   TextStyle? titleStyle;
   Widget? titleWidget;
   Widget? description;
   Widget? extWidget;
   /// 根据实际的选项组件宽度，[extRatio]的值大于某个比例值时，位置的变化才会明显
-  RsxHorizontalItemExtPosition? extWidgetPosition;
+  rHorizontalItemExtPosition? extWidgetPosition;
   /// 扩展组件与主内容组件宽度比例
   double? extRatio;
   Widget? leading;
@@ -51,13 +51,13 @@ class RsxHorizontalItem {
   Color? backgroundColor;
   bool? leadingTop;
 
-  RsxHorizontalItem({
+  rHorizontalItem({
     this.title,
     this.titleStyle,
     this.titleWidget,
     this.description,
     this.extWidget,
-    this.extWidgetPosition = RsxHorizontalItemExtPosition.left,
+    this.extWidgetPosition = rHorizontalItemExtPosition.left,
     this.extRatio = 0.25,
     this.leading,
     this.suffix,

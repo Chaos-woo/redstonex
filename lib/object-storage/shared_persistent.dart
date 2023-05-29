@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:flustars_flutter3/flustars_flutter3.dart';
 
 /// 基于shared_preferences的本地化缓存
-class XShared {
-  static final XShared _single = XShared._internal();
+class rShared {
+  static final rShared _single = rShared._internal();
 
-  factory XShared() => _single;
+  factory rShared() => _single;
 
-  XShared._internal();
+  rShared._internal();
 
   Future<void> initial() async {
     await SpUtil.getInstance();

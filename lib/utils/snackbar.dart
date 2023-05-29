@@ -5,12 +5,12 @@ import 'package:get/get.dart';
 
 import 'screen.dart';
 
-class XSnackBar {
-  static final XSnackBar _single = XSnackBar._internal();
+class rSnackBar {
+  static final rSnackBar _single = rSnackBar._internal();
 
-  XSnackBar._internal();
+  rSnackBar._internal();
 
-  factory XSnackBar() => _single;
+  factory rSnackBar() => _single;
 
   SnackbarController showPromptSnackBar({
     String? title,
@@ -119,7 +119,7 @@ class XSnackBar {
 
     if ((message != null && messageWidget == null) || (title != null && titleWidget == null)) {
       final iconPadding = padding.left > 16.0 ? padding.left : 0.0;
-      double minWidth = XScreen().screenWidth - (margin.vertical + padding.vertical);
+      double minWidth = rScreen().screenWidth - (margin.vertical + padding.vertical);
       if (icon != null) {
         minWidth -= iconPadding;
       }
@@ -139,7 +139,7 @@ class XSnackBar {
             TextSpan(text: message, style: const TextStyle(fontSize: 14.0, color: Colors.white));
         TextPainter painter = TextPainter(
             text: messageSpan, maxLines: messageMaxLines, textDirection: TextDirection.rtl);
-        double maxWidth = XScreen().screenWidth * 0.75;
+        double maxWidth = rScreen().screenWidth * 0.75;
         if (minWidth > maxWidth) {
           double tempWidth = maxWidth;
           maxWidth = minWidth;
@@ -169,7 +169,7 @@ class XSnackBar {
             ));
         TextPainter painter =
             TextPainter(text: titleSpan, maxLines: titleMaxLines, textDirection: TextDirection.rtl);
-        painter.layout(minWidth: minWidth, maxWidth: XScreen().screenWidth * 0.75);
+        painter.layout(minWidth: minWidth, maxWidth: rScreen().screenWidth * 0.75);
         if (painter.didExceedMaxLines) {
           titleWidget = Text(
             title,

@@ -10,7 +10,7 @@ class BiliFavoriteVideoState {
   }
 }
 
-class BiliFavoriteVideoPagingState extends PagingState<BiliFavoriteVideo>{
+class BiliFavoriteVideoPagingState extends rPagingState<BiliFavoriteVideo>{
   final int pageSize = 10;
 
   BiliFavoriteVideoPagingState() {

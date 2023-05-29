@@ -4,12 +4,12 @@ import 'package:styled_widget/styled_widget.dart';
 
 import 'theme.dart';
 
-class XDialog {
-  static final XDialog _single = XDialog._internal();
+class rDialog {
+  static final rDialog _single = rDialog._internal();
 
-  XDialog._internal();
+  rDialog._internal();
 
-  factory XDialog() => _single;
+  factory rDialog() => _single;
 
   /// 操作为主的dialog
   void showActionDialog(
@@ -206,7 +206,7 @@ class XDialog {
         onPressed: onCancel,
         child: Text(
           textCancel,
-          style: XTheme().theme().dialogTheme.titleTextStyle?.copyWith(color: cancelTextColor),
+          style: rTheme().theme().dialogTheme.titleTextStyle?.copyWith(color: cancelTextColor),
         ),
       ));
     }
@@ -215,7 +215,7 @@ class XDialog {
         onPressed: onConfirm,
         child: Text(
           textConfirm,
-          style: XTheme().theme().dialogTheme.titleTextStyle?.copyWith(color: confirmTextColor),
+          style: rTheme().theme().dialogTheme.titleTextStyle?.copyWith(color: confirmTextColor),
         ),
       ));
     }

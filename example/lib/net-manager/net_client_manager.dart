@@ -5,7 +5,7 @@ import 'package:redstonex/redstonex.dart';
 
 class NetClientManager {
   static void initNetClients() {
-    XProvides().provide(JvheNetClient());
-    XProvides().provide(BiliNetClient());
+    rProvides().provide(JvheNetClient());
+    rProvides().provide(BiliNetClient());
   }
 }

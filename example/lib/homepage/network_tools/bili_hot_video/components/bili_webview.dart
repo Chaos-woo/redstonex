@@ -12,7 +12,7 @@ class BiliWebView extends StatefulWidget {
   late String toUrl;
 
   BiliWebView({Key? key}) : super(key: key) {
-    toUrl = XNavigator().routeParameters('url') ?? '';
+    toUrl = rNavigator().routeParameters('url') ?? '';
   }
 
   @override
@@ -96,20 +96,20 @@ Page resource error:
 
             if (request.url.startsWith('bilibili:')) {
               if (await canLaunchUrl(Uri.parse(request.url))) {
-                await XDialog().showPromptDialog(
+                await rDialog().showPromptDialog(
                   title: '跳转三方应用',
                   content: '是否打开【哔哩哔哩】App观看?',
                   textConfirm: '跳转',
                   textCancel: '取消',
                   confirmTextColor: Colors.blue,
                   cancelTextColor: Colors.grey,
-                  onConfirm: () => XNavigator().back(result: true),
-                  onCancel: () => XNavigator().back(result: false),
+                  onConfirm: () => rNavigator().back(result: true),
+                  onCancel: () => rNavigator().back(result: false),
                   callback: (dynamic agree) async {
                     if (null != agree && agree) {
                       // await launchUrl(Uri.parse(request.url));
-                      await XLaunch().launch(request.url, exceptCallback: () {
-                        XToast().show('异常跳转');
+                      await rLaunch().launch(request.url, exceptCallback: () {
+                        rToast().show('异常跳转');
                       });
                     }
                   },

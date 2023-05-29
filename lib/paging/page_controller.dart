@@ -8,7 +8,7 @@ import 'paging_data.dart';
 import 'paging_params.dart';
 
 @Deprecated("Recommend use EventPagingController based event bus")
-abstract class PagingController<M, S extends PagingState<M>> extends GetxController {
+abstract class PagingController<M, S extends rPagingState<M>> extends GetxController {
   /// 分页数据
   late S pagingState;
 
@@ -49,9 +49,9 @@ abstract class PagingController<M, S extends PagingState<M>> extends GetxControl
 
   /// 数据加载
   Future<void> _loadData() async {
-    PagingParams pagingParams = customPagingParams();
+    rPagingParams pagingParams = customPagingParams();
     pagingParams.currentIndex = pagingState.nextIndex;
-    PagingData<M>? pagingData = await loadData(pagingParams);
+    rPagingData<M>? pagingData = await loadData(pagingParams);
     List<M>? list = pagingData?.data;
 
     /// 数据不为空，则将数据添加到 data 中
@@ -79,11 +79,11 @@ abstract class PagingController<M, S extends PagingState<M>> extends GetxControl
   }
 
   /// 自定义数据加载
-  Future<PagingData<M>?> loadData(PagingParams pagingParams,
-      {bool Function(ApiException)? onError});
+  Future<rPagingData<M>?> loadData(rPagingParams pagingParams,
+      {bool Function(rApiException)? onError});
 
   /// 获取分页请求参数
-  PagingParams customPagingParams() => PagingParams.create(pageIndex: pagingState.nextIndex);
+  rPagingParams customPagingParams() => rPagingParams.create(pageIndex: pagingState.nextIndex);
 
   /// 获取State
   S customPagingState();

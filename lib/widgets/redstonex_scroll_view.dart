@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class RsxVerticalScrollView extends StatelessWidget {
-  RsxVerticalScrollView({
+class rVerticalScrollView extends StatelessWidget {
+  rVerticalScrollView({
     Key? key,
     this.children = const [],
     this.scrollViewPadding,

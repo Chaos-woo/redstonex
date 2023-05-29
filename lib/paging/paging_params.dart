@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'paging_params.g.dart';
 
 @JsonSerializable()
-class PagingParams {
+class rPagingParams {
   int size = 10;
   int currentIndex = 1;
   /// 额外请求参数
@@ -13,19 +13,19 @@ class PagingParams {
 
   int? total;
 
-  PagingParams();
+  rPagingParams();
 
-  factory PagingParams.fromJson(Map<String, dynamic> json) => _$PagingParamsFromJson(json);
+  factory rPagingParams.fromJson(Map<String, dynamic> json) => _$PagingParamsFromJson(json);
 
   Map<String, dynamic> toJson() => _$PagingParamsToJson(this);
 
-  factory PagingParams.create({
+  factory rPagingParams.create({
     required int pageIndex,
     int pageSize = 10,
     Map<String, dynamic>? model,
     Map<String, dynamic>? extra,
   }) {
-    var request = PagingParams();
+    var request = rPagingParams();
     request.currentIndex = pageIndex;
     request.size = pageSize;
     request.model = model ?? {};

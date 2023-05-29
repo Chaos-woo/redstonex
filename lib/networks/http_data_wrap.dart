@@ -1,4 +1,4 @@
-class HttpDataWrap {
+class rHttpDataWrap {
   final Map<String, dynamic> _params = {};
   final Map<String, dynamic> _header = {};
   dynamic _data;

@@ -6,10 +6,10 @@ import 'package:styled_widget/styled_widget.dart';
 import '../../resources/gaps.dart';
 import 'redstonex_item_list_model.dart';
 
-class RsxHorizontalItemWidget extends StatelessWidget {
-  final RsxHorizontalItem item;
+class RHorizontalItemWidget extends StatelessWidget {
+  final rHorizontalItem item;
 
-  const RsxHorizontalItemWidget({
+  const RHorizontalItemWidget({
     Key? key,
     required this.item,
   }) : super(key: key);
@@ -24,7 +24,7 @@ class RsxHorizontalItemWidget extends StatelessWidget {
     /// 最好 [MainAxisSize.min] 和 [Flexible类别的组件配合使用]
     var optionItemRow = <Widget>[
       <Widget>[
-        item.leading ?? Gaps.emptyBox,
+        item.leading ?? rGaps.emptyBox,
         _buildMainContent().flexible(),
       ]
           .toRow(
@@ -33,7 +33,7 @@ class RsxHorizontalItemWidget extends StatelessWidget {
                   calcLeadingTop ? CrossAxisAlignment.start : CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.min)
           .flexible(),
-      item.suffix ?? Gaps.emptyBox,
+      item.suffix ?? rGaps.emptyBox,
     ].toRow(mainAxisAlignment: MainAxisAlignment.spaceBetween);
 
     /// 使单个选项卡高度尽可能符合实际高度
@@ -50,14 +50,14 @@ class RsxHorizontalItemWidget extends StatelessWidget {
   Widget _buildMainContent() {
     var contentCol = <Widget>[
       item.titleWidget ?? Text(item.title ?? '', style: item.titleStyle),
-      item.description ?? Gaps.emptyBox,
+      item.description ?? rGaps.emptyBox,
     ].toColumn(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
     );
 
-    var extWidget = item.extWidget ?? Gaps.emptyBox;
+    var extWidget = item.extWidget ?? rGaps.emptyBox;
     if (null != item.extWidget) {
       var normalizationRatio = item.extRatio!.clamp(0.0, 1.0);
       int extWidgetFlex = (normalizationRatio * 100).toInt();
@@ -66,7 +66,7 @@ class RsxHorizontalItemWidget extends StatelessWidget {
       contentCol = contentCol.flexible(flex: contentColFlex);
       extWidget = extWidget
           .alignment(
-            RsxHorizontalItemExtPosition.left == item.extWidgetPosition
+            rHorizontalItemExtPosition.left == item.extWidgetPosition
                 ? Alignment.centerLeft
                 : Alignment.centerRight,
           )

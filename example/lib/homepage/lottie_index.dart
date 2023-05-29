@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:redstonex/redstonex.dart';
 
-class LottieIndex extends LottieGetxBottomNavigationBarPage {
+class LottieIndex extends rLottieGetxBottomNavigationBarPage {
   LottieIndex({super.key}) : super(animationDuration: 3.seconds, iconHeight: 300);
 
   @override
-  List<LottieBottomNavigationItem> getLottieBottomNavigationItems() {
+  List<rLottieBottomNavigationItem> getLottieBottomNavigationItems() {
     return [
-      LottieBottomNavigationItem(label: 'book', index: 0, lottieJsonPath: 'assets/lottie/115882-glass-note.json'),
-      LottieBottomNavigationItem(
+      rLottieBottomNavigationItem(label: 'book', index: 0, lottieJsonPath: 'assets/lottie/115882-glass-note.json'),
+      rLottieBottomNavigationItem(
           label: 'setting', index: 1, lottieJsonPath: 'assets/lottie/115556-price-tag.json'),
-      LottieBottomNavigationItem(label: 'book', index: 2, lottieJsonPath: 'assets/lottie/115882-glass-note.json'),
-      LottieBottomNavigationItem(
+      rLottieBottomNavigationItem(label: 'book', index: 2, lottieJsonPath: 'assets/lottie/115882-glass-note.json'),
+      rLottieBottomNavigationItem(
           label: 'setting', index: 3, lottieJsonPath: 'assets/lottie/115556-price-tag.json'),
     ];
   }
@@ -30,9 +30,9 @@ class LottieIndex extends LottieGetxBottomNavigationBarPage {
   PreferredSizeWidget? appBar() {
     return AppBar(
       title: const Text('Lottie'),
-      leading: RsxClickWidget(
+      leading: rRsxClickWidget(
         child: const Icon(Icons.arrow_back_ios_new),
-        onTap: () => XNavigator().back(),
+        onTap: () => rNavigator().back(),
       ),
     );
   }

@@ -8,7 +8,7 @@ extension ExtMultiSort on List {
       return this;
     }
     if (rawProps.length != rawPropsAscCriteria.length) {
-      XLog().debug('Criteria length is not equal to rawProps');
+      rLog().debug('Criteria length is not equal to rawProps');
       return this;
     }
 

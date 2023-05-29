@@ -3,15 +3,15 @@ import 'dart:async';
 import 'package:event_bus/event_bus.dart';
 
 /// 事件流工具
-class XEventBus {
-  static final XEventBus _single = XEventBus._internal();
-  static final EventBus _eBus = EventBus();
+class rEventBus {
+  static final rEventBus _single = rEventBus._internal();
+  static final EventBus _bus = EventBus();
 
-  XEventBus._internal();
+  rEventBus._internal();
 
-  factory XEventBus() => _single;
+  factory rEventBus() => _single;
 
-  void _fire<T>(T event) => _eBus.fire(event);
+  void _fire<T>(T event) => _bus.fire(event);
 
   /// 立即触发一个事件
   Future<void> fire<T>(T event) async => _fire(event);
@@ -22,7 +22,7 @@ class XEventBus {
   /// 延时[duration]后触发一个事件
   Future<void> fireDelay<T>(T event, {Duration? duration}) => Future.delayed(
         duration ?? Duration.zero,
-        () => _eBus.fire(event),
+        () => _bus.fire(event),
       );
 
   /// 订阅T类型事件，并在异常错误时自动取消订阅
@@ -46,7 +46,7 @@ class XEventBus {
     void Function()? onDone,
     bool? cancelOnError,
   }) {
-    StreamSubscription subscription = _eBus.on<T>().listen(
+    StreamSubscription subscription = _bus.on<T>().listen(
           onData,
           onError: onError,
           onDone: onDone,

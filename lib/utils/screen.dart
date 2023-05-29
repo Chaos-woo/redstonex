@@ -11,12 +11,12 @@ import 'package:flutter/widgets.dart';
 /// bool isTablet = Screen.diagonalInches(context) >= 7;
 /// bool isNarrow = Screen.widthInches(context) < 3.5;
 
-class XScreen {
-  static final XScreen _single = XScreen._internal();
+class rScreen {
+  static final rScreen _single = rScreen._internal();
 
-  XScreen._internal();
+  rScreen._internal();
 
-  factory XScreen() => _single;
+  factory rScreen() => _single;
 
   double get screenHeight => ScreenUtil.getInstance().screenHeight;
 
@@ -52,11 +52,11 @@ class XScreen {
 }
 
 extension MediaQueryExtension on BuildContext {
-  Size get size => XScreen().size(this);
+  Size get size => rScreen().size(this);
 
-  double get screenHeight => XScreen().size(this).height;
+  double get screenHeight => rScreen().size(this).height;
 
-  double get screenWidth => XScreen().size(this).width;
+  double get screenWidth => rScreen().size(this).width;
 
   double scaleHeight(double size) => ScreenUtil.getScaleH(this, size);
 

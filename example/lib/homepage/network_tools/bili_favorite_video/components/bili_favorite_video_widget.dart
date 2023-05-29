@@ -24,13 +24,13 @@ class _BiliFavoriteVideoWidgetState extends State<BiliFavoriteVideoWidget> with 
     Widget mainContentWidget = <Widget>[
       AspectRatio(
         aspectRatio: 1.5,
-        child: RsxImageLoader(
+        child: rImageLoader(
           widget.item.value.pic,
           fit: BoxFit.cover,
           holderImg: 'assets/images/bg/image_holder.png',
         ),
       ).height(75).clipRRect(all: 10),
-      Gaps.hGap8,
+      rGaps.hGap8,
       <Widget>[
         Text(
           widget.item.value.title,
@@ -43,7 +43,7 @@ class _BiliFavoriteVideoWidgetState extends State<BiliFavoriteVideoWidget> with 
           overflow: TextOverflow.ellipsis,
         ),
         const Spacer(),
-        Gaps.vGap4,
+        rGaps.vGap4,
         <Widget>[
           const Text(
             'UP',
@@ -55,7 +55,7 @@ class _BiliFavoriteVideoWidgetState extends State<BiliFavoriteVideoWidget> with 
                 ),
                 borderRadius: BorderRadius.circular(3),
               ),
-          Gaps.hGap(2),
+          rGaps.hGap(2),
           Text(
             widget.item.value.up,
             style: const TextStyle(
@@ -72,7 +72,7 @@ class _BiliFavoriteVideoWidgetState extends State<BiliFavoriteVideoWidget> with 
               color: Colors.grey,
             ),
           ),
-          Gaps.hGap4,
+          rGaps.hGap4,
           Text(
             TimelineUtil.format(
               widget.item.value.publishData.millisecondsSinceEpoch,

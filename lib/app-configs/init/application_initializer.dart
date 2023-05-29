@@ -7,7 +7,8 @@ import 'redstonex_default_app.dart';
 
 typedef FlutterErrorReporter = void Function(FlutterErrorDetails details);
 
-class AppInitializer {
+/// 应用初始化器
+class rAppInitializer {
   /// 自定义异常上报器
   static FlutterErrorReporter? _errorReporter;
 
@@ -20,15 +21,18 @@ class AppInitializer {
     _errorReporter = errorReporter;
 
     /// 捕获异常
-    catchException(() =>
-        RsxDefaultApp.run(myApp, preBuiltinInit: preBuiltinInit, postBuiltinInit: postBuiltinInit));
+    catchException(() => rDefaultApp.run(
+          myApp,
+          preBuiltinInit: preBuiltinInit,
+          postBuiltinInit: postBuiltinInit,
+        ));
   }
 
   ///异常捕获处理
   static void catchException<T>(T Function() callback) {
     /// 捕获异常的回调
     FlutterError.onError = (FlutterErrorDetails details) {
-      if (!Constant.inProduction) {
+      if (!rConstant.inProduction) {
         /// 非生产环境，直接将异常信息打印。
         FlutterError.dumpErrorToConsole(details);
       } else {

@@ -13,8 +13,8 @@ class CommonToolsComponent extends StatelessWidget {
   late final CommonToolsState state;
 
   CommonToolsComponent({Key? key}) : super(key: key) {
-    logic = XProvides().provide(CommonToolsLogic());
-    state = XDepends().on<CommonToolsLogic>().state;
+    logic = rProvides().provide(CommonToolsLogic());
+    state = rDepends().on<CommonToolsLogic>().state;
   }
 
   @override
@@ -24,11 +24,11 @@ class CommonToolsComponent extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         const SnackbarToolsComponent(),
-        Gaps.vGap10,
+        rGaps.vGap10,
         DialogToolsComponent(),
-        Gaps.vGap10,
+        rGaps.vGap10,
         const ToastToolsComponent(),
-        Gaps.vGap10,
+        rGaps.vGap10,
         BottomSheetToolsComponent(),
       ],
     );

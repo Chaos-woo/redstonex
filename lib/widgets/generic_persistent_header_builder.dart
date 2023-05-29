@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// 通用SliverPersistentHeader
-class GenericPersistentHeaderBuilder extends SliverPersistentHeaderDelegate {
+class rGenericPersistentHeaderBuilder extends SliverPersistentHeaderDelegate {
   /// 最大高度
   final double maxHeight;
 
@@ -12,7 +12,7 @@ class GenericPersistentHeaderBuilder extends SliverPersistentHeaderDelegate {
   final Widget Function(BuildContext context, double shrinkOffset, bool overlapsContent) builder;
 
   /// 初始化
-  GenericPersistentHeaderBuilder({
+  rGenericPersistentHeaderBuilder({
     this.maxHeight = 120,
     this.minHeight = 80,
     required this.builder,
@@ -30,6 +30,6 @@ class GenericPersistentHeaderBuilder extends SliverPersistentHeaderDelegate {
   double get minExtent => minHeight;
 
   @override
-  bool shouldRebuild(covariant GenericPersistentHeaderBuilder oldDelegate) =>
+  bool shouldRebuild(covariant rGenericPersistentHeaderBuilder oldDelegate) =>
       maxHeight != oldDelegate.maxHeight || minHeight != oldDelegate.minHeight || builder != oldDelegate.builder;
 }

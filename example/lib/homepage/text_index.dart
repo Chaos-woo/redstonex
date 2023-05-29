@@ -4,7 +4,7 @@ import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:redstonex/redstonex.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-class TextIndex extends RsxTextBottomNavigationBarPage {
+class TextIndex extends rTextBottomNavigationBarPage {
   @override
   List<PersistentTabConfig> getNavigationTabConfig() {
     return <PersistentTabConfig>[
@@ -69,9 +69,9 @@ class TextIndex extends RsxTextBottomNavigationBarPage {
   PreferredSizeWidget? appBar() {
     return AppBar(
       title: const Text('Persistent Bottom NavBar'),
-      leading: RsxClickWidget(
+      leading: rRsxClickWidget(
         child: const Icon(Icons.arrow_back_ios_new),
-        onTap: () => XNavigator().back(),
+        onTap: () => rNavigator().back(),
       ),
       actions: [
         Obx(() {

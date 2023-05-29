@@ -3,12 +3,12 @@ import 'package:redstonex/redstonex.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 class RsxOptionItemUtils {
-  static RsxHorizontalItem navigatorRsxOptionItem({
+  static rHorizontalItem navigatorRsxOptionItem({
     required String title,
     required String description,
     VoidCallback? onTap,
   }) {
-    return RsxHorizontalItem(
+    return rHorizontalItem(
       title: title,
       titleStyle: const TextStyle(fontSize: 16),
       description: Text(
@@ -33,12 +33,12 @@ class RsxOptionItemUtils {
     );
   }
 
-  static RsxHorizontalItem functionRsxOptionItem({
+  static rHorizontalItem functionRsxOptionItem({
     required String title,
     required String description,
     VoidCallback? onTap,
   }) {
-    return RsxHorizontalItem(
+    return rHorizontalItem(
       title: title,
       titleStyle: const TextStyle(fontSize: 16),
       description: Text(

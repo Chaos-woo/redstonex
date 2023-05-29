@@ -1,7 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 
-class BoolIntConverter implements JsonConverter<bool, int> {
-  const BoolIntConverter();
+/// json布尔值转换器
+class rBoolIntConverter implements JsonConverter<bool, int> {
+  const rBoolIntConverter();
 
   @override
   bool fromJson(int json) {
@@ -14,6 +15,7 @@ class BoolIntConverter implements JsonConverter<bool, int> {
   }
 }
 
+/// json String布尔值转换器
 class BoolStringConverter implements JsonConverter<bool, String> {
   const BoolStringConverter();
 

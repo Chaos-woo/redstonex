@@ -6,12 +6,12 @@ import 'package:get/get.dart';
 
 import '../events/redstonex_event_bus.dart';
 
-class EventObserverUtil {
+class rEventObserverUtil {
   static List<StreamSubscription?> createAutoCloseableSubStreams() => [];
 }
 
 /// 支持事件方式更新UI
-mixin HasEventObserverOfController on GetxController {
+mixin rHasEventObserverOfController on GetxController {
   getAutoCloseableSubStreams();
 
   @mustCallSuper
@@ -29,7 +29,7 @@ mixin HasEventObserverOfController on GetxController {
       Function? onError,
       void Function()? onDone,
       ) {
-    StreamSubscription subscription = XEventBus().subscribeAutoCancelOnError<T>(
+    StreamSubscription subscription = rEventBus().subscribeAutoCancelOnError<T>(
           (T event) => onEvent.call(event),
       onDone: onDone,
       onError: onError,
@@ -51,7 +51,7 @@ mixin HasEventObserverOfController on GetxController {
 }
 
 /// 支持事件方式更新UI
-mixin HasEventObserverOfService on GetxService {
+mixin rHasEventObserverOfService on GetxService {
   getAutoCloseableSubStreams();
 
   @mustCallSuper
@@ -69,7 +69,7 @@ mixin HasEventObserverOfService on GetxService {
       Function? onError,
       void Function()? onDone,
       ) {
-    StreamSubscription subscription = XEventBus().subscribeAutoCancelOnError<T>(
+    StreamSubscription subscription = rEventBus().subscribeAutoCancelOnError<T>(
           (T event) => onEvent.call(event),
       onDone: onDone,
       onError: onError,

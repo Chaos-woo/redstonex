@@ -4,45 +4,45 @@ import 'user-configs/global_app_configs.dart';
 import 'user-configs/global_database_configs.dart';
 import 'user-configs/global_http_option_configs.dart';
 
-/// 全局配置
-class GlobalConfig {
-  static const String _globalConfigTag = '&globalConfigTag';
+/// 应用全局配置
+class rGlobalConfig {
+  static const String _globalConfigTag = '&rGlobalConfig';
 
-  static GlobalConfig get instance => xDeps_.of<GlobalConfig>(tag: _globalConfigTag);
+  static rGlobalConfig get instance => rDeps_.of<rGlobalConfig>(tag: _globalConfigTag);
 
   static initial() {
-    XProvides().provide(GlobalConfig(), tag: _globalConfigTag);
+    rProvides().provide(rGlobalConfig(), tag: _globalConfigTag);
   }
 
-  static replaceDefaultGlobalConfig(GlobalConfig targetConfig) {
-    XProvides().replace(targetConfig, tag: _globalConfigTag);
+  static replaceDefaultGlobalConfig(rGlobalConfig targetConfig) {
+    rProvides().replace(targetConfig, tag: _globalConfigTag);
   }
 
   /// debug模式
   bool get debugMode => false;
 
   /// app全局配置
-  GlobalAppConfigs get globalAppConfigs => GlobalAppConfigs();
+  rGlobalAppConfigs get globalAppConfigs => rGlobalAppConfigs();
 
   /// http全局配置
-  GlobalHttpOptionConfigs get globalHttpOptionConfigs => GlobalHttpOptionConfigs();
+  rGlobalHttpOptionConfigs get globalHttpOptionConfigs => rGlobalHttpOptionConfigs();
 
   /// 本地数据库配置
-  GlobalDatabaseConfigs get globalDatabaseConfigs => GlobalDatabaseConfigs();
+  rGlobalDatabaseConfigs get globalDatabaseConfigs => rGlobalDatabaseConfigs();
 }
 
-extension GlobalConfigExtension on GlobalConfig {
+extension GlobalConfigExtension on rGlobalConfig {
   T as<T>() => this as T;
 }
 
-extension GlobalAppConfigsExtension on GlobalAppConfigs {
+extension GlobalAppConfigsExtension on rGlobalAppConfigs {
   T as<T>() => this as T;
 }
 
-extension GlobalHttpOptionConfigsExtension on GlobalHttpOptionConfigs {
+extension GlobalHttpOptionConfigsExtension on rGlobalHttpOptionConfigs {
   T as<T>() => this as T;
 }
 
-extension GlobalDatabaseConfigsExtension on GlobalDatabaseConfigs {
+extension GlobalDatabaseConfigsExtension on rGlobalDatabaseConfigs {
   T as<T>() => this as T;
 }

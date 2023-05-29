@@ -12,7 +12,7 @@ class BiliResponseConvertInterceptor extends Interceptor {
 
     response.data = data;
 
-    XLog().debug('bilibili data request: ${response.toString()}');
+    rLog().debug('bilibili data request: ${response.toString()}');
     super.onResponse(response, handler);
   }
 }

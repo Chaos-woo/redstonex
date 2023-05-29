@@ -1,6 +1,7 @@
 import 'package:floor/floor.dart';
 
-class BooleanConvertor extends TypeConverter<bool, int> {
+/// floor布尔值转换器
+class rFloorBooleanConvertor extends TypeConverter<bool, int> {
   @override
   bool decode(int databaseValue) {
     return 0 == databaseValue ? false : true;

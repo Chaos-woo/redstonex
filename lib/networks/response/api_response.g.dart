@@ -6,15 +6,15 @@ part of 'api_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ApiResponse _$ApiResponseFromJson(
+rApiResponse _$ApiResponseFromJson(
     Map<String, dynamic> json) =>
-    ApiResponse()
+    rApiResponse()
     ..code = json['code'] as int?
     ..message = json['message'] as String?
-    ..data = (RawData()..value = json['data']);
+    ..data = (rRawData()..value = json['data']);
 
 Map<String, dynamic> _$ApiResponseToJson(
-    ApiResponse instance) =>
+    rApiResponse instance) =>
     <String, dynamic>{
       'code': instance.code,
       'message': instance.message,

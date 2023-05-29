@@ -7,7 +7,7 @@ import '../../networks/response/api_response.dart';
 import '../../networks/response/raw_data.dart';
 
 /// http全局配置
-class GlobalHttpOptionConfigs {
+class rGlobalHttpOptionConfigs {
   /// 默认连接时间
   int get connectTimeout => 5000;
 
@@ -28,7 +28,7 @@ class GlobalHttpOptionConfigs {
 
   /// 业务响应处理
   GlobalCustomHttpBusinessResponseProcessor get customBusinessResponseProcessor =>
-      (ApiResponse response) {
+      (rApiResponse response) {
         return response.data;
       };
 
@@ -40,7 +40,7 @@ class GlobalHttpOptionConfigs {
 }
 
 /// 全局HTTP业务响应处理器
-typedef GlobalCustomHttpBusinessResponseProcessor = RawData Function(ApiResponse response);
+typedef GlobalCustomHttpBusinessResponseProcessor = rRawData Function(rApiResponse response);
 
 /// dio默认异常描述
 class GlobalDioError {

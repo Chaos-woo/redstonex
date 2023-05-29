@@ -15,7 +15,7 @@ extension ExtGlobalKeyBox on GlobalKey {
   RenderBox get renderBox => currentContext!.findRenderObject() as RenderBox;
 }
 
-class RsxPopupWindow {
+class rPopupWindow {
   static Future<T?> show<T>({
     required BuildContext context,
     required RenderBox anchor,

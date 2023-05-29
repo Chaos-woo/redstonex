@@ -6,15 +6,15 @@ import 'package:redstonex/redstonex.dart';
 
 /// B站API客户端
 class BiliNetClient extends GetxService {
-  late final HttpClient _httpClient;
+  late final rHttpClient _httpClient;
 
   BiliNetClient() {
-    HttpOption option = (HttpOptionBuilder()
+    rHttpOption option = (rHttpOptionBuilder()
           ..responseType = ResponseType.json
           ..receiveTimeOut = 10000)
         .build();
 
-    _httpClient = HttpClient(
+    _httpClient = rHttpClient(
       'https://api.bilibili.com',
       httpOption: option,
       interceptors: [
@@ -24,8 +24,8 @@ class BiliNetClient extends GetxService {
   }
 
   /// 获取Bilibili热门视频列表
-  Future<dynamic> requestBilibiliHotVideos(PagingParams pagingParams, {bool Function(ApiException)? onError}) async {
-    HttpDataWrap httpDataWrap = HttpDataWrap();
+  Future<dynamic> requestBilibiliHotVideos(rPagingParams pagingParams, {bool Function(rApiException)? onError}) async {
+    rHttpDataWrap httpDataWrap = rHttpDataWrap();
     httpDataWrap.param('ps', pagingParams.size);
     httpDataWrap.param('pn', pagingParams.currentIndex);
     // dynamic ret = await _httpClient.get<dynamic>(
@@ -34,7 +34,7 @@ class BiliNetClient extends GetxService {
     //   onError: onError,
     // );
 
-    RawData? rawRet = await _httpClient.get<RawData>(
+    rRawData? rawRet = await _httpClient.get<rRawData>(
       BiliApi.hotVideoPagingQuery,
       queryParameters: httpDataWrap.params,
       onError: onError,

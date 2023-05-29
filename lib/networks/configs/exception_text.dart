@@ -1,9 +1,9 @@
 ///
 /// An app exception multi language error message.
 ///
-/// Note: extends [DefErrText] and put in GetX bean container,
+/// Note: extends [rDefaultErrText] and put in GetX bean container,
 /// tag only is [RSException.fixedI10nExceptionTextTag]
-class DefErrText {
+class rDefaultErrText {
   static const String fixedTag = 'FIXED_NET_ERR_TAG';
   static const int fixedErrCode = -1;
 

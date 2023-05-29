@@ -8,15 +8,15 @@ import 'package:redstonex/redstonex.dart';
 
 /// 聚合数据API客户端
 class JvheNetClient extends GetxService {
-  late final HttpClient _httpClient;
+  late final rHttpClient _httpClient;
 
   JvheNetClient() {
-    HttpOption option = (HttpOptionBuilder()
+    rHttpOption option = (rHttpOptionBuilder()
       ..responseType = ResponseType.json
       ..receiveTimeOut = 10000)
         .build();
 
-    _httpClient = HttpClient(
+    _httpClient = rHttpClient(
       'http://v.juhe.cn',
       httpOption: option,
       interceptors: [
@@ -28,8 +28,8 @@ class JvheNetClient extends GetxService {
   }
 
   /// 获取支持的省列表
-  Future<List<dynamic>?> requestHistoryWeatherProvinces({bool Function(ApiException)? onError}) async {
-    RawData ret = await _httpClient.get<RawData>(
+  Future<List<dynamic>?> requestHistoryWeatherProvinces({bool Function(rApiException)? onError}) async {
+    rRawData ret = await _httpClient.get<rRawData>(
       JvheApi.historyWeatherProvinces,
       onError: onError,
     );
@@ -39,11 +39,11 @@ class JvheNetClient extends GetxService {
   /// 获取支持的城市列表
   Future<List<dynamic>?> requestHistoryWeatherCities(
     String provinceId, {
-    bool Function(ApiException)? onError,
+    bool Function(rApiException)? onError,
   }) async {
     Map<String, dynamic> queryParameters = {};
     queryParameters['province_id'] = provinceId;
-    RawData ret = await _httpClient.get<RawData>(
+    rRawData ret = await _httpClient.get<rRawData>(
       JvheApi.historyWeatherCity,
       queryParameters: queryParameters,
       onError: onError,
@@ -55,12 +55,12 @@ class JvheNetClient extends GetxService {
   Future<dynamic> requestHistoryWeatherByCity({
     required String cityId,
     required DateTime historyDate,
-    bool Function(ApiException)? onError,
+    bool Function(rApiException)? onError,
   }) async {
-    HttpDataWrap httpDataWrap = HttpDataWrap();
+    rHttpDataWrap httpDataWrap = rHttpDataWrap();
     httpDataWrap.param('city_id', cityId);
-    httpDataWrap.param('weather_date', XDatetime().yyyyMMddFormat(historyDate));
-    return (await _httpClient.get<RawData>(
+    httpDataWrap.param('weather_date', rDatetime().yyyyMMddFormat(historyDate));
+    return (await _httpClient.get<rRawData>(
       JvheApi.historyWeather,
       queryParameters: httpDataWrap.params,
       onError: onError,

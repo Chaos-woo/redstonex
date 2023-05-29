@@ -8,12 +8,12 @@ import 'package:redstonex/redstonex.dart';
 /// 聚合数据提供网站
 /// 数据提供模块向上提供数据，数据依赖可以为缓存、本地数据库、网络数据等
 class JvheApiProvider extends GetxService {
-  final JvheNetClient _jvheNetClient = XDepends().on();
+  final JvheNetClient _jvheNetClient = rDepends().on();
 
   /// 历史天气支持的省份
-  Future<List<Province>> getHistoryWeatherSupportProvinces({bool Function(ApiException)? onError}) async {
+  Future<List<Province>> getHistoryWeatherSupportProvinces({bool Function(rApiException)? onError}) async {
     final List<Province> supportProvinces = [];
-    await SyncLoader.execute(
+    await rSyncLoader.execute(
       () async {
         List<dynamic>? provinces = await _jvheNetClient.requestHistoryWeatherProvinces(onError: onError);
         if (null != provinces) {
@@ -34,9 +34,9 @@ class JvheApiProvider extends GetxService {
   }
 
   /// 历史天气支持的城市地区
-  Future<List<City>> getHistoryWeatherSingleProvinceSupportCities(String provinceId, {bool Function(ApiException)? onError}) async {
+  Future<List<City>> getHistoryWeatherSingleProvinceSupportCities(String provinceId, {bool Function(rApiException)? onError}) async {
     final List<City> supportProvinces = [];
-    await SyncLoader.execute(
+    await rSyncLoader.execute(
       () async {
         List<City> cities = await getSingleProvinceRelatedCities(provinceId);
         supportProvinces.addAll(cities);
@@ -48,10 +48,10 @@ class JvheApiProvider extends GetxService {
   }
 
   /// 历史天气支持的城市地区
-  Future<List<City>> getHistoryWeatherMultiProvinceSupportCities(List<String> provinceIds, {bool Function(ApiException)? onError}) async {
+  Future<List<City>> getHistoryWeatherMultiProvinceSupportCities(List<String> provinceIds, {bool Function(rApiException)? onError}) async {
     final List<City> supportCities = [];
     DateTime start = DateTime.now();
-    await ParallelLoader.execute(
+    await rParallelLoader.execute(
       provinceIds
           .map((e) => ParallelRequest(
                 getSingleProvinceRelatedCities(e),
@@ -63,7 +63,7 @@ class JvheApiProvider extends GetxService {
       onError: onError,
       loadingText: '加载中...',
     );
-    XLog().debug('request all provinceId cost: ${DateTime.now().millisecondsSinceEpoch - start.millisecondsSinceEpoch}');
+    rLog().debug('request all provinceId cost: ${DateTime.now().millisecondsSinceEpoch - start.millisecondsSinceEpoch}');
     return supportCities;
   }
 
@@ -72,7 +72,7 @@ class JvheApiProvider extends GetxService {
     final List<City> supportCities = [];
     DateTime start = DateTime.now();
     List<dynamic>? cities = await _jvheNetClient.requestHistoryWeatherCities(provinceId);
-    XLog().debug('request $provinceId cost: ${DateTime.now().millisecondsSinceEpoch - start.millisecondsSinceEpoch}');
+    rLog().debug('request $provinceId cost: ${DateTime.now().millisecondsSinceEpoch - start.millisecondsSinceEpoch}');
     if (null != cities) {
       List<City> convertRet = cities.map((e) {
         Map<String, dynamic> cData = e;
@@ -94,7 +94,7 @@ class JvheApiProvider extends GetxService {
       cityId: cityId,
       historyDate: dateTime,
     );
-    XLog().debug('request $cityId cost: ${DateTime.now().millisecondsSinceEpoch - start.millisecondsSinceEpoch}');
+    rLog().debug('request $cityId cost: ${DateTime.now().millisecondsSinceEpoch - start.millisecondsSinceEpoch}');
     if (null != cityWeather) {
       Map<String, dynamic> wData = cityWeather;
       CityHistoryWeather dayWeather = CityHistoryWeather();

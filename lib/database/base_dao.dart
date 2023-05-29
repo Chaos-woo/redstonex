@@ -1,7 +1,8 @@
 import 'package:floor/floor.dart';
 
 /// Floor https://pub.dev/packages/floor
-abstract class BaseDao<T> {
+/// floor基础dao
+abstract class rBaseDao<T> {
   @insert
   Future<int> insert0(T record);
 

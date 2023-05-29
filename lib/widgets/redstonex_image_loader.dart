@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 /// 图片加载（支持本地与网络图片）
-class RsxImageLoader extends StatelessWidget {
-  const RsxImageLoader(
+class rImageLoader extends StatelessWidget {
+  const rImageLoader(
     this.image, {
     Key? key,
     this.width,
@@ -31,11 +31,11 @@ class RsxImageLoader extends StatelessWidget {
     if (image.isEmpty || image.startsWith('http')) {
       return CachedNetworkImage(
         imageUrl: image,
-        placeholder: holderImg.isNotEmpty ? (_, __) => LocalAssetImageLoader(holderImg, height: height, width: width, fit: fit) : null,
+        placeholder: holderImg.isNotEmpty ? (_, __) => rLocalAssetImageLoader(holderImg, height: height, width: width, fit: fit) : null,
         errorWidget: errorImg.isNotEmpty
-            ? (_, __, dynamic error) => LocalAssetImageLoader(holderImg, height: height, width: width, fit: fit)
+            ? (_, __, dynamic error) => rLocalAssetImageLoader(holderImg, height: height, width: width, fit: fit)
             : holderImg.isNotEmpty
-                ? (_, __, dynamic error) => LocalAssetImageLoader(holderImg, height: height, width: width, fit: fit)
+                ? (_, __, dynamic error) => rLocalAssetImageLoader(holderImg, height: height, width: width, fit: fit)
                 : null,
         width: width,
         height: height,
@@ -45,7 +45,7 @@ class RsxImageLoader extends StatelessWidget {
         progressIndicatorBuilder: netImgProgressIndicatorBuilder,
       );
     } else {
-      return LocalAssetImageLoader(
+      return rLocalAssetImageLoader(
         image,
         height: height,
         width: width,
@@ -58,8 +58,8 @@ class RsxImageLoader extends StatelessWidget {
 }
 
 /// 本地图片加载
-class LocalAssetImageLoader extends StatelessWidget {
-  const LocalAssetImageLoader(
+class rLocalAssetImageLoader extends StatelessWidget {
+  const rLocalAssetImageLoader(
     this.image, {
     Key? key,
     this.width,

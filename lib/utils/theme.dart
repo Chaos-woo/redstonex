@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class XTheme {
-  static final XTheme _single = XTheme._internal();
+class rTheme {
+  static final rTheme _single = rTheme._internal();
 
-  XTheme._internal();
+  rTheme._internal();
 
-  factory XTheme() => _single;
+  factory rTheme() => _single;
 
   void setLightMode(ThemeData theme) {
     Get.changeTheme(theme);

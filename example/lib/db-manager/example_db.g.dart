@@ -284,5 +284,5 @@ class _$BiliFavoriteVideoDao extends BiliFavoriteVideoDao {
 }
 
 // ignore_for_file: unused_element
-final _datetimeConvertor = DatetimeConvertor();
-final _datetimeNullConvertor = DatetimeNullConvertor();
+final _datetimeConvertor = rFloorDatetimeConvertor();
+final _datetimeNullConvertor = rFloorDatetimeNullConvertor();

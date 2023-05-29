@@ -2,14 +2,14 @@ import 'raw_data.dart';
 
 part 'api_response.g.dart';
 
-class ApiResponse {
+class rApiResponse {
   int? code;
   String? message;
-  late RawData data;
+  late rRawData data;
 
-  ApiResponse();
+  rApiResponse();
 
-  factory ApiResponse.fromJson(Map<String, dynamic> json) => _$ApiResponseFromJson(json);
+  factory rApiResponse.fromJson(Map<String, dynamic> json) => _$ApiResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$ApiResponseToJson(this);
 }

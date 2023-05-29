@@ -13,8 +13,8 @@ import 'history_weather_query_logic.dart';
 import 'models/city_history_weather.dart';
 
 class HistoryWeatherQueryPage extends StatelessWidget {
-  final logic = XDepends().on<HistoryWeatherQueryLogic>();
-  final state = XDepends().on<HistoryWeatherQueryLogic>().state;
+  final logic = rDepends().on<HistoryWeatherQueryLogic>();
+  final state = rDepends().on<HistoryWeatherQueryLogic>().state;
 
   HistoryWeatherQueryPage({Key? key}) : super(key: key);
 
@@ -25,9 +25,9 @@ class HistoryWeatherQueryPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Persistent Bottom NavBar'),
-        leading: RsxClickWidget(
+        leading: rRsxClickWidget(
           child: const Icon(Icons.arrow_back_ios_new),
-          onTap: () => XNavigator().back(),
+          onTap: () => rNavigator().back(),
         ),
         backgroundColor: bgColor,
       ),
@@ -38,7 +38,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Gaps.vGap32,
+            rGaps.vGap32,
 
             /// 日夜天气数据展示
             _dayNightWeatherCarouselWindow(),
@@ -70,7 +70,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
   }
 
   Widget _provinceCityPicker(BuildContext context) {
-    return RsxClickWidget(
+    return rRsxClickWidget(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -80,7 +80,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
             color: Colors.white,
             size: 14,
           ),
-          Gaps.hGap4,
+          rGaps.hGap4,
           GetBuilder<HistoryWeatherQueryLogic>(
             id: logic.weatherCityBuilderId,
             builder: (_) {
@@ -94,7 +94,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
               return Text(
                 cityShowText,
                 style: const TextStyle(
-                  fontSize: Dimens.fontSp18,
+                  fontSize: rDimens.fontSp18,
                   color: Colors.white,
                 ),
               );
@@ -131,15 +131,15 @@ class HistoryWeatherQueryPage extends StatelessWidget {
       builder: (_) {
         return Container(
           margin: const EdgeInsets.symmetric(vertical: 10),
-          width: XScreen().screenWidth - 80,
-          height: XScreen().screenHeight * 0.5,
+          width: rScreen().screenWidth - 80,
+          height: rScreen().screenHeight * 0.5,
           decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(10.0)),
           ),
           child: GFCarousel(
             viewportFraction: 1.0,
-            height: XScreen().screenHeight * 0.5,
+            height: rScreen().screenHeight * 0.5,
             items: <Widget>[
               _weatherCarousel(true, state.latestQueryWeatherState.weatherCompose.dayWeather),
               _weatherCarousel(false, state.latestQueryWeatherState.weatherCompose.nightWeather),
@@ -171,7 +171,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
             builder: (_) {
               return TextButton(
                 onPressed: () {
-                  DateTime previousDay = XDatetime().previousDay(DateTime.now());
+                  DateTime previousDay = rDatetime().previousDay(DateTime.now());
                   Pickers.showDatePicker(
                     context,
                     // 模式，详见下方
@@ -190,7 +190,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
                   );
                 },
                 child: Text(
-                  XDatetime().yyyyMMddFormat(state.selectDateTime),
+                  rDatetime().yyyyMMddFormat(state.selectDateTime),
                   style: const TextStyle(
                     fontSize: 20,
                     color: Colors.white,
@@ -229,8 +229,8 @@ class HistoryWeatherQueryPage extends StatelessWidget {
               ),
             ),
           ),
-          Gaps.hGap16,
-          RsxClickWidget(
+          rGaps.hGap16,
+          rRsxClickWidget(
             child: Stack(
               children: <Widget>[
                 Container(
@@ -253,7 +253,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
               ],
             ),
             onTap: () {
-              XDialog().showPromptDialog(
+              rDialog().showPromptDialog(
                   title: '聚合数据API',
                   content: '''
 天气预报API接口
@@ -263,7 +263,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
                         ''',
                   textConfirm: '了解',
                   onConfirm: () {
-                    XNavigator().back();
+                    rNavigator().back();
                   });
             },
           )
@@ -279,7 +279,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(10.0)),
           image: DecorationImage(
-            image: XImage().getAssetImageProvider(daytime ? 'assets/images/bg/bg_daytime.jpeg' : 'assets/images/bg/bg_night.jpeg'),
+            image: rImage().getAssetImageProvider(daytime ? 'assets/images/bg/bg_daytime.jpeg' : 'assets/images/bg/bg_night.jpeg'),
             fit: BoxFit.fill,
           )),
       child: ClipRRect(
@@ -313,7 +313,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
                 '当前展示城市: ${cityWeather.cityName}',
                 style: TextStyle(color: daytime ? Colors.black : Colors.white),
               ),
-              RsxClickWidget(
+              rRsxClickWidget(
                 child: CircleAvatar(
                   backgroundColor: Colors.transparent,
                   child: state.userSelectCityOrDatetimeChange
@@ -323,7 +323,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
                       : const Spacer(),
                 ),
                 onTap: () {
-                  RsxPopupWindow.show(
+                  rPopupWindow.show(
                       context: Get.context!,
                       anchor: wChangeTipIconKey.renderBox,
                       child: Container(
@@ -331,7 +331,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
                         margin: const EdgeInsets.symmetric(horizontal: 20),
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: XTheme().isDarkMode() ? XTheme().theme().primaryColorDark : XTheme().theme().primaryColor,
+                          color: rTheme().isDarkMode() ? rTheme().theme().primaryColorDark : rTheme().theme().primaryColor,
                           borderRadius: const BorderRadius.all(Radius.circular(10)),
                         ),
                         child: const Text(
@@ -344,7 +344,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
             ],
           ),
         ),
-        Gaps.vGap16,
+        rGaps.vGap16,
         SizedBox(
           width: 300,
           height: 100,
@@ -355,10 +355,10 @@ class HistoryWeatherQueryPage extends StatelessWidget {
                 height: 70,
                 width: 70,
                 child: Image(
-                  image: XImage().getAssetImageProvider(logic.getWeatherCodeIconPath(cityWeather.weatherId, daytime: daytime)),
+                  image: rImage().getAssetImageProvider(logic.getWeatherCodeIconPath(cityWeather.weatherId, daytime: daytime)),
                 ),
               ),
-              Gaps.hGap15,
+              rGaps.hGap15,
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -420,7 +420,7 @@ class HistoryWeatherQueryPage extends StatelessWidget {
                     fontSize: 14,
                   ),
                 ),
-                Gaps.vGap8,
+                rGaps.vGap8,
                 Text(
                   '${daytime ? '白天风力情况' : '夜间风力情况'}: ${cityWeather.windComp}',
                   style: TextStyle(

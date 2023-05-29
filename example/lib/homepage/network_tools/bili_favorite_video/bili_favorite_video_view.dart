@@ -10,8 +10,8 @@ import 'package:styled_widget/styled_widget.dart';
 import 'bili_favorite_video_logic.dart';
 
 class BiliFavoriteVideoPage extends StatelessWidget {
-  final logic = XDepends().on<BiliFavoriteVideoLogic>();
-  final state = XDepends().on<BiliFavoriteVideoLogic>().state;
+  final logic = rDepends().on<BiliFavoriteVideoLogic>();
+  final state = rDepends().on<BiliFavoriteVideoLogic>().state;
 
   @override
   Widget build(BuildContext context) {
@@ -20,24 +20,24 @@ class BiliFavoriteVideoPage extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.grey[200],
           title: const Text('Bilibili收藏视频'),
-          leading: RsxClickWidget(
+          leading: rRsxClickWidget(
             child: const Icon(Icons.arrow_back_ios_new),
-            onTap: () => XNavigator().back(),
+            onTap: () => rNavigator().back(),
           ),
         ),
-        body: RefreshableWidgets.buildEventRefreshableListWidget<BiliFavoriteVideo, BiliFavoriteVideoLogic>(
+        body: rRefreshableWidgets.buildEventRefreshableListWidget<BiliFavoriteVideo, BiliFavoriteVideoLogic>(
           itemBuilder: (Rx<BiliFavoriteVideo> item, int index) => BiliFavoriteVideoWidget(item: item),
-          separatorBuilder: (item, index) => Gaps.vGap10,
+          separatorBuilder: (item, index) => rGaps.vGap10,
           onItemClick: (item, index) =>
-              XNavigator().to(RouteCompose.biliRoute.videoDetail, parameters: {'url': item.value.shortLink}),
+              rNavigator().to(RouteCompose.biliRoute.videoDetail, parameters: {'url': item.value.shortLink}),
           onItemLongPress: (item, index) {
-            XDialog().showActionDialog([
+            rDialog().showActionDialog([
               TextButton(
                 child: const Text('移除收藏'),
                 onPressed: () async {
-                  await XDepends().on<BiliService>().removeFavoriteBiliVideo(item.value.bVid);
+                  await rDepends().on<BiliService>().removeFavoriteBiliVideo(item.value.bVid);
                   logic.refreshData();
-                  XToast().show('移除成功');
+                  rToast().show('移除成功');
                 },
               ),
             ],

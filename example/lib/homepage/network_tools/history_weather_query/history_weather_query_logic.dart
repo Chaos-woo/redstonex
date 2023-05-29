@@ -9,7 +9,7 @@ import 'history_weather_query_state.dart';
 
 class HistoryWeatherQueryLogic extends GetxController {
   final HistoryWeatherQueryState state = HistoryWeatherQueryState();
-  final WeatherService weatherService = XDepends().on();
+  final WeatherService weatherService = rDepends().on();
 
   @override
   void onReady() async {

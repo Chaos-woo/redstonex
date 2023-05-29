@@ -1,12 +1,12 @@
 part 'paging_data.g.dart';
 
-class PagingData<T> {
+class rPagingData<T> {
   /// 当前页
   int? currentIndex;
   List<T>? data;
   int? total;
 
-  PagingData();
+  rPagingData();
 
   Map<String, dynamic> toJson() => _$PagingDataToJson(this);
 }

@@ -1,11 +1,11 @@
 import 'package:redstonex/utils/types.dart';
 
-class RawData {
+class rRawData {
   dynamic value;
 
   /// 反序列化为T类型数据，存在反序列化器时返回对象
   T objectAs<T>({T Function(Map<String, dynamic>)? fromJsonConvertor}) {
-    if (XType().isBaseType(T)) {
+    if (rType().isBaseType(T)) {
       return value as T;
     }
     return _objectItemAs<T>(value, fromJsonConvertor: fromJsonConvertor);
@@ -14,7 +14,7 @@ class RawData {
   /// 反序列化为T类型数据数组，存在反序列化器时返回对象数组
   List<T> listAs<T>({T Function(Map<String, dynamic>)? fromJsonConvertor}) {
     List<dynamic> list = value as List<dynamic>;
-    if (XType().isBaseType(T)) {
+    if (rType().isBaseType(T)) {
       return list.map((item) => item as T).toList();
     }
 

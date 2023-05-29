@@ -6,14 +6,14 @@ part of 'paging_params.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PagingParams _$PagingParamsFromJson(Map<String, dynamic> json) => PagingParams()
+rPagingParams _$PagingParamsFromJson(Map<String, dynamic> json) => rPagingParams()
   ..currentIndex = json['currentIndex'] as int
   ..extra = json['extra'] as Map<String, dynamic>?
   ..model = json['model'] as Map<String, dynamic>
   ..size = json['size'] as int
   ..total = json['total'] as int?;
 
-Map<String, dynamic> _$PagingParamsToJson(PagingParams instance) =>
+Map<String, dynamic> _$PagingParamsToJson(rPagingParams instance) =>
     <String, dynamic>{
       'currentIndex': instance.currentIndex,
       'extra': instance.extra,

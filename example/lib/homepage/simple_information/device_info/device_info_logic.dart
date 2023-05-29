@@ -17,7 +17,7 @@ class DeviceInfoLogic extends GetxController {
   void initStateUpdateBuilder() {
     state.init();
     EasyLoading.show(status: '本地加载模拟...', maskType: EasyLoadingMaskType.black);
-    XDelay().delayAny(() {
+    rDelay().delayAny(() {
       EasyLoading.dismiss();
       update();
     }, duration: 2.seconds);

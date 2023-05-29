@@ -5,26 +5,26 @@ import 'package:common_utils/common_utils.dart';
 import '../resources/constant.dart';
 
 /// 输出Log工具类
-class XLog {
+class rLog {
   static const String tag = '&rsx-log';
-  static final XLog _single = XLog.internal();
+  static final rLog _single = rLog.internal();
 
-  XLog.internal();
+  rLog.internal();
 
-  factory XLog() => _single;
+  factory rLog() => _single;
 
   void init() {
-    LogUtil.init(isDebug: !Constant.inProduction);
+    LogUtil.init(isDebug: !rConstant.inProduction);
   }
 
   void debug(Object msg, {String tag = tag}) {
-    if (!Constant.inProduction) {
+    if (!rConstant.inProduction) {
       LogUtil.d(msg, tag: tag);
     }
   }
 
   void error(Object msg, {String tag = tag}) {
-    if (!Constant.inProduction) {
+    if (!rConstant.inProduction) {
       LogUtil.e(msg, tag: tag);
     }
   }

@@ -1,39 +1,39 @@
 /// 刷新文案
-class RefreshTextCompose {
-  late RefreshHeaderText header;
-  late RefreshFooterText footer;
+class rRefreshTextCompose {
+  late rRefreshHeaderText header;
+  late rRefreshFooterText footer;
 
-  RefreshTextCompose({
-    RefreshHeaderText? header,
-    RefreshFooterText? footer,
+  rRefreshTextCompose({
+    rRefreshHeaderText? header,
+    rRefreshFooterText? footer,
   }) {
-    this.header = header ?? RefreshHeaderText();
-    this.footer = footer ?? RefreshFooterText();
+    this.header = header ?? rRefreshHeaderText();
+    this.footer = footer ?? rRefreshFooterText();
   }
 }
 
-class RefreshHeaderText {
+class rRefreshHeaderText {
   String idleText;
   String releaseText;
   String completeText;
   String refreshingText;
 
-  RefreshHeaderText({
-    this.idleText = '下拉刷新',
-    this.releaseText = '松开刷新',
-    this.completeText = '刷新完成',
-    this.refreshingText = '加载中...',
+  rRefreshHeaderText({
+    this.idleText = 'Pull to refresh',
+    this.releaseText = 'Release to refresh',
+    this.completeText = 'Refresh completed',
+    this.refreshingText = 'Loading...',
   });
 }
 
-class RefreshFooterText {
+class rRefreshFooterText {
   String idleText;
   String canLoadingText;
   String loadingText;
 
-  RefreshFooterText({
-    this.idleText = '上拉加载更多',
-    this.canLoadingText = '松开加载更多',
-    this.loadingText = '加载中...',
+  rRefreshFooterText({
+    this.idleText = 'Load more',
+    this.canLoadingText = 'Release to load',
+    this.loadingText = 'Loading...',
   });
 }

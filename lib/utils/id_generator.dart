@@ -1,11 +1,11 @@
 import 'package:uuid/uuid.dart';
 
-class XId {
-  static final XId _single = XId._internal();
+class rId {
+  static final rId _single = rId._internal();
 
-  XId._internal();
+  rId._internal();
 
-  factory XId() => _single;
+  factory rId() => _single;
 
   static const _uuid = Uuid();
 

@@ -1,9 +1,9 @@
-class XType {
-  static final XType _single = XType._internal();
+class rType {
+  static final rType _single = rType._internal();
 
-  XType._internal();
+  rType._internal();
 
-  factory XType() => _single;
+  factory rType() => _single;
 
   bool isBaseType(dynamic data) {
     return data.runtimeType is String ||

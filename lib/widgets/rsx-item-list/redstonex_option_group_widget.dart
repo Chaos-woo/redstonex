@@ -6,14 +6,14 @@ import 'redstonex_horizontal_toolbar_widget.dart';
 import 'redstonex_horizontal_widget.dart';
 import 'redstonex_item_list_model.dart';
 
-typedef RsxOptionDividerBuilder = Widget Function(BuildContext context);
+typedef rOptionDividerBuilder = Widget Function(BuildContext context);
 
 /// 选项组组件
-class RsxOptionGroupWidget extends StatelessWidget {
+class rOptionGroupWidget extends StatelessWidget {
   /// 选项组
-  final List<RsxOptionGroupItem> optionGroupItems;
+  final List<rOptionGroupItem> optionGroupItems;
   /// 选项间的分隔构造器
-  RsxOptionDividerBuilder? optionItemDividerBuilder;
+  rOptionDividerBuilder? optionItemDividerBuilder;
   /// 工具条和分组内容间的间隙
   double? toolbarItemGap;
   /// 多个分组之间的间隙
@@ -21,7 +21,7 @@ class RsxOptionGroupWidget extends StatelessWidget {
   /// 整个选项组列表的物理滑动效果
   ScrollPhysics? physics;
 
-  RsxOptionGroupWidget({
+  rOptionGroupWidget({
     Key? key,
     required this.optionGroupItems,
     this.optionItemDividerBuilder,
@@ -41,13 +41,13 @@ class RsxOptionGroupWidget extends StatelessWidget {
   }
 
   Widget _defaultValGap(double? vGap, {double defaultVal = 0.0}) {
-    return null != vGap ? Gaps.vGap(vGap) : Gaps.vGap(defaultVal);
+    return null != vGap ? rGaps.vGap(vGap) : rGaps.vGap(defaultVal);
   }
 
   @override
   Widget build(BuildContext context) {
     if (!_checkValidGroupItems()) {
-      return Gaps.emptyBox;
+      return rGaps.emptyBox;
     }
 
     return ListView.builder(
@@ -56,9 +56,9 @@ class RsxOptionGroupWidget extends StatelessWidget {
       itemCount: optionGroupItems.length,
       itemBuilder: (context, index) {
         var optionGroup = optionGroupItems[index];
-        var toolbar = RsxHorizontalToolbarWidget(toolbar: optionGroup.toolbar);
+        var toolbar = rHorizontalToolbarWidget(toolbar: optionGroup.toolbar);
         var optionItems = optionGroup.optionItems.map((item) {
-          var itemWidget = RsxHorizontalItemWidget(item: item);
+          var itemWidget = RHorizontalItemWidget(item: item);
           if (null != optionItemDividerBuilder && optionGroup.optionItems.last != item) {
             return <Widget>[
               itemWidget,

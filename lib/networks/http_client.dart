@@ -9,16 +9,16 @@ import 'exception/api_exception.dart';
 import 'response/api_response.dart';
 import 'response/raw_data.dart';
 
-class HttpClient {
+class rHttpClient {
   late Dio _dio;
-  late HttpOption _httpOption;
+  late rHttpOption _httpOption;
 
-  HttpClient(
+  rHttpClient(
     String baseUrl, {
-    HttpOption? httpOption,
+    rHttpOption? httpOption,
     List<Interceptor>? interceptors,
   }) {
-    HttpOption optional = httpOption ?? HttpOptionBuilder().build();
+    rHttpOption optional = httpOption ?? rHttpOptionBuilder().build();
     _httpOption = optional;
     BaseOptions options = BaseOptions(
       baseUrl: baseUrl,
@@ -41,16 +41,16 @@ class HttpClient {
     _dio.interceptors.addAll(interceptors ?? const []);
   }
 
-  HttpOption get httpOption => _httpOption.immutable();
+  rHttpOption get httpOption => _httpOption.immutable();
 
-  Future<RawData> fetchApi<T>(
+  Future<rRawData> fetchApi<T>(
     String url, {
     String method = "GET",
     Map<String, dynamic>? queryParameters,
     data,
     Map<String, dynamic>? headers,
     CancelToken? cancelToken,
-    bool Function(ApiException)? onError,
+    bool Function(rApiException)? onError,
   }) async {
     try {
       Options options = Options()
@@ -69,11 +69,11 @@ class HttpClient {
 
       return _handleResponse<T>(response);
     } catch (e) {
-      var exception = ApiException.from(e);
+      var exception = rApiException.from(e);
       if (onError?.call(exception) != true) {
         throw exception;
       }
-      return RawData()..value = null;
+      return rRawData()..value = null;
     }
   }
 
@@ -85,29 +85,29 @@ class HttpClient {
   }
 
   /// 请求响应内容处理
-  RawData _handleResponse<T>(Response response) {
+  rRawData _handleResponse<T>(Response response) {
     if (response.statusCode == 200) {
-      if (T is RawData) {
+      if (T is rRawData) {
         /// T类型为RawData时，不按照Rest处理，直接返回结果
-        return RawData()..value = response.data;
+        return rRawData()..value = response.data;
       } else {
-        ApiResponse apiResponse = ApiResponse.fromJson(response.data);
-        return GlobalConfig.instance.globalHttpOptionConfigs.customBusinessResponseProcessor
+        rApiResponse apiResponse = rApiResponse.fromJson(response.data);
+        return rGlobalConfig.instance.globalHttpOptionConfigs.customBusinessResponseProcessor
             .call(apiResponse);
       }
     } else {
-      var exception = ApiException(
-          response.statusCode, GlobalConfig.instance.globalHttpOptionConfigs.httpError.eDefault);
+      var exception = rApiException(
+          response.statusCode, rGlobalConfig.instance.globalHttpOptionConfigs.httpError.eDefault);
       throw exception;
     }
   }
 
-  Future<RawData> get<T>(
+  Future<rRawData> get<T>(
     String url, {
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
     CancelToken? cancelToken,
-    bool Function(ApiException)? onError,
+    bool Function(rApiException)? onError,
   }) {
     return fetchApi(
       url,
@@ -118,13 +118,13 @@ class HttpClient {
     );
   }
 
-  Future<RawData> post<T>(
+  Future<rRawData> post<T>(
     String url, {
     Map<String, dynamic>? queryParameters,
     data,
     Map<String, dynamic>? headers,
     CancelToken? cancelToken,
-    bool Function(ApiException)? onError,
+    bool Function(rApiException)? onError,
   }) {
     return fetchApi(
       url,
@@ -137,13 +137,13 @@ class HttpClient {
     );
   }
 
-  Future<RawData> delete<T>(
+  Future<rRawData> delete<T>(
     String url, {
     Map<String, dynamic>? queryParameters,
     data,
     Map<String, dynamic>? headers,
     CancelToken? cancelToken,
-    bool Function(ApiException)? onError,
+    bool Function(rApiException)? onError,
   }) {
     return fetchApi(
       url,
@@ -156,17 +156,36 @@ class HttpClient {
     );
   }
 
-  Future<RawData> put<T>(
+  Future<rRawData> put<T>(
     String url, {
     Map<String, dynamic>? queryParameters,
     data,
     Map<String, dynamic>? headers,
     CancelToken? cancelToken,
-    bool Function(ApiException)? onError,
+    bool Function(rApiException)? onError,
   }) {
     return fetchApi(
       url,
       method: "PUT",
+      cancelToken: cancelToken,
+      queryParameters: queryParameters,
+      data: data,
+      headers: headers,
+      onError: onError,
+    );
+  }
+
+  Future<rRawData> patch<T>(
+      String url, {
+        Map<String, dynamic>? queryParameters,
+        data,
+        Map<String, dynamic>? headers,
+        CancelToken? cancelToken,
+        bool Function(rApiException)? onError,
+      }) {
+    return fetchApi(
+      url,
+      method: "PATCH",
       cancelToken: cancelToken,
       queryParameters: queryParameters,
       data: data,
@@ -200,7 +219,7 @@ class HttpClient {
         options: options,
       );
     } on DioError catch (e) {
-      var exception = ApiException.fromDioError(e);
+      var exception = rApiException.fromDioError(e);
       throw exception;
     }
   }

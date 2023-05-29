@@ -7,7 +7,7 @@ part of 'paging_data.dart';
 // **************************************************************************
 
 Map<String, dynamic> _$PagingDataToJson(
-    PagingData instance) =>
+    rPagingData instance) =>
     <String, dynamic>{
       'currentIndex': instance.currentIndex,
       'total': instance.total,

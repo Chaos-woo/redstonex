@@ -4,12 +4,12 @@ import 'package:oktoast/oktoast.dart';
 import '../redstonex.dart';
 
 /// Toast工具类
-class XToast {
-  static final XToast _single = XToast._internal();
+class rToast {
+  static final rToast _single = rToast._internal();
 
-  XToast._internal();
+  rToast._internal();
 
-  factory XToast() => _single;
+  factory rToast() => _single;
 
   void show(
     String? msg, {
@@ -46,7 +46,7 @@ class XToast {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Icon(icon, color: iconColor, size: iconSize),
-              Gaps.hGap4,
+              rGaps.hGap4,
               Flexible(
                   child: Text(
                 msg,

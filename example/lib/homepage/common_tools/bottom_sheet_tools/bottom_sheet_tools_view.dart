@@ -22,9 +22,9 @@ class BottomSheetToolsComponent extends StatelessWidget {
         title: '深色模式选择',
         description: '切换模式',
         onTap: () {
-          XBottomSheet().showBottomSheet(
+          rBottomSheet().showBottomSheet(
             _renderDarkModeView(),
-            shape: XShapeBorder().roundedRectangleBorderOnly(topLeft: 15.0, topRight: 15.0),
+            shape: rShapeBorder().roundedRectangleBorderOnly(topLeft: 15.0, topRight: 15.0),
           );
         },
       ),
@@ -32,9 +32,9 @@ class BottomSheetToolsComponent extends StatelessWidget {
         title: '评论区',
         description: '展示用户评论',
         onTap: () {
-          XBottomSheet().showBottomSheet(
+          rBottomSheet().showBottomSheet(
             _renderCommentsView(context, commentComponents),
-            shape: XShapeBorder().roundedRectangleBorderOnly(topLeft: 15.0, topRight: 15.0),
+            shape: rShapeBorder().roundedRectangleBorderOnly(topLeft: 15.0, topRight: 15.0),
             enterBottomSheetDuration: 400.milliseconds,
             exitBottomSheetDuration: 300.milliseconds,
           );
@@ -44,9 +44,9 @@ class BottomSheetToolsComponent extends StatelessWidget {
         title: '评论区V2',
         description: '展示用户评论,设置bottom sheet高度',
         onTap: () {
-          XBottomSheet().showBottomSheet(
-            _renderCommentsView(context, commentComponents).height(XScreen().screenHeight * 0.85),
-            shape: XShapeBorder().roundedRectangleBorderOnly(topLeft: 15.0, topRight: 15.0),
+          rBottomSheet().showBottomSheet(
+            _renderCommentsView(context, commentComponents).height(rScreen().screenHeight * 0.85),
+            shape: rShapeBorder().roundedRectangleBorderOnly(topLeft: 15.0, topRight: 15.0),
             enterBottomSheetDuration: 400.milliseconds,
             exitBottomSheetDuration: 300.milliseconds,
             customControlHeight: true,
@@ -57,25 +57,25 @@ class BottomSheetToolsComponent extends StatelessWidget {
         title: 'Lottie动画',
         description: 'Lottie bottom navigation',
         onTap: () {
-          XNavigator().to(RouteCompose.lottieRoute.index);
+          rNavigator().to(RouteCompose.lottieRoute.index);
         },
       ),
       RsxOptionItemUtils.functionRsxOptionItem(
         title: 'Persistent Bottom NavBar',
         description: '文字路由导航',
         onTap: () {
-          XNavigator().to(RouteCompose.textRoute.index);
+          rNavigator().to(RouteCompose.textRoute.index);
         },
       ),
     ];
 
-    var optionGroupItems = RsxOptionGroupItem(
+    var optionGroupItems = rOptionGroupItem(
       optionItems: optionItems,
     );
 
     return GFAccordion(
       title: 'Bottom Sheet',
-      contentChild: RsxOptionGroupWidget(
+      contentChild: rOptionGroupWidget(
         optionGroupItems: [optionGroupItems],
         physics: const NeverScrollableScrollPhysics(),
         optionItemDividerBuilder: (context) => const Divider().padding(left: 25),
@@ -93,7 +93,7 @@ class BottomSheetToolsComponent extends StatelessWidget {
         'mode': '浅色模式',
         'desc': '适合光线充足使用',
         'onTap': () {
-          XNavigator().back();
+          rNavigator().back();
         },
         'modeFlg': 'light',
       },
@@ -101,14 +101,14 @@ class BottomSheetToolsComponent extends StatelessWidget {
         'mode': '深色模式',
         'desc': '适合光线较暗使用',
         'onTap': () {
-          XNavigator().back();
+          rNavigator().back();
         },
         'modeFlg': 'dark',
       },
     ];
 
     var modeSelectorOptionItems = modes.map((m) {
-      return RsxHorizontalItem(
+      return rHorizontalItem(
         title: m['mode'] as String,
         titleStyle: const TextStyle(
           fontSize: 16,
@@ -133,13 +133,13 @@ class BottomSheetToolsComponent extends StatelessWidget {
       );
     }).toList();
 
-    var optionGroupItems = RsxOptionGroupItem(
+    var optionGroupItems = rOptionGroupItem(
       optionItems: modeSelectorOptionItems,
     );
 
     return <Widget>[
       /// 简单引导
-      SizedBox(width: XScreen().screenWidth / 6, height: 4)
+      SizedBox(width: rScreen().screenWidth / 6, height: 4)
           .decorated(
             color: Colors.grey.withOpacity(0.6),
             borderRadius: const BorderRadius.all(Radius.circular(4)),
@@ -153,7 +153,7 @@ class BottomSheetToolsComponent extends StatelessWidget {
             vertical: 10,
           )
           .height(45),
-      RsxOptionGroupWidget(
+      rOptionGroupWidget(
         optionGroupItems: [optionGroupItems],
       ).padding(horizontal: 20),
     ].toColumn(mainAxisAlignment: MainAxisAlignment.start, mainAxisSize: MainAxisSize.min);
@@ -167,7 +167,7 @@ class BottomSheetToolsComponent extends StatelessWidget {
         '$allCommentCount 条评论',
         style: const TextStyle(fontSize: 12, color: Colors.grey),
       ).center().height(20),
-      Gaps.vGap10,
+      rGaps.vGap10,
       ListView.builder(
         physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
         itemBuilder: (context, index) {
@@ -188,7 +188,7 @@ class BottomSheetToolsComponent extends StatelessWidget {
     var randomUserNickname = RandomUtils.getRandomName();
     var randomComment = RandomUtils.getRandomString(10, 100);
 
-    RsxHorizontalItem item = RsxHorizontalItem(
+    rHorizontalItem item = rHorizontalItem(
       titleWidget: _renderUserNicknameAndLevel(randomUserNickname, randomLevel),
       description: Text(
         randomComment,
@@ -205,8 +205,8 @@ class BottomSheetToolsComponent extends StatelessWidget {
         Icons.favorite_outline_sharp,
         color: Colors.grey,
         size: 20,
-      ).gestures(onTap: () => XToast().show('click favorite icon')).padding(left: 10),
-      onLongPress: () => XToast().show('Copied $randomUserNickname\'s comment'),
+      ).gestures(onTap: () => rToast().show('click favorite icon')).padding(left: 10),
+      onLongPress: () => rToast().show('Copied $randomUserNickname\'s comment'),
       onDoubleTap: () => _handleUserCommentDialog({
         'nickname': randomUserNickname,
         'level': randomLevel,
@@ -214,13 +214,13 @@ class BottomSheetToolsComponent extends StatelessWidget {
       }),
     );
 
-    return RsxHorizontalItemWidget(
+    return RHorizontalItemWidget(
       item: item,
     ).padding(vertical: 5);
   }
 
   void _handleUserCommentDialog(Map<String, dynamic> param) {
-    XDialog().showPromptDialog(
+    rDialog().showPromptDialog(
       title: '评论详情',
       backgroundColor: Colors.white,
       contentWidget: <Widget>[
@@ -251,7 +251,7 @@ class BottomSheetToolsComponent extends StatelessWidget {
       ),
       textConfirm: '关闭',
       confirmTextColor: Colors.grey,
-      onConfirm: () => XNavigator().back(),
+      onConfirm: () => rNavigator().back(),
     );
   }
 

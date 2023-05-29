@@ -14,7 +14,7 @@ class MyExampleDb extends ExampleBaseFloorDatabase {
   factory MyExampleDb() => _single;
 }
 
-abstract class ExampleBaseFloorDatabase extends BaseFloorDatabase<ExampleDb> {
+abstract class ExampleBaseFloorDatabase extends rBaseFloorDatabase<ExampleDb> {
   @override
   void initializeDatabase() async {
     _setupCallbackRegister();
@@ -41,14 +41,14 @@ abstract class ExampleBaseFloorDatabase extends BaseFloorDatabase<ExampleDb> {
 class ExampleDbOnCreateCallback extends OnCreateCallback {
   @override
   FutureOr<void> Function(sql_api.Database database, int version) get onCreate => (db, version) {
-        XLog().debug('example database create');
+        rLog().debug('example database create');
       };
 }
 
 class ExampleDbOnOpenCallback extends OnOpenCallback {
   @override
   FutureOr<void> Function(sql_api.Database database) get onOpen => (db) {
-        XLog().debug('example database open');
+        rLog().debug('example database open');
       };
 }
 
@@ -58,7 +58,7 @@ class ExampleDbOnUpdateCallbackV1 extends OnUpgradeCallback {
 
   @override
   Function(sql_api.Batch batch, int oldVersion, int newVersion) get onUpgrade => (batch, oldVersion, newVersion) {
-        XLog().debug('example database upgrade V1');
+        rLog().debug('example database upgrade V1');
       };
 }
 
@@ -68,6 +68,6 @@ class ExampleDbOnUpdateCallbackV2 extends OnUpgradeCallback {
 
   @override
   Function(sql_api.Batch batch, int oldVersion, int newVersion) get onUpgrade => (batch, oldVersion, newVersion) {
-        XLog().debug('example database upgrade V2');
+        rLog().debug('example database upgrade V2');
       };
 }

@@ -3,6 +3,6 @@ import 'package:redstonex/redstonex.dart';
 
 class ProvidersManager {
   static void initProviders() {
-    XProvides().provide(JvheApiProvider());
+    rProvides().provide(JvheApiProvider());
   }
 }

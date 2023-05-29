@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 /// A GetX route, navigation utils.
 ///
 /// In order to semantic.
-class XRouter {
+class rRouter {
   static Future<R?>? push<R>(String route, {dynamic arguments, Map<String, String>? parameters}) {
     return Get.toNamed<R>(
       route,
@@ -68,7 +68,7 @@ class XRouter {
 }
 
 /// 路由对象
-class Router {
+class rRoute {
   String routeName;
   GetPageBuilder pageBuilder;
   Bindings? binding;
@@ -77,7 +77,7 @@ class Router {
   Duration? transitionDuration;
   CustomTransition? customTransition;
 
-  Router(
+  rRoute(
       this.routeName,
       this.pageBuilder, {
         this.binding,
@@ -89,13 +89,13 @@ class Router {
 }
 
 /// 命名路由组
-class RouterGroup {
+class rRouteGroup {
   final String name;
-  final List<Router> routes = [];
+  final List<rRoute> routes = [];
 
-  RouterGroup(this.name);
+  rRouteGroup(this.name);
 
-  RouterGroup newRoute(Router route) {
+  rRouteGroup newRoute(rRoute route) {
     routes.add(route);
     return this;
   }

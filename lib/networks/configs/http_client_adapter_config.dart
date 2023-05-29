@@ -5,8 +5,8 @@ import 'package:dio/dio.dart';
 
 import '../../extension/string_extension.dart';
 
-class HttpClientAdapterBuilder {
-  static HttpClientAdapter defaultClientAdapter({String? proxy}) {
+class rHttpClientAdapterBuilder {
+  static HttpClientAdapter clientAdapter({String? proxy}) {
     return DefaultHttpClientAdapter()
       ..onHttpClientCreate = (client) {
         if (!proxy.oNullOrBlank) {
