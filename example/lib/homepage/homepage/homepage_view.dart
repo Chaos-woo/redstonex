@@ -3,6 +3,7 @@ import 'package:example/homepage/network_tools/network_tools_view.dart';
 import 'package:example/homepage/simple_information/simple_information_view.dart';
 import 'package:flutter/material.dart';
 import 'package:redstonex/redstonex.dart';
+import 'package:styled_widget/styled_widget.dart';
 
 import 'homepage_logic.dart';
 

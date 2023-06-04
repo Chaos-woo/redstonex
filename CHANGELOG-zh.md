@@ -1,3 +1,6 @@
+# 1.2.6
+* rOptionGroupWidget选项组组件支持分组组件圆角展示
+
 ## 1.2.5
 **>> BREAKING CHANGE VERSION <<**
 * 修复应用初始化器类名

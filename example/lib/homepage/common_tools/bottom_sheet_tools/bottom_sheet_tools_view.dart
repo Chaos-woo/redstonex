@@ -214,7 +214,7 @@ class BottomSheetToolsComponent extends StatelessWidget {
       }),
     );
 
-    return RHorizontalItemWidget(
+    return rHorizontalItemWidget(
       item: item,
     ).padding(vertical: 5);
   }

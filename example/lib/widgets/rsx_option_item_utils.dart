@@ -22,12 +22,12 @@ class RsxOptionItemUtils {
         Icons.contact_page,
         size: 20,
         color: Colors.grey,
-      ).padding(right: 10),
+      ).padding(right: 10, left: 10),
       suffix: const Icon(
         Icons.keyboard_arrow_right,
         size: 20,
         color: Colors.grey,
-      ),
+      ).padding(right: 10),
       onTap: onTap,
       backgroundColor: Colors.white,
     );

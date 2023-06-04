@@ -34,16 +34,21 @@ class NetworkToolsComponent extends StatelessWidget {
       optionItems: optionItems,
     );
 
-    return GFAccordion(
-      title: '简单三方API对接',
-      contentChild: rOptionGroupWidget(
-        optionGroupItems: [optionGroupItems],
-        physics: const NeverScrollableScrollPhysics(),
-      ),
-      margin: EdgeInsets.zero,
-      collapsedTitleBackgroundColor: Colors.grey.withOpacity(0.1),
-      expandedTitleBackgroundColor: Colors.grey.withOpacity(0.1),
-      showAccordion: false,
+    // return GFAccordion(
+    //   title: '简单三方API对接',
+    //   contentChild: rOptionGroupWidget(
+    //     optionGroupItems: [optionGroupItems],
+    //     physics: const NeverScrollableScrollPhysics(),
+    //   ),
+    //   margin: EdgeInsets.zero,
+    //   collapsedTitleBackgroundColor: Colors.grey.withOpacity(0.1),
+    //   expandedTitleBackgroundColor: Colors.grey.withOpacity(0.1),
+    //   showAccordion: false,
+    // );
+
+    return rOptionGroupWidget(
+      optionGroupItems: [optionGroupItems],
+      physics: const NeverScrollableScrollPhysics(),
     );
   }
 }

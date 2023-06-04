@@ -6,10 +6,10 @@ import 'package:styled_widget/styled_widget.dart';
 import '../../resources/gaps.dart';
 import 'redstonex_item_list_model.dart';
 
-class RHorizontalItemWidget extends StatelessWidget {
+class rHorizontalItemWidget extends StatelessWidget {
   final rHorizontalItem item;
 
-  const RHorizontalItemWidget({
+  const rHorizontalItemWidget({
     Key? key,
     required this.item,
   }) : super(key: key);
