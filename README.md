@@ -21,30 +21,22 @@ dependencies:
 * 模板初始化
 ```dart
 void main() async {
-  /// 封装通常的app启动配置过程
-  AppInitializer.run(
+  rApplicationInitializer.run(
     const OKToast(child: MyApp()),
-    /// 内部初始化前
     preBuiltinInit: () {
-      /// App路由初始化
       Routes.initGlobalRoutes();
-      /// 数据库初始化
       MyExampleDb().initializeDatabase();
     },
-    /// 内部初始化后
     postBuiltinInit: () {
-      /// 业务service初始化
       NetClientManager.initNetClients();
       ProvidersManager.initProviders();
       ServicesManager.initServices();
-      
       ScreenUtil.getInstance();
-      XLog().debug('initial end');
+      rLog().debug('initial end');
     },
-    /// flutter顶级异常处理器
-    errorReporter: (details) {},
+    errorReporter: (details) => FlutterError.dumpErrorToConsole(details),
   );
-} 
+}
 ```
 
 ## Change log
