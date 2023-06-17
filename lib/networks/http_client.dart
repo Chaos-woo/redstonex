@@ -91,10 +91,15 @@ class rHttpClient {
   /// 请求响应内容处理
   rRawData _handleResponse<T>(Response response) {
     if (response.statusCode == 200) {
-      if (T is rRawData) {
-        /// T类型为RawData时，不按照Rest处理，直接返回结果
+      if (T.toString() == (rRawData).toString()) {
+        // T类型为rRawData时，不按照Rest处理，直接返回结果
+        // dart的泛型不能直接使用is语法判断是否属于某个类型
+        // 直接请求使用rRawData时，Response中的data无需任何转换，其值将会被转为rRawData的value返回
         return rRawData()..value = response.data;
       } else {
+        // 请求其他类型的响应内容时，建议在http client的拦截器中对Response中的data进行
+        // 数据结构进行转换，并在全局配置中配置统一的响应内容处理器
+        // 最终需要和另一逻辑相同，返回rRawData类型，用以适配不同请求的响应体
         rApiResponse apiResponse = rApiResponse.fromJson(response.data);
         return rGlobalConfig.instance.globalHttpOptionConfigs.customBusinessResponseProcessor.call(apiResponse);
       }

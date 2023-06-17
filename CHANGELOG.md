@@ -1,3 +1,6 @@
+## 1.2.9
+* 修复rRawData类型拍断时泛型不能直接使用is语法判断是否属于某个类型
+
 ## 1.2.8
 * 修复Dio网络框架封装get/post/delete/put接口使用内部fetchApi方法时未传递泛型的问题
 * rHttpClient异常处理使用ApiExceptionThrowAgainCallback符合处理逻辑含义名字的函数定义
