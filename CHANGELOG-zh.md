@@ -1,7 +1,11 @@
-# 1.2.7
+## 1.2.8
+* 修复Dio网络框架封装get/post/delete/put接口使用内部fetchApi方法时未传递泛型的问题
+* rHttpClient异常处理使用ApiExceptionThrowAgainCallback符合处理逻辑含义名字的函数定义
+
+## 1.2.7
 * 修复rOptionGroupWidget选项组组件带有toolBar时圆角展示异常的问题
 
-# 1.2.6
+## 1.2.6
 * rOptionGroupWidget选项组组件支持分组组件圆角展示
 
 ## 1.2.5

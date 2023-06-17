@@ -9,6 +9,9 @@ import 'exception/api_exception.dart';
 import 'response/api_response.dart';
 import 'response/raw_data.dart';
 
+typedef ApiExceptionThrowAgainCallback = bool Function(rApiException);
+
+/// Dio组件封装的网络客户端
 class rHttpClient {
   late Dio _dio;
   late rHttpOption _httpOption;
@@ -50,7 +53,7 @@ class rHttpClient {
     data,
     Map<String, dynamic>? headers,
     CancelToken? cancelToken,
-    bool Function(rApiException)? onError,
+    ApiExceptionThrowAgainCallback? onError,
   }) async {
     try {
       Options options = Options()
@@ -70,7 +73,8 @@ class rHttpClient {
       return _handleResponse<T>(response);
     } catch (e) {
       var exception = rApiException.from(e);
-      if (onError?.call(exception) != true) {
+      if (onError?.call(exception) == true) {
+        // 判断异常处理器处理后是否需要继续向上抛出异常
         throw exception;
       }
       return rRawData()..value = null;
@@ -92,12 +96,11 @@ class rHttpClient {
         return rRawData()..value = response.data;
       } else {
         rApiResponse apiResponse = rApiResponse.fromJson(response.data);
-        return rGlobalConfig.instance.globalHttpOptionConfigs.customBusinessResponseProcessor
-            .call(apiResponse);
+        return rGlobalConfig.instance.globalHttpOptionConfigs.customBusinessResponseProcessor.call(apiResponse);
       }
     } else {
-      var exception = rApiException(
-          response.statusCode, rGlobalConfig.instance.globalHttpOptionConfigs.httpError.eDefault);
+      var exception =
+          rApiException(response.statusCode, rGlobalConfig.instance.globalHttpOptionConfigs.httpError.eDefault);
       throw exception;
     }
   }
@@ -107,9 +110,9 @@ class rHttpClient {
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
     CancelToken? cancelToken,
-    bool Function(rApiException)? onError,
+        ApiExceptionThrowAgainCallback? onError,
   }) {
-    return fetchApi(
+    return fetchApi<T>(
       url,
       cancelToken: cancelToken,
       queryParameters: queryParameters,
@@ -124,9 +127,9 @@ class rHttpClient {
     data,
     Map<String, dynamic>? headers,
     CancelToken? cancelToken,
-    bool Function(rApiException)? onError,
+        ApiExceptionThrowAgainCallback? onError,
   }) {
-    return fetchApi(
+    return fetchApi<T>(
       url,
       method: "POST",
       cancelToken: cancelToken,
@@ -143,9 +146,9 @@ class rHttpClient {
     data,
     Map<String, dynamic>? headers,
     CancelToken? cancelToken,
-    bool Function(rApiException)? onError,
+        ApiExceptionThrowAgainCallback? onError,
   }) {
-    return fetchApi(
+    return fetchApi<T>(
       url,
       method: "DELETE",
       cancelToken: cancelToken,
@@ -162,9 +165,9 @@ class rHttpClient {
     data,
     Map<String, dynamic>? headers,
     CancelToken? cancelToken,
-    bool Function(rApiException)? onError,
+        ApiExceptionThrowAgainCallback? onError,
   }) {
-    return fetchApi(
+    return fetchApi<T>(
       url,
       method: "PUT",
       cancelToken: cancelToken,
@@ -176,14 +179,14 @@ class rHttpClient {
   }
 
   Future<rRawData> patch<T>(
-      String url, {
-        Map<String, dynamic>? queryParameters,
-        data,
-        Map<String, dynamic>? headers,
-        CancelToken? cancelToken,
-        bool Function(rApiException)? onError,
-      }) {
-    return fetchApi(
+    String url, {
+    Map<String, dynamic>? queryParameters,
+    data,
+    Map<String, dynamic>? headers,
+    CancelToken? cancelToken,
+        ApiExceptionThrowAgainCallback? onError,
+  }) {
+    return fetchApi<T>(
       url,
       method: "PATCH",
       cancelToken: cancelToken,
@@ -230,9 +233,7 @@ class rHttpClient {
       required String Function(String data) dataProcessor,
       required T Function(Map<String, dynamic>) onSuccess}) {
     final controller = StreamController<T>.broadcast();
-    _dio
-        .get(url, cancelToken: cancelToken, options: Options(responseType: ResponseType.stream))
-        .then((it) {
+    _dio.get(url, cancelToken: cancelToken, options: Options(responseType: ResponseType.stream)).then((it) {
       (it.data.stream as Stream).listen((it) {
         final rawData = utf8.decode(it);
 
@@ -279,9 +280,7 @@ class rHttpClient {
 
     _dio
         .post(url,
-            cancelToken: cancelToken,
-            data: json.encode(request),
-            options: Options(responseType: ResponseType.stream))
+            cancelToken: cancelToken, data: json.encode(request), options: Options(responseType: ResponseType.stream))
         .then((iterator) {
       iterator.data.stream.listen((it) {
         final raw = utf8.decode(it);
