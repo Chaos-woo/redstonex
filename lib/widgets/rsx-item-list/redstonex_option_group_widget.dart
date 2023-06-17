@@ -84,16 +84,14 @@ class rOptionGroupWidget extends StatelessWidget {
 
         return Container(
           margin: (optionGroupGap ?? 0.0).bottomEdge,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(optionGroupRadius ?? 10.0),
-            child: Container(
-              child: <Widget>[
-                toolbar,
-                if (null != optionGroup.toolbar) _defaultValGap(toolbarItemGap),
-                ...optionItems,
-              ].toColumn(mainAxisSize: MainAxisSize.min),
+          child: <Widget>[
+            toolbar,
+            if (null != optionGroup.toolbar) _defaultValGap(toolbarItemGap),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(optionGroupRadius ?? 0.0),
+              child: <Widget>[...optionItems].toColumn(mainAxisSize: MainAxisSize.min),
             ),
-          ),
+          ].toColumn(mainAxisSize: MainAxisSize.min),
         );
       },
       physics: physics,

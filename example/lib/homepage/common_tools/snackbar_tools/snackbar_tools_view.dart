@@ -106,6 +106,10 @@ class SnackbarToolsComponent extends StatelessWidget {
 
     var optionGroupItems = rOptionGroupItem(
       optionItems: optionItems,
+      toolbar: rHorizontalToolbar(
+        label: 'General',
+        labelStyle: const TextStyle(fontSize: 14, color: Colors.grey),
+      ),
     );
 
     return GFAccordion(

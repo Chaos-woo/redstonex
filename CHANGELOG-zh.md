@@ -1,3 +1,6 @@
+# 1.2.7
+* 修复rOptionGroupWidget选项组组件带有toolBar时圆角展示异常的问题
+
 # 1.2.6
 * rOptionGroupWidget选项组组件支持分组组件圆角展示
 
